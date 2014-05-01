@@ -18,6 +18,7 @@
                       "~/Scripts/respond.js"));
 
             bundles.Add(new StyleBundle("~/Content/css").Include(
+                      "~/Content/font-awesome.css",
                       "~/Content/bootstrap.css",
                       "~/Content/bootstrap.themes.unify.app.css",
                       "~/Content/bootstrap.themes.unify.css",

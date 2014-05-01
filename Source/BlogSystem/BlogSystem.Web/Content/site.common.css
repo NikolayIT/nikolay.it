@@ -32,3 +32,18 @@ textarea {
 .topbar ul.loginbar > li > a, .topbar ul.loginbar > li > a:hover {
     color: #AAAAAA;
 }
+
+.blog-photos li i {
+    opacity: 0.6;
+    width: 58px;
+    height: 54px;
+    font-size: 52px;
+    margin: 0 2px 8px;
+    color: black;
+    text-align: center;
+}
+
+.blog-photos li i:hover {
+	opacity: 1;
+	box-shadow: 0 0 0 2px #72c02c;
+}
