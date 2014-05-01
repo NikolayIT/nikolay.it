@@ -1,7 +1,7 @@
-﻿using System.ComponentModel.DataAnnotations;
-
-namespace BlogSystem.Web.Models
+﻿namespace BlogSystem.Web.Models
 {
+    using System.ComponentModel.DataAnnotations;
+
     public class ExternalLoginConfirmationViewModel
     {
         [Required]

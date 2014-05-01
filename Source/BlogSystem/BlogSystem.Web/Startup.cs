@@ -2,6 +2,7 @@
 using Owin;
 
 [assembly: OwinStartupAttribute(typeof(BlogSystem.Web.Startup))]
+
 namespace BlogSystem.Web
 {
     public partial class Startup
