@@ -2,30 +2,57 @@
     ViewBag.Title = "Home Page";
 }
 
-<div class="jumbotron">
-    <h1>ASP.NET</h1>
-    <p class="lead">ASP.NET is a free web framework for building great Web sites and Web applications using HTML, CSS and JavaScript.</p>
-    <p><a href="http://asp.net" class="btn btn-primary btn-lg">Learn more &raquo;</a></p>
-</div>
+@section breadcrumbs {
+    <li><a href="/">Home</a></li>
+    <li><a href="/blog">Blog</a></li>
+    <li><a href="/blog/2014">2014</a></li>
+    <li><a href="/blog/2014/04">April</a></li>
+    <li class="active">Post</li>
+}
 
-<div class="row">
-    <div class="col-md-4">
-        <h2>Getting started</h2>
-        <p>
-            ASP.NET MVC gives you a powerful, patterns-based way to build dynamic websites that
-            enables a clean separation of concerns and gives you full control over markup
-            for enjoyable, agile development.
-        </p>
-        <p><a class="btn btn-default" href="http://go.microsoft.com/fwlink/?LinkId=301865">Learn more &raquo;</a></p>
+@for (int i = 0; i < 5; i++)
+{
+    <div class="blog margin-bottom-40">
+        <h2><a href="blog_item_option1.html">Видео: Разработване на уеб приложения с ExpressJS (NodeJS)</a></h2>
+        <div class="blog-post-tags">
+            <ul class="list-unstyled list-inline blog-info">
+                <li><i class="fa fa-calendar"></i> February 02, 2013</li>
+                <li><i class="fa fa-pencil"></i> Diana Anderson</li>
+                <li><i class="fa fa-comments"></i> <a href="#">24 Comments</a></li>
+            </ul>
+            <ul class="list-unstyled list-inline blog-tags">
+                <li>
+                    <i class="fa fa-tags"></i>
+                    <a href="#">Technology</a>
+                    <a href="#">Education</a>
+                    <a href="#">Internet</a>
+                    <a href="#">Media</a>
+                </li>
+            </ul>
+        </div>
+        <div class="blog-img">
+            <div class="responsive-video">
+                <iframe src="http://www.youtube.com/embed/tv3DsYIxU8c" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
+            </div>
+        </div>
+        <p>Content</p>
+        <p><a class="btn-u btn-u-small" href="blog_item_option1.html"><i class="fa fa-plus-sign"></i> Read More</a></p>
     </div>
-    <div class="col-md-4">
-        <h2>Get more libraries</h2>
-        <p>NuGet is a free Visual Studio extension that makes it easy to add, remove, and update libraries and tools in Visual Studio projects.</p>
-        <p><a class="btn btn-default" href="http://go.microsoft.com/fwlink/?LinkId=301866">Learn more &raquo;</a></p>
-    </div>
-    <div class="col-md-4">
-        <h2>Web Hosting</h2>
-        <p>You can easily find a web hosting company that offers the right mix of features and price for your applications.</p>
-        <p><a class="btn btn-default" href="http://go.microsoft.com/fwlink/?LinkId=301867">Learn more &raquo;</a></p>
-    </div>
+}
+
+<!--Pagination-->
+<div class="text-center">
+    <ul class="pagination">
+        <li><a href="#">«</a></li>
+        <li><a href="#">1</a></li>
+        <li><a href="#">2</a></li>
+        <li class="active"><a href="#">3</a></li>
+        <li><a href="#">4</a></li>
+        <li><a href="#">5</a></li>
+        <li><a href="#">6</a></li>
+        <li><a href="#">7</a></li>
+        <li><a href="#">8</a></li>
+        <li><a href="#">»</a></li>
+    </ul>
 </div>
+<!--End Pagination-->

@@ -1,40 +1,99 @@
-﻿<!DOCTYPE html>
-<html>
+﻿@using System.Collections.Specialized
+<!DOCTYPE html>
+<!--[if IE 8]> <html lang="en" class="ie8"> <![endif]-->
+<!--[if IE 9]> <html lang="en" class="ie9"> <![endif]-->
+<!--[if !IE]><!-->
+<html lang="en">
+ <!--<![endif]-->
 <head>
+    <title>@ViewBag.Title - Nikolay.IT Blog</title>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>@ViewBag.Title - My ASP.NET Application</title>
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="shortcut icon" href="/favicon.ico">
     @Styles.Render("~/Content/css")
-    @Scripts.Render("~/bundles/modernizr")
-
 </head>
-<body>
-    <div class="navbar navbar-inverse navbar-fixed-top">
-        <div class="container">
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-                @Html.ActionLink("Application name", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+
+<body class="boxed-layout container">
+    <div class="wrapper">
+        <div class="header">
+            <div class="topbar">
+                <div class="container">
+                    @Html.Partial("_LoginPartial")
+                </div>
             </div>
-            <div class="navbar-collapse collapse">
-                <ul class="nav navbar-nav">
-                    <li>@Html.ActionLink("Home", "Index", "Home")</li>
-                    <li>@Html.ActionLink("About", "About", "Home")</li>
-                    <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
-                </ul>
-                @Html.Partial("_LoginPartial")
+
+            <div class="navbar navbar-default" role="navigation">
+                <div class="container">
+                    <div class="navbar-header">
+                        <a class="navbar-brand" href="/">
+                            <img id="logo-header" src="/Content/Images/header-logo.png" alt="Logo">
+                        </a>
+                    </div>
+
+                    <div class="collapse navbar-collapse navbar-responsive-collapse">
+                        <ul class="nav navbar-nav">
+                            <li>
+                                <a href="/">
+                                    Home
+                                </a>
+                            </li>
+                            <li>
+                                <a href="/About-me">
+                                    About me
+                                </a>
+                            </li>
+                            <li>
+                                <a href="/Projects">
+                                    Projects
+                                </a>
+                            </li>
+                            <li>
+                                <a href="/Video">
+                                    Video
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
             </div>
         </div>
-    </div>
-    <div class="container body-content">
-        @RenderBody()
-        <hr />
-        <footer>
-            <p>&copy; @DateTime.Now.Year - My ASP.NET Application</p>
-        </footer>
+        
+        <div class="breadcrumbs">
+            <div class="container">
+                <h1 class="pull-left">@ViewBag.Title</h1>
+                @if (IsSectionDefined("breadcrumbs"))
+                {
+                    <ul class="pull-right breadcrumb">
+                        @RenderSection("breadcrumbs", false)
+                    </ul>
+                }
+            </div>
+        </div>
+        
+        <div class="container content">
+            <div class="row blog-page">
+                <div class="col-md-9">
+                    @RenderBody()
+                </div>
+                
+                @Html.Partial("_SidebarPartial")
+            </div>
+        </div>
+
+        <div class="copyright">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-6">
+                        <p>&copy; 2011-@DateTime.Now.Year <strong><a href="http://nikolay.it">Nikolay.IT</a></strong> Brought to you by <a href="https://www.google.com/search?q=Magic+Unicorns&tbm=isch" target="_blank"><i class="fa fa-magic"></i> Magic Unicorns</a></p>
+                    </div>
+                    <div class="col-md-6">
+                        <p class="pull-right"><a href="https://github.com/NikolayIT/BlogSystem" target="_blank"><i class="fa fa-magic"></i> Open Source System :)</a></p>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 
     @Scripts.Render("~/bundles/jquery")

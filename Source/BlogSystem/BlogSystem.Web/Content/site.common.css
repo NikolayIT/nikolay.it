@@ -1,0 +1,34 @@
+﻿body {
+    background-image: url('http://nikolay.it/static/backgrounds/rainbow/image.jpg') !important;
+    background-repeat: no-repeat !important;
+    background-color: #000 !important;
+    background-position: center top !important;
+}
+
+/* Set width on the form input elements since they're 100% wide by default */
+input,
+select,
+textarea {
+    max-width: 280px;
+}
+
+.navbar-header {
+    position: relative;
+    top: -35px;
+}
+
+.header {
+    background-color: black;
+}
+
+.copyright {
+    background-color: black;
+}
+
+.header .navbar-default .navbar-nav > li > a {
+    color: #DDDDDD;
+}
+
+.topbar ul.loginbar > li > a, .topbar ul.loginbar > li > a:hover {
+    color: #AAAAAA;
+}
