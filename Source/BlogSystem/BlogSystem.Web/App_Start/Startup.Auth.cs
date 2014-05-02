@@ -4,7 +4,6 @@
 
     using BlogSystem.Data;
     using BlogSystem.Data.Models;
-    using BlogSystem.Web.Models;
 
     using Microsoft.AspNet.Identity;
     using Microsoft.AspNet.Identity.Owin;
@@ -39,20 +38,20 @@
             
             app.UseExternalSignInCookie(DefaultAuthenticationTypes.ExternalCookie);
 
-            // Uncomment the following lines to enable logging in with third party login providers
-            //app.UseMicrosoftAccountAuthentication(
-            //    clientId: "",
-            //    clientSecret: "");
+            //// Uncomment the following lines to enable logging in with third party login providers
+            //// app.UseMicrosoftAccountAuthentication(
+            ////     clientId: "",
+            ////     clientSecret: "");
 
-            //app.UseTwitterAuthentication(
-            //   consumerKey: "",
-            //   consumerSecret: "");
+            //// app.UseTwitterAuthentication(
+            ////    consumerKey: "",
+            ////    consumerSecret: "");
 
-            //app.UseFacebookAuthentication(
-            //   appId: "",
-            //   appSecret: "");
+            //// app.UseFacebookAuthentication(
+            ////    appId: "",
+            ////    appSecret: "");
 
-            //app.UseGoogleAuthentication();
+            //// app.UseGoogleAuthentication();
         }
     }
 }
