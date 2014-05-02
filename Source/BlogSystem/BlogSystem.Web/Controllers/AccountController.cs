@@ -4,6 +4,7 @@
     using System.Web;
     using System.Web.Mvc;
 
+    using BlogSystem.Data.Models;
     using BlogSystem.Web.Models;
 
     using Microsoft.AspNet.Identity;

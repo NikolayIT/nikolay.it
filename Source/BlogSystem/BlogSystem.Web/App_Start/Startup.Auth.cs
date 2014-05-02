@@ -2,6 +2,8 @@
 {
     using System;
 
+    using BlogSystem.Data;
+    using BlogSystem.Data.Models;
     using BlogSystem.Web.Models;
 
     using Microsoft.AspNet.Identity;
