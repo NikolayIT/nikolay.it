@@ -1,6 +1,7 @@
 ﻿namespace BlogSystem.Tools.MigrateOldWebsite
 {
     using System.Data.Entity;
+    using System.Linq;
 
     using BlogSystem.Data;
     using BlogSystem.Data.Migrations;
@@ -15,7 +16,7 @@
             var oldDatabase = new nikolayitEntities();
             var newDatabase = new ApplicationDbContext();
 
-            foreach (var post in oldDatabase.posts)
+            foreach (var post in oldDatabase.posts.OrderBy(x => x.published))
             {
                 var newPost = new BlogPost
                                   {

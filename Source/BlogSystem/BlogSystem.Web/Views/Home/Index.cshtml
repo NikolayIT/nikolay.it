@@ -1,5 +1,6 @@
-﻿@{
-    ViewBag.Title = "Home Page";
+﻿@model BlogSystem.Web.ViewModels.Index.IndexViewModel
+@{
+    ViewBag.Title = "Nikolay Kostov's Blog";
 }
 
 @section breadcrumbs {
@@ -10,13 +11,13 @@
     <li class="active">Post</li>
 }
 
-@for (int i = 0; i < 5; i++)
+@foreach (var post in Model.Posts)
 {
     <div class="blog margin-bottom-40">
-        <h2><a href="blog_item_option1.html">Видео: Разработване на уеб приложения с ExpressJS (NodeJS)</a></h2>
+        <h2><a href="/">@post.Title</a></h2>
         <div class="blog-post-tags">
             <ul class="list-unstyled list-inline blog-info">
-                <li><i class="fa fa-calendar"></i> February 02, 2013</li>
+                <li><i class="fa fa-calendar"></i> @post.CreatedOn.ToString("MMMM dd, yyyy")</li>
                 <li><i class="fa fa-pencil"></i> Nikolay Kostov</li>
                 <li><i class="fa fa-comments"></i> <a href="#">Comments not allowed</a></li>
             </ul>
@@ -30,29 +31,45 @@
                 </li>
             </ul>
         </div>
-        <div class="blog-img">
-            <div class="responsive-video">
-                <iframe src="http://www.youtube.com/embed/tv3DsYIxU8c" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
+        @if (post.ImageOrVideoUrl != null)
+        {
+            <div class="blog-img">
+                @if (post.ImageOrVideoUrl.Contains("youtube.com"))
+                {
+                    <div class="responsive-video">
+                        <iframe src="@post.ImageOrVideoUrl" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
+                    </div>
+                }
+                else
+                {
+                    <img src="@post.ImageOrVideoUrl" alt="@post.Title" />
+                }
             </div>
-        </div>
-        <p>Content</p>
-        <p><a class="btn-u btn-u-small" href="blog_item_option1.html"><i class="fa fa-plus-sign"></i> Read More</a></p>
+        }
+        
+        @Html.Raw(post.Content)
+
+        <p><a class="btn-u btn-u-small" href="/"><i class="fa fa-plus"></i> Read More</a></p>
     </div>
 }
 
 <!--Pagination-->
 <div class="text-center">
     <ul class="pagination">
-        <li><a href="#">«</a></li>
-        <li><a href="#">1</a></li>
-        <li><a href="#">2</a></li>
-        <li class="active"><a href="#">3</a></li>
-        <li><a href="#">4</a></li>
-        <li><a href="#">5</a></li>
-        <li><a href="#">6</a></li>
-        <li><a href="#">7</a></li>
-        <li><a href="#">8</a></li>
-        <li><a href="#">»</a></li>
+
+        <li><a href="/?page=@Model.PreviousPage"><i class="fa fa-backward"></i></a></li>
+        @for (int i = 1; i <= Model.PagesCount; i++)
+        {
+            if (i == Model.CurrentPage)
+            {
+                <li class="active"><a href="/?page=@i">@i</a></li>
+            }
+            else
+            {
+                <li><a href="/?page=@i">@i</a></li>
+            }
+        }
+        <li><a href="/?page=@Model.NextPage"><i class="fa fa-forward"></i></a></li>
     </ul>
 </div>
 <!--End Pagination-->

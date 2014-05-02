@@ -4,26 +4,29 @@
     using System.Web;
     using System.Web.Mvc;
 
+    using BlogSystem.Data;
     using BlogSystem.Data.Models;
-    using BlogSystem.Web.Models;
+    using BlogSystem.Web.ViewModels;
 
     using Microsoft.AspNet.Identity;
     using Microsoft.AspNet.Identity.Owin;
     using Microsoft.Owin.Security;
 
     [Authorize]
-    public class AccountController : Controller
+    public class AccountController : BaseController
     {
         // Used for XSRF protection when adding external logins
         private const string XsrfKey = "XsrfId";
 
         private ApplicationUserManager userManager;
 
-        public AccountController()
+        public AccountController(ApplicationDbContext data)
+            : base(data)
         {
         }
 
-        public AccountController(ApplicationUserManager userManager)
+        public AccountController(ApplicationDbContext data, ApplicationUserManager userManager)
+            : base(data)
         {
             this.UserManager = userManager;
         }

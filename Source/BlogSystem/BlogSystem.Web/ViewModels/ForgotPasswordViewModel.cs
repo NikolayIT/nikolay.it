@@ -1,8 +1,8 @@
-﻿namespace BlogSystem.Web.Models
+﻿namespace BlogSystem.Web.ViewModels
 {
     using System.ComponentModel.DataAnnotations;
 
-    public class ExternalLoginConfirmationViewModel
+    public class ForgotPasswordViewModel
     {
         [Required]
         [EmailAddress]
