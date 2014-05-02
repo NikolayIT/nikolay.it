@@ -1,0 +1,343 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="nikolayitModel.Store" Provider="MySql.Data.MySqlClient" ProviderManifestToken="5.5" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="backgrounds">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="uint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="name" Type="varchar" MaxLength="32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="categories">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="uint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="name" Type="varchar" MaxLength="64" Nullable="false" />
+          <Property Name="posts" Type="uint" Nullable="false" />
+        </EntityType>
+        <EntityType Name="config">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="uint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="name" Type="varchar" MaxLength="32" Nullable="false" />
+          <Property Name="value" Type="longtext" Nullable="false" />
+        </EntityType>
+        <EntityType Name="links">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="uint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="text" Type="text" Nullable="false" />
+          <Property Name="url" Type="text" Nullable="false" />
+          <Property Name="title" Type="text" Nullable="false" />
+          <Property Name="added" Type="datetime" Precision="0" Nullable="false" />
+          <Property Name="order" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="media">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="uint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="name" Type="varchar" MaxLength="255" Nullable="false" />
+          <Property Name="type" Type="enum" Nullable="false" />
+          <Property Name="filename" Type="varchar" MaxLength="255" Nullable="false" />
+          <Property Name="size" Type="ubigint" Nullable="false" />
+          <Property Name="uploaded" Type="timestamp" Precision="0" Nullable="false" />
+        </EntityType>
+        <EntityType Name="pages">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="uint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="name" Type="varchar" MaxLength="64" Nullable="false" />
+          <Property Name="title" Type="varchar" MaxLength="255" Nullable="false" />
+          <Property Name="subtitle" Type="varchar" MaxLength="255" Nullable="false" />
+          <Property Name="content" Type="longtext" Nullable="false" />
+          <Property Name="meta_description" Type="varchar" MaxLength="255" Nullable="false" />
+          <Property Name="meta_keywords" Type="varchar" MaxLength="255" Nullable="false" />
+          <Property Name="meta_robots" Type="varchar" MaxLength="32" Nullable="false" />
+          <Property Name="last_update" Type="timestamp" Precision="0" Nullable="false" />
+          <Property Name="background" Type="uint" Nullable="false" />
+        </EntityType>
+        <EntityType Name="posts">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="uint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="title" Type="varchar" MaxLength="255" Nullable="false" />
+          <Property Name="subtitle" Type="varchar" MaxLength="255" Nullable="false" />
+          <Property Name="content" Type="longtext" Nullable="false" />
+          <Property Name="content_short" Type="longtext" Nullable="false" />
+          <Property Name="published" Type="timestamp" Precision="0" Nullable="false" />
+          <Property Name="last_update" Type="timestamp" Precision="0" Nullable="false" />
+          <Property Name="meta_description" Type="varchar" MaxLength="255" Nullable="false" />
+          <Property Name="meta_keywords" Type="varchar" MaxLength="255" Nullable="false" />
+          <Property Name="meta_robots" Type="varchar" MaxLength="32" Nullable="false" />
+          <Property Name="background" Type="uint" Nullable="false" />
+        </EntityType>
+        <EntityType Name="posts_categories">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="uint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="post" Type="uint" Nullable="false" />
+          <Property Name="category" Type="uint" Nullable="false" />
+        </EntityType>
+        <EntityType Name="projects">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="uint" StoreGeneratedPattern="Identity" Nullable="false" />
+        </EntityType>
+        <EntityContainer Name="nikolayitModelStoreContainer">
+          <EntitySet Name="backgrounds" EntityType="Self.backgrounds" Schema="nikolayit" store:Type="Tables" />
+          <EntitySet Name="categories" EntityType="Self.categories" Schema="nikolayit" store:Type="Tables" />
+          <EntitySet Name="config" EntityType="Self.config" Schema="nikolayit" store:Type="Tables" />
+          <EntitySet Name="links" EntityType="Self.links" Schema="nikolayit" store:Type="Tables" />
+          <EntitySet Name="media" EntityType="Self.media" Schema="nikolayit" store:Type="Tables" />
+          <EntitySet Name="pages" EntityType="Self.pages" Schema="nikolayit" store:Type="Tables" />
+          <EntitySet Name="posts" EntityType="Self.posts" Schema="nikolayit" store:Type="Tables" />
+          <EntitySet Name="posts_categories" EntityType="Self.posts_categories" Schema="nikolayit" store:Type="Tables" />
+          <EntitySet Name="projects" EntityType="Self.projects" Schema="nikolayit" store:Type="Tables" />
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="nikolayitModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="background">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="name" Type="String" MaxLength="32" FixedLength="false" Unicode="false" Nullable="false" />
+        </EntityType>
+        <EntityType Name="category">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="name" Type="String" MaxLength="64" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="posts" Type="Int64" Nullable="false" />
+        </EntityType>
+        <EntityType Name="config">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="name" Type="String" MaxLength="32" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="value" Type="String" MaxLength="1073741823" FixedLength="false" Unicode="false" Nullable="false" />
+        </EntityType>
+        <EntityType Name="link">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="text" Type="String" MaxLength="65535" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="url" Type="String" MaxLength="65535" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="title" Type="String" MaxLength="65535" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="added" Type="DateTime" Nullable="false" />
+          <Property Name="order" Type="Int32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="medium">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="name" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="type" Type="String" MaxLength="65532" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="filename" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="size" Type="Decimal" Nullable="false" />
+          <Property Name="uploaded" Type="DateTime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="page">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="name" Type="String" MaxLength="64" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="title" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="subtitle" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="content" Type="String" MaxLength="1073741823" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="meta_description" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="meta_keywords" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="meta_robots" Type="String" MaxLength="32" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="last_update" Type="DateTime" Nullable="false" />
+          <Property Name="background" Type="Int64" Nullable="false" />
+        </EntityType>
+        <EntityType Name="post">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="title" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="subtitle" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="content" Type="String" MaxLength="1073741823" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="content_short" Type="String" MaxLength="1073741823" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="published" Type="DateTime" Nullable="false" />
+          <Property Name="last_update" Type="DateTime" Nullable="false" />
+          <Property Name="meta_description" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="meta_keywords" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="meta_robots" Type="String" MaxLength="32" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="background" Type="Int64" Nullable="false" />
+        </EntityType>
+        <EntityType Name="posts_categories">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="post" Type="Int64" Nullable="false" />
+          <Property Name="category" Type="Int64" Nullable="false" />
+        </EntityType>
+        <EntityType Name="project">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+        </EntityType>
+        <EntityContainer Name="nikolayitEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="backgrounds" EntityType="Self.background" />
+          <EntitySet Name="categories" EntityType="Self.category" />
+          <EntitySet Name="configs" EntityType="Self.config" />
+          <EntitySet Name="links" EntityType="Self.link" />
+          <EntitySet Name="media" EntityType="Self.medium" />
+          <EntitySet Name="pages" EntityType="Self.page" />
+          <EntitySet Name="posts" EntityType="Self.post" />
+          <EntitySet Name="posts_categories" EntityType="Self.posts_categories" />
+          <EntitySet Name="projects" EntityType="Self.project" />
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="nikolayitModelStoreContainer" CdmEntityContainer="nikolayitEntities">
+          <EntitySetMapping Name="backgrounds">
+            <EntityTypeMapping TypeName="nikolayitModel.background">
+              <MappingFragment StoreEntitySet="backgrounds">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="name" ColumnName="name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="categories">
+            <EntityTypeMapping TypeName="nikolayitModel.category">
+              <MappingFragment StoreEntitySet="categories">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="posts" ColumnName="posts" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="configs">
+            <EntityTypeMapping TypeName="nikolayitModel.config">
+              <MappingFragment StoreEntitySet="config">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="value" ColumnName="value" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="links">
+            <EntityTypeMapping TypeName="nikolayitModel.link">
+              <MappingFragment StoreEntitySet="links">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="text" ColumnName="text" />
+                <ScalarProperty Name="url" ColumnName="url" />
+                <ScalarProperty Name="title" ColumnName="title" />
+                <ScalarProperty Name="added" ColumnName="added" />
+                <ScalarProperty Name="order" ColumnName="order" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="media">
+            <EntityTypeMapping TypeName="nikolayitModel.medium">
+              <MappingFragment StoreEntitySet="media">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="type" ColumnName="type" />
+                <ScalarProperty Name="filename" ColumnName="filename" />
+                <ScalarProperty Name="size" ColumnName="size" />
+                <ScalarProperty Name="uploaded" ColumnName="uploaded" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="pages">
+            <EntityTypeMapping TypeName="nikolayitModel.page">
+              <MappingFragment StoreEntitySet="pages">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="title" ColumnName="title" />
+                <ScalarProperty Name="subtitle" ColumnName="subtitle" />
+                <ScalarProperty Name="content" ColumnName="content" />
+                <ScalarProperty Name="meta_description" ColumnName="meta_description" />
+                <ScalarProperty Name="meta_keywords" ColumnName="meta_keywords" />
+                <ScalarProperty Name="meta_robots" ColumnName="meta_robots" />
+                <ScalarProperty Name="last_update" ColumnName="last_update" />
+                <ScalarProperty Name="background" ColumnName="background" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="posts">
+            <EntityTypeMapping TypeName="nikolayitModel.post">
+              <MappingFragment StoreEntitySet="posts">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="title" ColumnName="title" />
+                <ScalarProperty Name="subtitle" ColumnName="subtitle" />
+                <ScalarProperty Name="content" ColumnName="content" />
+                <ScalarProperty Name="content_short" ColumnName="content_short" />
+                <ScalarProperty Name="published" ColumnName="published" />
+                <ScalarProperty Name="last_update" ColumnName="last_update" />
+                <ScalarProperty Name="meta_description" ColumnName="meta_description" />
+                <ScalarProperty Name="meta_keywords" ColumnName="meta_keywords" />
+                <ScalarProperty Name="meta_robots" ColumnName="meta_robots" />
+                <ScalarProperty Name="background" ColumnName="background" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="posts_categories">
+            <EntityTypeMapping TypeName="nikolayitModel.posts_categories">
+              <MappingFragment StoreEntitySet="posts_categories">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="post" ColumnName="post" />
+                <ScalarProperty Name="category" ColumnName="category" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="projects">
+            <EntityTypeMapping TypeName="nikolayitModel.project">
+              <MappingFragment StoreEntitySet="projects">
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

@@ -254,15 +254,19 @@
     <Content Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\BlogSystem.Data.Contracts\BlogSystem.Data.Contracts.csproj">
+    <ProjectReference Include="..\BlogSystem.Common\BlogSystem.Common.csproj">
+      <Project>{094191b9-a6a1-42de-bcc9-d84002eb6e94}</Project>
+      <Name>BlogSystem.Common</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Data\BlogSystem.Data.Contracts\BlogSystem.Data.Contracts.csproj">
       <Project>{4c22b895-b21c-4702-b8b3-7ea3177945de}</Project>
       <Name>BlogSystem.Data.Contracts</Name>
     </ProjectReference>
-    <ProjectReference Include="..\BlogSystem.Data.Models\BlogSystem.Data.Models.csproj">
+    <ProjectReference Include="..\Data\BlogSystem.Data.Models\BlogSystem.Data.Models.csproj">
       <Project>{e0fa4dd5-6f83-4499-beeb-d02c486ca2fd}</Project>
       <Name>BlogSystem.Data.Models</Name>
     </ProjectReference>
-    <ProjectReference Include="..\BlogSystem.Data\BlogSystem.Data.csproj">
+    <ProjectReference Include="..\Data\BlogSystem.Data\BlogSystem.Data.csproj">
       <Project>{50bc7c0e-c3df-411f-be60-f9de6e09dd2a}</Project>
       <Name>BlogSystem.Data</Name>
     </ProjectReference>

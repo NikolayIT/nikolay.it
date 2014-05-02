@@ -63,7 +63,7 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\BlogSystem.Common\BlogSystem.Common.csproj">
+    <ProjectReference Include="..\..\BlogSystem.Common\BlogSystem.Common.csproj">
       <Project>{094191B9-A6A1-42DE-BCC9-D84002EB6E94}</Project>
       <Name>BlogSystem.Common</Name>
     </ProjectReference>
