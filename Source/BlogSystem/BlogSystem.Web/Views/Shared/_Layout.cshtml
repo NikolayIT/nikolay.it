@@ -1,5 +1,4 @@
-﻿@using System.Collections.Specialized
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <!--[if IE 8]> <html lang="en" class="ie8"> <![endif]-->
 <!--[if IE 9]> <html lang="en" class="ie9"> <![endif]-->
 <!--[if !IE]><!-->
@@ -21,7 +20,7 @@
 
 <body class="boxed-layout container">
     <div class="wrapper">
-        <div class="header">
+        <header class="header">
             <div class="topbar">
                 <div class="container">
                     @Html.Partial("_LoginPartial")
@@ -36,16 +35,16 @@
                         </a>
                     </div>
 
-                    <div class="collapse navbar-collapse navbar-responsive-collapse">
+                    <nav class="collapse navbar-collapse navbar-responsive-collapse">
                         <ul class="nav navbar-nav">
                             <li><a href="/">Home</a></li>
                             <li><a href="/Pages/About-me">About me</a></li>
                             <li><a href="/Pages/Contacts">Contacts</a></li>
                         </ul>
-                    </div>
+                    </nav>
                 </div>
             </div>
-        </div>
+        </header>
         
         <div class="breadcrumbs">
             <div class="container">
@@ -59,7 +58,7 @@
             </div>
         </div>
         
-        <div class="container content">
+        <aside class="container content">
             <div class="row blog-page">
                 <div class="col-md-9">
                     @RenderBody()
@@ -67,9 +66,9 @@
                 
                 @Html.Partial("_SidebarPartial")
             </div>
-        </div>
+        </aside>
 
-        <div class="copyright">
+        <footer class="copyright">
             <div class="container">
                 <div class="row">
                     <div class="col-md-6">
@@ -80,7 +79,7 @@
                     </div>
                 </div>
             </div>
-        </div>
+        </footer>
     </div>
 
     @Scripts.Render("~/bundles/jquery")

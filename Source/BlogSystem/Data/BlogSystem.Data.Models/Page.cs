@@ -2,5 +2,6 @@
 {
     public class Page : ContentHolder
     {
+        public string ShortUrl { get; set; }
     }
 }

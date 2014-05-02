@@ -17,6 +17,8 @@
 
         public DbSet<Page> Pages { get; set; }
 
+        public DbSet<Tag> Tags { get; set; }
+
         public static ApplicationDbContext Create()
         {
             return new ApplicationDbContext();
