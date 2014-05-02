@@ -1,5 +1,7 @@
 ﻿namespace BlogSystem.Data
 {
+    using System.Data.Entity;
+
     using BlogSystem.Data.Models;
 
     using Microsoft.AspNet.Identity.EntityFramework;
@@ -10,6 +12,10 @@
             : base("DefaultConnection", throwIfV1Schema: false)
         {
         }
+
+        public DbSet<BlogPost> BlogPosts { get; set; }
+
+        public DbSet<Page> Pages { get; set; }
 
         public static ApplicationDbContext Create()
         {

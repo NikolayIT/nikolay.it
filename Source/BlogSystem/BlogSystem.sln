@@ -9,6 +9,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BlogSystem.Data.Models", "B
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BlogSystem.Data", "BlogSystem.Data\BlogSystem.Data.csproj", "{50BC7C0E-C3DF-411F-BE60-F9DE6E09DD2A}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BlogSystem.Data.Contracts", "BlogSystem.Data.Contracts\BlogSystem.Data.Contracts.csproj", "{4C22B895-B21C-4702-B8B3-7EA3177945DE}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BlogSystem.Common", "BlogSystem.Common\BlogSystem.Common.csproj", "{094191B9-A6A1-42DE-BCC9-D84002EB6E94}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,6 +31,14 @@ Global
 		{50BC7C0E-C3DF-411F-BE60-F9DE6E09DD2A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{50BC7C0E-C3DF-411F-BE60-F9DE6E09DD2A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{50BC7C0E-C3DF-411F-BE60-F9DE6E09DD2A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4C22B895-B21C-4702-B8B3-7EA3177945DE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4C22B895-B21C-4702-B8B3-7EA3177945DE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4C22B895-B21C-4702-B8B3-7EA3177945DE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4C22B895-B21C-4702-B8B3-7EA3177945DE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{094191B9-A6A1-42DE-BCC9-D84002EB6E94}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{094191B9-A6A1-42DE-BCC9-D84002EB6E94}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{094191B9-A6A1-42DE-BCC9-D84002EB6E94}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{094191B9-A6A1-42DE-BCC9-D84002EB6E94}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
