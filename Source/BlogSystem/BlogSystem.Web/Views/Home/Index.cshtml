@@ -11,9 +11,11 @@
     <li class="active">Post</li>
 }
 
-@foreach (var post in Model.Posts)
+<div class="blog margin-bottom-40">
+@if (Model.Posts.Count() > 0)
 {
-    <div class="blog margin-bottom-40">
+    foreach (var post in Model.Posts)
+    {
         <h2><a href="/">@post.Title</a></h2>
         <div class="blog-post-tags">
             <ul class="list-unstyled list-inline blog-info">
@@ -31,7 +33,7 @@
                 </li>
             </ul>
         </div>
-        @if (post.ImageOrVideoUrl != null)
+        if (post.ImageOrVideoUrl != null)
         {
             <div class="blog-img">
                 @if (post.ImageOrVideoUrl.Contains("youtube.com"))
@@ -46,30 +48,37 @@
                 }
             </div>
         }
-        
+
         @Html.Raw(post.Content)
 
         <p><a class="btn-u btn-u-small" href="/"><i class="fa fa-plus"></i> Read More</a></p>
-    </div>
+    }
 }
-
-<!--Pagination-->
-<div class="text-center">
-    <ul class="pagination">
-
-        <li><a href="/?page=@Model.PreviousPage"><i class="fa fa-backward"></i></a></li>
-        @for (int i = 1; i <= Model.PagesCount; i++)
-        {
-            if (i == Model.CurrentPage)
-            {
-                <li class="active"><a href="/?page=@i">@i</a></li>
-            }
-            else
-            {
-                <li><a href="/?page=@i">@i</a></li>
-            }
-        }
-        <li><a href="/?page=@Model.NextPage"><i class="fa fa-forward"></i></a></li>
-    </ul>
+else
+{
+    <h2>Sorry, nothing here.</h2>
+}
 </div>
-<!--End Pagination-->
+
+@if (Model.PagesCount > 0)
+{
+    <!--Pagination-->
+    <div class="text-center">
+        <ul class="pagination">
+            <li><a href="/?page=@Model.PreviousPage"><i class="fa fa-backward"></i></a></li>
+            @for (int i = 1; i <= Model.PagesCount; i++)
+            {
+                if (i == Model.CurrentPage)
+                {
+                    <li class="active"><a href="/?page=@i">@i</a></li>
+                }
+                else
+                {
+                    <li><a href="/?page=@i">@i</a></li>
+                }
+            }
+            <li><a href="/?page=@Model.NextPage"><i class="fa fa-forward"></i></a></li>
+        </ul>
+    </div>
+    <!--End Pagination-->
+}
