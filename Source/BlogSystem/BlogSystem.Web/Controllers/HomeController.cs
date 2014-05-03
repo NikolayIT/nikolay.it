@@ -16,12 +16,9 @@
         {
         }
 
-        public ActionResult Index(int? page, int? perPage)
+        public ActionResult Index(int page = 1, int perPage = PostsPerPageDefaultValue)
         {
-            var currentPage = page ?? 1;
-            var postsPerPage = perPage ?? PostsPerPageDefaultValue;
-
-            var pagesCount = (int)Math.Ceiling(this.Data.BlogPosts.Count() / (decimal)postsPerPage);
+            var pagesCount = (int)Math.Ceiling(this.Data.BlogPosts.Count() / (decimal)perPage);
 
             var posts =
                 this.Data.BlogPosts.Where(x => !x.IsDeleted)
@@ -35,13 +32,13 @@
                                 CreatedOn = x.CreatedOn,
                                 ImageOrVideoUrl = x.ImageOrVideoUrl,
                             })
-                    .Skip(postsPerPage * (currentPage - 1))
-                    .Take(postsPerPage);
+                    .Skip(perPage * (page - 1))
+                    .Take(perPage);
 
             var model = new IndexViewModel
                             {
                                 Posts = posts.ToList(),
-                                CurrentPage = currentPage,
+                                CurrentPage = page,
                                 PagesCount = pagesCount,
                             };
 
