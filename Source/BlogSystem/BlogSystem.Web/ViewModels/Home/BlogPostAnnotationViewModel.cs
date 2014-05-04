@@ -1,4 +1,4 @@
-﻿namespace BlogSystem.Web.ViewModels.Index
+﻿namespace BlogSystem.Web.ViewModels.Home
 {
     using System;
 
