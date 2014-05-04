@@ -4,7 +4,7 @@
 
     public class BlogPost : ContentHolder
     {
-        public int OldId { get; set; }
+        public int? OldId { get; set; }
 
         [DataType(DataType.Html)]
         public string ShortContent { get; set; }

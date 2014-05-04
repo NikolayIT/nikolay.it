@@ -15,11 +15,10 @@
         {
         }
 
-
         // GET: Administration/BlogPosts
         public ActionResult Index()
         {
-            return View(Data.BlogPosts.ToList());
+            return this.View(Data.BlogPosts.OrderByDescending(x => x.CreatedOn).ToList());
         }
 
         // GET: Administration/BlogPosts/Details/5
@@ -29,18 +28,20 @@
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
+
             BlogPost blogPost = Data.BlogPosts.Find(id);
             if (blogPost == null)
             {
-                return HttpNotFound();
+                return this.HttpNotFound();
             }
-            return View(blogPost);
+
+            return this.View(blogPost);
         }
 
         // GET: Administration/BlogPosts/Create
         public ActionResult Create()
         {
-            return View();
+            return this.View();
         }
 
         // POST: Administration/BlogPosts/Create
@@ -48,16 +49,16 @@
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,OldId,ShortContent,ImageOrVideoUrl,Title,SubTitle,Content,MetaDescription,MetaKeywords,IsDeleted,DeletedOn,CreatedOn,ModifiedOn")] BlogPost blogPost)
+        public ActionResult Create([Bind(Include = "Id,ShortContent,ImageOrVideoUrl,Title,SubTitle,Content,MetaDescription,MetaKeywords,IsDeleted,DeletedOn,CreatedOn,ModifiedOn")] BlogPost blogPost)
         {
             if (ModelState.IsValid)
             {
                 Data.BlogPosts.Add(blogPost);
                 Data.SaveChanges();
-                return RedirectToAction("Index");
+                return this.RedirectToAction("Index");
             }
 
-            return View(blogPost);
+            return this.View(blogPost);
         }
 
         // GET: Administration/BlogPosts/Edit/5
@@ -67,12 +68,14 @@
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
+
             BlogPost blogPost = Data.BlogPosts.Find(id);
             if (blogPost == null)
             {
-                return HttpNotFound();
+                return this.HttpNotFound();
             }
-            return View(blogPost);
+
+            return this.View(blogPost);
         }
 
         // POST: Administration/BlogPosts/Edit/5
@@ -80,15 +83,16 @@
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,OldId,ShortContent,ImageOrVideoUrl,Title,SubTitle,Content,MetaDescription,MetaKeywords,IsDeleted,DeletedOn,CreatedOn,ModifiedOn")] BlogPost blogPost)
+        public ActionResult Edit([Bind(Include = "Id,ShortContent,ImageOrVideoUrl,Title,SubTitle,Content,MetaDescription,MetaKeywords,IsDeleted,DeletedOn,CreatedOn")] BlogPost blogPost)
         {
             if (ModelState.IsValid)
             {
                 Data.Entry(blogPost).State = EntityState.Modified;
                 Data.SaveChanges();
-                return RedirectToAction("Index");
+                return this.RedirectToAction("Index");
             }
-            return View(blogPost);
+
+            return this.View(blogPost);
         }
 
         // GET: Administration/BlogPosts/Delete/5
@@ -98,12 +102,14 @@
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
+
             BlogPost blogPost = Data.BlogPosts.Find(id);
             if (blogPost == null)
             {
-                return HttpNotFound();
+                return this.HttpNotFound();
             }
-            return View(blogPost);
+
+            return this.View(blogPost);
         }
 
         // POST: Administration/BlogPosts/Delete/5
@@ -114,7 +120,7 @@
             BlogPost blogPost = Data.BlogPosts.Find(id);
             Data.BlogPosts.Remove(blogPost);
             Data.SaveChanges();
-            return RedirectToAction("Index");
+            return this.RedirectToAction("Index");
         }
 
         protected override void Dispose(bool disposing)
@@ -123,6 +129,7 @@
             {
                 Data.Dispose();
             }
+
             base.Dispose(disposing);
         }
     }
