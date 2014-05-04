@@ -5,7 +5,7 @@
     using System.Web.Mvc;
 
     using BlogSystem.Data;
-    using BlogSystem.Web.ViewModels.Index;
+    using BlogSystem.Web.ViewModels.Home;
 
     public class HomeController : BaseController
     {

@@ -6,7 +6,7 @@
 
     using BlogSystem.Data;
     using BlogSystem.Data.Models;
-    using BlogSystem.Web.ViewModels;
+    using BlogSystem.Web.ViewModels.Account;
 
     using Microsoft.AspNet.Identity;
     using Microsoft.AspNet.Identity.Owin;
