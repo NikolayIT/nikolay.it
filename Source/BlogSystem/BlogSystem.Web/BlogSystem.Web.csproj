@@ -176,10 +176,14 @@
     <Compile Include="Areas\Administration\Controllers\AdminController.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\BaseController.cs" />
+    <Compile Include="Controllers\BlogController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\RedirectsController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Helpers\BlogUrlGenerator.cs" />
+    <Compile Include="Helpers\IBlogUrlGenerator.cs" />
     <Compile Include="ViewModels\Index\BlogPostAnnotationViewModel.cs" />
     <Compile Include="ViewModels\ForgotPasswordViewModel.cs" />
     <Compile Include="ViewModels\ExternalLoginConfirmationViewModel.cs" />
@@ -441,6 +445,9 @@
     <Folder Include="Areas\Administration\Models\" />
     <Folder Include="Areas\Administration\Views\Admin\" />
     <Folder Include="Areas\Administration\Views\Shared\" />
+    <Folder Include="ViewModels\Blog\" />
+    <Folder Include="Views\BlogPosts\" />
+    <Folder Include="Views\Redirects\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />

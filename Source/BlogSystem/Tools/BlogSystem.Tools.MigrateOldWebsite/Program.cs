@@ -29,6 +29,7 @@
                                       ModifiedOn = post.last_update,
                                       SubTitle = post.subtitle,
                                       Title = post.title,
+                                      OldId = (int)post.id,
                                   };
 
                 newDatabase.BlogPosts.Add(newPost);
