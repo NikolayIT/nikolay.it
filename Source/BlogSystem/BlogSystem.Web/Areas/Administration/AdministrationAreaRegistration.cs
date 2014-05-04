@@ -1,7 +1,7 @@
-﻿using System.Web.Mvc;
-
-namespace BlogSystem.Web.Areas.Administration
+﻿namespace BlogSystem.Web.Areas.Administration
 {
+    using System.Web.Mvc;
+
     public class AdministrationAreaRegistration : AreaRegistration 
     {
         public override string AreaName 
@@ -12,13 +12,12 @@ namespace BlogSystem.Web.Areas.Administration
             }
         }
 
-        public override void RegisterArea(AreaRegistrationContext context) 
+        public override void RegisterArea(AreaRegistrationContext context)
         {
             context.MapRoute(
                 "Administration_default",
                 "Administration/{controller}/{action}/{id}",
-                new { action = "Index", id = UrlParameter.Optional }
-            );
+                new { action = "Index", id = UrlParameter.Optional });
         }
     }
 }
