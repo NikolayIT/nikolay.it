@@ -5,15 +5,11 @@
 
 @section breadcrumbs {
     <li><a href="/">Home</a></li>
-    <li><a href="/blog">Blog</a></li>
-    <li><a href="/blog/2014">2014</a></li>
-    <li><a href="/blog/2014/04">April</a></li>
-    <li class="active">Post</li>
 }
 
 <div class="blog margin-bottom-40">
 
-@if (Model.Posts.Any())
+@if (Model.Posts.Count() > 0)
 {
     foreach (var post in Model.Posts)
     {
@@ -52,7 +48,7 @@
 
         @Html.Raw(post.Content)
 
-        <p><a class="btn-u btn-u-small" href="/"><i class="fa fa-plus"></i> Read More</a></p>
+        <p><a class="btn-u btn-u-small" href="@post.Url"><i class="fa fa-plus"></i> Read More</a></p>
     }
 }
 else

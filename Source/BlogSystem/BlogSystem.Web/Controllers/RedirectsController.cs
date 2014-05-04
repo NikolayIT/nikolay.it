@@ -19,7 +19,7 @@
             var blogPost = this.Data.BlogPosts.Select(x => new { x.Id, x.Title, x.CreatedOn, x.OldId }).FirstOrDefault(x => x.OldId == id);
             if (blogPost == null)
             {
-                throw new HttpException(404, "Blog post not found");
+                return this.HttpNotFound("Blog post not found");
             }
 
             IBlogUrlGenerator blogUrlGenerator = new BlogUrlGenerator();

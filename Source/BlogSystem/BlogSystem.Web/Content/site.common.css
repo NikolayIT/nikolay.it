@@ -5,11 +5,9 @@
     background-position: center top !important;
 }
 
-/* Set width on the form input elements since they're 100% wide by default */
-input,
-select,
-textarea {
-    max-width: 280px;
+.edit-with-tinymce {
+    width: 100%;
+    height: 500px;
 }
 
 .navbar-header {

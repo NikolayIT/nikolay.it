@@ -27,6 +27,11 @@
                             CreatedOn = x.CreatedOn
                         }).FirstOrDefault(x => x.Id == id);
 
+            if (viewModel == null)
+            {
+                return this.HttpNotFound("Blog post not found");
+            }
+
             return this.View(viewModel);
         }
     }

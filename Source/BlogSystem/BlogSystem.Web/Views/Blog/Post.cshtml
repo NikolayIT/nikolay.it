@@ -4,14 +4,23 @@
     ViewBag.Title = Model.Title;
 }
 
+@section breadcrumbs {
+    <li><a href="/">Home</a></li>
+    <li><a href="/Blog">Blog</a></li>
+    <li><a href="/Blog/@(Model.CreatedOn.Year.ToString("0000"))">@Model.CreatedOn.Year.ToString("0000")</a></li>
+    <li><a href="/Blog/@(Model.CreatedOn.Year.ToString("0000"))/@(Model.CreatedOn.Month.ToString("00"))">@(Model.CreatedOn.Month.ToString("00"))</a></li>
+    <li class="active">Post</li>
+}
+
 <!--Blog Post-->
 <div class="blog margin-bottom-40">
-    <h2>@Model.SubTitle</h2>
+    @*<h2>@Model.SubTitle</h2>*@
     <div class="blog-post-tags">
         <ul class="list-unstyled list-inline blog-info">
             <li><i class="fa fa-calendar"></i> @Model.CreatedOn.ToString("MMMM dd, yyyy")</li>
             <li><i class="fa fa-pencil"></i> Nikolay Kostov</li>
             <li><i class="fa fa-comments"></i> <a href="#">Comments not allowed</a></li>
+            <li><i class="fa fa-pencil"></i> <a href="/Administration/BlogPosts/Edit/@Model.Id">Edit</a></li>
         </ul>
         <ul class="list-unstyled list-inline blog-tags">
             <li>

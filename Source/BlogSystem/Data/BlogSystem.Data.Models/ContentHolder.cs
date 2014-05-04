@@ -21,8 +21,10 @@
 
         public string SubTitle { get; set; }
 
+        [DataType(DataType.Html)]
         public string Content { get; set; }
 
+        [DataType(DataType.MultilineText)]
         public string MetaDescription { get; set; }
 
         public string MetaKeywords { get; set; }
