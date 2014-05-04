@@ -58,15 +58,19 @@
             </div>
         </div>
         
-        <aside class="container content">
+        <div class="container content">
             <div class="row blog-page">
                 <div class="col-md-9">
                     @RenderBody()
                 </div>
-                
-                @Html.Partial("_SidebarPartial")
+
+                <!-- Right Sidebar -->
+                <aside class="col-md-3 magazine-page">
+                    @Html.Partial("_SidebarPartial")
+                </aside>
+                <!-- End Right Sidebar -->
             </div>
-        </aside>
+        </div>
 
         <footer class="copyright">
             <div class="container">

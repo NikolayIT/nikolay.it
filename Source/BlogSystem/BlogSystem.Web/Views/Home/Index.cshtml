@@ -13,11 +13,11 @@
 
 <div class="blog margin-bottom-40">
 
-@if (Model.Posts.Count() > 0)
+@if (Model.Posts.Any())
 {
     foreach (var post in Model.Posts)
     {
-        <h2><a href="/">@post.Title</a></h2>
+        <h2><a href="@post.Url">@post.Title</a></h2>
         <div class="blog-post-tags">
             <ul class="list-unstyled list-inline blog-info">
                 <li><i class="fa fa-calendar"></i> @post.CreatedOn.ToString("MMMM dd, yyyy")</li>

@@ -1,0 +1,28 @@
+﻿@model BlogSystem.Web.ViewModels.Blog.BlogPostViewModel
+
+@{
+    ViewBag.Title = Model.Title;
+}
+
+<!--Blog Post-->
+<div class="blog margin-bottom-40">
+    <h2>@Model.SubTitle</h2>
+    <div class="blog-post-tags">
+        <ul class="list-unstyled list-inline blog-info">
+            <li><i class="fa fa-calendar"></i> @Model.CreatedOn.ToString("MMMM dd, yyyy")</li>
+            <li><i class="fa fa-pencil"></i> Nikolay Kostov</li>
+            <li><i class="fa fa-comments"></i> <a href="#">Comments not allowed</a></li>
+        </ul>
+        <ul class="list-unstyled list-inline blog-tags">
+            <li>
+                <i class="fa fa-tags"></i>
+                <a href="#">Technology</a>
+                <a href="#">Education</a>
+                <a href="#">Internet</a>
+                <a href="#">Media</a>
+            </li>
+        </ul>
+    </div>
+    @Html.Raw(Model.Content)
+</div>
+<!--End Blog Post-->

@@ -27,6 +27,7 @@
                         x =>
                         new BlogPostAnnotationViewModel
                             {
+                                Id = x.Id,
                                 Title = x.Title,
                                 Content = x.ShortContent,
                                 CreatedOn = x.CreatedOn,
