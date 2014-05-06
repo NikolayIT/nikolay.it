@@ -17,7 +17,7 @@
 
         public ActionResult Index()
         {
-            return View(Data.Pages.ToList());
+            return this.View(Data.Pages.ToList());
         }
 
         public ActionResult Details(int? id)
@@ -26,17 +26,19 @@
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
+
             Page page = Data.Pages.Find(id);
             if (page == null)
             {
-                return HttpNotFound();
+                return this.HttpNotFound();
             }
-            return View(page);
+
+            return this.View(page);
         }
 
         public ActionResult Create()
         {
-            return View();
+            return this.View();
         }
 
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
@@ -49,10 +51,10 @@
             {
                 Data.Pages.Add(page);
                 Data.SaveChanges();
-                return RedirectToAction("Index");
+                return this.RedirectToAction("Index");
             }
 
-            return View(page);
+            return this.View(page);
         }
 
         public ActionResult Edit(int? id)
@@ -61,12 +63,14 @@
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
+
             Page page = Data.Pages.Find(id);
             if (page == null)
             {
-                return HttpNotFound();
+                return this.HttpNotFound();
             }
-            return View(page);
+
+            return this.View(page);
         }
 
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
@@ -79,9 +83,10 @@
             {
                 Data.Entry(page).State = EntityState.Modified;
                 Data.SaveChanges();
-                return RedirectToAction("Index");
+                return this.RedirectToAction("Index");
             }
-            return View(page);
+
+            return this.View(page);
         }
 
         public ActionResult Delete(int? id)
@@ -90,12 +95,14 @@
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
+
             Page page = Data.Pages.Find(id);
             if (page == null)
             {
-                return HttpNotFound();
+                return this.HttpNotFound();
             }
-            return View(page);
+
+            return this.View(page);
         }
 
         [HttpPost, ActionName("Delete")]
@@ -105,7 +112,7 @@
             Page page = Data.Pages.Find(id);
             Data.Pages.Remove(page);
             Data.SaveChanges();
-            return RedirectToAction("Index");
+            return this.RedirectToAction("Index");
         }
 
         protected override void Dispose(bool disposing)

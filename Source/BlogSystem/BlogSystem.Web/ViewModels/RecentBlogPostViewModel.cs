@@ -7,7 +7,6 @@
 
     public class RecentBlogPostViewModel
     {
-        
         private readonly IBlogUrlGenerator urlGenerator;
 
         public RecentBlogPostViewModel()
