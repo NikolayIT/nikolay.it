@@ -175,6 +175,7 @@
     <Compile Include="Areas\Administration\AdministrationAreaRegistration.cs" />
     <Compile Include="Areas\Administration\Controllers\AdminController.cs" />
     <Compile Include="Areas\Administration\Controllers\BlogPostsController.cs" />
+    <Compile Include="Areas\Administration\Controllers\PagesController.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\BaseController.cs" />
     <Compile Include="Controllers\BlogController.cs" />
@@ -235,6 +236,11 @@
     <Content Include="Areas\Administration\Views\BlogPosts\Details.cshtml" />
     <Content Include="Areas\Administration\Views\BlogPosts\Edit.cshtml" />
     <Content Include="Areas\Administration\Views\BlogPosts\Index.cshtml" />
+    <Content Include="Areas\Administration\Views\Pages\Create.cshtml" />
+    <Content Include="Areas\Administration\Views\Pages\Delete.cshtml" />
+    <Content Include="Areas\Administration\Views\Pages\Details.cshtml" />
+    <Content Include="Areas\Administration\Views\Pages\Edit.cshtml" />
+    <Content Include="Areas\Administration\Views\Pages\Index.cshtml" />
     <None Include="Scripts\jquery-2.1.0.intellisense.js" />
     <Content Include="Scripts\jquery-2.1.0.js" />
     <Content Include="Scripts\jquery-2.1.0.min.js" />

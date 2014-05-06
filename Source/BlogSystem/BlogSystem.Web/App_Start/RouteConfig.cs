@@ -12,12 +12,14 @@
             routes.MapRoute(
                 name: "Blog post",
                 url: "Blog/{year}/{month}/{title}/{id}",
-                defaults: new { controller = "Blog", action = "Post" });
+                defaults: new { controller = "Blog", action = "Post" },
+                namespaces: new[] { "BlogSystem.Web.Controllers" });
 
             routes.MapRoute(
                 name: "Page",
                 url: "Pages/{permalink}",
-                defaults: new { controller = "Pages", action = "Page" });
+                defaults: new { controller = "Pages", action = "Page" },
+                namespaces: new[] { "BlogSystem.Web.Controllers" });
 
             routes.MapRoute(
                 name: "Old blog links",
