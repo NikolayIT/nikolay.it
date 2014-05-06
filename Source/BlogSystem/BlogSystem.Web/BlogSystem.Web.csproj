@@ -242,6 +242,7 @@
     <Content Include="Areas\Administration\Views\Pages\Details.cshtml" />
     <Content Include="Areas\Administration\Views\Pages\Edit.cshtml" />
     <Content Include="Areas\Administration\Views\Pages\Index.cshtml" />
+    <None Include="Properties\PublishProfiles\79.124.67.12.pubxml" />
     <None Include="Scripts\jquery-2.1.0.intellisense.js" />
     <Content Include="Scripts\jquery-2.1.0.js" />
     <Content Include="Scripts\jquery-2.1.0.min.js" />
@@ -465,6 +466,7 @@
     <Folder Include="App_Data\" />
     <Folder Include="Areas\Administration\Models\" />
     <Folder Include="Areas\Administration\Views\Shared\" />
+    <Folder Include="Content\Files\" />
     <Folder Include="Views\Redirects\" />
   </ItemGroup>
   <ItemGroup>

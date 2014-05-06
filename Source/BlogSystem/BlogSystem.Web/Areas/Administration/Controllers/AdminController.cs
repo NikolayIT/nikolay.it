@@ -6,7 +6,7 @@
     using BlogSystem.Data;
     using BlogSystem.Web.Controllers;
 
-    // TODO: [Authorize(Roles = GlobalConstants.AdministratorRoleName)]
+    [Authorize(Roles = GlobalConstants.AdministratorRoleName)]
     [ValidateInput(false)]
     public abstract class AdminController : BaseController
     {
