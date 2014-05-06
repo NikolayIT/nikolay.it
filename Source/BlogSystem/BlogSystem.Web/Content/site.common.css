@@ -1,5 +1,5 @@
 ﻿body {
-    background-image: url('http://nikolay.it/static/backgrounds/rainbow/image.jpg') !important;
+    background-image: url('../img/background.jpg') !important;
     background-repeat: no-repeat !important;
     background-color: #000 !important;
     background-position: center top !important;

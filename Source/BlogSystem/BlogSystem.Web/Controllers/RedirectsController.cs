@@ -27,5 +27,10 @@
 
             return this.RedirectPermanent(url);
         }
+
+        public ActionResult Index()
+        {
+            return this.RedirectPermanent("/");
+        }
     }
 }
