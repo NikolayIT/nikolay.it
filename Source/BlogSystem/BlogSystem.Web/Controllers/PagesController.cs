@@ -3,6 +3,8 @@
     using System.Linq;
     using System.Web.Mvc;
 
+    using AutoMapper.QueryableExtensions;
+
     using BlogSystem.Data;
     using BlogSystem.Data.Contracts;
     using BlogSystem.Data.Models;
@@ -20,16 +22,10 @@
         public ActionResult Page(string permalink)
         {
             var viewModel =
-                this.pages.All().Where(x => x.Permalink.ToLower().Trim() == permalink.ToLower().Trim())
-                    .Select(
-                        x =>
-                        new PageViewModel
-                            {
-                                Id = x.Id,
-                                Title = x.Title,
-                                Content = x.Content,
-                                LastModified = x.ModifiedOn ?? x.CreatedOn,
-                            })
+                this.pages.All()
+                    .Where(x => x.Permalink.ToLower().Trim() == permalink.ToLower().Trim())
+                    .Project()
+                    .To<PageViewModel>()
                     .FirstOrDefault();
 
             if (viewModel == null)

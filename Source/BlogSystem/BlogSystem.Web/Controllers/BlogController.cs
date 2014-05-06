@@ -3,6 +3,9 @@
     using System.Linq;
     using System.Web.Mvc;
 
+    using AutoMapper;
+    using AutoMapper.QueryableExtensions;
+
     using BlogSystem.Data.Contracts;
     using BlogSystem.Data.Models;
     using BlogSystem.Web.ViewModels.Blog;
@@ -19,16 +22,7 @@
         public ActionResult Post(int id)
         {
             var viewModel =
-                this.blogPosts.All().Select(
-                    x =>
-                    new BlogPostViewModel
-                        {
-                            Id = x.Id,
-                            Title = x.Title,
-                            SubTitle = x.SubTitle,
-                            Content = x.Content,
-                            CreatedOn = x.CreatedOn
-                        }).FirstOrDefault(x => x.Id == id);
+                this.blogPosts.All().Where(x => x.Id == id).Project().To<BlogPostViewModel>().FirstOrDefault();
 
             if (viewModel == null)
             {

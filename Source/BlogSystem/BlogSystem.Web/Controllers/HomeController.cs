@@ -4,6 +4,8 @@
     using System.Linq;
     using System.Web.Mvc;
 
+    using AutoMapper.QueryableExtensions;
+
     using BlogSystem.Data.Contracts;
     using BlogSystem.Data.Models;
     using BlogSystem.Web.ViewModels.Home;
@@ -25,16 +27,7 @@
             var posts =
                 this.blogPosts.All().Where(x => !x.IsDeleted)
                     .OrderByDescending(x => x.CreatedOn)
-                    .Select(
-                        x =>
-                        new BlogPostAnnotationViewModel
-                            {
-                                Id = x.Id,
-                                Title = x.Title,
-                                Content = x.ShortContent,
-                                CreatedOn = x.CreatedOn,
-                                ImageOrVideoUrl = x.ImageOrVideoUrl,
-                            })
+                    .Project().To<BlogPostAnnotationViewModel>()
                     .Skip(perPage * (page - 1))
                     .Take(perPage);
 

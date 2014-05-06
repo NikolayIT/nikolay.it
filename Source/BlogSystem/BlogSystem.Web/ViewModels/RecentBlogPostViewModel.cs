@@ -4,8 +4,9 @@
 
     using BlogSystem.Data.Models;
     using BlogSystem.Web.Helpers;
+    using BlogSystem.Web.Infrastructure.Mapping;
 
-    public class RecentBlogPostViewModel
+    public class RecentBlogPostViewModel : IMapFrom<BlogPost>
     {
         private readonly IBlogUrlGenerator urlGenerator;
 
