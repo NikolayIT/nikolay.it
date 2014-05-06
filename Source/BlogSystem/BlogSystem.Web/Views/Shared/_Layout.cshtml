@@ -21,20 +21,20 @@
 <body class="boxed-layout container">
     <div class="wrapper">
         <header class="header">
-            <div class="topbar">
-                <div class="container">
-                    @Html.Partial("_LoginPartial")
-                </div>
-            </div>
-
-            <div class="navbar navbar-default" role="navigation">
-                <div class="container">
+            <div class="row">
+                <div class="col-md-6">
                     <div class="navbar-header">
                         <a class="navbar-brand" href="/">
-                            <img id="logo-header" src="/img/header-logo.png" width="300" height="90" alt="Logo">
+                            <img id="logo-header" src="/img/header-logo.png" width="300" height="80" alt="Logo">
                         </a>
                     </div>
+                </div>
 
+                <div class="navbar navbar-default col-md-6" role="navigation">
+                    <div class="topbar">
+                        @Html.Partial("_LoginPartial")
+                    </div>
+                    <div class="clearfix"></div>
                     <nav class="collapse navbar-collapse navbar-responsive-collapse">
                         <ul class="nav navbar-nav">
                             <li><a href="/">Home</a></li>
