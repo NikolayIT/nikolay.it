@@ -15,6 +15,11 @@
                 defaults: new { controller = "Blog", action = "Post" });
 
             routes.MapRoute(
+                name: "Page",
+                url: "Pages/{permalink}",
+                defaults: new { controller = "Pages", action = "Page" });
+
+            routes.MapRoute(
                 name: "Old blog links",
                 url: "{year}-{month}/{title}-{id}.html",
                 defaults: new { controller = "Redirects", action = "OldSystemBlogPost" });

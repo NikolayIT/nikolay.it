@@ -4,13 +4,13 @@
     ViewBag.Title = Model.Title;
 }
 
-@section breadcrumbs {
+@*@section breadcrumbs {
     <li><a href="/">Home</a></li>
     <li><a href="/Blog">Blog</a></li>
     <li><a href="/Blog/@(Model.CreatedOn.Year.ToString("0000"))">@Model.CreatedOn.Year.ToString("0000")</a></li>
     <li><a href="/Blog/@(Model.CreatedOn.Year.ToString("0000"))/@(Model.CreatedOn.Month.ToString("00"))">@(Model.CreatedOn.Month.ToString("00"))</a></li>
     <li class="active">Post</li>
-}
+}*@
 
 <!--Blog Post-->
 <div class="blog margin-bottom-40">
