@@ -2,9 +2,8 @@
 {
     using System;
     using System.Linq;
-    using System.Linq.Expressions;
 
-    public interface IRepository<T> where T : class
+    public interface IRepository<T> : IDisposable where T : class
     {
         IQueryable<T> All();
 
@@ -20,6 +19,6 @@
 
         void Detach(T entity);
 
-        void UpdateValues(Expression<Func<T, object>> entity);
+        int SaveChanges();
     }
 }

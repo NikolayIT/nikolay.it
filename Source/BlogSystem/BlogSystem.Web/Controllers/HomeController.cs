@@ -4,24 +4,26 @@
     using System.Linq;
     using System.Web.Mvc;
 
-    using BlogSystem.Data;
+    using BlogSystem.Data.Contracts;
+    using BlogSystem.Data.Models;
     using BlogSystem.Web.ViewModels.Home;
 
     public class HomeController : BaseController
     {
         private const int PostsPerPageDefaultValue = 5;
+        private readonly IRepository<BlogPost> blogPosts;
 
-        public HomeController(ApplicationDbContext data)
-            : base(data)
+        public HomeController(IRepository<BlogPost> blogPosts)
         {
+            this.blogPosts = blogPosts;
         }
 
         public ActionResult Index(int page = 1, int perPage = PostsPerPageDefaultValue)
         {
-            var pagesCount = (int)Math.Ceiling(this.Data.BlogPosts.Count() / (decimal)perPage);
+            var pagesCount = (int)Math.Ceiling(this.blogPosts.All().Count() / (decimal)perPage);
 
             var posts =
-                this.Data.BlogPosts.Where(x => !x.IsDeleted)
+                this.blogPosts.All().Where(x => !x.IsDeleted)
                     .OrderByDescending(x => x.CreatedOn)
                     .Select(
                         x =>

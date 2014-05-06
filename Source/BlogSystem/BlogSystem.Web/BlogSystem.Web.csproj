@@ -183,6 +183,7 @@
     <Compile Include="Helpers\PrincipalExtensions.cs" />
     <Compile Include="Infrastructure\Conventions\ControllerConvention.cs" />
     <Compile Include="Infrastructure\Registries\ControllerRegistry.cs" />
+    <Compile Include="Infrastructure\Registries\DataRegistry.cs" />
     <Compile Include="Infrastructure\Registries\MvcRegistry.cs" />
     <Compile Include="Infrastructure\Registries\StandardRegistry.cs" />
     <Compile Include="Infrastructure\StructureMapDependencyResolver.cs" />

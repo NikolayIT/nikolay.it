@@ -6,19 +6,22 @@
     using System.Web.Mvc;
 
     using BlogSystem.Data;
+    using BlogSystem.Data.Contracts;
     using BlogSystem.Data.Models;
 
     public class BlogPostsController : AdminController
     {
-        public BlogPostsController(ApplicationDbContext data)
-            : base(data)
+        private readonly IRepository<BlogPost> blogPosts;
+
+        public BlogPostsController(IRepository<BlogPost> blogPosts)
         {
+            this.blogPosts = blogPosts;
         }
 
         // GET: Administration/BlogPosts
         public ActionResult Index()
         {
-            return this.View(Data.BlogPosts.OrderByDescending(x => x.CreatedOn).ToList());
+            return this.View(this.blogPosts.All().OrderByDescending(x => x.CreatedOn).ToList());
         }
 
         // GET: Administration/BlogPosts/Details/5
@@ -29,7 +32,7 @@
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
 
-            BlogPost blogPost = Data.BlogPosts.Find(id);
+            BlogPost blogPost = this.blogPosts.GetById(id.Value);
             if (blogPost == null)
             {
                 return this.HttpNotFound();
@@ -53,8 +56,8 @@
         {
             if (ModelState.IsValid)
             {
-                Data.BlogPosts.Add(blogPost);
-                Data.SaveChanges();
+                this.blogPosts.Add(blogPost);
+                this.blogPosts.SaveChanges();
                 return this.RedirectToAction("Index");
             }
 
@@ -69,7 +72,7 @@
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
 
-            BlogPost blogPost = Data.BlogPosts.Find(id);
+            BlogPost blogPost = this.blogPosts.GetById(id.Value);
             if (blogPost == null)
             {
                 return this.HttpNotFound();
@@ -87,8 +90,8 @@
         {
             if (ModelState.IsValid)
             {
-                Data.Entry(blogPost).State = EntityState.Modified;
-                Data.SaveChanges();
+                this.blogPosts.Update(blogPost);
+                this.blogPosts.SaveChanges();
                 return this.RedirectToAction("Index");
             }
 
@@ -103,7 +106,7 @@
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
 
-            BlogPost blogPost = Data.BlogPosts.Find(id);
+            BlogPost blogPost = this.blogPosts.GetById(id.Value);
             if (blogPost == null)
             {
                 return this.HttpNotFound();
@@ -117,9 +120,9 @@
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            BlogPost blogPost = Data.BlogPosts.Find(id);
-            Data.BlogPosts.Remove(blogPost);
-            Data.SaveChanges();
+            BlogPost blogPost = this.blogPosts.GetById(id);
+            this.blogPosts.Delete(blogPost);
+            this.blogPosts.SaveChanges();
             return this.RedirectToAction("Index");
         }
 
@@ -127,7 +130,7 @@
         {
             if (disposing)
             {
-                Data.Dispose();
+                this.blogPosts.Dispose();
             }
 
             base.Dispose(disposing);

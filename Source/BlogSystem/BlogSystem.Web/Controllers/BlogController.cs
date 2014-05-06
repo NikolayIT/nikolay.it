@@ -3,20 +3,23 @@
     using System.Linq;
     using System.Web.Mvc;
 
-    using BlogSystem.Data;
+    using BlogSystem.Data.Contracts;
+    using BlogSystem.Data.Models;
     using BlogSystem.Web.ViewModels.Blog;
 
     public class BlogController : BaseController
     {
-        public BlogController(ApplicationDbContext data)
-            : base(data)
+        private readonly IRepository<BlogPost> blogPosts;
+
+        public BlogController(IRepository<BlogPost> blogPosts)
         {
+            this.blogPosts = blogPosts;
         }
 
         public ActionResult Post(int id)
         {
             var viewModel =
-                this.Data.BlogPosts.Select(
+                this.blogPosts.All().Select(
                     x =>
                     new BlogPostViewModel
                         {

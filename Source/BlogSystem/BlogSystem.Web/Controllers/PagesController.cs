@@ -4,19 +4,23 @@
     using System.Web.Mvc;
 
     using BlogSystem.Data;
+    using BlogSystem.Data.Contracts;
+    using BlogSystem.Data.Models;
     using BlogSystem.Web.ViewModels.Pages;
 
     public class PagesController : BaseController
     {
-        public PagesController(ApplicationDbContext data)
-            : base(data)
+        private readonly IRepository<Page> pages;
+
+        public PagesController(IRepository<Page> pages)
         {
+            this.pages = pages;
         }
 
         public ActionResult Page(string permalink)
         {
             var viewModel =
-                this.Data.Pages.Where(x => x.Permalink.ToLower().Trim() == permalink.ToLower().Trim())
+                this.pages.All().Where(x => x.Permalink.ToLower().Trim() == permalink.ToLower().Trim())
                     .Select(
                         x =>
                         new PageViewModel

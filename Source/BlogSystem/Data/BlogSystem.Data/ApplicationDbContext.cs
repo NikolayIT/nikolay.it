@@ -9,7 +9,7 @@
 
     using Microsoft.AspNet.Identity.EntityFramework;
 
-    public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
+    public class ApplicationDbContext : IdentityDbContext<ApplicationUser>, IApplicationDbContext
     {
         public ApplicationDbContext()
             : base("DefaultConnection", throwIfV1Schema: false)
@@ -32,6 +32,11 @@
             this.ApplyAuditInfoRules();
             this.ApplyDeletableEntityRules();
             return base.SaveChanges();
+        }
+
+        public new IDbSet<T> Set<T>() where T : class
+        {
+            return base.Set<T>();
         }
 
         private void ApplyAuditInfoRules()

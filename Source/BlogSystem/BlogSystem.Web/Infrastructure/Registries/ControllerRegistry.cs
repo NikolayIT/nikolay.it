@@ -9,7 +9,7 @@
     {
         public ControllerRegistry()
         {
-            Scan(scan =>
+            this.Scan(scan =>
             {
                 scan.TheCallingAssembly();
                 scan.With(new ControllerConvention());
