@@ -196,7 +196,7 @@
     <Compile Include="ViewModels\Account\LoginViewModel.cs" />
     <Compile Include="ViewModels\Account\ManageUserViewModel.cs" />
     <Compile Include="ViewModels\Pages\PageViewModel.cs" />
-    <Compile Include="ViewModels\RecentBlogPost.cs" />
+    <Compile Include="ViewModels\RecentBlogPostViewModel.cs" />
     <Compile Include="ViewModels\Account\RegisterViewModel.cs" />
     <Compile Include="ViewModels\Account\ResetPasswordViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

@@ -30,12 +30,12 @@
 <!-- Posts -->
 <div class="posts margin-bottom-40">
     <div class="headline headline-md"><h2>Recent Posts</h2></div>
-    @foreach (RecentBlogPost post in ViewBag.RecentPost)
+    @foreach (RecentBlogPostViewModel post in ViewBag.RecentPost)
     {
         <dl class="dl-horizontal">
-            <dt><a href="#"><img src="@post.Image" alt="" /></a></dt>
+            <dt><a href="@post.Url"><img src="@post.Image" alt="" /></a></dt>
             <dd>
-                <p><a href="#">@post.Title</a></p>
+                <p><a href="@post.Url">@post.Title</a></p>
             </dd>
         </dl>
     }

@@ -1,19 +1,20 @@
-﻿namespace BlogSystem.Web.ViewModels.Home
+﻿namespace BlogSystem.Web.ViewModels
 {
     using System;
 
     using BlogSystem.Web.Helpers;
 
-    public class BlogPostAnnotationViewModel
+    public class RecentBlogPostViewModel
     {
+        
         private readonly IBlogUrlGenerator urlGenerator;
 
-        public BlogPostAnnotationViewModel()
+        public RecentBlogPostViewModel()
             : this(new BlogUrlGenerator())
         {
         }
 
-        public BlogPostAnnotationViewModel(IBlogUrlGenerator urlGenerator)
+        public RecentBlogPostViewModel(IBlogUrlGenerator urlGenerator)
         {
             this.urlGenerator = urlGenerator;
         }
@@ -22,11 +23,15 @@
 
         public string Title { get; set; }
 
-        public string Content { get; set; }
-
         public DateTime CreatedOn { get; set; }
 
-        public string ImageOrVideoUrl { get; set; }
+        public string Image
+        {
+            get
+            {
+                return "http://cainclusion.org/camap/images/resources/video.png";
+            }
+        }
 
         public string Url
         {
