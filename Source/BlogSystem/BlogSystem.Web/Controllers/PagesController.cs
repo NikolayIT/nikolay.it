@@ -21,6 +21,7 @@
                         x =>
                         new PageViewModel
                             {
+                                Id = x.Id,
                                 Title = x.Title,
                                 Content = x.Content,
                                 LastModified = x.ModifiedOn ?? x.CreatedOn,

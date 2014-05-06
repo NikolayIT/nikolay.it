@@ -20,9 +20,12 @@
             <li><i class="fa fa-calendar"></i> @Model.CreatedOn.ToString("MMMM dd, yyyy")</li>
             <li><i class="fa fa-pencil"></i> Nikolay Kostov</li>
             <li><i class="fa fa-comments"></i> <a href="#">Comments not allowed</a></li>
-            <li><i class="fa fa-pencil"></i> <a href="/Administration/BlogPosts/Edit/@Model.Id">Edit</a></li>
+            @if (User.IsAdmin())
+            {
+                <li><i class="fa fa-pencil"></i> <a href="/Administration/BlogPosts/Edit/@Model.Id">Edit</a></li>
+            }
         </ul>
-        <ul class="list-unstyled list-inline blog-tags">
+        @*<ul class="list-unstyled list-inline blog-tags">
             <li>
                 <i class="fa fa-tags"></i>
                 <a href="#">Technology</a>
@@ -30,7 +33,7 @@
                 <a href="#">Internet</a>
                 <a href="#">Media</a>
             </li>
-        </ul>
+        </ul>*@
     </div>
     @Html.Raw(Model.Content)
 </div>

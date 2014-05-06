@@ -45,3 +45,12 @@
 	opacity: 1;
 	box-shadow: 0 0 0 2px #72c02c;
 }
+
+.posts .dl-horizontal dt i {
+	width: 60px; 
+	height: 60px;
+    padding-top: 4px;
+	border: solid 1px #ddd;
+    font-size: 52px;
+    text-align: center;
+}

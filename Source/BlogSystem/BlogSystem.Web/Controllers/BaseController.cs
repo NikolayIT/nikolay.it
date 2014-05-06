@@ -21,8 +21,8 @@
         {
             this.ViewBag.RecentPost =
                 this.Data.BlogPosts.OrderByDescending(x => x.CreatedOn)
-                    .Select(x => new RecentBlogPostViewModel { Title = x.Title, Id = x.Id, CreatedOn = x.CreatedOn })
-                    .Take(3);
+                    .Select(x => new RecentBlogPostViewModel { Title = x.Title, Id = x.Id, CreatedOn = x.CreatedOn, Type = x.Type })
+                    .Take(5);
 
             this.ViewBag.Tags = this.Data.Tags.OrderBy(x => x.Name).Select(x => new TagViewModel { Name = x.Name, PostsCount = x.BlogPosts.Count });
 

@@ -2,6 +2,7 @@
 {
     using System;
 
+    using BlogSystem.Data.Models;
     using BlogSystem.Web.Helpers;
 
     public class RecentBlogPostViewModel
@@ -23,13 +24,22 @@
 
         public string Title { get; set; }
 
+        public BlogPostType Type { get; set; }
+
         public DateTime CreatedOn { get; set; }
 
-        public string Image
+        public string IconClass
         {
             get
             {
-                return "http://cainclusion.org/camap/images/resources/video.png";
+                if (this.Type == BlogPostType.Video)
+                {
+                    return "fa-youtube-play";
+                }
+                else
+                {
+                    return "fa-file-text";
+                }
             }
         }
 

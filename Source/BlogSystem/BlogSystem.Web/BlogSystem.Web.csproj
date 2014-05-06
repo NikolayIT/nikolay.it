@@ -187,6 +187,7 @@
     </Compile>
     <Compile Include="Helpers\BlogUrlGenerator.cs" />
     <Compile Include="Helpers\IBlogUrlGenerator.cs" />
+    <Compile Include="Helpers\PrincipalExtensions.cs" />
     <Compile Include="ViewModels\Blog\BlogPostViewModel.cs" />
     <Compile Include="ViewModels\Home\BlogPostAnnotationViewModel.cs" />
     <Compile Include="ViewModels\Account\ForgotPasswordViewModel.cs" />
@@ -458,6 +459,7 @@
     <Content Include="Views\Shared\EditorTemplates\Html.cshtml" />
     <Content Include="Views\Blog\Post.cshtml" />
     <Content Include="Views\Pages\Page.cshtml" />
+    <Content Include="Views\Shared\EditorTemplates\Enum.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

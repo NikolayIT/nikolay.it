@@ -33,7 +33,7 @@
     @foreach (RecentBlogPostViewModel post in ViewBag.RecentPost)
     {
         <dl class="dl-horizontal">
-            <dt><a href="@post.Url"><img src="@post.Image" alt="" /></a></dt>
+            <dt><a href="@post.Url"><i class="fa @post.IconClass"></i></a></dt>
             <dd>
                 <p><a href="@post.Url">@post.Title</a></p>
             </dd>
@@ -42,7 +42,7 @@
 </div>
 <!-- End Posts -->
 
-<!-- Blog Tags -->
+@*<!-- Blog Tags -->
 <div class="headline headline-md"><h2>Blog Tags</h2></div>
 <ul class="list-unstyled blog-tags margin-bottom-30">
     @foreach (TagViewModel tag in ViewBag.Tags)
@@ -50,4 +50,4 @@
         <li><a href="#"><i class="fa fa-tags"></i> @tag.Name (@tag.PostsCount)</a></li>
     }
 </ul>
-<!-- End Blog Tags -->
+<!-- End Blog Tags -->*@

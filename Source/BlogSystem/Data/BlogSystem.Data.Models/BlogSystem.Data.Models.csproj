@@ -54,6 +54,7 @@
   <ItemGroup>
     <Compile Include="ApplicationUser.cs" />
     <Compile Include="BlogPost.cs" />
+    <Compile Include="BlogPostType.cs" />
     <Compile Include="ContentHolder.cs" />
     <Compile Include="Page.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

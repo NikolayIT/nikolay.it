@@ -10,5 +10,7 @@
         public string ShortContent { get; set; }
 
         public string ImageOrVideoUrl { get; set; }
+
+        public BlogPostType Type { get; set; }
     }
 }

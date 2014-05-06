@@ -49,7 +49,7 @@
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,ShortContent,ImageOrVideoUrl,Title,SubTitle,Content,MetaDescription,MetaKeywords,IsDeleted,DeletedOn,CreatedOn,ModifiedOn")] BlogPost blogPost)
+        public ActionResult Create([Bind(Include = "Id,ShortContent,ImageOrVideoUrl,Type,Title,SubTitle,Content,MetaDescription,MetaKeywords,IsDeleted,DeletedOn,CreatedOn,ModifiedOn")] BlogPost blogPost)
         {
             if (ModelState.IsValid)
             {
@@ -83,7 +83,7 @@
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,ShortContent,ImageOrVideoUrl,Title,SubTitle,Content,MetaDescription,MetaKeywords,IsDeleted,DeletedOn,CreatedOn")] BlogPost blogPost)
+        public ActionResult Edit([Bind(Include = "Id,ShortContent,ImageOrVideoUrl,Type,Title,SubTitle,Content,MetaDescription,MetaKeywords,IsDeleted,DeletedOn,CreatedOn")] BlogPost blogPost)
         {
             if (ModelState.IsValid)
             {
