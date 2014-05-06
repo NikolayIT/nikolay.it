@@ -6,7 +6,7 @@
 
 @if (User.IsAdmin())
 {
-    <li><i class="fa fa-pencil"></i> <a href="/Administration/Pages/Edit/@Model.Id">Edit</a></li>
+    <i class="fa fa-pencil"></i> <a href="/Administration/Pages/Edit/@Model.Id">Edit</a>
 }
 
 @Html.Raw(Model.Content)
