@@ -5,7 +5,6 @@
 
     using AutoMapper.QueryableExtensions;
 
-    using BlogSystem.Data;
     using BlogSystem.Data.Contracts;
     using BlogSystem.Data.Models;
     using BlogSystem.Web.ViewModels.Pages;

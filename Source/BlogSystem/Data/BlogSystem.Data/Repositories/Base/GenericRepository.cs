@@ -95,18 +95,6 @@
             return this.Context.SaveChanges();
         }
 
-        private int GetPrimaryKey(DbEntityEntry entry)
-        {
-            var myObject = entry.Entity;
-
-            var property = myObject
-                .GetType()
-                .GetProperties()
-                .FirstOrDefault(prop => Attribute.IsDefined(prop, typeof(KeyAttribute)));
-
-            return (int)property.GetValue(myObject, null);
-        }
-
         public void Dispose()
         {
             this.Context.Dispose();

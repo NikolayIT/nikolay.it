@@ -14,6 +14,8 @@
 
         DbSet<Tag> Tags { get; }
 
+        DbSet<Setting> Settings { get; }
+
         int SaveChanges();
 
         DbEntityEntry<TEntity> Entry<TEntity>(TEntity entity) where TEntity : class;

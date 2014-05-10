@@ -6,15 +6,11 @@
     using System.Web.Optimization;
     using System.Web.Routing;
 
-    using AutoMapper;
-
     using BlogSystem.Data;
     using BlogSystem.Data.Migrations;
-    using BlogSystem.Data.Models;
     using BlogSystem.Web.Infrastructure;
     using BlogSystem.Web.Infrastructure.Mapping;
     using BlogSystem.Web.Infrastructure.Registries;
-    using BlogSystem.Web.ViewModels.Blog;
 
     using StructureMap;
 

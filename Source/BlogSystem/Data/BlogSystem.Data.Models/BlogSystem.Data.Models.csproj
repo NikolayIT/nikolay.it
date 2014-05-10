@@ -58,6 +58,7 @@
     <Compile Include="ContentHolder.cs" />
     <Compile Include="Page.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Setting.cs" />
     <Compile Include="Tag.cs" />
   </ItemGroup>
   <ItemGroup>

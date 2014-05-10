@@ -15,6 +15,8 @@
             For<IApplicationDbContext>().Use<ApplicationDbContext>();
             For<IRepository<BlogPost>>().Use<GenericRepository<BlogPost>>();
             For<IRepository<Page>>().Use<GenericRepository<Page>>();
+            For<IRepository<Tag>>().Use<GenericRepository<Tag>>();
+            For<IRepository<Setting>>().Use<GenericRepository<Setting>>();
         }
     }
 }
