@@ -1,23 +1,24 @@
 ﻿namespace BlogSystem.Web.Areas.Administration.Controllers
 {
-    using System.Data.Entity;
     using System.Linq;
     using System.Net;
     using System.Web.Mvc;
 
-    using BlogSystem.Data;
+    using BlogSystem.Data.Contracts;
     using BlogSystem.Data.Models;
 
     public class PagesController : AdminController
     {
-        public PagesController(ApplicationDbContext data)
-            : base(data)
+        private readonly IRepository<Page> pages; 
+
+        public PagesController(IRepository<Page> pages)
         {
+            this.pages = pages;
         }
 
         public ActionResult Index()
         {
-            return this.View(Data.Pages.ToList());
+            return this.View(this.pages.All().ToList());
         }
 
         public ActionResult Details(int? id)
@@ -27,7 +28,7 @@
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
 
-            Page page = Data.Pages.Find(id);
+            Page page = this.pages.GetById(id.Value);
             if (page == null)
             {
                 return this.HttpNotFound();
@@ -49,8 +50,8 @@
         {
             if (ModelState.IsValid)
             {
-                Data.Pages.Add(page);
-                Data.SaveChanges();
+                this.pages.Add(page);
+                this.pages.SaveChanges();
                 return this.RedirectToAction("Index");
             }
 
@@ -64,7 +65,7 @@
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
 
-            Page page = Data.Pages.Find(id);
+            Page page = this.pages.GetById(id.Value);
             if (page == null)
             {
                 return this.HttpNotFound();
@@ -81,8 +82,8 @@
         {
             if (ModelState.IsValid)
             {
-                Data.Entry(page).State = EntityState.Modified;
-                Data.SaveChanges();
+                this.pages.Update(page);
+                this.pages.SaveChanges();
                 return this.RedirectToAction("Index");
             }
 
@@ -96,7 +97,7 @@
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
 
-            Page page = Data.Pages.Find(id);
+            Page page = this.pages.GetById(id.Value);
             if (page == null)
             {
                 return this.HttpNotFound();
@@ -109,9 +110,9 @@
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            Page page = Data.Pages.Find(id);
-            Data.Pages.Remove(page);
-            Data.SaveChanges();
+            Page page = this.pages.GetById(id);
+            this.pages.Delete(page);
+            this.pages.SaveChanges();
             return this.RedirectToAction("Index");
         }
 
@@ -119,7 +120,7 @@
         {
             if (disposing)
             {
-                Data.Dispose();
+                this.pages.Dispose();
             }
 
             base.Dispose(disposing);

@@ -10,6 +10,11 @@
             routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
 
             routes.MapRoute(
+                name: "index.html",
+                url: "index.html",
+                defaults: new { controller = "Redirects", action = "Index" });
+
+            routes.MapRoute(
                 name: "Blog post",
                 url: "Blog/{year}/{month}/{title}/{id}",
                 defaults: new { controller = "Blog", action = "Post" },

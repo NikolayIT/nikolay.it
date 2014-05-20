@@ -9,7 +9,7 @@
 
     using Microsoft.AspNet.Identity.EntityFramework;
 
-    public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
+    public class ApplicationDbContext : IdentityDbContext<ApplicationUser>, IApplicationDbContext
     {
         public ApplicationDbContext()
             : base("DefaultConnection", throwIfV1Schema: false)
@@ -23,7 +23,12 @@
         public DbSet<Tag> Tags { get; set; }
 
         public DbSet<PostComment> Comments { get; set; }
+        public DbSet<Setting> Settings { get; set; }
+<<<<<<< .mine
 
+=======
+
+>>>>>>> .theirs
         public static ApplicationDbContext Create()
         {
             return new ApplicationDbContext();
@@ -34,6 +39,11 @@
             this.ApplyAuditInfoRules();
             this.ApplyDeletableEntityRules();
             return base.SaveChanges();
+        }
+
+        public new IDbSet<T> Set<T>() where T : class
+        {
+            return base.Set<T>();
         }
 
         private void ApplyAuditInfoRules()

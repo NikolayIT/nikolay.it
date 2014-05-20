@@ -2,7 +2,10 @@
 {
     using System;
 
-    public class BlogPostViewModel
+    using BlogSystem.Data.Models;
+    using BlogSystem.Web.Infrastructure.Mapping;
+
+    public class BlogPostViewModel : IMapFrom<BlogPost>
     {
         public int Id { get; set; }
 

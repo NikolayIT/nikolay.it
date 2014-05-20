@@ -2,7 +2,10 @@
 {
     using System;
 
-    public class PageViewModel
+    using BlogSystem.Data.Models;
+    using BlogSystem.Web.Infrastructure.Mapping;
+
+    public class PageViewModel : IMapFrom<Page>
     {
         public int Id { get; set; }
 

@@ -9,9 +9,11 @@
     using BlogSystem.Web.ViewModels.Account;
 
     using Microsoft.AspNet.Identity;
+    using Microsoft.AspNet.Identity.EntityFramework;
     using Microsoft.AspNet.Identity.Owin;
     using Microsoft.Owin.Security;
 
+    // TODO: Depend on interfaces instead of new ApplicationUserManager(new UserStore<ApplicationUser>(new ApplicationDbContext()));
     [Authorize]
     public class AccountController : BaseController
     {
@@ -20,15 +22,9 @@
 
         private ApplicationUserManager userManager;
 
-        public AccountController(ApplicationDbContext data)
-            : base(data)
+        public AccountController()
         {
-        }
-
-        public AccountController(ApplicationDbContext data, ApplicationUserManager userManager)
-            : base(data)
-        {
-            this.UserManager = userManager;
+            this.UserManager = new ApplicationUserManager(new UserStore<ApplicationUser>(new ApplicationDbContext()));
         }
 
         public enum ManageMessageId

@@ -1,12 +1,14 @@
-﻿@*<!-- Search Bar -->
-<div class="headline headline-md"><h2>Search</h2></div>
-<div class="input-group margin-bottom-40">
-    <input type="text" class="form-control" placeholder="Search">
-    <span class="input-group-btn">
-        <button class="btn-u" type="button">Go</button>
-    </span>
-</div>
-<!-- End Search Bar -->*@
+﻿@model SidebarViewModel
+
+@*<!-- Search Bar -->
+    <div class="headline headline-md"><h2>Search</h2></div>
+    <div class="input-group margin-bottom-40">
+        <input type="text" class="form-control" placeholder="Search">
+        <span class="input-group-btn">
+            <button class="btn-u" type="button">Go</button>
+        </span>
+    </div>
+    <!-- End Search Bar -->*@
 
 <!-- Social Bar -->
 <div class="headline headline-md"><h2>Social?</h2></div>
@@ -21,16 +23,14 @@
     <li><a href="/Rss/Blog" target="_blank"><i class="fa fa-rss-square hover-effect"></i></a></li>
 </ul>
 <!-- End Social -->
-    
 <!-- GitHub Badge -->
 <div class="headline headline-md"><h2>Me @@GitHub</h2></div>
 <iframe src="http://githubbadge.appspot.com/NikolayIT?s=1" style="border: 0;height: 142px;width: 200px;overflow: hidden;" frameborder="0"></iframe>
 <!-- End GitHub Badge -->
-
 <!-- Posts -->
 <div class="posts margin-bottom-40">
     <div class="headline headline-md"><h2>Recent Posts</h2></div>
-    @foreach (RecentBlogPostViewModel post in ViewBag.RecentPost)
+    @foreach (RecentBlogPostViewModel post in Model.RecentPosts)
     {
         <dl class="dl-horizontal">
             <dt><a href="@post.Url"><i class="fa @post.IconClass"></i></a></dt>
@@ -41,13 +41,12 @@
     }
 </div>
 <!-- End Posts -->
-
 @*<!-- Blog Tags -->
-<div class="headline headline-md"><h2>Blog Tags</h2></div>
-<ul class="list-unstyled blog-tags margin-bottom-30">
-    @foreach (TagViewModel tag in ViewBag.Tags)
-    {
-        <li><a href="#"><i class="fa fa-tags"></i> @tag.Name (@tag.PostsCount)</a></li>
-    }
-</ul>
-<!-- End Blog Tags -->*@
+    <div class="headline headline-md"><h2>Blog Tags</h2></div>
+    <ul class="list-unstyled blog-tags margin-bottom-30">
+        @foreach (TagViewModel tag in Model.Tags)
+        {
+            <li><a href="#"><i class="fa fa-tags"></i> @tag.Name (@tag.PostsCount)</a></li>
+        }
+    </ul>
+    <!-- End Blog Tags -->*@

@@ -2,9 +2,13 @@
 {
     using System;
 
-    using BlogSystem.Web.Helpers;
+    using AutoMapper;
 
-    public class BlogPostAnnotationViewModel
+    using BlogSystem.Data.Models;
+    using BlogSystem.Web.Helpers;
+    using BlogSystem.Web.Infrastructure.Mapping;
+
+    public class BlogPostAnnotationViewModel : IMapFrom<BlogPost>, IHaveCustomMappings
     {
         private readonly IBlogUrlGenerator urlGenerator;
 
@@ -34,6 +38,12 @@
             {
                 return this.urlGenerator.GenerateUrl(this.Id, this.Title, this.CreatedOn);
             }
+        }
+
+        public void CreateMappings(IConfiguration configuration)
+        {
+            configuration.CreateMap<BlogPost, BlogPostAnnotationViewModel>()
+                .ForMember(m => m.Content, opt => opt.MapFrom(u => u.ShortContent));
         }
     }
 }
