@@ -1,0 +1,21 @@
+﻿@model int
+
+<div>
+    @(Ajax.ActionLink("View Comments", "All", new { id = Model, controller = "Comments" },
+                        new AjaxOptions
+                        {
+                            HttpMethod = "GET",
+                            OnSuccess = "hideViewCommentsButton",
+                            InsertionMode = InsertionMode.Replace,
+                            UpdateTargetId = "comments"
+                        }, new { id = "show-comments-btn", @class = "btn-u" }))
+</div>
+<section id="comments">
+
+</section>
+
+<script>
+    function hideViewCommentsButton() {
+        $('#show-comments-btn').hide();
+    }
+</script>

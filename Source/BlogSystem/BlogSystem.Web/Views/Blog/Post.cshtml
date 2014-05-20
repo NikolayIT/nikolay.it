@@ -38,3 +38,6 @@
     @Html.Raw(Model.Content)
 </div>
 <!--End Blog Post-->
+
+<!--Start Comments-->
+@Html.Partial("_Comments", Model.Id)

@@ -22,6 +22,8 @@
 
         public DbSet<Tag> Tags { get; set; }
 
+        public DbSet<PostComment> Comments { get; set; }
+
         public static ApplicationDbContext Create()
         {
             return new ApplicationDbContext();

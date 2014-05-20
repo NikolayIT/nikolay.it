@@ -179,6 +179,7 @@
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\BaseController.cs" />
     <Compile Include="Controllers\BlogController.cs" />
+    <Compile Include="Controllers\CommentsController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\PagesController.cs" />
     <Compile Include="Controllers\RedirectsController.cs" />
@@ -196,6 +197,7 @@
     <Compile Include="ViewModels\Home\IndexViewModel.cs" />
     <Compile Include="ViewModels\Account\LoginViewModel.cs" />
     <Compile Include="ViewModels\Account\ManageUserViewModel.cs" />
+    <Compile Include="ViewModels\Comments\CommentViewModel.cs" />
     <Compile Include="ViewModels\Pages\PageViewModel.cs" />
     <Compile Include="ViewModels\RecentBlogPostViewModel.cs" />
     <Compile Include="ViewModels\Account\RegisterViewModel.cs" />
@@ -248,6 +250,8 @@
     <Content Include="Scripts\jquery-2.1.0.min.js" />
     <Content Include="Scripts\jquery-2.1.0.min.map" />
     <None Include="Scripts\jquery.validate-vsdoc.js" />
+    <Content Include="Scripts\jquery.unobtrusive-ajax.js" />
+    <Content Include="Scripts\jquery.unobtrusive-ajax.min.js" />
     <Content Include="Scripts\jquery.validate.js" />
     <Content Include="Scripts\jquery.validate.min.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
@@ -461,6 +465,8 @@
     <Content Include="Views\Blog\Post.cshtml" />
     <Content Include="Views\Pages\Page.cshtml" />
     <Content Include="Views\Shared\EditorTemplates\Enum.cshtml" />
+    <Content Include="Views\Shared\_Comments.cshtml" />
+    <Content Include="Views\Comments\All.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
