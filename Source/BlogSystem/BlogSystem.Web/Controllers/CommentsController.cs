@@ -4,19 +4,23 @@
     using System.Linq;
     using System.Web.Mvc;
 
-    using BlogSystem.Data;
+    using BlogSystem.Data.Models;
     using BlogSystem.Web.ViewModels.Comments;
+    using BlogSystem.Data.Contracts;
 
     public class CommentsController : BaseController
     {
-        public CommentsController(ApplicationDbContext data)
-            : base(data)
+        private IRepository<PostComment> commentsData;
+
+        public CommentsController(IRepository<PostComment> commentsRepository)
         {
+            this.commentsData = commentsRepository;
         }
 
         public ActionResult All(int id, int maxComments = 999, int startFrom = 0)
         {
-            var comments = this.Data.Comments
+            var comments = this.commentsData
+                .All()
                 .Where(c => !c.IsDeleted && c.IsApproved)
                 .OrderByDescending(c => c.CreatedOn)
                 .Skip(startFrom)

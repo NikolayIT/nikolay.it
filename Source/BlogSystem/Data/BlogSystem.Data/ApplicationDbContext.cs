@@ -23,12 +23,9 @@
         public DbSet<Tag> Tags { get; set; }
 
         public DbSet<PostComment> Comments { get; set; }
+
         public DbSet<Setting> Settings { get; set; }
-<<<<<<< .mine
 
-=======
-
->>>>>>> .theirs
         public static ApplicationDbContext Create()
         {
             return new ApplicationDbContext();
