@@ -1,9 +1,10 @@
 ﻿namespace BlogSystem.Data.Models
 {
+    using System.ComponentModel.DataAnnotations;
+
     public class Setting
     {
-        public int Id { get; set; }
-
+        [Key]
         public string Name { get; set; }
 
         public string Value { get; set; }
