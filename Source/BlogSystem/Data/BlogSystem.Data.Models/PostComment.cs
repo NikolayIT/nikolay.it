@@ -1,6 +1,7 @@
 ﻿namespace BlogSystem.Data.Models
 {
     using BlogSystem.Data.Contracts;
+    using System.ComponentModel;
 
     public class PostComment : DeletableEntity
     {
@@ -12,6 +13,7 @@
 
         public virtual BlogPost BlogPost { get; set; }
 
-        public bool IsApproved { get; set; }
+        [DefaultValue(true)]
+        public bool IsVisible { get; set; }
     }
 }

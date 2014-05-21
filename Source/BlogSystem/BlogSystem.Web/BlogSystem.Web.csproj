@@ -187,6 +187,7 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Helpers\BlogUrlGenerator.cs" />
+    <Compile Include="Helpers\Html\Bootstrap.cs" />
     <Compile Include="Helpers\IBlogUrlGenerator.cs" />
     <Compile Include="Helpers\PrincipalExtensions.cs" />
     <Compile Include="Infrastructure\Conventions\ControllerConvention.cs" />
@@ -478,6 +479,9 @@
     <Content Include="Views\Shared\EditorTemplates\Enum.cshtml" />
     <Content Include="Views\Shared\_Comments.cshtml" />
     <Content Include="Views\Comments\All.cshtml" />
+    <Content Include="Views\Shared\_CreateComment.cshtml" />
+    <Content Include="Views\Shared\DisplayTemplates\Comment.cshtml" />
+    <Content Include="Views\Shared\EditorTemplates\Comment.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

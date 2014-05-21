@@ -1,0 +1,11 @@
+﻿@model BlogSystem.Web.ViewModels.Comments.CommentViewModel
+
+<div class="media">
+    @*<a class="pull-left" href="#">
+        <img class="media-object" src="assets/img/sliders/elastislide/9.jpg" alt="">
+    </a>*@
+    <div class="media-body">
+        <h4 class="media-heading">Media heading <span>@Model.CommentedOn@* / <a href="#">Reply</a>*@</span></h4>
+        <p>@Model.Content</p>
+    </div>
+</div>

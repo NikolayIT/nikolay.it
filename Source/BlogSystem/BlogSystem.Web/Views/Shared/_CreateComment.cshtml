@@ -1,0 +1,13 @@
+﻿@model BlogSystem.Web.ViewModels.Comments.CommentViewModel
+
+<div class="post-comment">
+    <h3>Leave a Comment</h3>
+    @using (Ajax.BeginForm("Create", new AjaxOptions { HttpMethod = "Post", InsertionMode = InsertionMode.InsertAfter, UpdateTargetId = "comments" }))
+    {
+        @Html.EditorForModel("Comment")
+        
+        <p>
+            <input class="btn-u" type="submit" value="Send Message" />
+        </p>
+    }
+</div>

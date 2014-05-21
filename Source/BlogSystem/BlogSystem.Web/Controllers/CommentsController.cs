@@ -21,7 +21,7 @@
         {
             var comments = this.commentsData
                 .All()
-                .Where(c => !c.IsDeleted && c.IsApproved)
+                .Where(c => !c.IsDeleted && c.IsVisible)
                 .OrderByDescending(c => c.CreatedOn)
                 .Skip(startFrom)
                 .Take(maxComments)

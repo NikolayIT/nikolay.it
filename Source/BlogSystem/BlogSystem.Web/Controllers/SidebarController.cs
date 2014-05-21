@@ -11,7 +11,6 @@
 
     public class SidebarController : BaseController
     {
-        
         private readonly IRepository<BlogPost> blogPosts;
         private readonly IRepository<Tag> tags;
 
