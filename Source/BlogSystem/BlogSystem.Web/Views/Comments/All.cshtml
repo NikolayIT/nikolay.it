@@ -1,4 +1,5 @@
-﻿@model IEnumerable<BlogSystem.Web.ViewModels.Comments.CommentViewModel>
+﻿@using BlogSystem.Web.ViewModels.Comments;
+@model IEnumerable<CommentViewModel>
 <h3>@(Model.Count() == 0 ? "No comments" : "Comments")</h3>
 
 @foreach (var comment in Model)
@@ -7,4 +8,4 @@
 }
 
 <hr />
-@Html.Partial("_CreateComment")
+@Html.Partial("_CreateComment", new CommentViewModel())

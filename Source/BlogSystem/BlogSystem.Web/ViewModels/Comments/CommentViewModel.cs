@@ -14,12 +14,16 @@
 
         public int BlogPostId { get; set; }
 
+        public string User { get; set; }
+
         public DateTime CommentedOn { get; set; }
 
         public void CreateMappings(IConfiguration configuration)
         {
             configuration.CreateMap<PostComment, CommentViewModel>()
                 .ForMember(m => m.CommentedOn, opt => opt.MapFrom(u => u.CreatedOn));
+            configuration.CreateMap<PostComment, CommentViewModel>()
+                .ForMember(m => m.User, opt => opt.MapFrom(u => u.User.UserName));
         }
     }
 }

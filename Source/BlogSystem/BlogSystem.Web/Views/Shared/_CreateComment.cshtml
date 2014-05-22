@@ -2,12 +2,22 @@
 
 <div class="post-comment">
     <h3>Leave a Comment</h3>
-    @using (Ajax.BeginForm("Create", new AjaxOptions { HttpMethod = "Post", InsertionMode = InsertionMode.InsertAfter, UpdateTargetId = "comments" }))
+    @if (User.IsLoggedIn())
     {
+        using (Ajax.BeginForm("Create", new AjaxOptions { HttpMethod = "Post", InsertionMode = InsertionMode.InsertAfter, UpdateTargetId = "comments" }))
+        {
         @Html.EditorForModel("Comment")
         
         <p>
-            <input class="btn-u" type="submit" value="Send Message" />
+            @Html.BootstrapBubmitButton("Add Comment");
+        </p>
+        }
+    }
+    else
+    {
+        <p>
+            Only registered users can comment.
+            @Html.Partial("_PageLoginPartial")
         </p>
     }
 </div>

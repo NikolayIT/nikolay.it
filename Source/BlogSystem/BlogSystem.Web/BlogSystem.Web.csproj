@@ -482,6 +482,7 @@
     <Content Include="Views\Shared\_CreateComment.cshtml" />
     <Content Include="Views\Shared\DisplayTemplates\Comment.cshtml" />
     <Content Include="Views\Shared\EditorTemplates\Comment.cshtml" />
+    <Content Include="Views\Shared\_PageLoginPartial.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
