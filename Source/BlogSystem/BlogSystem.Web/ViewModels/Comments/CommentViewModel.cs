@@ -8,6 +8,15 @@
 
     public class CommentViewModel : IMapFrom<PostComment>, IHaveCustomMappings
     {
+        public CommentViewModel()
+        {
+        }
+
+        public CommentViewModel(int blogPostId)
+        {
+            this.BlogPostId = blogPostId;
+        }
+
         public int Id { get; set; }
 
         public string Content { get; set; }

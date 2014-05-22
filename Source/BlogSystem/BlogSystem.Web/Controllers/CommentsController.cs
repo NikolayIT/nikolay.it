@@ -7,6 +7,7 @@
     using BlogSystem.Data.Models;
     using BlogSystem.Web.ViewModels.Comments;
     using BlogSystem.Data.Contracts;
+    using BlogSystem.Web.Infrastructure.Filters;
 
     public class CommentsController : BaseController
     {
@@ -17,9 +18,10 @@
             this.commentsData = commentsRepository;
         }
 
+        [PassRouteValuesToViewData]
         public ActionResult All(int id, int maxComments = 999, int startFrom = 0)
         {
-            var comments = this.commentsData
+            var comments = commentsData
                 .All()
                 .Where(c => !c.IsDeleted && c.IsVisible)
                 .OrderByDescending(c => c.CreatedOn)
@@ -35,6 +37,18 @@
                     });
 
             return PartialView(comments);
+        }
+
+        public ActionResult Create(int id, CommentViewModel comment)
+        {
+            var newComment = new PostComment
+            {
+                Content = comment.Content,
+                BlogPostId = id,
+                CreatedOn = DateTime.Now,
+            };
+
+            throw new NotImplementedException();
         }
 	}
 }
