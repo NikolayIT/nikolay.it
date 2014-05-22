@@ -2,7 +2,7 @@
 {
     using System.Web.Mvc;
 
-    public class PassRouteValuesToViewDataAttribute : ActionFilterAttribute
+    public class PassRouteValuesToViewDataAttribute : ActionFilterAttribute, IActionFilter
     {
         public override void OnActionExecuting(ActionExecutingContext filterContext)
         {

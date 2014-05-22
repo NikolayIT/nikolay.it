@@ -195,11 +195,13 @@
     <Compile Include="Infrastructure\Mapping\AutoMapperConfig.cs" />
     <Compile Include="Infrastructure\Mapping\IHaveCustomMappings.cs" />
     <Compile Include="Infrastructure\Mapping\IMapFrom.cs" />
+    <Compile Include="Infrastructure\Registries\ActionFilterRegistry.cs" />
     <Compile Include="Infrastructure\Registries\ControllerRegistry.cs" />
     <Compile Include="Infrastructure\Registries\DataRegistry.cs" />
     <Compile Include="Infrastructure\Registries\MvcRegistry.cs" />
     <Compile Include="Infrastructure\Registries\StandardRegistry.cs" />
     <Compile Include="Infrastructure\StructureMapDependencyResolver.cs" />
+    <Compile Include="Infrastructure\StructureMapFilterProvider.cs" />
     <Compile Include="ViewModels\Blog\BlogPostViewModel.cs" />
     <Compile Include="ViewModels\Home\BlogPostAnnotationViewModel.cs" />
     <Compile Include="ViewModels\Account\ForgotPasswordViewModel.cs" />
