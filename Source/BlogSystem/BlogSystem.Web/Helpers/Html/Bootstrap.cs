@@ -1,8 +1,9 @@
-﻿using System;
-using System.Linq.Expressions;
-using System.Web.Mvc;
-namespace BlogSystem.Web.Helpers.Html
+﻿namespace BlogSystem.Web.Helpers.Html
 {
+    using System;
+    using System.Linq.Expressions;
+    using System.Web.Mvc;
+
     //    <label>Name</label>
     //    <div class="row margin-bottom-20">
     //        <div class="col-md-7 col-md-offset-0">
@@ -19,10 +20,26 @@ namespace BlogSystem.Web.Helpers.Html
             var metaData = ModelMetadata.FromLambdaExpression(expression, helper.ViewData);
             string propertyName = metaData.PropertyName;
 
-            var label = GenerateLabel(propertyName);
+            return BuildFormControl(propertyName, htmlAttributes, GenerateTextBox);
+        }
+
+        public static MvcHtmlString BootstrapFormTextAreaFor<TModel, TValue>(
+            this HtmlHelper<TModel> helper,
+            Expression<Func<TModel, TValue>> expression,
+            object htmlAttributes = null)
+        {
+            var metaData = ModelMetadata.FromLambdaExpression(expression, helper.ViewData);
+            string propertyName = metaData.PropertyName;
+
+            return BuildFormControl(propertyName, htmlAttributes, GenerateTextArea);
+        }
+
+        private static MvcHtmlString BuildFormControl(string name, object htmlAttributes, Func<string, object, TagBuilder> inputElement)
+        {
+            var label = GenerateLabel(name);
             var outerDiv = GenerateOuterDiv();
             var innerDiv = GenerateInnerDiv();
-            var input = GenerateTextBox(propertyName, htmlAttributes);
+            var input = inputElement(name, htmlAttributes);
 
             innerDiv.InnerHtml = input.ToString();
             outerDiv.InnerHtml = innerDiv.ToString();
@@ -58,14 +75,29 @@ namespace BlogSystem.Web.Helpers.Html
             input.Attributes.Add("type", "text");
             input.Attributes.Add("name", name);
             input.Attributes.Add("id", HtmlHelper.GenerateIdFromName(name));
+            input.ApplyAttributes(htmlAttributes);
 
+            return input;
+        }
+
+        private static TagBuilder GenerateTextArea(string name, object htmlAttributes)
+        {
+            var textArea = new TagBuilder("textarea");
+            textArea.AddCssClass("form-control");
+            textArea.Attributes.Add("name", name);
+            textArea.Attributes.Add("id", HtmlHelper.GenerateIdFromName(name));
+            textArea.ApplyAttributes(htmlAttributes);
+
+            return textArea;
+        }
+
+        private static void ApplyAttributes(this TagBuilder tagBuilder, object htmlAttributes)
+        {
             if (htmlAttributes != null)
             {
                 var attributes = HtmlHelper.AnonymousObjectToHtmlAttributes(htmlAttributes);
-                input.MergeAttributes(attributes);
+                tagBuilder.MergeAttributes(attributes);
             }
-
-            return input;
         }
     }
 }
