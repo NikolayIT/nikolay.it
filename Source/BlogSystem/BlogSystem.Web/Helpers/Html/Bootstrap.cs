@@ -34,6 +34,16 @@
             return BuildFormControl(propertyName, htmlAttributes, GenerateTextArea);
         }
 
+        public static MvcHtmlString BootstrapBubmitButton(this HtmlHelper helper, string value, object htmlAttributes = null)
+        {
+            var submitButton = new TagBuilder("input");
+            submitButton.AddCssClass("btn-u");
+            submitButton.Attributes.Add("type", "submit");
+            submitButton.Attributes.Add("value", value);
+            submitButton.ApplyAttributes(htmlAttributes);
+            return new MvcHtmlString(submitButton.ToString());
+        }
+
         private static MvcHtmlString BuildFormControl(string name, object htmlAttributes, Func<string, object, TagBuilder> inputElement)
         {
             var label = GenerateLabel(name);
