@@ -192,6 +192,8 @@
     <Compile Include="Helpers\PrincipalExtensions.cs" />
     <Compile Include="Infrastructure\Conventions\ControllerConvention.cs" />
     <Compile Include="Infrastructure\Filters\RouteValuesInViewData.cs" />
+    <Compile Include="Infrastructure\Identity\CurrentUser.cs" />
+    <Compile Include="Infrastructure\Identity\ICurrentUser.cs" />
     <Compile Include="Infrastructure\Mapping\AutoMapperConfig.cs" />
     <Compile Include="Infrastructure\Mapping\IHaveCustomMappings.cs" />
     <Compile Include="Infrastructure\Mapping\IMapFrom.cs" />

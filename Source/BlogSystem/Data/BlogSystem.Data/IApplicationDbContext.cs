@@ -8,13 +8,17 @@
 
     public interface IApplicationDbContext : IDisposable
     {
-        DbSet<BlogPost> BlogPosts { get; }
+        IDbSet<BlogPost> BlogPosts { get; set; }
 
-        DbSet<Page> Pages { get; }
+        IDbSet<Page> Pages { get; set; }
 
-        DbSet<Tag> Tags { get; }
+        IDbSet<Tag> Tags { get; set; }
 
-        DbSet<Setting> Settings { get; }
+        IDbSet<Setting> Settings { get; set; }
+
+        IDbSet<PostComment> Comments { get; set; }
+
+        IDbSet<ApplicationUser> Users { get; set; }
 
         int SaveChanges();
 

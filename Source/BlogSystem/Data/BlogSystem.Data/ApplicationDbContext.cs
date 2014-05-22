@@ -16,15 +16,15 @@
         {
         }
 
-        public DbSet<BlogPost> BlogPosts { get; set; }
+        public IDbSet<BlogPost> BlogPosts { get; set; }
 
-        public DbSet<Page> Pages { get; set; }
+        public IDbSet<Page> Pages { get; set; }
 
-        public DbSet<Tag> Tags { get; set; }
+        public IDbSet<Tag> Tags { get; set; }
 
-        public DbSet<PostComment> Comments { get; set; }
+        public IDbSet<PostComment> Comments { get; set; }
 
-        public DbSet<Setting> Settings { get; set; }
+        public IDbSet<Setting> Settings { get; set; }
 
         public static ApplicationDbContext Create()
         {
