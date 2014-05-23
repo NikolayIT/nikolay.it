@@ -13,6 +13,8 @@
     using Microsoft.AspNet.Identity.Owin;
     using Microsoft.Owin.Security;
 
+    using Recaptcha;
+
     // TODO: Depend on interfaces instead of new ApplicationUserManager(new UserStore<ApplicationUser>(new ApplicationDbContext()));
     [Authorize]
     public class AccountController : BaseController
@@ -98,9 +100,25 @@
         // POST: /Account/Register
         [HttpPost]
         [AllowAnonymous]
+        [RecaptchaControlMvc.CaptchaValidator]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Register(RegisterViewModel model)
+        public async Task<ActionResult> Register(RegisterViewModel model, bool captchaValid)
         {
+            if (userManager.FindByEmail(model.Email) != null)
+            {
+                this.ModelState.AddModelError("Email", "Email is already registered");
+            }
+
+            if (userManager.FindByEmail(model.UserName) != null)
+            {
+                this.ModelState.AddModelError("UserName", "User name is already registered");
+            }
+
+            if (!captchaValid)
+            {
+                this.ModelState.AddModelError("Captcha", "Invalid captcha");
+            }
+
             if (ModelState.IsValid)
             {
                 var user = new ApplicationUser() { UserName = model.UserName, Email = model.Email };
