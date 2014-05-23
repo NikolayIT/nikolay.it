@@ -182,6 +182,7 @@
     <Compile Include="Areas\Administration\Controllers\BlogPostsController.cs" />
     <Compile Include="Areas\Administration\Controllers\PagesController.cs" />
     <Compile Include="Areas\Administration\Controllers\PostCommentsController.cs" />
+    <Compile Include="Areas\Administration\Controllers\SettingsController.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\BaseController.cs" />
     <Compile Include="Controllers\BlogController.cs" />
@@ -210,6 +211,7 @@
     <Compile Include="Infrastructure\Registries\DataRegistry.cs" />
     <Compile Include="Infrastructure\Registries\MvcRegistry.cs" />
     <Compile Include="Infrastructure\Registries\StandardRegistry.cs" />
+    <Compile Include="Infrastructure\SettingsManager.cs" />
     <Compile Include="Infrastructure\StructureMapDependencyResolver.cs" />
     <Compile Include="Infrastructure\StructureMapFilterProvider.cs" />
     <Compile Include="ViewModels\Blog\BlogPostViewModel.cs" />
@@ -273,6 +275,9 @@
     <Content Include="Areas\Administration\Views\PostComments\Details.cshtml" />
     <Content Include="Areas\Administration\Views\PostComments\Edit.cshtml" />
     <Content Include="Areas\Administration\Views\PostComments\Index.cshtml" />
+    <Content Include="Areas\Administration\Views\Settings\Details.cshtml" />
+    <Content Include="Areas\Administration\Views\Settings\Edit.cshtml" />
+    <Content Include="Areas\Administration\Views\Settings\Index.cshtml" />
     <None Include="Properties\PublishProfiles\79.124.67.12.pubxml" />
     <Content Include="Scripts\global.js" />
     <None Include="Scripts\jquery-2.1.1.intellisense.js" />
@@ -489,7 +494,7 @@
     <Content Include="Views\Comments\_Comments.cshtml" />
     <Content Include="Views\Comments\All.cshtml" />
     <Content Include="Views\Comments\_CreateComment.cshtml" />
-    <Content Include="Views\Shared\EditorTemplates\Comment.cshtml" />
+    <Content Include="Views\Blog\EditorTemplates\Comment.cshtml" />
     <Content Include="Views\Shared\_PageLoginPartial.cshtml" />
     <Content Include="Views\Comments\_CommentDetail.cshtml" />
     <Content Include="Scripts\tinymce\skins\lightgray\fonts\tinymce-small.woff" />
