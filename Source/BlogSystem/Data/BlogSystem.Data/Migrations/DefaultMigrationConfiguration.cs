@@ -29,18 +29,19 @@
                 return;
             }
 
-            context.Settings.Add(new Setting { Name = "Logo Url", Value = null });
-            context.Settings.Add(new Setting { Name = "Home Title", Value = null });
-            context.Settings.Add(new Setting { Name = "Blog Name", Value = null });
-            context.Settings.Add(new Setting { Name = "Author", Value = null });
-            context.Settings.Add(new Setting { Name = "GitHub Profile", Value = null });
-            context.Settings.Add(new Setting { Name = "Stack Overflow Profile", Value = null });
-            context.Settings.Add(new Setting { Name = "Linked In Profile", Value = null });
-            context.Settings.Add(new Setting { Name = "Contact Email", Value = null });
-            context.Settings.Add(new Setting { Name = "Facebook Profile", Value = null });
-            context.Settings.Add(new Setting { Name = "Foursquare Profile", Value = null });
-            context.Settings.Add(new Setting { Name = "Google+ Profile", Value = null });
-            context.Settings.Add(new Setting { Name = "RSS Url", Value = null });
+            context.Settings.Add(new Setting { Name = "Logo URL", Value = "/img/header-logo.png" });
+            context.Settings.Add(new Setting { Name = "Home Title", Value = "Home Title" });
+            context.Settings.Add(new Setting { Name = "Blog Name", Value = "Blog Name" });
+            context.Settings.Add(new Setting { Name = "Author", Value = "Author" });
+            context.Settings.Add(new Setting { Name = "GitHub Profile", Value = "GitHub Profile" });
+            context.Settings.Add(new Setting { Name = "GitHub Badge HTML Code", Value = "GitHub Badge HTML Code" });
+            context.Settings.Add(new Setting { Name = "Stack Overflow Profile", Value = "Stack Overflow Profile" });
+            context.Settings.Add(new Setting { Name = "Linked In Profile", Value = "Linked In Profile" });
+            context.Settings.Add(new Setting { Name = "Contact Email", Value = "Contact Email" });
+            context.Settings.Add(new Setting { Name = "Facebook Profile", Value = "Facebook Profile" });
+            context.Settings.Add(new Setting { Name = "Foursquare Profile", Value = "Foursquare Profile" });
+            context.Settings.Add(new Setting { Name = "Google+ Profile", Value = "Google+ Profile" });
+            context.Settings.Add(new Setting { Name = "RSS Url", Value = "RSS Url" });
         }
 
         protected void SeedRoles(ApplicationDbContext context)

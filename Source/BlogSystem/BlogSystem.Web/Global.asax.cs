@@ -45,7 +45,7 @@
             {
                 cfg.AddRegistry(new StandardRegistry());
                 cfg.AddRegistry(new ControllerRegistry());
-                //// cfg.AddRegistry(new ActionFilterRegistry(() => Container ?? ObjectFactory.Container));
+                cfg.AddRegistry(new ActionFilterRegistry(() => Container ?? ObjectFactory.Container));
                 cfg.AddRegistry(new MvcRegistry());
                 //// TODO: cfg.AddRegistry(new TaskRegistry());
                 cfg.AddRegistry(new DataRegistry());

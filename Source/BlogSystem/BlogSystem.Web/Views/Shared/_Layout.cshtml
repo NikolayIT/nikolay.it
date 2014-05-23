@@ -3,16 +3,16 @@
 <!--[if IE 9]> <html lang="en" class="ie9"> <![endif]-->
 <!--[if !IE]><!-->
 <html lang="en">
- <!--<![endif]-->
+<!--<![endif]-->
 <head>
-    <title>@ViewBag.Title - Nikolay.IT Blog</title>
+    <title>@ViewBag.Title - @ViewBag.Settings.Get["Home Title"]</title>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="keywords" content="@ViewBag.Keywords" />
     <meta name="description" content="@ViewBag.Description" />
     <meta name="robots" content="index, follow" />
     <meta name="revisit-after" content="1 days" />
-    <meta name="author" content="Nikolay.IT - Nikolay Kostov" />
+    <meta name="author" content="@ViewBag.Settings.Get["Blog Name"] - @ViewBag.Settings.Get["Author"]" />
     <meta name="generator" content="NikolayIT BlogSystem - https://github.com/NikolayIT/BlogSystem" />
     <link rel="shortcut icon" href="/favicon.ico" />
     @Styles.Render("~/Content/css")
@@ -25,7 +25,7 @@
                 <div class="col-md-6">
                     <div class="navbar-header">
                         <a class="navbar-brand" href="/">
-                            <img id="logo-header" src="/img/header-logo.png" width="300" height="80" alt="Logo">
+                            <img id="logo-header" src="@ViewBag.Settings.Get["Logo URL"]" width="300" height="80" alt="Logo">
                         </a>
                     </div>
                 </div>
@@ -45,7 +45,7 @@
                 </div>
             </div>
         </header>
-        
+
         <div class="breadcrumbs">
             <div class="container">
                 <h1 class="pull-left">@ViewBag.Title</h1>
@@ -57,7 +57,7 @@
                 }
             </div>
         </div>
-        
+
         <div class="container content">
             <div class="row blog-page">
                 <div class="col-md-9">
@@ -76,10 +76,10 @@
             <div class="container">
                 <div class="row">
                     <div class="col-md-6">
-                        <p>&copy; 2011-@DateTime.Now.Year <strong>Nikolay.IT</strong> Brought to you by <a href="https://www.google.com/search?q=Magic+Unicorns&tbm=isch" target="_blank"><i class="fa fa-magic"></i> Magic Unicorns</a></p>
+                        <p>&copy; 2011-@DateTime.Now.Year <strong>@ViewBag.Settings.Get["Blog Name"]</strong> Brought to you by <a href="https://www.google.com/search?q=Magic+Unicorns&tbm=isch" target="_blank"><i class="fa fa-magic"></i>Magic Unicorns</a></p>
                     </div>
                     <div class="col-md-6">
-                        <p class="pull-right"><a href="https://github.com/NikolayIT/BlogSystem" target="_blank"><i class="fa fa-github"></i> Open Source System <i class="fa fa-smile-o"></i></a></p>
+                        <p class="pull-right"><a href="https://github.com/NikolayIT/BlogSystem" target="_blank"><i class="fa fa-github"></i>Open Source System <i class="fa fa-smile-o"></i></a></p>
                     </div>
                 </div>
             </div>
@@ -90,16 +90,16 @@
     @Scripts.Render("~/bundles/bootstrap")
     @Scripts.Render("~/bundles/global")
     @RenderSection("scripts", required: false)
-    
+
     <script type="text/javascript">
-		var _gaq = _gaq || [];
-		_gaq.push(['_setAccount', 'UA-25135627-1']);
-		_gaq.push(['_trackPageview']);
-		(function() {
-			var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
-			ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
-			var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
-		})();
+        var _gaq = _gaq || [];
+        _gaq.push(['_setAccount', 'UA-25135627-1']);
+        _gaq.push(['_trackPageview']);
+        (function () {
+            var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+            ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+            var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+        })();
     </script>
 </body>
 </html>

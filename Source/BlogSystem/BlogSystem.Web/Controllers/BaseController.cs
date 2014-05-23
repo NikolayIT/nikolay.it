@@ -11,6 +11,7 @@
 
     using StructureMap;
     using BlogSystem.Web.Infrastructure.ActionResults;
+    using BlogSystem.Web.Infrastructure;
 
     public abstract class BaseController : Controller
     {
@@ -68,6 +69,7 @@
 
         protected override IAsyncResult BeginExecute(RequestContext requestContext, AsyncCallback callback, object state)
         {
+            ViewBag.Settings = new SettingsManager(() => this.Settings.All().ToDictionary(x => x.Name, x => x.Value));
             return base.BeginExecute(requestContext, callback, state);
         }
     }
