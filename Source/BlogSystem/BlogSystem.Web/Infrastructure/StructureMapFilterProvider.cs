@@ -1,24 +1,25 @@
 ﻿namespace BlogSystem.Web.Infrastructure
 {
-    using StructureMap;
     using System;
     using System.Collections.Generic;
     using System.Web.Mvc;
 
+    using StructureMap;
+
     public class StructureMapFilterProvider : FilterAttributeFilterProvider
     {
-        private readonly Func<IContainer> _container;
+        private readonly Func<IContainer> currentContainer;
 
         public StructureMapFilterProvider(Func<IContainer> container)
         {
-            _container = container;
+            this.currentContainer = container;
         }
 
         public override IEnumerable<Filter> GetFilters(ControllerContext controllerContext, ActionDescriptor actionDescriptor)
         {
             var filters = base.GetFilters(controllerContext, actionDescriptor);
 
-            var container = _container();
+            var container = this.currentContainer();
 
             foreach (var filter in filters)
             {

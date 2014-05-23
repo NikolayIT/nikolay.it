@@ -12,16 +12,16 @@
 
     public class StandardJsonResult : JsonResult
     {
-        public IList<string> ErrorMessages { get; private set; }
-
         public StandardJsonResult()
         {
-            ErrorMessages = new List<string>();
+            this.ErrorMessages = new List<string>();
         }
+
+        public IList<string> ErrorMessages { get; private set; }
 
         public void AddError(string errorMessage)
         {
-            ErrorMessages.Add(errorMessage);
+            this.ErrorMessages.Add(errorMessage);
         }
 
         public override void ExecuteResult(ControllerContext context)
@@ -38,27 +38,27 @@
             }
 
             var response = context.HttpContext.Response;
-            response.ContentType = string.IsNullOrEmpty(ContentType) ? "application/json" : ContentType;
+            response.ContentType = string.IsNullOrEmpty(this.ContentType) ? "application/json" : this.ContentType;
 
-            if (ContentEncoding != null)
+            if (this.ContentEncoding != null)
             {
-                response.ContentEncoding = ContentEncoding;
+                response.ContentEncoding = this.ContentEncoding;
             }
 
-            SerializeData(response);
+            this.SerializeData(response);
         }
 
         protected virtual void SerializeData(HttpResponseBase response)
         {
-            if (ErrorMessages.Any())
+            if (this.ErrorMessages.Any())
             {
                 var originalData = Data;
-                Data = new
+                this.Data = new
                 {
                     Success = false,
                     OriginalData = originalData,
-                    ErrorMessage = string.Join("\n", ErrorMessages),
-                    ErrorMessages = ErrorMessages.ToArray()
+                    ErrorMessage = string.Join("\n", this.ErrorMessages),
+                    ErrorMessages = this.ErrorMessages.ToArray()
                 };
 
                 response.StatusCode = 400;
@@ -68,12 +68,12 @@
             {
                 ContractResolver = new CamelCasePropertyNamesContractResolver(),
                 Converters = new JsonConverter[]
-				{
-					new StringEnumConverter(), 
-				},
+                {
+                    new StringEnumConverter(), 
+                },
             };
 
-            response.Write(JsonConvert.SerializeObject(Data, settings));
+            response.Write(JsonConvert.SerializeObject(this.Data, settings));
         }
     }
 

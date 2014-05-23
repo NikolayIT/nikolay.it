@@ -1,11 +1,12 @@
 ﻿namespace BlogSystem.Web.ViewModels.Comments
 {
     using System;
+    using System.ComponentModel.DataAnnotations;
 
     using AutoMapper;
+
     using BlogSystem.Data.Models;
     using BlogSystem.Web.Infrastructure.Mapping;
-    using System.ComponentModel.DataAnnotations;
 
     public class CommentViewModel : IMapFrom<PostComment>, IHaveCustomMappings
     {

@@ -8,10 +8,10 @@
 
     using BlogSystem.Data.Contracts;
     using BlogSystem.Data.Models;
+    using BlogSystem.Web.Infrastructure;
+    using BlogSystem.Web.Infrastructure.ActionResults;
 
     using StructureMap;
-    using BlogSystem.Web.Infrastructure.ActionResults;
-    using BlogSystem.Web.Infrastructure;
 
     public abstract class BaseController : Controller
     {
@@ -50,6 +50,7 @@
             {
                 result.AddError(validationError.ErrorMessage);
             }
+
             return result;
         }
 

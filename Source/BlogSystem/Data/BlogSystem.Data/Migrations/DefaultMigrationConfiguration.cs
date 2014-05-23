@@ -22,7 +22,7 @@
             this.SeedSettings(context);
         }
 
-        private void SeedSettings(ApplicationDbContext context)
+        protected void SeedSettings(ApplicationDbContext context)
         {
             if (context.Settings.Any())
             {

@@ -14,13 +14,13 @@
 
         public SettingsController(IRepository<Setting> settingsRepository)
         {
-            settingsData = settingsRepository;
+            this.settingsData = settingsRepository;
         }
 
         // GET: /Administration/Settings/
         public ActionResult Index()
         {
-            return View(settingsData.All().ToList());
+            return this.View(this.settingsData.All().ToList());
         }
 
         // GET: /Administration/Settings/Edit/5
@@ -30,12 +30,14 @@
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Setting setting = settingsData.All().FirstOrDefault(s => s.Name == id);
+
+            Setting setting = this.settingsData.All().FirstOrDefault(s => s.Name == id);
             if (setting == null)
             {
-                return HttpNotFound();
+                return this.HttpNotFound();
             }
-            return View(setting);
+
+            return this.View(setting);
         }
 
         // POST: /Administration/Settings/Edit/5
@@ -43,23 +45,25 @@
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include="Name,Value")] Setting setting)
+        public ActionResult Edit([Bind(Include = "Name,Value")] Setting setting)
         {
             if (ModelState.IsValid)
             {
-                settingsData.Update(setting);
-                settingsData.SaveChanges();
-                return RedirectToAction("Index");
+                this.settingsData.Update(setting);
+                this.settingsData.SaveChanges();
+                return this.RedirectToAction("Index");
             }
-            return View(setting);
+
+            return this.View(setting);
         }
 
         protected override void Dispose(bool disposing)
         {
             if (disposing)
             {
-                settingsData.Dispose();
+                this.settingsData.Dispose();
             }
+
             base.Dispose(disposing);
         }
     }

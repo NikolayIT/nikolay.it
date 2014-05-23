@@ -6,7 +6,7 @@
     {
         public PostComment()
         {
-            IsVisible = true;
+            this.IsVisible = true;
         }
 
         public int Id { get; set; }

@@ -104,12 +104,12 @@
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> Register(RegisterViewModel model, bool captchaValid)
         {
-            if (userManager.FindByEmail(model.Email) != null)
+            if (this.userManager.FindByEmail(model.Email) != null)
             {
                 this.ModelState.AddModelError("Email", "Email is already registered");
             }
 
-            if (userManager.FindByEmail(model.UserName) != null)
+            if (this.userManager.FindByEmail(model.UserName) != null)
             {
                 this.ModelState.AddModelError("UserName", "User name is already registered");
             }

@@ -11,7 +11,7 @@
         public DataRegistry()
         {
             For<IApplicationDbContext>().Use<ApplicationDbContext>();
-            AddType(typeof(IRepository<>), typeof(GenericRepository<>));
+            this.AddType(typeof(IRepository<>), typeof(GenericRepository<>));
         }
     }
 }

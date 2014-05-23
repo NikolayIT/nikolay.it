@@ -1,12 +1,13 @@
 ﻿namespace BlogSystem.Web.Areas.Administration.Controllers
 {
     using System;
-using System.Data.Entity;
-using System.Linq;
-using System.Net;
-using System.Web.Mvc;
-using BlogSystem.Data.Models;
-using BlogSystem.Data.Contracts;
+    using System.Data.Entity;
+    using System.Linq;
+    using System.Net;
+    using System.Web.Mvc;
+
+    using BlogSystem.Data.Contracts;
+    using BlogSystem.Data.Models;
 
     public class PostCommentsController : Controller
     {
@@ -15,15 +16,15 @@ using BlogSystem.Data.Contracts;
 
         public PostCommentsController(IRepository<PostComment> commentsRepository, IRepository<BlogPost> blogPostsRepository)
         {
-            commentsData = commentsRepository;
-            blogPostsData = blogPostsRepository;
+            this.commentsData = commentsRepository;
+            this.blogPostsData = blogPostsRepository;
         }
 
         // GET: /Administration/PostComments/
         public ActionResult Index()
         {
-            var postcomments = commentsData.All().Include(p => p.BlogPost);
-            return View(postcomments.ToList());
+            var postcomments = this.commentsData.All().Include(p => p.BlogPost);
+            return this.View(postcomments.ToList());
         }
 
         // GET: /Administration/PostComments/Details/5
@@ -33,12 +34,14 @@ using BlogSystem.Data.Contracts;
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            PostComment postcomment = commentsData.GetById(id.Value);
+
+            PostComment postcomment = this.commentsData.GetById(id.Value);
             if (postcomment == null)
             {
-                return HttpNotFound();
+                return this.HttpNotFound();
             }
-            return View(postcomment);
+
+            return this.View(postcomment);
         }
 
         // GET: /Administration/PostComments/Edit/5
@@ -48,13 +51,15 @@ using BlogSystem.Data.Contracts;
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            PostComment postcomment = commentsData.GetById(id.Value);
+
+            PostComment postcomment = this.commentsData.GetById(id.Value);
             if (postcomment == null)
             {
-                return HttpNotFound();
+                return this.HttpNotFound();
             }
-            ViewBag.BlogPostId = new SelectList(blogPostsData.All(), "Id", "ShortContent", postcomment.BlogPostId);
-            return View(postcomment);
+
+            this.ViewBag.BlogPostId = new SelectList(this.blogPostsData.All(), "Id", "ShortContent", postcomment.BlogPostId);
+            return this.View(postcomment);
         }
 
         // POST: /Administration/PostComments/Edit/5
@@ -62,16 +67,17 @@ using BlogSystem.Data.Contracts;
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include="Id,Content,BlogPostId,IsVisible,IsDeleted,DeletedOn,CreatedOn,ModifiedOn")] PostComment postcomment)
+        public ActionResult Edit([Bind(Include = "Id,Content,BlogPostId,IsVisible,IsDeleted,DeletedOn,CreatedOn,ModifiedOn")] PostComment postcomment)
         {
             if (ModelState.IsValid)
             {
-                commentsData.Update(postcomment);
-                commentsData.SaveChanges();
-                return RedirectToAction("Index");
+                this.commentsData.Update(postcomment);
+                this.commentsData.SaveChanges();
+                return this.RedirectToAction("Index");
             }
-            ViewBag.BlogPostId = new SelectList(blogPostsData.All(), "Id", "ShortContent", postcomment.BlogPostId);
-            return View(postcomment);
+
+            this.ViewBag.BlogPostId = new SelectList(this.blogPostsData.All(), "Id", "ShortContent", postcomment.BlogPostId);
+            return this.View(postcomment);
         }
 
         // GET: /Administration/PostComments/Delete/5
@@ -81,12 +87,14 @@ using BlogSystem.Data.Contracts;
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            PostComment postcomment = commentsData.GetById(id.Value);
+
+            PostComment postcomment = this.commentsData.GetById(id.Value);
             if (postcomment == null)
             {
-                return HttpNotFound();
+                return this.HttpNotFound();
             }
-            return View(postcomment);
+
+            return this.View(postcomment);
         }
 
         // POST: /Administration/PostComments/Delete/5
@@ -94,18 +102,19 @@ using BlogSystem.Data.Contracts;
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            PostComment postcomment = commentsData.GetById(id);
-            commentsData.Delete(postcomment);
-            commentsData.SaveChanges();
-            return RedirectToAction("Index");
+            PostComment postcomment = this.commentsData.GetById(id);
+            this.commentsData.Delete(postcomment);
+            this.commentsData.SaveChanges();
+            return this.RedirectToAction("Index");
         }
 
         protected override void Dispose(bool disposing)
         {
             if (disposing)
             {
-                commentsData.Dispose();
+                this.commentsData.Dispose();
             }
+
             base.Dispose(disposing);
         }
     }

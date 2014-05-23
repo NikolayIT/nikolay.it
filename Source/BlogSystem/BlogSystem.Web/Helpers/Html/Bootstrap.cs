@@ -4,12 +4,12 @@
     using System.Linq.Expressions;
     using System.Web.Mvc;
 
-    //    <label>Name</label>
-    //    <div class="row margin-bottom-20">
-    //        <div class="col-md-7 col-md-offset-0">
-    //            <input type="text" class="form-control">
-    //        </div>
-    //    </div>W
+    // <label>Name</label>
+    // <div class="row margin-bottom-20">
+    //     <div class="col-md-7 col-md-offset-0">
+    //         <input type="text" class="form-control">
+    //     </div>
+    // </div>
     public static class Bootstrap
     {
         public static MvcHtmlString BootstrapFormTextInputFor<TModel, TValue>(

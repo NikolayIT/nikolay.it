@@ -1,9 +1,10 @@
 ﻿namespace BlogSystem.Web.Infrastructure.Registries
 {
-    using StructureMap;
-    using StructureMap.Configuration.DSL;
     using System;
     using System.Web.Mvc;
+
+    using StructureMap;
+    using StructureMap.Configuration.DSL;
 
     public class ActionFilterRegistry : Registry
     {
