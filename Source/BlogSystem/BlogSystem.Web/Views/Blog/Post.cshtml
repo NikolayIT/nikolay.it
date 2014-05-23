@@ -2,6 +2,7 @@
 
 @{
     ViewBag.Title = Model.Title;
+    const string CommentsPartialViewsFolder = "~/Views/Comments/{0}.cshtml";
 }
 
 @*@section breadcrumbs {
@@ -40,4 +41,4 @@
 <!--End Blog Post-->
 
 <!--Start Comments-->
-@Html.Partial("_Comments", Model.Id)
+@Html.Partial(string.Format(CommentsPartialViewsFolder, "_Comments"), Model.Id)

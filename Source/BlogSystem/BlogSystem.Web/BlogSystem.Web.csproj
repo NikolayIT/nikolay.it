@@ -190,6 +190,7 @@
     <Compile Include="Helpers\Html\Bootstrap.cs" />
     <Compile Include="Helpers\IBlogUrlGenerator.cs" />
     <Compile Include="Helpers\PrincipalExtensions.cs" />
+    <Compile Include="Infrastructure\ActionResults\StandardJsonResult.cs" />
     <Compile Include="Infrastructure\Conventions\ControllerConvention.cs" />
     <Compile Include="Infrastructure\Filters\RouteValuesInViewData.cs" />
     <Compile Include="Infrastructure\Identity\CurrentUser.cs" />
@@ -263,6 +264,7 @@
     <Content Include="Areas\Administration\Views\Pages\Index.cshtml" />
     <None Include="Properties\PublishProfiles\79.124.67.12.pubxml" />
     <None Include="Scripts\jquery-2.1.0.intellisense.js" />
+    <Content Include="Scripts\global.js" />
     <Content Include="Scripts\jquery-2.1.0.js" />
     <Content Include="Scripts\jquery-2.1.0.min.js" />
     <Content Include="Scripts\jquery-2.1.0.min.map" />
@@ -482,12 +484,12 @@
     <Content Include="Views\Blog\Post.cshtml" />
     <Content Include="Views\Pages\Page.cshtml" />
     <Content Include="Views\Shared\EditorTemplates\Enum.cshtml" />
-    <Content Include="Views\Shared\_Comments.cshtml" />
+    <Content Include="Views\Comments\_Comments.cshtml" />
     <Content Include="Views\Comments\All.cshtml" />
-    <Content Include="Views\Shared\_CreateComment.cshtml" />
-    <Content Include="Views\Shared\DisplayTemplates\Comment.cshtml" />
+    <Content Include="Views\Comments\_CreateComment.cshtml" />
     <Content Include="Views\Shared\EditorTemplates\Comment.cshtml" />
     <Content Include="Views\Shared\_PageLoginPartial.cshtml" />
+    <Content Include="Views\Comments\_CommentDetail.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

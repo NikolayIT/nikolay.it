@@ -3,11 +3,11 @@
     using System.Linq;
     using System.Web.Mvc;
 
-    using AutoMapper;
     using AutoMapper.QueryableExtensions;
 
     using BlogSystem.Data.Contracts;
     using BlogSystem.Data.Models;
+    using BlogSystem.Web.Infrastructure.Filters;
     using BlogSystem.Web.ViewModels.Blog;
 
     public class BlogController : BaseController
@@ -18,7 +18,8 @@
         {
             this.blogPosts = blogPosts;
         }
-
+        
+        [PassRouteValuesToViewData]
         public ActionResult Post(int id)
         {
             var viewModel =

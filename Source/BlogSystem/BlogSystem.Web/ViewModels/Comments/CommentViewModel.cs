@@ -5,6 +5,7 @@
     using AutoMapper;
     using BlogSystem.Data.Models;
     using BlogSystem.Web.Infrastructure.Mapping;
+    using System.ComponentModel.DataAnnotations;
 
     public class CommentViewModel : IMapFrom<PostComment>, IHaveCustomMappings
     {
@@ -19,6 +20,7 @@
 
         public int Id { get; set; }
 
+        [Required]
         public string Content { get; set; }
 
         public int BlogPostId { get; set; }

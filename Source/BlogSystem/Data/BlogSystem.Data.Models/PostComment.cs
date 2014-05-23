@@ -1,10 +1,14 @@
 ﻿namespace BlogSystem.Data.Models
 {
     using BlogSystem.Data.Contracts;
-    using System.ComponentModel;
 
     public class PostComment : DeletableEntity
     {
+        public PostComment()
+        {
+            IsVisible = true;
+        }
+
         public int Id { get; set; }
 
         public string Content { get; set; }
@@ -15,7 +19,6 @@
 
         public virtual ApplicationUser User { get; set; }
 
-        [DefaultValue(true)]
         public bool IsVisible { get; set; }
     }
 }

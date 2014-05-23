@@ -1,11 +1,21 @@
-﻿@using BlogSystem.Web.ViewModels.Comments;
-@model IEnumerable<CommentViewModel>
-<h3>@(Model.Count() == 0 ? "No comments" : "Comments")</h3>
+﻿@model IEnumerable<CommentViewModel>
+
+@using BlogSystem.Web.ViewModels.Comments;
+
+<h3>Comments</h3>
 
 @foreach (var comment in Model)
 {
-    @Html.DisplayFor(x => comment, "CommentDetail")
+    @Html.Partial("_CommentDetail", comment)
 }
 
-<hr />
-@Html.Partial("_CreateComment", new CommentViewModel())
+<script>
+    function hideViewCommentsButton() {
+        $('#show-comments-btn').hide();
+        $('#new-comment').removeClass('hidden');
+    }
+
+    function showCommentRequiredError(data) {
+        $('<h3 style="color:red">' + data.responseJSON.errorMessage + '</h3>').prependTo('#new-comment').delay(3000).fadeOut();
+    }
+</script>
