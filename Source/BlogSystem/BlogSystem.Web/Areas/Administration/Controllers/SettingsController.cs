@@ -8,7 +8,7 @@
     using BlogSystem.Data.Contracts;
     using BlogSystem.Data.Models;
 
-    public class SettingsController : Controller
+    public class SettingsController : AdminController
     {
         private readonly IRepository<Setting> settingsData;
 

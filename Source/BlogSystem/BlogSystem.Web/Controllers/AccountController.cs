@@ -74,7 +74,7 @@
         {
             if (ModelState.IsValid)
             {
-                var user = await this.UserManager.FindAsync(model.Email, model.Password);
+                var user = await this.UserManager.FindAsync(model.UserName, model.Password);
                 if (user != null)
                 {
                     await this.SignInAsync(user, model.RememberMe);

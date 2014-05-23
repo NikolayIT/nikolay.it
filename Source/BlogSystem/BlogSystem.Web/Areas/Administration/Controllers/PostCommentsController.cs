@@ -9,7 +9,7 @@
     using BlogSystem.Data.Contracts;
     using BlogSystem.Data.Models;
 
-    public class PostCommentsController : Controller
+    public class PostCommentsController : AdminController
     {
         private readonly IRepository<PostComment> commentsData;
         private readonly IRepository<BlogPost> blogPostsData;

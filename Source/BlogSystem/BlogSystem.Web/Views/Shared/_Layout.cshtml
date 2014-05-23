@@ -38,8 +38,11 @@
                     <nav class="collapse navbar-collapse navbar-responsive-collapse">
                         <ul class="nav navbar-nav">
                             <li><a href="/">Home</a></li>
-                            <li><a href="/Pages/About-me">About me</a></li>
-                            <li><a href="/Pages/Contacts">Contacts</a></li>
+                            @Html.Action("Menu", "Home", routeValues: new { Area = string.Empty })
+                            @if (User.IsAdmin())
+                            {
+                                @Html.Action("Menu", "Admin", routeValues: new { Area = "Administration" })
+                            }
                         </ul>
                     </nav>
                 </div>
@@ -66,7 +69,7 @@
 
                 <!-- Right Sidebar -->
                 <aside class="col-md-3 magazine-page">
-                    @Html.Action("Index", "Sidebar")
+                    @Html.Action("Index", "Sidebar", routeValues: new { area = string.Empty })
                 </aside>
                 <!-- End Right Sidebar -->
             </div>

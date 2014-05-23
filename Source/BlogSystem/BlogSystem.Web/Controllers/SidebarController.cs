@@ -20,6 +20,7 @@
             this.tags = tags;
         }
 
+        [ChildActionOnly]
         [OutputCache(Duration = 10 * 60)]
         public ActionResult Index()
         {

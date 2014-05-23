@@ -13,23 +13,27 @@
     public class HomeController : BaseController
     {
         private const int PostsPerPageDefaultValue = 5;
-        private readonly IRepository<BlogPost> blogPosts;
 
-        public HomeController(IRepository<BlogPost> blogPosts)
+        private readonly IRepository<BlogPost> blogPostsData;
+        private readonly IRepository<Page> pagesData;
+
+        public HomeController(IRepository<BlogPost> blogPosts, IRepository<Page> pages)
         {
-            this.blogPosts = blogPosts;
+            this.blogPostsData = blogPosts;
+            this.pagesData = pages;
         }
 
         public ActionResult Index(int page = 1, int perPage = PostsPerPageDefaultValue)
         {
-            var pagesCount = (int)Math.Ceiling(this.blogPosts.All().Count() / (decimal)perPage);
+            var pagesCount = (int)Math.Ceiling(this.blogPostsData.All().Count() / (decimal)perPage);
 
-            var posts =
-                this.blogPosts.All().Where(x => !x.IsDeleted)
-                    .OrderByDescending(x => x.CreatedOn)
-                    .Project().To<BlogPostAnnotationViewModel>()
-                    .Skip(perPage * (page - 1))
-                    .Take(perPage);
+            var posts = this.blogPostsData
+                .All()
+                .Where(x => !x.IsDeleted)
+                .OrderByDescending(x => x.CreatedOn)
+                .Project().To<BlogPostAnnotationViewModel>()
+                .Skip(perPage * (page - 1))
+                .Take(perPage);
 
             var model = new IndexViewModel
                             {
@@ -39,6 +43,19 @@
                             };
 
             return this.View(model);
+        }
+
+        [ChildActionOnly]
+        [OutputCache(Duration = 6 * 10 * 60)]
+        public ActionResult Menu()
+        {
+            var menuItems = this.pagesData
+                .All()
+                .Where(p => !p.IsDeleted)
+                .Project().To<MenuItemViewModel>()
+                .ToList();
+
+            return this.PartialView("_Menu", menuItems);
         }
     }
 }

@@ -183,6 +183,7 @@
     <Compile Include="Areas\Administration\Controllers\PagesController.cs" />
     <Compile Include="Areas\Administration\Controllers\PostCommentsController.cs" />
     <Compile Include="Areas\Administration\Controllers\SettingsController.cs" />
+    <Compile Include="Areas\Administration\Helpers\AdminMenu.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\BaseController.cs" />
     <Compile Include="Controllers\BlogController.cs" />
@@ -198,6 +199,7 @@
     <Compile Include="Helpers\Html\Bootstrap.cs" />
     <Compile Include="Helpers\IBlogUrlGenerator.cs" />
     <Compile Include="Helpers\PrincipalExtensions.cs" />
+    <Compile Include="Helpers\ReflectionHelper.cs" />
     <Compile Include="Infrastructure\ActionResults\StandardJsonResult.cs" />
     <Compile Include="Infrastructure\Conventions\ControllerConvention.cs" />
     <Compile Include="Infrastructure\Filters\RouteValuesInViewData.cs" />
@@ -223,6 +225,7 @@
     <Compile Include="ViewModels\Account\LoginViewModel.cs" />
     <Compile Include="ViewModels\Account\ManageUserViewModel.cs" />
     <Compile Include="ViewModels\Comments\CommentViewModel.cs" />
+    <Compile Include="ViewModels\Home\MenuItemViewModel.cs" />
     <Compile Include="ViewModels\Pages\PageViewModel.cs" />
     <Compile Include="ViewModels\RecentBlogPostViewModel.cs" />
     <Compile Include="ViewModels\Account\RegisterViewModel.cs" />
@@ -260,7 +263,6 @@
     <Content Include="Content\bootstrap-theme.css.map" />
     <Content Include="Content\bootstrap.css.map" />
     <Content Include="Areas\Administration\Views\web.config" />
-    <Content Include="Areas\Administration\Views\_ViewStart.cshtml" />
     <Content Include="Areas\Administration\Views\BlogPosts\Create.cshtml" />
     <Content Include="Areas\Administration\Views\BlogPosts\Delete.cshtml" />
     <Content Include="Areas\Administration\Views\BlogPosts\Details.cshtml" />
@@ -275,9 +277,10 @@
     <Content Include="Areas\Administration\Views\PostComments\Details.cshtml" />
     <Content Include="Areas\Administration\Views\PostComments\Edit.cshtml" />
     <Content Include="Areas\Administration\Views\PostComments\Index.cshtml" />
-    <Content Include="Areas\Administration\Views\Settings\Details.cshtml" />
     <Content Include="Areas\Administration\Views\Settings\Edit.cshtml" />
     <Content Include="Areas\Administration\Views\Settings\Index.cshtml" />
+    <Content Include="Areas\Administration\Views\Shared\_AdminMenu.cshtml" />
+    <Content Include="Areas\Administration\Views\_ViewStart.cshtml" />
     <None Include="Properties\PublishProfiles\79.124.67.12.pubxml" />
     <Content Include="Scripts\global.js" />
     <None Include="Scripts\jquery-2.1.1.intellisense.js" />
@@ -507,10 +510,10 @@
     <Content Include="Scripts\tinymce\skins\lightgray\fonts\tinymce.eot" />
     <Content Include="Scripts\tinymce\skins\lightgray\fonts\readme.md" />
     <Content Include="Scripts\tinymce\langs\readme.md" />
+    <Content Include="Views\Shared\_Menu.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Areas\Administration\Views\Shared\" />
     <Folder Include="Content\Files\" />
     <Folder Include="Content\Images\" />
   </ItemGroup>
