@@ -73,13 +73,17 @@
 
         private bool CurrentUserCommentedInLastMinutes()
         {
-            var lastCommentDate = currentUser.Get()
+            var lastComment = currentUser.Get()
                 .Comments
                 .OrderByDescending(c => c.CreatedOn)
-                .FirstOrDefault()
-                .CreatedOn;
+                .FirstOrDefault();
 
-            return lastCommentDate.AddMinutes(MinutesBetweenComments) >= DateTime.Now;
+            if (lastComment == null)
+            {
+                return false;
+            }
+
+            return lastComment.CreatedOn.AddMinutes(MinutesBetweenComments) >= DateTime.Now;
         }
     }
 }

@@ -175,6 +175,7 @@
     <Compile Include="Areas\Administration\Controllers\AdminController.cs" />
     <Compile Include="Areas\Administration\Controllers\BlogPostsController.cs" />
     <Compile Include="Areas\Administration\Controllers\PagesController.cs" />
+    <Compile Include="Areas\Administration\Controllers\PostCommentsController.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\BaseController.cs" />
     <Compile Include="Controllers\BlogController.cs" />
@@ -262,6 +263,10 @@
     <Content Include="Areas\Administration\Views\Pages\Details.cshtml" />
     <Content Include="Areas\Administration\Views\Pages\Edit.cshtml" />
     <Content Include="Areas\Administration\Views\Pages\Index.cshtml" />
+    <Content Include="Areas\Administration\Views\PostComments\Delete.cshtml" />
+    <Content Include="Areas\Administration\Views\PostComments\Details.cshtml" />
+    <Content Include="Areas\Administration\Views\PostComments\Edit.cshtml" />
+    <Content Include="Areas\Administration\Views\PostComments\Index.cshtml" />
     <None Include="Properties\PublishProfiles\79.124.67.12.pubxml" />
     <None Include="Scripts\jquery-2.1.0.intellisense.js" />
     <Content Include="Scripts\global.js" />
@@ -493,7 +498,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Areas\Administration\Models\" />
     <Folder Include="Areas\Administration\Views\Shared\" />
     <Folder Include="Content\Files\" />
     <Folder Include="Content\Images\" />

@@ -1,11 +1,9 @@
 ﻿namespace BlogSystem.Web.Areas.Administration.Controllers
 {
-    using System.Data.Entity;
     using System.Linq;
     using System.Net;
     using System.Web.Mvc;
 
-    using BlogSystem.Data;
     using BlogSystem.Data.Contracts;
     using BlogSystem.Data.Models;
 

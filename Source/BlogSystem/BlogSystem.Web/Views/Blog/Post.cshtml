@@ -20,7 +20,7 @@
         <ul class="list-unstyled list-inline blog-info">
             <li><i class="fa fa-calendar"></i> @Model.CreatedOn.ToString("MMMM dd, yyyy")</li>
             <li><i class="fa fa-pencil"></i> Nikolay Kostov</li>
-            <li><i class="fa fa-comments"></i> <a href="#">Comments not allowed</a></li>
+            <li><i class="fa fa-comments"></i> <a href="#comments">Comments</a></li>
             @if (User.IsAdmin())
             {
                 <li><i class="fa fa-pencil"></i> <a href="/Administration/BlogPosts/Edit/@Model.Id">Edit</a></li>

@@ -16,7 +16,7 @@
 
         IDbSet<Setting> Settings { get; set; }
 
-        IDbSet<PostComment> Comments { get; set; }
+        IDbSet<PostComment> PostComments { get; set; }
 
         IDbSet<ApplicationUser> Users { get; set; }
 

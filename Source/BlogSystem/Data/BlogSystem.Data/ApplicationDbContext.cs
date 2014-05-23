@@ -22,7 +22,7 @@
 
         public IDbSet<Tag> Tags { get; set; }
 
-        public IDbSet<PostComment> Comments { get; set; }
+        public IDbSet<PostComment> PostComments { get; set; }
 
         public IDbSet<Setting> Settings { get; set; }
 
