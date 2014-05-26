@@ -21,7 +21,7 @@
 
         private static IEnumerable<string> GetControllerNames()
         {
-            return ReflectionHelper.GetSubClasses<AdminController>().Select(c => c.Name.Replace("Controller", string.Empty).PascalCaseToText());
+            return ReflectionHelper.GetSubClasses<AdminController>().Select(c => c.Name.Replace("Controller", string.Empty));
         }
     }
 }
