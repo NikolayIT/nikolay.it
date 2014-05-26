@@ -200,6 +200,7 @@
     <Compile Include="Helpers\IBlogUrlGenerator.cs" />
     <Compile Include="Helpers\PrincipalExtensions.cs" />
     <Compile Include="Helpers\ReflectionHelper.cs" />
+    <Compile Include="Helpers\StringExtensions.cs" />
     <Compile Include="Infrastructure\ActionResults\StandardJsonResult.cs" />
     <Compile Include="Infrastructure\Conventions\ControllerConvention.cs" />
     <Compile Include="Infrastructure\Filters\RouteValuesInViewData.cs" />
