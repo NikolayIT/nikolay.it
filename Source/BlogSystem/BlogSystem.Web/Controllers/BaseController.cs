@@ -1,6 +1,7 @@
 ﻿namespace BlogSystem.Web.Controllers
 {
     using System;
+    using System.Collections.Generic;
     using System.Linq;
     using System.Linq.Expressions;
     using System.Web.Mvc;
@@ -70,8 +71,13 @@
 
         protected override IAsyncResult BeginExecute(RequestContext requestContext, AsyncCallback callback, object state)
         {
-            this.ViewBag.Settings = new SettingsManager(() => this.Settings.All().ToDictionary(x => x.Name, x => x.Value));
+            this.ViewBag.Settings = new SettingsManager(this.GetSettings);
             return base.BeginExecute(requestContext, callback, state);
+        }
+
+        private IDictionary<string, string> GetSettings()
+        {
+            return this.Settings.All().ToDictionary(x => x.Name, x => x.Value);
         }
     }
 }
