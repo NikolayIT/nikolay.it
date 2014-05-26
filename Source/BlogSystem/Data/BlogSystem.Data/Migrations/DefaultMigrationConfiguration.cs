@@ -40,7 +40,7 @@
             context.Settings.Add(new Setting { Name = "Contact Email", Value = "Contact Email" });
             context.Settings.Add(new Setting { Name = "Facebook Profile", Value = "Facebook Profile" });
             context.Settings.Add(new Setting { Name = "Foursquare Profile", Value = "Foursquare Profile" });
-            context.Settings.Add(new Setting { Name = "Google+ Profile", Value = "Google+ Profile" });
+            context.Settings.Add(new Setting { Name = "Google Profile", Value = "Google+ Profile" });
             context.Settings.Add(new Setting { Name = "RSS Url", Value = "RSS Url" });
         }
 
