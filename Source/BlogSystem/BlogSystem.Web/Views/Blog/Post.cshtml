@@ -19,7 +19,7 @@
     <div class="blog-post-tags">
         <ul class="list-unstyled list-inline blog-info">
             <li><i class="fa fa-calendar"></i> @Model.CreatedOn.ToString("MMMM dd, yyyy")</li>
-            <li><i class="fa fa-pencil"></i> Nikolay Kostov</li>
+            <li><i class="fa fa-pencil"></i> @ViewBag.Settings.Get["Author"]</li>
             <li><i class="fa fa-comments"></i> <a href="#comments">Comments</a></li>
             @if (User.IsAdmin())
             {

@@ -17,7 +17,7 @@
         <div class="blog-post-tags">
             <ul class="list-unstyled list-inline blog-info">
                 <li><i class="fa fa-calendar"></i> @post.CreatedOn.ToString("MMMM dd, yyyy")</li>
-                <li><i class="fa fa-pencil"></i> Nikolay Kostov</li>
+                <li><i class="fa fa-pencil"></i> @ViewBag.Settings.Get["Author"]</li>
             </ul>
             @*<ul class="list-unstyled list-inline blog-tags">
                 <li>
@@ -40,7 +40,7 @@
                 }
                 else
                 {
-                    <img src="@post.ImageOrVideoUrl" alt="@post.Title" />
+                    <img src="@post.ImageOrVideoUrl" class="img-responsive" alt="@post.Title" />
                 }
             </div>
         }
