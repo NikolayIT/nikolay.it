@@ -68,14 +68,9 @@
             return new StandardJsonResult<T> { Data = data };
         }
 
-        protected override void OnActionExecuting(ActionExecutingContext filterContext)
-        {
-            this.ViewBag.Settings = new SettingsManager(() => this.Settings.All().ToDictionary(x => x.Name, x => x.Value));
-            base.OnActionExecuting(filterContext);
-        }
-
         protected override IAsyncResult BeginExecute(RequestContext requestContext, AsyncCallback callback, object state)
         {
+            this.ViewBag.Settings = new SettingsManager(() => this.Settings.All().ToDictionary(x => x.Name, x => x.Value));
             return base.BeginExecute(requestContext, callback, state);
         }
     }
