@@ -78,6 +78,7 @@
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
+    <Reference Include="System.ServiceModel" />
     <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Entity" />
     <Reference Include="System.Web.ApplicationServices" />
@@ -191,6 +192,7 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\PagesController.cs" />
     <Compile Include="Controllers\RedirectsController.cs" />
+    <Compile Include="Controllers\RssController.cs" />
     <Compile Include="Controllers\SidebarController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -201,6 +203,7 @@
     <Compile Include="Helpers\PrincipalExtensions.cs" />
     <Compile Include="Helpers\ReflectionHelper.cs" />
     <Compile Include="Helpers\StringExtensions.cs" />
+    <Compile Include="Infrastructure\ActionResults\RssActionResult.cs" />
     <Compile Include="Infrastructure\ActionResults\StandardJsonResult.cs" />
     <Compile Include="Infrastructure\Conventions\ControllerConvention.cs" />
     <Compile Include="Infrastructure\Filters\RouteValuesInViewData.cs" />

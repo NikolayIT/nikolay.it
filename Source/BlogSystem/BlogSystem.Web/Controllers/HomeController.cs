@@ -12,7 +12,7 @@
 
     public class HomeController : BaseController
     {
-        private const int PostsPerPageDefaultValue = 5;
+        private const int PostsPerPageDefaultValue = 10;
 
         private readonly IRepository<BlogPost> blogPostsData;
         private readonly IRepository<Page> pagesData;
