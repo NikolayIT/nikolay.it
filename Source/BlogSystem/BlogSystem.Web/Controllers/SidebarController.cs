@@ -31,7 +31,7 @@
                                     .OrderByDescending(x => x.CreatedOn)
                                     .Project()
                                     .To<RecentBlogPostViewModel>()
-                                    .Take(5),
+                                    .Take(10),
                                 Tags =
                                     this.tags.All()
                                     .Project()
