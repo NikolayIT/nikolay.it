@@ -12,9 +12,10 @@
     <meta name="description" content="@ViewBag.Description" />
     <meta name="robots" content="index, follow" />
     <meta name="revisit-after" content="1 days" />
-    <meta name="author" content="@ViewBag.Settings.Get["Blog Name"] - @ViewBag.Settings.Get["Author"]" />
-    <meta name="generator" content="NikolayIT BlogSystem - https://github.com/NikolayIT/BlogSystem" />
+    <meta name="author" content="@ViewBag.Settings.Get["Author"]" />
+    <meta name="generator" content="Nikolay.IT BlogSystem - https://github.com/NikolayIT/BlogSystem" />
     <link rel="shortcut icon" href="/favicon.ico" />
+    <link rel="alternate" type="application/rss+xml" title="Blog RSS" href="/RSS/Blog" />
     @Styles.Render("~/Content/css")
 </head>
 
