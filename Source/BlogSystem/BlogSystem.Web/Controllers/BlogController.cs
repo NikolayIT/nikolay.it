@@ -30,6 +30,9 @@
                 return this.HttpNotFound("Blog post not found");
             }
 
+            this.ViewBag.Keywords = viewModel.MetaKeywords;
+            this.ViewBag.Description = viewModel.MetaDescription;
+
             return this.View(viewModel);
         }
     }
