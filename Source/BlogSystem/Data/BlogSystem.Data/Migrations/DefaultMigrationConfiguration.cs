@@ -32,6 +32,7 @@
             context.Settings.Add(new Setting { Name = "Logo URL", Value = "/img/header-logo.png" });
             context.Settings.Add(new Setting { Name = "Home Title", Value = "Home Title" });
             context.Settings.Add(new Setting { Name = "Blog Name", Value = "Blog Name" });
+            context.Settings.Add(new Setting { Name = "Blog Url", Value = "Blog Url" });
             context.Settings.Add(new Setting { Name = "Author", Value = "Author" });
             context.Settings.Add(new Setting { Name = "GitHub Profile", Value = "GitHub Profile" });
             context.Settings.Add(new Setting { Name = "GitHub Badge HTML Code", Value = "GitHub Badge HTML Code" });

@@ -12,7 +12,7 @@
     using BlogSystem.Web.Helpers;
     using BlogSystem.Web.Infrastructure.ActionResults;
 
-    public class RssController : Controller
+    public class RssController : BaseController
     {
         private readonly IRepository<BlogPost> blogPostsData;
         private readonly IBlogUrlGenerator urlGenerator;
@@ -37,7 +37,7 @@
             foreach (var post in posts)
             {
                 var url = this.urlGenerator.GenerateUrl(post.Id, post.Title, post.CreatedOn);
-                var item = new SyndicationItem(post.Title, post.ShortContent, new Uri("http://nikolay.it" + url))
+                var item = new SyndicationItem(post.Title, post.ShortContent, new Uri(this.GetSettings()["Blog Url"] + url))
                                {
                                    PublishDate = new DateTimeOffset(post.CreatedOn),
                                    Id = post.Id.ToString(CultureInfo.InvariantCulture)
@@ -45,7 +45,7 @@
                 items.Add(item);
             }
 
-            var feed = new SyndicationFeed("Nikolay.IT Blog", "Nikolay.IT Blog", new Uri("http://nikolay.it"), items);
+            var feed = new SyndicationFeed(this.GetSettings()["Blog Name"], this.GetSettings()["Blog Name"], new Uri(this.GetSettings()["Blog Url"]), items);
             feed.LastUpdatedTime = new DateTimeOffset(DateTime.Now);
             
             return new RssActionResult(feed);
