@@ -52,11 +52,6 @@
                 return;
             }
 
-            foreach (var entity in context.Roles)
-            {
-                context.Roles.Remove(entity);
-            }
-
             context.Roles.AddOrUpdate(new IdentityRole(GlobalConstants.AdministratorRoleName));
         }
     }
