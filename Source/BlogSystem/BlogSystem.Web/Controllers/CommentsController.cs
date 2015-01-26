@@ -30,7 +30,7 @@
         {
             var comments = this.commentsData
                 .All()
-                .Where(c => !c.IsDeleted && c.IsVisible)
+                .Where(c => c.BlogPostId == id && !c.IsDeleted && c.IsVisible)
                 .OrderByDescending(c => c.CreatedOn)
                 .Skip(startFrom)
                 .Take(maxComments)
