@@ -36,6 +36,7 @@
             context.Settings.Add(new Setting { Name = "Author", Value = "Author" });
             context.Settings.Add(new Setting { Name = "GitHub Profile", Value = "GitHub Profile" });
             context.Settings.Add(new Setting { Name = "GitHub Badge HTML Code", Value = "GitHub Badge HTML Code" });
+            context.Settings.Add(new Setting { Name = "StackOverflow Badge HTML Code", Value = "StackOverflow Badge HTML Code" });
             context.Settings.Add(new Setting { Name = "Stack Overflow Profile", Value = "Stack Overflow Profile" });
             context.Settings.Add(new Setting { Name = "Linked In Profile", Value = "Linked In Profile" });
             context.Settings.Add(new Setting { Name = "Contact Email", Value = "Contact Email" });

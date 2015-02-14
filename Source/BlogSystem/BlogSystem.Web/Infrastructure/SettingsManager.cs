@@ -13,6 +13,7 @@
             this.settings = new Lazy<IDictionary<string, string>>(initializer);
         }
 
+        // Replace with abstraction over IDictionary (SettingsManager indexer for example)
         public IDictionary<string, string> Get
         {
             get
