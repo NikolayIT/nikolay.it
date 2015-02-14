@@ -287,6 +287,7 @@
     <Content Include="Areas\Administration\Views\_ViewStart.cshtml" />
     <None Include="Properties\PublishProfiles\79.124.67.12.pubxml" />
     <Content Include="Scripts\global.js" />
+    <None Include="Properties\PublishProfiles\todor.it.pubxml" />
     <None Include="Scripts\jquery-2.1.1.intellisense.js" />
     <Content Include="Scripts\jquery-2.1.1.js" />
     <Content Include="Scripts\jquery-2.1.1.min.js" />
