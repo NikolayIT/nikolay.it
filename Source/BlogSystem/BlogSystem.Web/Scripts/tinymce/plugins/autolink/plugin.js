@@ -61,7 +61,7 @@ tinymce.PluginManager.add('autolink', function(editor) {
 	}
 
 	function parseCurrentLine(editor, end_offset, delimiter) {
-		var rng, end, start, endContainer, bookmark, text, matches, prev, len;
+		var rng, end, start, endContainer, bookmark, text, matches, prev, len, rngText;
 
 		function scopeIndex(container, index) {
 			if (index < 0) {
@@ -80,11 +80,19 @@ tinymce.PluginManager.add('autolink', function(editor) {
 		}
 
 		function setStart(container, offset) {
-			rng.setStart(container, scopeIndex(container, offset));
+			if (container.nodeType != 1 || container.hasChildNodes()) {
+				rng.setStart(container, scopeIndex(container, offset));
+			} else {
+				rng.setStartBefore(container);
+			}
 		}
-		
+
 		function setEnd(container, offset) {
-			rng.setEnd(container, scopeIndex(container, offset));
+			if (container.nodeType != 1 || container.hasChildNodes()) {
+				rng.setEnd(container, scopeIndex(container, offset));
+			} else {
+				rng.setEndAfter(container);
+			}
 		}
 
 		// We need at least five characters to form a URL,
@@ -142,10 +150,10 @@ tinymce.PluginManager.add('autolink', function(editor) {
 			setStart(endContainer, end >= 2 ? end - 2 : 0);
 			setEnd(endContainer, end >= 1 ? end - 1 : 0);
 			end -= 1;
+			rngText = rng.toString();
 
 			// Loop until one of the following is found: a blank space, &nbsp;, delimiter, (end-2) >= 0
-		} while (rng.toString() != ' ' && rng.toString() !== '' &&
-			rng.toString().charCodeAt(0) != 160 && (end - 2) >= 0 && rng.toString() != delimiter);
+		} while (rngText != ' ' && rngText !== '' && rngText.charCodeAt(0) != 160 && (end - 2) >= 0 && rngText != delimiter);
 
 		if (rng.toString() == delimiter || rng.toString().charCodeAt(0) == 160) {
 			setStart(endContainer, end);

@@ -341,6 +341,8 @@
     <Content Include="Scripts\tinymce\plugins\charmap\plugin.min.js" />
     <Content Include="Scripts\tinymce\plugins\code\plugin.js" />
     <Content Include="Scripts\tinymce\plugins\code\plugin.min.js" />
+    <Content Include="Scripts\tinymce\plugins\colorpicker\plugin.js" />
+    <Content Include="Scripts\tinymce\plugins\colorpicker\plugin.min.js" />
     <Content Include="Scripts\tinymce\plugins\compat3x\css\dialog.css" />
     <Content Include="Scripts\tinymce\plugins\compat3x\img\buttons.png" />
     <Content Include="Scripts\tinymce\plugins\compat3x\img\icons.gif" />
@@ -412,12 +414,6 @@
     <Content Include="Scripts\tinymce\plugins\noneditable\plugin.min.js" />
     <Content Include="Scripts\tinymce\plugins\pagebreak\plugin.js" />
     <Content Include="Scripts\tinymce\plugins\pagebreak\plugin.min.js" />
-    <Content Include="Scripts\tinymce\plugins\paste\classes\Clipboard.js" />
-    <Content Include="Scripts\tinymce\plugins\paste\classes\Plugin.js" />
-    <Content Include="Scripts\tinymce\plugins\paste\classes\Quirks.js" />
-    <Content Include="Scripts\tinymce\plugins\paste\classes\Utils.js" />
-    <Content Include="Scripts\tinymce\plugins\paste\classes\WordFilter.js" />
-    <Content Include="Scripts\tinymce\plugins\paste\plugin.dev.js" />
     <Content Include="Scripts\tinymce\plugins\paste\plugin.js" />
     <Content Include="Scripts\tinymce\plugins\paste\plugin.min.js" />
     <Content Include="Scripts\tinymce\plugins\preview\plugin.js" />
@@ -428,30 +424,25 @@
     <Content Include="Scripts\tinymce\plugins\save\plugin.min.js" />
     <Content Include="Scripts\tinymce\plugins\searchreplace\plugin.js" />
     <Content Include="Scripts\tinymce\plugins\searchreplace\plugin.min.js" />
-    <Content Include="Scripts\tinymce\plugins\spellchecker\classes\DomTextMatcher.js" />
-    <Content Include="Scripts\tinymce\plugins\spellchecker\classes\Plugin.js" />
-    <Content Include="Scripts\tinymce\plugins\spellchecker\plugin.dev.js" />
     <Content Include="Scripts\tinymce\plugins\spellchecker\plugin.js" />
     <Content Include="Scripts\tinymce\plugins\spellchecker\plugin.min.js" />
     <Content Include="Scripts\tinymce\plugins\tabfocus\plugin.js" />
     <Content Include="Scripts\tinymce\plugins\tabfocus\plugin.min.js" />
-    <Content Include="Scripts\tinymce\plugins\table\classes\CellSelection.js" />
-    <Content Include="Scripts\tinymce\plugins\table\classes\Plugin.js" />
-    <Content Include="Scripts\tinymce\plugins\table\classes\Quirks.js" />
-    <Content Include="Scripts\tinymce\plugins\table\classes\TableGrid.js" />
-    <Content Include="Scripts\tinymce\plugins\table\plugin.dev.js" />
     <Content Include="Scripts\tinymce\plugins\table\plugin.js" />
     <Content Include="Scripts\tinymce\plugins\table\plugin.min.js" />
     <Content Include="Scripts\tinymce\plugins\template\plugin.js" />
     <Content Include="Scripts\tinymce\plugins\template\plugin.min.js" />
     <Content Include="Scripts\tinymce\plugins\textcolor\plugin.js" />
     <Content Include="Scripts\tinymce\plugins\textcolor\plugin.min.js" />
+    <Content Include="Scripts\tinymce\plugins\textpattern\plugin.js" />
+    <Content Include="Scripts\tinymce\plugins\textpattern\plugin.min.js" />
     <Content Include="Scripts\tinymce\plugins\visualblocks\css\visualblocks.css" />
     <Content Include="Scripts\tinymce\plugins\visualblocks\img\address.gif" />
     <Content Include="Scripts\tinymce\plugins\visualblocks\img\article.gif" />
     <Content Include="Scripts\tinymce\plugins\visualblocks\img\aside.gif" />
     <Content Include="Scripts\tinymce\plugins\visualblocks\img\blockquote.gif" />
     <Content Include="Scripts\tinymce\plugins\visualblocks\img\div.gif" />
+    <Content Include="Scripts\tinymce\plugins\visualblocks\img\dl.gif" />
     <Content Include="Scripts\tinymce\plugins\visualblocks\img\figure.gif" />
     <Content Include="Scripts\tinymce\plugins\visualblocks\img\h1.gif" />
     <Content Include="Scripts\tinymce\plugins\visualblocks\img\h2.gif" />
@@ -526,6 +517,8 @@
     <Content Include="Views\Blog\EditorTemplates\Comment.cshtml" />
     <Content Include="Views\Shared\_PageLoginPartial.cshtml" />
     <Content Include="Views\Comments\_CommentDetail.cshtml" />
+    <Content Include="Views\Shared\_Menu.cshtml" />
+    <Content Include="Views\Shared\_ImageOrVideo.cshtml" />
     <Content Include="Scripts\tinymce\skins\lightgray\fonts\tinymce-small.woff" />
     <Content Include="Scripts\tinymce\skins\lightgray\fonts\tinymce-small.ttf" />
     <Content Include="Scripts\tinymce\skins\lightgray\fonts\tinymce-small.json" />
@@ -536,8 +529,6 @@
     <Content Include="Scripts\tinymce\skins\lightgray\fonts\tinymce.eot" />
     <Content Include="Scripts\tinymce\skins\lightgray\fonts\readme.md" />
     <Content Include="Scripts\tinymce\langs\readme.md" />
-    <Content Include="Views\Shared\_Menu.cshtml" />
-    <Content Include="Views\Shared\_ImageOrVideo.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
