@@ -6,12 +6,12 @@
 }
 
 @*@section breadcrumbs {
-    <li><a href="/">Home</a></li>
-    <li><a href="/Blog">Blog</a></li>
-    <li><a href="/Blog/@(Model.CreatedOn.Year.ToString("0000"))">@Model.CreatedOn.Year.ToString("0000")</a></li>
-    <li><a href="/Blog/@(Model.CreatedOn.Year.ToString("0000"))/@(Model.CreatedOn.Month.ToString("00"))">@(Model.CreatedOn.Month.ToString("00"))</a></li>
-    <li class="active">Post</li>
-}*@
+        <li><a href="/">Home</a></li>
+        <li><a href="/Blog">Blog</a></li>
+        <li><a href="/Blog/@(Model.CreatedOn.Year.ToString("0000"))">@Model.CreatedOn.Year.ToString("0000")</a></li>
+        <li><a href="/Blog/@(Model.CreatedOn.Year.ToString("0000"))/@(Model.CreatedOn.Month.ToString("00"))">@(Model.CreatedOn.Month.ToString("00"))</a></li>
+        <li class="active">Post</li>
+    }*@
 
 <!--Blog Post-->
 <div class="blog margin-bottom-40">
@@ -27,18 +27,25 @@
             }
         </ul>
         @*<ul class="list-unstyled list-inline blog-tags">
-            <li>
-                <i class="fa fa-tags"></i>
-                <a href="#">Technology</a>
-                <a href="#">Education</a>
-                <a href="#">Internet</a>
-                <a href="#">Media</a>
-            </li>
-        </ul>*@
+                <li>
+                    <i class="fa fa-tags"></i>
+                    <a href="#">Technology</a>
+                    <a href="#">Education</a>
+                    <a href="#">Internet</a>
+                    <a href="#">Media</a>
+                </li>
+            </ul>*@
     </div>
     @Html.Raw(Model.Content)
+    <br />
+    <div id="social-button-sharer">
+        <div>
+            <a href="https://twitter.com/share" class="twitter-share-button">Tweet</a>
+            <script>!function (d, s, id) { var js, fjs = d.getElementsByTagName(s)[0], p = /^http:/.test(d.location) ? 'http' : 'https'; if (!d.getElementById(id)) { js = d.createElement(s); js.id = id; js.src = p + '://platform.twitter.com/widgets.js'; fjs.parentNode.insertBefore(js, fjs); } }(document, 'script', 'twitter-wjs');</script>
+        </div>
+        <div class="fb-share-button" data-href="@Request.Url" data-type="button_count"></div>
+    </div>
 </div>
 <!--End Blog Post-->
-
 <!--Start Comments-->
 @Html.Partial(string.Format(CommentsPartialViewsFolder, "_Comments"), Model.Id)

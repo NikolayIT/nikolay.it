@@ -75,7 +75,7 @@
             return base.BeginExecute(requestContext, callback, state);
         }
 
-        private IDictionary<string, string> GetSettings()
+        protected IDictionary<string, string> GetSettings()
         {
             return this.Settings.All().ToDictionary(x => x.Name, x => x.Value);
         }

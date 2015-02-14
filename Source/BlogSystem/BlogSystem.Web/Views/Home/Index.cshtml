@@ -29,25 +29,12 @@
                 </li>
             </ul>*@
         </div>
-        if (post.ImageOrVideoUrl != null)
-        {
-            <div class="blog-img">
-                @if (post.ImageOrVideoUrl.Contains("youtube.com"))
-                {
-                    <div class="responsive-video">
-                        <iframe src="@post.ImageOrVideoUrl" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
-                    </div>
-                }
-                else
-                {
-                    <img src="@post.ImageOrVideoUrl" class="img-responsive" alt="@post.Title" />
-                }
-            </div>
-        }
+        @Html.Partial("_ImageOrVideo", post)
 
         @Html.Raw(post.Content)
 
         <p><a class="btn-u btn-u-small" href="@post.Url"><i class="fa fa-plus"></i> Read More</a></p>
+        <br />
     }
 }
 else

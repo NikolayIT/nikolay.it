@@ -3,6 +3,7 @@
     background-repeat: no-repeat !important;
     background-color: #000 !important;
     background-position: center top !important;
+    background-attachment: fixed !important;
 }
 
 .edit-with-tinymce {
