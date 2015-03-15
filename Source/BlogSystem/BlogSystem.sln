@@ -1,15 +1,11 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2013
-VisualStudioVersion = 12.0.30324.0
+VisualStudioVersion = 12.0.31101.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BlogSystem.Web", "BlogSystem.Web\BlogSystem.Web.csproj", "{14EDF240-739E-46A2-8BAC-14C6F16A541C}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BlogSystem.Common", "BlogSystem.Common\BlogSystem.Common.csproj", "{094191B9-A6A1-42DE-BCC9-D84002EB6E94}"
-EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tools", "Tools", "{482A3023-AE92-46E2-9D6D-D2D00CA74544}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BlogSystem.Tools.MigrateOldWebsite", "Tools\BlogSystem.Tools.MigrateOldWebsite\BlogSystem.Tools.MigrateOldWebsite.csproj", "{FBCC5447-B769-42A3-A6BC-69A5114535F8}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Data", "Data", "{A9D8BB5A-907E-4905-B2A8-E0DB6807C4DE}"
 EndProject
@@ -37,10 +33,6 @@ Global
 		{094191B9-A6A1-42DE-BCC9-D84002EB6E94}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{094191B9-A6A1-42DE-BCC9-D84002EB6E94}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{094191B9-A6A1-42DE-BCC9-D84002EB6E94}.Release|Any CPU.Build.0 = Release|Any CPU
-		{FBCC5447-B769-42A3-A6BC-69A5114535F8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{FBCC5447-B769-42A3-A6BC-69A5114535F8}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{FBCC5447-B769-42A3-A6BC-69A5114535F8}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{FBCC5447-B769-42A3-A6BC-69A5114535F8}.Release|Any CPU.Build.0 = Release|Any CPU
 		{50BC7C0E-C3DF-411F-BE60-F9DE6E09DD2A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{50BC7C0E-C3DF-411F-BE60-F9DE6E09DD2A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{50BC7C0E-C3DF-411F-BE60-F9DE6E09DD2A}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -62,7 +54,6 @@ Global
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
-		{FBCC5447-B769-42A3-A6BC-69A5114535F8} = {482A3023-AE92-46E2-9D6D-D2D00CA74544}
 		{50BC7C0E-C3DF-411F-BE60-F9DE6E09DD2A} = {A9D8BB5A-907E-4905-B2A8-E0DB6807C4DE}
 		{4C22B895-B21C-4702-B8B3-7EA3177945DE} = {A9D8BB5A-907E-4905-B2A8-E0DB6807C4DE}
 		{E0FA4DD5-6F83-4499-BEEB-D02C486CA2FD} = {A9D8BB5A-907E-4905-B2A8-E0DB6807C4DE}
