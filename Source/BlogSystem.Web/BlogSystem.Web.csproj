@@ -227,6 +227,7 @@
     <Compile Include="Infrastructure\Mapping\AutoMapperConfig.cs" />
     <Compile Include="Infrastructure\Mapping\IHaveCustomMappings.cs" />
     <Compile Include="Infrastructure\Mapping\IMapFrom.cs" />
+    <Compile Include="Infrastructure\ObjectFactory.cs" />
     <Compile Include="Infrastructure\Registries\ActionFilterRegistry.cs" />
     <Compile Include="Infrastructure\Registries\ControllerRegistry.cs" />
     <Compile Include="Infrastructure\Registries\DataRegistry.cs" />

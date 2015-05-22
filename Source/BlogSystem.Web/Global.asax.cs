@@ -10,7 +10,6 @@
     using BlogSystem.Data.Migrations;
     using BlogSystem.Web.Infrastructure;
     using BlogSystem.Web.Infrastructure.Mapping;
-    using BlogSystem.Web.Infrastructure.Registries;
 
     using StructureMap;
 
@@ -39,25 +38,15 @@
 
             Database.SetInitializer(new MigrateDatabaseToLatestVersion<ApplicationDbContext, DefaultMigrationConfiguration>());
 
-            DependencyResolver.SetResolver(new StructureMapDependencyResolver(() => this.Container ?? ObjectFactory.Container));
-
-            ObjectFactory.Configure(cfg =>
-            {
-                cfg.AddRegistry(new StandardRegistry());
-                cfg.AddRegistry(new ControllerRegistry());
-                cfg.AddRegistry(new ActionFilterRegistry(() => Container ?? ObjectFactory.Container));
-                cfg.AddRegistry(new MvcRegistry());
-                //// TODO: cfg.AddRegistry(new TaskRegistry());
-                cfg.AddRegistry(new DataRegistry());
-            });
-
+            DependencyResolver.SetResolver(new StructureMapDependencyResolver(() => this.Container ?? Infrastructure.ObjectFactory.Container));
+            
             var autoMapperConfig = new AutoMapperConfig();
             autoMapperConfig.Execute();
         }
 
         protected void Application_BeginRequest()
         {
-            this.Container = ObjectFactory.Container.GetNestedContainer();
+            this.Container = Infrastructure.ObjectFactory.Container.GetNestedContainer();
         }
 
         protected void Application_EndRequest()
