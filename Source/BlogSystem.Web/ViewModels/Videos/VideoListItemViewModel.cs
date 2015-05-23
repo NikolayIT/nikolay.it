@@ -1,8 +1,9 @@
 ﻿namespace BlogSystem.Web.ViewModels.Videos
 {
     using BlogSystem.Data.Models;
+    using BlogSystem.Web.Infrastructure.Mapping;
 
-    public class VideoListItemViewModel
+    public class VideoListItemViewModel : IMapFrom<Video>
     {
         public int Id { get; set; }
 

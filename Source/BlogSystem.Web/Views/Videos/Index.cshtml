@@ -1,5 +1,33 @@
-﻿@*@model BlogSystem.Web.ViewModels.Pages.PageViewModel*@
+﻿@model BlogSystem.Web.ViewModels.Videos.VideoListViewModel
 
 @{
     ViewBag.Title = "Videos";
+}
+
+@foreach (var video in Model.Videos)
+{
+    @video.Title<br />
+}
+
+@if (Model.Pages > 0)
+{
+    <!--Pagination-->
+    <div class="text-center">
+        <ul class="pagination">
+            <li><a href="/Videos/?page=@Model.PreviousPage"><i class="fa fa-backward"></i></a></li>
+            @for (int i = 1; i <= Model.Pages; i++)
+            {
+                if (i == Model.Page)
+                {
+                    <li class="active"><a href="/Videos/?page=@i">@i</a></li>
+                }
+                else
+                {
+                    <li><a href="/Videos/?page=@i">@i</a></li>
+                }
+            }
+            <li><a href="/Videos/?page=@Model.NextPage"><i class="fa fa-forward"></i></a></li>
+        </ul>
+    </div>
+    <!--End Pagination-->
 }
