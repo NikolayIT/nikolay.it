@@ -1,6 +1,8 @@
 ﻿namespace BlogSystem.Data.Models
 {
-    public class Video
+    using BlogSystem.Data.Contracts;
+
+    public class Video : DeletableEntity
     {
         public int Id { get; set; }
 
