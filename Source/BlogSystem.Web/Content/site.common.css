@@ -73,3 +73,8 @@
 .hidden {
     display: none;
 }
+
+
+.copyright p {
+    font-size: 13px;
+}
