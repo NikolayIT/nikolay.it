@@ -26,6 +26,8 @@
 
         public IDbSet<Setting> Settings { get; set; }
 
+        public IDbSet<Video> Videos { get; set; }
+
         public static ApplicationDbContext Create()
         {
             return new ApplicationDbContext();

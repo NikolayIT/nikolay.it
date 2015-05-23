@@ -20,6 +20,8 @@
 
         IDbSet<ApplicationUser> Users { get; set; }
 
+        IDbSet<Video> Videos { get; set; }
+
         int SaveChanges();
 
         DbEntityEntry<TEntity> Entry<TEntity>(TEntity entity) where TEntity : class;
