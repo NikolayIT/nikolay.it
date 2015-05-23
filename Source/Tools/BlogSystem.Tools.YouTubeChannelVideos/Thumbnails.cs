@@ -2,14 +2,14 @@
 {
     public class Thumbnails
     {
-        public Default _default { get; set; }
+        public Default Default { get; set; }
 
-        public Medium medium { get; set; }
+        public Medium Medium { get; set; }
 
-        public High high { get; set; }
+        public High High { get; set; }
 
-        public Standard standard { get; set; }
+        public Standard Standard { get; set; }
 
-        public Maxres maxres { get; set; }
+        public Maxres Maxres { get; set; }
     }
 }

@@ -1,15 +1,15 @@
 ﻿namespace BlogSystem.Tools.YouTubeChannelVideos
 {
-    public class Rootobject
+    public class RootObject
     {
-        public string kind { get; set; }
+        public string Kind { get; set; }
 
-        public string etag { get; set; }
+        public string ETag { get; set; }
 
-        public string nextPageToken { get; set; }
+        public string NextPageToken { get; set; }
 
-        public Pageinfo pageInfo { get; set; }
+        public PageInfo PageInfo { get; set; }
 
-        public Item[] items { get; set; }
+        public Item[] Items { get; set; }
     }
 }

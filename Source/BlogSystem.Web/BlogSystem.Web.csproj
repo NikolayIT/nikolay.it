@@ -220,6 +220,7 @@
     <Compile Include="Helpers\StringExtensions.cs" />
     <Compile Include="Infrastructure\ActionResults\RssActionResult.cs" />
     <Compile Include="Infrastructure\ActionResults\StandardJsonResult.cs" />
+    <Compile Include="Infrastructure\ActionResults\StandardJsonResult`1.cs" />
     <Compile Include="Infrastructure\Conventions\ControllerConvention.cs" />
     <Compile Include="Infrastructure\Filters\RouteValuesInViewData.cs" />
     <Compile Include="Infrastructure\Identity\CurrentUser.cs" />

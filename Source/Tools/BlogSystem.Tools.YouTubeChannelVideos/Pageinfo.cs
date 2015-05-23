@@ -1,9 +1,9 @@
 ﻿namespace BlogSystem.Tools.YouTubeChannelVideos
 {
-    public class Pageinfo
+    public class PageInfo
     {
-        public int totalResults { get; set; }
+        public int TotalResults { get; set; }
 
-        public int resultsPerPage { get; set; }
+        public int ResultsPerPage { get; set; }
     }
 }

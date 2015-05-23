@@ -14,7 +14,7 @@
     // TODO: Improve code quality
     internal static class Program
     {
-        private const string ApiKey = "{YOUR_API_KEY_HERE}";
+        private const string ApiKey = "{YOUR_API_KEY}";
 
         private const string ChannelPlaylistId = "UULC-vbm7OWvpbqzXaoAMGGw";
 
@@ -31,33 +31,33 @@
             do
             {
                 var jsonText = client.DownloadString(string.Format(UrlFormat, ApiKey, ChannelPlaylistId, nextPage));
-                var obj = JsonConvert.DeserializeObject<Rootobject>(jsonText);
+                var obj = JsonConvert.DeserializeObject<RootObject>(jsonText);
                 items.AddRange(
-                    obj.items.Where(
+                    obj.Items.Where(
                         x =>
-                        x.snippet.description.ToLower().Contains("костов")
-                        || x.snippet.description.ToLower().Contains("kostov")
-                        || x.snippet.title.ToLower().Contains("ники") || x.snippet.title.ToLower().Contains("niki"))
-                        .Select(x => x.snippet));
-                total += obj.items.Count();
+                        x.Snippet.Description.ToLower().Contains("костов")
+                        || x.Snippet.Description.ToLower().Contains("kostov")
+                        || x.Snippet.Title.ToLower().Contains("ники") || x.Snippet.Title.ToLower().Contains("niki"))
+                        .Select(x => x.Snippet));
+                total += obj.Items.Count();
                 Console.WriteLine("{0} / {1}", items.Count, total);
-                nextPage = obj.nextPageToken;
+                nextPage = obj.NextPageToken;
             }
             while (!string.IsNullOrWhiteSpace(nextPage));
 
             var db = new ApplicationDbContext();
             foreach (var item in items)
             {
-                var videoId = item.resourceId.videoId;
+                var videoId = item.ResourceId.VideoId;
                 if (!db.Videos.Any(x => x.VideoId == videoId))
                 {
                     var video = new Video
                                     {
                                         VideoId = videoId,
-                                        Title = item.title,
-                                        Description = item.description,
+                                        Title = item.Title,
+                                        Description = item.Description,
                                         PreserveCreatedOn = true,
-                                        CreatedOn = item.publishedAt,
+                                        CreatedOn = item.PublishedAt,
                                         Provider = VideoProvider.YouTube
                                     };
 

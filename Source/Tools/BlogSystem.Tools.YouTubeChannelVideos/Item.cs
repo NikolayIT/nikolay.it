@@ -2,12 +2,12 @@
 {
     public class Item
     {
-        public string kind { get; set; }
+        public string Kind { get; set; }
 
-        public string etag { get; set; }
+        public string ETag { get; set; }
 
-        public string id { get; set; }
+        public string Id { get; set; }
 
-        public Snippet snippet { get; set; }
+        public Snippet Snippet { get; set; }
     }
 }
