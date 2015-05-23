@@ -19,6 +19,10 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{233D2EAB
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BlogSystem.Web.Tests", "Tests\BlogSystem.Web.Tests\BlogSystem.Web.Tests.csproj", "{4FDBD3AA-E24A-4CCF-B4E1-450F2C9C6D86}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tools", "Tools", "{1130B004-1C92-4C48-A27B-5B607034D485}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BlogSystem.Tools.YouTubeChannelVideos", "Tools\BlogSystem.Tools.YouTubeChannelVideos\BlogSystem.Tools.YouTubeChannelVideos.csproj", "{08F0977D-7774-4048-B347-C8C37FAC5102}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -49,6 +53,10 @@ Global
 		{4FDBD3AA-E24A-4CCF-B4E1-450F2C9C6D86}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{4FDBD3AA-E24A-4CCF-B4E1-450F2C9C6D86}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{4FDBD3AA-E24A-4CCF-B4E1-450F2C9C6D86}.Release|Any CPU.Build.0 = Release|Any CPU
+		{08F0977D-7774-4048-B347-C8C37FAC5102}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{08F0977D-7774-4048-B347-C8C37FAC5102}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{08F0977D-7774-4048-B347-C8C37FAC5102}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{08F0977D-7774-4048-B347-C8C37FAC5102}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -58,5 +66,6 @@ Global
 		{4C22B895-B21C-4702-B8B3-7EA3177945DE} = {A9D8BB5A-907E-4905-B2A8-E0DB6807C4DE}
 		{E0FA4DD5-6F83-4499-BEEB-D02C486CA2FD} = {A9D8BB5A-907E-4905-B2A8-E0DB6807C4DE}
 		{4FDBD3AA-E24A-4CCF-B4E1-450F2C9C6D86} = {233D2EAB-9CBD-4C7F-8DE6-A24F5C3B6F10}
+		{08F0977D-7774-4048-B347-C8C37FAC5102} = {1130B004-1C92-4C48-A27B-5B607034D485}
 	EndGlobalSection
 EndGlobal
