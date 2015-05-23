@@ -12,7 +12,7 @@
 
     public class VideosController : BaseController
     {
-        private const int ItemsPerPage = 20;
+        private const int ItemsPerPage = 12;
         private readonly IRepository<Video> videosRepository;
 
         public VideosController(IRepository<Video> videos)

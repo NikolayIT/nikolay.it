@@ -1,5 +1,7 @@
 ﻿namespace BlogSystem.Web.ViewModels.Videos
 {
+    using System;
+
     using BlogSystem.Data.Models;
     using BlogSystem.Web.Infrastructure.Mapping;
 
@@ -14,6 +16,8 @@
         public string Description { get; set; }
 
         public VideoProvider Provider { get; set; }
+
+        public DateTime CreatedOn { get; set; }
 
         public string VideoUrl
         {

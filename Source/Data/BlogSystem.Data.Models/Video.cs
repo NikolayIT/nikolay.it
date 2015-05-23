@@ -1,5 +1,7 @@
 ﻿namespace BlogSystem.Data.Models
 {
+    using System;
+
     using BlogSystem.Data.Contracts;
 
     public class Video : DeletableEntity

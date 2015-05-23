@@ -4,10 +4,19 @@
     ViewBag.Title = "Videos";
 }
 
-@foreach (var video in Model.Videos)
-{
-    @video.Title<br />
-}
+<div class="row">
+    @foreach (var video in Model.Videos)
+    {
+        <div class="col-md-3 video-list-item">
+            <a href="@video.VideoUrl" target="_blank" title="@video.Title">
+                <img src="@video.ThumbnailUrl" class="img-responsive" alt="@video.Title"/>
+                <h2>@video.Title</h2>
+            </a>
+            <time><i class="fa fa-calendar"></i> @video.CreatedOn.ToString("yyyy-MM-dd HH:mm")</time>
+            <p>@video.Description.Replace("\n", ";\n")</p>
+        </div>
+    }
+</div>
 
 @if (Model.Pages > 0)
 {
