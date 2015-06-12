@@ -1,0 +1,25 @@
+﻿namespace BlogSystem.Web.Infrastructure.Cache
+{
+    using System;
+    using System.Web;
+    using System.Web.Caching;
+
+    public class HttpRuntimeCacheService : ICacheService
+    {
+        public T Get<T>(string itemName, Func<T> getDataFunc, int durationInSeconds)
+        {
+            if (HttpRuntime.Cache[itemName] == null)
+            {
+                var data = getDataFunc();
+                HttpRuntime.Cache.Insert(itemName, data, null, DateTime.Now.AddSeconds(durationInSeconds), Cache.NoSlidingExpiration);
+            }
+
+            return (T)HttpRuntime.Cache[itemName];
+        }
+
+        public void Remove(string itemName)
+        {
+            HttpRuntime.Cache.Remove(itemName);
+        }
+    }
+}
