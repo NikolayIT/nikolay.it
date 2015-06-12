@@ -1,5 +1,7 @@
-﻿namespace BlogSystem.Tools.YouTubeChannelVideos
+﻿namespace BlogSystem.Services.YouTube.Models
 {
+    using BlogSystem.Services.YouTube.Models;
+
     public class Thumbnails
     {
         public Default Default { get; set; }

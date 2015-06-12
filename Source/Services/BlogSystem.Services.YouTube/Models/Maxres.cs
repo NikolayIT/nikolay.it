@@ -1,6 +1,6 @@
-﻿namespace BlogSystem.Tools.YouTubeChannelVideos
+namespace BlogSystem.Services.YouTube.Models
 {
-    public class Medium
+    public class Maxres
     {
         public string Url { get; set; }
 

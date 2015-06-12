@@ -8,6 +8,7 @@
 
     using BlogSystem.Data;
     using BlogSystem.Data.Models;
+    using BlogSystem.Services.YouTube.Models;
 
     using Newtonsoft.Json;
 

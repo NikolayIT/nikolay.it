@@ -1,4 +1,4 @@
-﻿namespace BlogSystem.Tools.YouTubeChannelVideos
+﻿namespace BlogSystem.Services.YouTube.Models
 {
     public class Item
     {

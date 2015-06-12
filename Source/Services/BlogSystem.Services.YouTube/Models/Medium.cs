@@ -1,6 +1,6 @@
-namespace BlogSystem.Tools.YouTubeChannelVideos
+﻿namespace BlogSystem.Services.YouTube.Models
 {
-    public class High
+    public class Medium
     {
         public string Url { get; set; }
 

@@ -62,19 +62,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Default.cs" />
-    <Compile Include="High.cs" />
-    <Compile Include="Item.cs" />
-    <Compile Include="Maxres.cs" />
-    <Compile Include="Medium.cs" />
-    <Compile Include="Pageinfo.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Resourceid.cs" />
-    <Compile Include="Rootobject.cs" />
-    <Compile Include="Snippet.cs" />
-    <Compile Include="Standard.cs" />
-    <Compile Include="Thumbnails.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
@@ -92,6 +81,10 @@
     <ProjectReference Include="..\..\Data\BlogSystem.Data\BlogSystem.Data.csproj">
       <Project>{50BC7C0E-C3DF-411F-BE60-F9DE6E09DD2A}</Project>
       <Name>BlogSystem.Data</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Services\BlogSystem.Services.YouTube\BlogSystem.Services.YouTube.csproj">
+      <Project>{45F7847F-97CB-40EC-899D-CB25993A228D}</Project>
+      <Name>BlogSystem.Services.YouTube</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

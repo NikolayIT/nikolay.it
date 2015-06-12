@@ -39,6 +39,17 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Models\Default.cs" />
+    <Compile Include="Models\High.cs" />
+    <Compile Include="Models\Item.cs" />
+    <Compile Include="Models\Maxres.cs" />
+    <Compile Include="Models\Medium.cs" />
+    <Compile Include="Models\Pageinfo.cs" />
+    <Compile Include="Models\Resourceid.cs" />
+    <Compile Include="Models\Rootobject.cs" />
+    <Compile Include="Models\Snippet.cs" />
+    <Compile Include="Models\Standard.cs" />
+    <Compile Include="Models\Thumbnails.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

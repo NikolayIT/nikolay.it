@@ -1,6 +1,6 @@
-namespace BlogSystem.Tools.YouTubeChannelVideos
+﻿namespace BlogSystem.Services.YouTube.Models
 {
-    public class Maxres
+    public class Default
     {
         public string Url { get; set; }
 
