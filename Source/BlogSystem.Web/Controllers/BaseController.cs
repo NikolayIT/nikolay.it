@@ -11,6 +11,7 @@
     using BlogSystem.Data.Models;
     using BlogSystem.Web.Infrastructure;
     using BlogSystem.Web.Infrastructure.ActionResults;
+    using BlogSystem.Web.Infrastructure.Cache;
 
     using StructureMap;
 
@@ -18,11 +19,13 @@
     {
         protected readonly IContainer Container;
         protected readonly IRepository<Setting> Settings;
+        protected readonly ICacheService Cache;
 
-        public BaseController()
+        protected BaseController()
         {
             this.Container = (IContainer)System.Web.HttpContext.Current.Items["_Container"];
             this.Settings = this.Container.GetInstance<IRepository<Setting>>();
+            this.Cache = this.Container.GetInstance<ICacheService>();
         }
 
         protected ActionResult RedirectToAction<TController>(Expression<Action<TController>> action)
@@ -35,24 +38,6 @@
             }
 
             return this.RedirectToAction(method.Method.Name);
-        }
-
-        [Obsolete("Do not use the standard Json helpers to return JSON data to the client.  Use either JsonSuccess or JsonError instead.")]
-        protected JsonResult Json<T>(T data)
-        {
-            throw new InvalidOperationException("Do not use the standard Json helpers to return JSON data to the client.  Use either JsonSuccess or JsonError instead.");
-        }
-
-        protected StandardJsonResult JsonValidationError()
-        {
-            var result = new StandardJsonResult();
-
-            foreach (var validationError in ModelState.Values.SelectMany(v => v.Errors))
-            {
-                result.AddError(validationError.ErrorMessage);
-            }
-
-            return result;
         }
 
         protected StandardJsonResult JsonError(string errorMessage)
@@ -72,6 +57,9 @@
         protected override IAsyncResult BeginExecute(RequestContext requestContext, AsyncCallback callback, object state)
         {
             this.ViewBag.Settings = new SettingsManager(this.GetSettings);
+
+            // this.ViewBag.Videos = this.Cache.Get("RecentVideos", () => , 7200);
+
             return base.BeginExecute(requestContext, callback, state);
         }
 
