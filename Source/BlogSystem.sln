@@ -27,6 +27,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Services", "Services", "{04
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BlogSystem.Services.YouTube", "Services\BlogSystem.Services.YouTube\BlogSystem.Services.YouTube.csproj", "{45F7847F-97CB-40EC-899D-CB25993A228D}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BlogSystem.Services.Data", "Services\BlogSystem.Services.Data\BlogSystem.Services.Data.csproj", "{FBE38C24-7077-4C36-BECD-A008F40A2422}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -65,6 +67,10 @@ Global
 		{45F7847F-97CB-40EC-899D-CB25993A228D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{45F7847F-97CB-40EC-899D-CB25993A228D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{45F7847F-97CB-40EC-899D-CB25993A228D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FBE38C24-7077-4C36-BECD-A008F40A2422}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FBE38C24-7077-4C36-BECD-A008F40A2422}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FBE38C24-7077-4C36-BECD-A008F40A2422}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FBE38C24-7077-4C36-BECD-A008F40A2422}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -76,5 +82,6 @@ Global
 		{4FDBD3AA-E24A-4CCF-B4E1-450F2C9C6D86} = {233D2EAB-9CBD-4C7F-8DE6-A24F5C3B6F10}
 		{08F0977D-7774-4048-B347-C8C37FAC5102} = {1130B004-1C92-4C48-A27B-5B607034D485}
 		{45F7847F-97CB-40EC-899D-CB25993A228D} = {04AABCAA-C11D-43A6-A28D-CDC09E74A442}
+		{FBE38C24-7077-4C36-BECD-A008F40A2422} = {04AABCAA-C11D-43A6-A28D-CDC09E74A442}
 	EndGlobalSection
 EndGlobal
