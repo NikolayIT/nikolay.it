@@ -46,7 +46,7 @@
                 "RecentVideos",
                 () =>
                     {
-                        if (ConfigurationManager.AppSettings["YouTubeApiKey"] == null)
+                        if (string.IsNullOrWhiteSpace(ConfigurationManager.AppSettings["YouTubeApiKey"]))
                         {
                             return new List<VideoListItemViewModel>();
                         }
