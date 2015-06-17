@@ -58,8 +58,6 @@
         {
             this.ViewBag.Settings = new SettingsManager(this.GetSettings);
 
-            // this.ViewBag.Videos = this.Cache.Get("RecentVideos", () => , 7200);
-
             return base.BeginExecute(requestContext, callback, state);
         }
 

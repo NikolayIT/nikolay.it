@@ -563,6 +563,10 @@
       <Project>{50bc7c0e-c3df-411f-be60-f9de6e09dd2a}</Project>
       <Name>BlogSystem.Data</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Services\BlogSystem.Services.Data\BlogSystem.Services.Data.csproj">
+      <Project>{FBE38C24-7077-4C36-BECD-A008F40A2422}</Project>
+      <Name>BlogSystem.Services.Data</Name>
+    </ProjectReference>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
