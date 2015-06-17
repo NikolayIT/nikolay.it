@@ -32,7 +32,7 @@
 
         private IQueryable<Video> GetLatestVideosFromDatabase(int count)
         {
-            return this.db.Videos.OrderBy(x => x.CreatedOn).Take(count);
+            return this.db.Videos.OrderByDescending(x => x.CreatedOn).Take(count);
         }
 
         private void FetchLatestVideo(string youtubeChannelId)
