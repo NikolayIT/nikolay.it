@@ -60,7 +60,7 @@
                         <ul class="nav navbar-nav">
                             <li><a href="/">Home</a></li>
                             @Html.Action("Menu", "Home", routeValues: new { Area = string.Empty })
-                            <li><a href="/Videos">Videos</a></li>
+                            <li><a href="/Videos">My Videos</a></li>
                             @if (User.IsAdmin())
                             {
                                 @Html.Action("Menu", "Admin", routeValues: new { Area = "Administration" })
