@@ -32,19 +32,24 @@
             {
                 var jsonText = client.DownloadString(string.Format(UrlFormat, this.apiKey, channelPlaylistId, nextPage));
                 var obj = JsonConvert.DeserializeObject<RootObject>(jsonText);
-                items.AddRange(
-                    obj.Items.Where(
-                        x =>
-                        x.Snippet.Description.ToLower().Contains("костов")
-                        || x.Snippet.Description.ToLower().Contains("kostov")
-                        || x.Snippet.Title.ToLower().Contains("ники") || x.Snippet.Title.ToLower().Contains("niki"))
-                        .Select(x => x.Snippet));
-
+                items.AddRange(obj.Items.Where(predicate).Select(x => x.Snippet));
                 nextPage = obj.NextPageToken;
             }
             while (!string.IsNullOrWhiteSpace(nextPage));
 
             return items;
-        } 
+        }
+
+        public IEnumerable<Snippet> GetLatestVideosFromChannel(string channelPlaylistId, Func<Item, bool> predicate)
+        {
+            var items = new List<Snippet>();
+            var client = new WebClient { Encoding = Encoding.UTF8 };
+
+            var jsonText = client.DownloadString(string.Format(UrlFormat, this.apiKey, channelPlaylistId, string.Empty));
+            var obj = JsonConvert.DeserializeObject<RootObject>(jsonText);
+            items.AddRange(obj.Items.Where(predicate).Select(x => x.Snippet));
+
+            return items;
+        }
     }
 }
