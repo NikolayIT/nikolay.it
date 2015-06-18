@@ -15,6 +15,12 @@
                 defaults: new { controller = "Redirects", action = "Index" });
 
             routes.MapRoute(
+                name: "robots.txt",
+                url: "robots.txt",
+                defaults: new { controller = "Home", action = "RobotsTxt" },
+                namespaces: new[] { "Telerik.ILS.Web.StudentsPortal.Controllers" });
+
+            routes.MapRoute(
                 name: "Blog post",
                 url: "Blog/{year}/{month}/{title}/{id}",
                 defaults: new { controller = "Blog", action = "Post" },

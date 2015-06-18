@@ -2,10 +2,12 @@
 {
     using System;
     using System.Linq;
+    using System.Text;
     using System.Web.Mvc;
 
     using AutoMapper.QueryableExtensions;
 
+    using BlogSystem.Common;
     using BlogSystem.Data.Contracts;
     using BlogSystem.Data.Models;
     using BlogSystem.Web.ViewModels.Home;
@@ -43,6 +45,21 @@
                             };
 
             return this.View(model);
+        }
+
+        /// <summary>
+        /// Gets the robots.txt file.
+        /// </summary>
+        /// <returns>Returns a robots.txt file.</returns>
+        [HttpGet]
+        [OutputCache(Duration = 3600)]
+        public FileResult RobotsTxt()
+        {
+            var robotsTxtContent = new StringBuilder();
+            robotsTxtContent.AppendLine("User-Agent: *");
+            robotsTxtContent.AppendLine("Allow: /");
+
+            return this.File(Encoding.ASCII.GetBytes(robotsTxtContent.ToString()), "text/plain");
         }
 
         [ChildActionOnly]
