@@ -22,14 +22,8 @@
             bundles.Add(new ScriptBundle("~/bundles/jqueryval").Include(
                         "~/Scripts/jquery.validate*"));
 
-            bundles.Add(new ScriptBundle("~/bundles/jqueryval").Include(
-                        "~/Scripts/jquery.validate*"));
-
             bundles.Add(new ScriptBundle("~/bundles/bootstrap").Include(
                         "~/Scripts/bootstrap.js"));
-
-            bundles.Add(new ScriptBundle("~/bundles/global").Include(
-                        "~/Scripts/global.js"));
         }
 
         public static void RegisterStyles(BundleCollection bundles)

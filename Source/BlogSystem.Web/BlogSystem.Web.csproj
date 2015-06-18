@@ -312,7 +312,6 @@
     <None Include="Properties\PublishProfiles\78.128.6.5.pubxml" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
-    <Content Include="Scripts\global.js" />
     <None Include="Properties\PublishProfiles\todor.it.pubxml" />
     <None Include="Scripts\jquery-2.1.3.intellisense.js" />
     <Content Include="Scripts\jquery-2.1.3.js" />
