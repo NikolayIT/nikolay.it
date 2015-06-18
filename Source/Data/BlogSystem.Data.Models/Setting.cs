@@ -7,6 +7,7 @@
         [Key]
         public string Name { get; set; }
 
+        [DataType(DataType.MultilineText)]
         public string Value { get; set; }
     }
 }
