@@ -48,5 +48,20 @@
                 }
             }
         }
+
+        public string SmallThumbnailUrl
+        {
+            get
+            {
+                if (this.Provider == VideoProvider.YouTube)
+                {
+                    return string.Format("https://i.ytimg.com/vi/{0}/default.jpg", this.VideoId);
+                }
+                else
+                {
+                    return this.VideoId; // TODO: Implement thumbnail URL in Video model when provider is not YouTube
+                }
+            }
+        }
     }
 }
