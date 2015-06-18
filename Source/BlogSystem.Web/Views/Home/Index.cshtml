@@ -1,6 +1,6 @@
 ﻿@model BlogSystem.Web.ViewModels.Home.IndexViewModel
 @{
-    ViewBag.Title = ViewBag.Settings.Get["Home Title"];
+    ViewBag.Title = "Home Page";
 }
 
 @*@section breadcrumbs {
@@ -33,7 +33,7 @@
 
         @Html.Raw(post.Content)
 
-        <p><a class="btn-u btn-u-small" href="@post.Url"><i class="fa fa-plus"></i> Read More</a></p>
+        <p><a class="btn btn-u btn-u-small" href="@post.Url"><i class="fa fa-plus"></i> Read More</a></p>
         <br />
     }
 }
