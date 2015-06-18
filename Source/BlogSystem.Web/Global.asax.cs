@@ -1,5 +1,6 @@
 ﻿namespace BlogSystem.Web
 {
+    using System;
     using System.Data.Entity;
     using System.Web;
     using System.Web.Mvc;
@@ -47,6 +48,16 @@
         protected void Application_BeginRequest()
         {
             this.Container = Infrastructure.ObjectFactory.Container.GetNestedContainer();
+
+            // Remove www. from URL
+            if (this.Request.Url.Host.StartsWith("www.") && !this.Request.Url.IsLoopback)
+            {
+                var builder = new UriBuilder(this.Request.Url)
+                                  {
+                                      Host = this.Request.Url.Host.Replace("www.", string.Empty)
+                                  };
+                this.Response.RedirectPermanent(builder.ToString(), true);
+            }
         }
 
         protected void Application_EndRequest()

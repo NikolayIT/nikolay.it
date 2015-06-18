@@ -7,7 +7,6 @@
 
     using AutoMapper.QueryableExtensions;
 
-    using BlogSystem.Common;
     using BlogSystem.Data.Contracts;
     using BlogSystem.Data.Models;
     using BlogSystem.Web.ViewModels.Home;
