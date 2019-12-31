@@ -21,6 +21,7 @@
   <ItemGroup>
     <ProjectReference Include="..\..\Data\BlogSystem.Data.Models\BlogSystem.Data.Models.csproj" />
     <ProjectReference Include="..\..\Services\BlogSystem.Services.Mapping\BlogSystem.Services.Mapping.csproj" />
+    <ProjectReference Include="..\..\Services\BlogSystem.Services\BlogSystem.Services.csproj" />
   </ItemGroup>
 
 </Project>
