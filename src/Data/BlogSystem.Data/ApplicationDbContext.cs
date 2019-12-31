@@ -24,6 +24,12 @@
         {
         }
 
+        public DbSet<BlogPost> BlogPosts { get; set; }
+
+        public DbSet<Page> Pages { get; set; }
+
+        public DbSet<Video> Videos { get; set; }
+
         public DbSet<Setting> Settings { get; set; }
 
         public override int SaveChanges() => this.SaveChanges(true);
