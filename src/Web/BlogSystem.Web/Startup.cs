@@ -102,7 +102,25 @@
             app.UseEndpoints(
                 endpoints =>
                     {
-                        endpoints.MapControllerRoute("areaRoute", "{area:exists}/{controller=Home}/{action=Index}/{id?}");
+                        endpoints.MapControllerRoute(
+                            "index.html",
+                            "index.html",
+                            new { controller = "Redirects", action = "Index" });
+                        endpoints.MapControllerRoute(
+                            "Blog post",
+                            "Blog/{year}/{month}/{title}/{id}",
+                            new { controller = "Blog", action = "Post" });
+                        endpoints.MapControllerRoute(
+                            "Page",
+                            "Pages/{permalink}",
+                            new { controller = "Pages", action = "Page" });
+                        endpoints.MapControllerRoute(
+                            "Old blog links",
+                            "{year}-{month}/{title}-{id}.html",
+                            new { controller = "Redirects", action = "OldSystemBlogPost" });
+                        endpoints.MapControllerRoute(
+                            "areaRoute",
+                            "{area:exists}/{controller=Home}/{action=Index}/{id?}");
                         endpoints.MapControllerRoute("default", "{controller=Home}/{action=Index}/{id?}");
                         endpoints.MapRazorPages();
                     });
