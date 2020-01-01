@@ -1,0 +1,13 @@
+﻿<script src="/lib/tinymce/tinymce.min.js" type="text/javascript"></script>
+<script type="text/javascript">
+    tinymce.init({
+        selector: "textarea.edit-with-tinymce",
+        plugins: [
+            "image paste table link code media"
+        ]
+    });
+</script>
+
+<textarea name="@ViewData.TemplateInfo.HtmlFieldPrefix" class="edit-with-tinymce">
+    @ViewData.TemplateInfo.FormattedModelValue
+</textarea>

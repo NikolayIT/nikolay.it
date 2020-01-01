@@ -1,6 +1,5 @@
 ﻿namespace BlogSystem.Data.Models
 {
-    using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
 
     using BlogSystem.Data.Common.Models;
@@ -11,12 +10,15 @@
 
         public string SubTitle { get; set; }
 
+        [DataType(DataType.Html)]
         public string Content { get; set; }
 
+        [DataType(DataType.MultilineText)]
         public string MetaDescription { get; set; }
 
         public string MetaKeywords { get; set; }
 
+        [DataType(DataType.Html)]
         public string ShortContent { get; set; }
 
         public string ImageOrVideoUrl { get; set; }

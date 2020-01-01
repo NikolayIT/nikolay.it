@@ -2,7 +2,14 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>@ViewBag.Title - @GlobalConstants.SystemName</title>
+    @if (ViewBag.Title == GlobalConstants.SystemName)
+    {
+        <title>@GlobalConstants.SystemName</title>
+    }
+    else
+    {
+        <title>@ViewBag.Title - @GlobalConstants.SystemName</title>
+    }
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="keywords" content="@GlobalConstants.SiteKeywords, @ViewBag.Keywords" />
@@ -65,8 +72,9 @@
                             @if (User.IsInRole(GlobalConstants.AdministratorRoleName))
                             {
                                 <li class="dropdown open">
-                                    <a class="dropdown-toggle" data-toggle="dropdown" href="#" id="admin-menu">Administration<span class="caret"></span></a>
+                                    <a class="dropdown-toggle" data-toggle="dropdown" href="#" id="admin-menu">Admin<span class="caret"></span></a>
                                     <ul class="dropdown-menu" aria-labelledby="admin-menu">
+                                        <li class="text-center"><a href="/Administration/Dashboard">Dashboard</a></li>
                                         <li class="text-center"><a href="/Administration/BlogPosts">Blog posts</a></li>
                                         <li class="text-center"><a href="/Administration/Pages">Pages</a></li>
                                         <li class="text-center"><a href="/Administration/Settings">Settings</a></li>
