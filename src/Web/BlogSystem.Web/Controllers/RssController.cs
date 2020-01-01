@@ -41,7 +41,7 @@
             sb.AppendLine("<channel>");
             sb.AppendLine($"<title>{GlobalConstants.SystemName}</title>");
             sb.AppendLine($"<link>{GlobalConstants.SystemBaseUrl}</link>");
-            sb.AppendLine($"<description>{GlobalConstants.SystemDescription}</description>");
+            sb.AppendLine($"<description>{GlobalConstants.SystemName}</description>");
 
             foreach (var post in posts)
             {

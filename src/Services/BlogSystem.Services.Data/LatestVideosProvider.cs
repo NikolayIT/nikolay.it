@@ -4,7 +4,6 @@
     using System.Linq;
     using System.Threading.Tasks;
 
-    using BlogSystem.Data;
     using BlogSystem.Data.Common.Repositories;
     using BlogSystem.Data.Models;
     using BlogSystem.Services.YouTube;

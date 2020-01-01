@@ -8,6 +8,7 @@
     using BlogSystem.Data.Models;
     using BlogSystem.Data.Repositories;
     using BlogSystem.Data.Seeding;
+    using BlogSystem.Services;
     using BlogSystem.Services.Data;
     using BlogSystem.Services.Mapping;
     using BlogSystem.Services.Messaging;
@@ -57,6 +58,7 @@
             services.AddScoped<IDbQueryRunner, DbQueryRunner>();
 
             // Application services
+            services.AddTransient<IBlogUrlGenerator, BlogUrlGenerator>();
             services.AddTransient<IEmailSender, NullMessageSender>();
             services.AddTransient<ISettingsService, SettingsService>();
         }

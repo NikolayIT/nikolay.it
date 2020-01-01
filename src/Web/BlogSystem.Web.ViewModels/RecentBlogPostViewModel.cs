@@ -28,20 +28,7 @@
 
         public DateTime CreatedOn { get; set; }
 
-        public string IconClass
-        {
-            get
-            {
-                if (this.Type == BlogPostType.Video)
-                {
-                    return "fa-youtube-play";
-                }
-                else
-                {
-                    return "fa-file-text";
-                }
-            }
-        }
+        public string IconClass => this.Type == BlogPostType.Video ? "fab fa-youtube-square" : "fa fa-file-alt";
 
         public string Url => this.urlGenerator.GenerateUrl(this.Id, this.Title, this.CreatedOn);
     }

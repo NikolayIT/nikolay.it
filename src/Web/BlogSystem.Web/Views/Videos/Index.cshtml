@@ -1,0 +1,40 @@
+﻿@model BlogSystem.Web.ViewModels.Videos.VideoListViewModel
+
+@{
+    ViewBag.Title = "My Videos";
+}
+
+<div class="row">
+    @foreach (var video in Model.Videos)
+    {
+        <div class="col-md-3 video-list-item">
+            <a href="@video.VideoUrl" target="_blank" title="@video.Title">
+                <img src="@video.ThumbnailUrl" class="img-responsive" alt="@video.Title"/>
+                <h2>@video.Title</h2>
+            </a>
+            <time><i class="fa fa-calendar"></i> @video.CreatedOn.ToString("yyyy-MM-dd HH:mm")</time>
+            <p>@video.Description.Replace("\n", ";\n")</p>
+        </div>
+    }
+</div>
+
+@if (Model.Pages > 0)
+{
+    <div class="text-center">
+        <ul class="pagination">
+            <li><a href="/Videos/?page=@Model.PreviousPage"><i class="fa fa-backward"></i></a></li>
+            @for (int i = 1; i <= Model.Pages; i++)
+            {
+                if (i == Model.Page)
+                {
+                    <li class="active"><a href="/Videos/?page=@i">@i</a></li>
+                }
+                else
+                {
+                    <li><a href="/Videos/?page=@i">@i</a></li>
+                }
+            }
+            <li><a href="/Videos/?page=@Model.NextPage"><i class="fa fa-forward"></i></a></li>
+        </ul>
+    </div>
+}

@@ -1,0 +1,6 @@
+﻿@model IEnumerable<BlogSystem.Web.ViewModels.Home.MenuItemViewModel>
+
+@foreach (var menuItem in Model)
+{
+    <li><a href="/Pages/@menuItem.Permalink">@menuItem.Title</a></li>
+}
