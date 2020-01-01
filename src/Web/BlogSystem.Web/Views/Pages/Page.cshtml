@@ -1,0 +1,13 @@
+﻿@using BlogSystem.Common
+@model BlogSystem.Web.ViewModels.Pages.PageViewModel
+
+@{
+    ViewBag.Title = Model.Title;
+}
+
+@if (this.User.IsInRole(GlobalConstants.AdministratorRoleName))
+{
+    <i class="fa fa-pencil-alt"></i> <a href="/Administration/Pages/Edit/@Model.Id">Edit</a>
+}
+
+@Html.Raw(Model.Content)

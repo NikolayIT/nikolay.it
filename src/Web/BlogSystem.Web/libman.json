@@ -1,0 +1,80 @@
+﻿{
+  "version": "1.0",
+  "defaultProvider": "jsdelivr",
+  "libraries": [
+    {
+      "library": "jquery@3.4.1",
+      "destination": "wwwroot/lib/jquery/",
+      "files": [
+        "dist/jquery.min.js",
+        "dist/jquery.js"
+      ]
+    },
+    {
+      "library": "bootstrap@3.4.1",
+      "destination": "wwwroot/lib/bootstrap/",
+      "files": [
+        "dist/css/bootstrap.css",
+        "dist/css/bootstrap.min.css",
+        "dist/js/bootstrap.js",
+        "dist/js/bootstrap.min.js"
+      ]
+    },
+    {
+      "library": "jquery-validation@1.19.1",
+      "destination": "wwwroot/lib/jquery-validation/",
+      "files": [
+        "dist/jquery.validate.js",
+        "dist/jquery.validate.min.js"
+      ]
+    },
+    {
+      "library": "jquery-validation-unobtrusive@3.2.11",
+      "destination": "wwwroot/lib/jquery-validation-unobtrusive/",
+      "files": [
+        "dist/jquery.validate.unobtrusive.js",
+        "dist/jquery.validate.unobtrusive.min.js"
+      ]
+    },
+    {
+      "library": "@fortawesome/fontawesome-free@5.12.0",
+      "destination": "wwwroot/lib/fontawesome/",
+      "files": [
+        "webfonts/fa-brands-400.eot",
+        "webfonts/fa-brands-400.svg",
+        "webfonts/fa-brands-400.ttf",
+        "webfonts/fa-brands-400.woff",
+        "webfonts/fa-brands-400.woff2",
+        "webfonts/fa-regular-400.eot",
+        "webfonts/fa-regular-400.svg",
+        "webfonts/fa-regular-400.ttf",
+        "webfonts/fa-regular-400.woff",
+        "webfonts/fa-regular-400.woff2",
+        "webfonts/fa-solid-900.eot",
+        "webfonts/fa-solid-900.svg",
+        "webfonts/fa-solid-900.ttf",
+        "webfonts/fa-solid-900.woff",
+        "webfonts/fa-solid-900.woff2",
+        "css/all.css",
+        "css/all.min.css"
+      ]
+    },
+    {
+      "library": "tinymce@5.1.5",
+      "destination": "wwwroot/lib/tinymce/",
+      "files": [
+        "tinymce.min.js",
+        "themes/silver/theme.min.js",
+        "skins/ui/oxide/content.min.css",
+        "skins/ui/oxide/skin.min.css",
+        "skins/content/default/content.min.css",
+        "plugins/image/plugin.min.js",
+        "plugins/paste/plugin.min.js",
+        "plugins/table/plugin.min.js",
+        "plugins/link/plugin.min.js",
+        "plugins/code/plugin.min.js",
+        "plugins/media/plugin.min.js"
+      ]
+    }
+  ]
+}

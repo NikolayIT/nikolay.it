@@ -1,0 +1,20 @@
+﻿@using BlogSystem.Common
+@using BlogSystem.Data.Models
+@using Microsoft.AspNetCore.Identity
+@inject SignInManager<ApplicationUser> SignInManager
+@inject UserManager<ApplicationUser> UserManager
+
+@if (this.SignInManager.IsSignedIn(this.User))
+{
+    <ul class="loginbar pull-right">
+        <li>
+            <a class="nav-link text-dark" asp-area="Identity" asp-page="/Account/Manage/Index" title="Manage">Hello @(this.User.Identity.Name)!</a>
+        </li>
+        <li class="topbar-devider"></li>
+        <li>
+            <a href="javascript:document.getElementById('logoutForm').submit()">Logout</a>
+            <form id="logoutForm" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@(this.Url.Action("Index", "Home", new { area = string.Empty }))">
+            </form>
+        </li>
+    </ul>
+}

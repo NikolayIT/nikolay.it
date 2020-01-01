@@ -1,0 +1,157 @@
+﻿@using BlogSystem.Common
+<!DOCTYPE html>
+<html>
+<head>
+    @if (ViewBag.Title == GlobalConstants.SystemName)
+    {
+        <title>@GlobalConstants.SystemName</title>
+    }
+    else
+    {
+        <title>@ViewBag.Title - @GlobalConstants.SystemName</title>
+    }
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="keywords" content="@GlobalConstants.SiteKeywords, @ViewBag.Keywords" />
+    @if (!string.IsNullOrWhiteSpace(ViewBag.Description))
+    {
+        <meta name="description" content="@ViewBag.Description" />
+    }
+    <meta name="robots" content="index, follow" />
+    <meta name="revisit-after" content="1 days" />
+    <meta name="author" content="@GlobalConstants.SiteAuthor" />
+    <meta name="generator" content="Nikolay.IT BlogSystem - https://github.com/NikolayIT/BlogSystem" />
+    <link rel="alternate" type="application/rss+xml" title="Blog RSS" href="/RSS/Blog" />
+
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-25135627-1"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
+
+        gtag('config', 'UA-25135627-1');
+    </script>
+
+    <environment names="Development">
+        <link href="~/lib/fontawesome/css/all.css" rel="stylesheet" asp-append-version="true" />
+        <link href="~/lib/bootstrap/dist/css/bootstrap.css" rel="stylesheet" asp-append-version="true" />
+        <link href="~/css/bootstrap.themes.unify.css" rel="stylesheet" asp-append-version="true" />
+        <link href="~/css/bootstrap.themes.unify.app.css" rel="stylesheet" asp-append-version="true" />
+        <link href="~/css/bootstrap.themes.unify.red.css" rel="stylesheet" asp-append-version="true" />
+        <link href="~/css/site.css" rel="stylesheet" asp-append-version="true" />
+    </environment>
+    <environment names="Staging,Production">
+        <link href="~/lib/fontawesome/css/all.min.css" rel="stylesheet" asp-append-version="true" />
+        <link href="~/lib/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet" asp-append-version="true" />
+        <link href="~/css/site.min.css" rel="stylesheet" asp-append-version="true" />
+    </environment>
+</head>
+
+<body class="boxed-layout container">
+    <div id="fb-root"></div>
+    <script>
+        (function (d, s, id) {
+            var js, fjs = d.getElementsByTagName(s)[0];
+            if (d.getElementById(id)) return;
+            js = d.createElement(s); js.id = id;
+            js.src = "//connect.facebook.net/en_US/sdk.js#xfbml=1&appId=290972921054347&version=v2.0";
+            fjs.parentNode.insertBefore(js, fjs);
+        }(document, 'script', 'facebook-jssdk'));</script>
+    <div class="wrapper">
+        <header class="header">
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="navbar-header">
+                        <a class="navbar-brand" href="/">
+                            <img id="logo-header" src="/img/header-logo.png" width="300" height="80" alt="Logo">
+                        </a>
+                    </div>
+                </div>
+
+                <div class="navbar navbar-default col-md-6" role="navigation">
+                    <div class="topbar">
+                        <partial name="_LoginPartial" />
+                    </div>
+                    <div class="clearfix"></div>
+                    <nav class="collapse navbar-collapse navbar-responsive-collapse">
+                        <ul class="nav navbar-nav">
+                            <li><a href="/">Home</a></li>
+                            <vc:menu></vc:menu>
+                            <li><a href="/Videos">My Videos</a></li>
+                            @if (User.IsInRole(GlobalConstants.AdministratorRoleName))
+                            {
+                                <li class="dropdown open">
+                                    <a class="dropdown-toggle" data-toggle="dropdown" href="#" id="admin-menu">Admin<span class="caret"></span></a>
+                                    <ul class="dropdown-menu" aria-labelledby="admin-menu">
+                                        <li class="text-center"><a href="/Administration/Dashboard">Dashboard</a></li>
+                                        <li class="text-center"><a href="/Administration/BlogPosts">Blog posts</a></li>
+                                        <li class="text-center"><a href="/Administration/Pages">Pages</a></li>
+                                        <li class="text-center"><a href="/Administration/Settings">Settings</a></li>
+                                    </ul>
+                                </li>
+                            }
+                        </ul>
+                    </nav>
+                </div>
+            </div>
+        </header>
+
+        <div class="breadcrumbs">
+            <div class="container">
+                <h1 class="pull-left">@ViewBag.Title</h1>
+                @if (IsSectionDefined("breadcrumbs"))
+                {
+                    <ul class="pull-right breadcrumb">
+                        @RenderSection("breadcrumbs", false)
+                    </ul>
+                }
+            </div>
+        </div>
+
+        <div class="container content">
+            <div class="row blog-page">
+                <div class="col-md-9">
+                    @RenderBody()
+                </div>
+
+                <!-- Right Sidebar -->
+                <aside class="col-md-3 magazine-page">
+                    <vc:sidebar></vc:sidebar>
+                </aside>
+                <!-- End Right Sidebar -->
+            </div>
+        </div>
+
+        <footer class="copyright">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-6">
+                        <p>&copy; 2011-@DateTime.Now.Year <strong>@GlobalConstants.SystemName</strong></p>
+                    </div>
+                    <div class="col-md-6">
+                        <p class="pull-right"><a href="https://github.com/NikolayIT/BlogSystem" target="_blank"><i class="fab fa-github"></i> Open Source System</a></p>
+                    </div>
+                </div>
+            </div>
+        </footer>
+    </div>
+
+    <environment names="Development">
+        <script src="~/lib/jquery/dist/jquery.js" asp-append-version="true"></script>
+        <script src="~/lib/jquery-validation/dist/jquery.validate.js" asp-append-version="true"></script>
+        <script src="~/lib/jquery-validation-unobtrusive/dist/jquery.validate.unobtrusive.js" asp-append-version="true"></script>
+        <script src="~/lib/bootstrap/dist/js/bootstrap.js" asp-append-version="true"></script>
+        <script src="~/js/site.js" asp-append-version="true"></script>
+    </environment>
+    <environment names="Staging,Production">
+        <script src="~/lib/jquery/dist/jquery.min.js" asp-append-version="true"></script>
+        <script src="~/lib/jquery-validation/dist/jquery.validate.min.js" asp-append-version="true"></script>
+        <script src="~/lib/jquery-validation-unobtrusive/dist/jquery.validate.unobtrusive.js" asp-append-version="true"></script>
+        <script src="~/lib/bootstrap/dist/js/bootstrap.min.js" asp-append-version="true"></script>
+        <script src="~/js/site.min.js" asp-append-version="true"></script>
+    </environment>
+
+    @this.RenderSection("Scripts", required: false)
+</body>
+</html>
