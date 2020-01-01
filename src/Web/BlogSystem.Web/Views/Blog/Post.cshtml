@@ -1,4 +1,5 @@
-﻿@using BlogSystem.Common
+﻿@using System.Net
+@using BlogSystem.Common
 @using Microsoft.AspNetCore.Http.Extensions
 @model BlogSystem.Web.ViewModels.Blog.BlogPostViewModel
 
@@ -38,10 +39,28 @@
     @Html.Raw(Model.Content)
     <br />
     <div id="social-button-sharer">
-        <div>
-            <a href="https://twitter.com/share" class="twitter-share-button">Tweet</a>
-            <script>!function (d, s, id) { var js, fjs = d.getElementsByTagName(s)[0], p = /^http:/.test(d.location) ? 'http' : 'https'; if (!d.getElementById(id)) { js = d.createElement(s); js.id = id; js.src = p + '://platform.twitter.com/widgets.js'; fjs.parentNode.insertBefore(js, fjs); } }(document, 'script', 'twitter-wjs');</script>
+            <a class="twitter-share-button" href="https://twitter.com/intent/tweet">Tweet</a>
+        <script>
+            window.twttr = (function (d, s, id) {
+                var js, fjs = d.getElementsByTagName(s)[0],
+                    t = window.twttr || {};
+                if (d.getElementById(id)) return t;
+                js = d.createElement(s);
+                js.id = id;
+                js.src = "https://platform.twitter.com/widgets.js";
+                fjs.parentNode.insertBefore(js, fjs);
+                t._e = [];
+                t.ready = function (f) {
+                    t._e.push(f);
+                };
+                return t;
+            }(document, "script", "twitter-wjs"));
+        </script>
+
+        <div id="fb-root"></div>
+        <script async defer crossorigin="anonymous" src="https://connect.facebook.net/en_GB/sdk.js#xfbml=1&version=v5.0&appId=155172444599081&autoLogAppEvents=1"></script>
+        <div class="fb-share-button" data-href="@this.Context.Request.GetDisplayUrl()" data-layout="button_count" data-size="small">
+            <a target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=@WebUtility.UrlEncode(this.Context.Request.GetDisplayUrl())&amp;src=sdkpreparse" class="fb-xfbml-parse-ignore">Share</a>
         </div>
-        <div class="fb-share-button" data-href="@this.Context.Request.GetDisplayUrl()" data-type="button_count"></div>
     </div>
 </div>
