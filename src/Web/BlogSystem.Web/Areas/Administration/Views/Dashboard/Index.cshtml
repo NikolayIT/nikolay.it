@@ -5,3 +5,23 @@
 
 <h1>@this.ViewData["Title"]</h1>
 Settings: @this.Model.SettingsCount
+
+<h2>Remote Monitor Requests</h2>
+
+<table class="table">
+    <tr>
+        <th>Title</th>
+        <th>Pattern</th>
+        <th>Actual value</th>
+        <th>OK</th>
+    </tr>
+    @foreach (var remoteMonitorRequest in this.Model.RemoteMonitorRequests)
+    {
+        <tr>
+            <td>@remoteMonitorRequest.Title</td>
+            <td>@remoteMonitorRequest.RegexPattern</td>
+            <td>@remoteMonitorRequest.ActualValue</td>
+            <td>@remoteMonitorRequest.Ok</td>
+        </tr>
+    }
+</table>

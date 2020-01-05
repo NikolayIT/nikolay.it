@@ -1,12 +1,9 @@
 ﻿namespace BlogSystem.Web.ViewComponents
 {
-    using System.Collections.Generic;
     using System.Linq;
-    using System.Threading.Tasks;
 
     using BlogSystem.Data.Common.Repositories;
     using BlogSystem.Data.Models;
-    using BlogSystem.Services.Data;
     using BlogSystem.Services.Mapping;
     using BlogSystem.Web.ViewModels;
     using BlogSystem.Web.ViewModels.Videos;
@@ -27,7 +24,7 @@
             this.videosRepository = videosRepository;
         }
 
-        public async Task<IViewComponentResult> InvokeAsync()
+        public IViewComponentResult Invoke()
         {
             var model = new SidebarViewModel
                             {
