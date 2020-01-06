@@ -21,7 +21,16 @@ Settings: @this.Model.SettingsCount
             <td>@remoteMonitorRequest.Title</td>
             <td>@remoteMonitorRequest.RegexPattern</td>
             <td>@remoteMonitorRequest.ActualValue</td>
-            <td>@remoteMonitorRequest.Ok</td>
+            <td>
+                @if (remoteMonitorRequest.Ok)
+                {
+                    <span class="text-success"><i class="fa fa-check"></i></span>
+                }
+                else
+                {
+                    <span class="text-danger"><i class="fa fa-times"></i></span>
+                }
+            </td>
         </tr>
     }
 </table>

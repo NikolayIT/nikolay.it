@@ -1,7 +1,6 @@
 ﻿namespace BlogSystem.Web.ViewComponents
 {
     using System.Linq;
-    using System.Threading.Tasks;
 
     using BlogSystem.Data.Common.Repositories;
     using BlogSystem.Data.Models;
@@ -19,7 +18,7 @@
             this.pagesRepository = pagesRepository;
         }
 
-        public async Task<IViewComponentResult> InvokeAsync()
+        public IViewComponentResult Invoke()
         {
             var menuItems = this.pagesRepository
                 .All()
