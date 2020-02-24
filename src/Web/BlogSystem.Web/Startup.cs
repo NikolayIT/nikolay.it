@@ -12,6 +12,7 @@
     using BlogSystem.Services.Data;
     using BlogSystem.Services.Mapping;
     using BlogSystem.Services.Messaging;
+    using BlogSystem.Services.YouTube;
     using BlogSystem.Web.ViewModels;
 
     using Microsoft.AspNetCore.Builder;
@@ -61,6 +62,9 @@
             services.AddTransient<IBlogUrlGenerator, BlogUrlGenerator>();
             services.AddTransient<IEmailSender, NullMessageSender>();
             services.AddTransient<ISettingsService, SettingsService>();
+            services.AddTransient<ILatestVideosProvider, LatestVideosProvider>();
+            services.AddTransient<IYouTubeChannelVideosFetcher>(
+                s => new YouTubeChannelVideosFetcher(this.configuration["YouTube:ApiKey"]));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

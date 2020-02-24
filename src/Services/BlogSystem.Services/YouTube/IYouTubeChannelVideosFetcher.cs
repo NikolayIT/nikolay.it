@@ -2,14 +2,10 @@
 {
     using System;
     using System.Collections.Generic;
+    using System.Threading.Tasks;
 
     public interface IYouTubeChannelVideosFetcher
     {
-        IEnumerable<Snippet> GetLatestVideosFromChannel(
-            string channelPlaylistId,
-            int maxResults,
-            Func<Item, bool> predicate);
-
-        IEnumerable<Snippet> GetAllVideosFromChannel(string channelPlaylistId, Func<Item, bool> predicate);
+        Task<IEnumerable<Item>> GetAllVideosFromChannel(string channelId, Func<Item, bool> predicate);
     }
 }

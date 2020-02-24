@@ -1,6 +1,6 @@
 ﻿namespace BlogSystem.Services.YouTube
 {
-    public class Resourceid
+    public class Id
     {
         public string Kind { get; set; }
 

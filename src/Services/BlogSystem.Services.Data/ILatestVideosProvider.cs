@@ -1,11 +1,14 @@
 ﻿namespace BlogSystem.Services.Data
 {
     using System.Collections.Generic;
+    using System.Threading.Tasks;
 
     using BlogSystem.Data.Models;
 
     public interface ILatestVideosProvider
     {
-        IEnumerable<Video> GetLatestVideos(int count, string youtubeChannelId);
+        IEnumerable<Video> GetLatestVideos(int count, string channelId);
+
+        Task FetchLatestVideosAsync(string youtubeChannelId);
     }
 }

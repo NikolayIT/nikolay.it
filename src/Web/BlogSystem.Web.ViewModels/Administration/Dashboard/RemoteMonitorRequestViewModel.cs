@@ -17,6 +17,9 @@
 
         public string ActualValue { get; set; }
 
+        public string ActualValueShort =>
+            this.ActualValue.Length <= 100 ? this.ActualValue : this.ActualValue.Substring(0, 100) + "...";
+
         public bool Ok => Regex.Match(this.ActualValue, this.RegexPattern).Success;
     }
 }

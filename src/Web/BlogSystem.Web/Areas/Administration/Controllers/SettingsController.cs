@@ -9,7 +9,6 @@
     using Microsoft.AspNetCore.Mvc;
     using Microsoft.EntityFrameworkCore;
 
-    [Area("Administration")]
     public class SettingsController : AdministrationController
     {
         private readonly IDeletableEntityRepository<Setting> repository;

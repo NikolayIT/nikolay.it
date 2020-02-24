@@ -18,9 +18,9 @@ Settings: @this.Model.SettingsCount
     @foreach (var remoteMonitorRequest in this.Model.RemoteMonitorRequests)
     {
         <tr>
-            <td>@remoteMonitorRequest.Title</td>
+            <td><a href="@remoteMonitorRequest.Url" target="_blank">@remoteMonitorRequest.Title</a></td>
             <td>@remoteMonitorRequest.RegexPattern</td>
-            <td>@remoteMonitorRequest.ActualValue</td>
+            <td>@remoteMonitorRequest.ActualValueShort</td>
             <td>
                 @if (remoteMonitorRequest.Ok)
                 {

@@ -20,37 +20,29 @@
             this.videosFetcher = videosFetcher;
         }
 
-        public IEnumerable<Video> GetLatestVideos(int count, string youtubeChannelId)
+        public IEnumerable<Video> GetLatestVideos(int count, string channelId)
         {
-            this.FetchLatestVideosAsync(youtubeChannelId).GetAwaiter().GetResult();
-            return this.GetLatestVideosFromDatabase(count);
+            this.FetchLatestVideosAsync(channelId).GetAwaiter().GetResult();
+            return this.videosRepository.All().OrderByDescending(x => x.CreatedOn).Take(count).ToList();
         }
 
-        private IQueryable<Video> GetLatestVideosFromDatabase(int count)
+        public async Task FetchLatestVideosAsync(string youtubeChannelId)
         {
-            return this.videosRepository.All().OrderByDescending(x => x.CreatedOn).Take(count);
-        }
-
-        private async Task FetchLatestVideosAsync(string youtubeChannelId)
-        {
-            var items = this.videosFetcher.GetAllVideosFromChannel(
-                youtubeChannelId,
-                x => x.Snippet.Description.ToLower().Contains("костов")
-                     || x.Snippet.Description.ToLower().Contains("kostov")
-                     || x.Snippet.Title.ToLower().Contains("ники")
-                     || x.Snippet.Title.ToLower().Contains("niki"));
+            var items = await this.videosFetcher.GetAllVideosFromChannel(
+                            youtubeChannelId,
+                            x => x.Snippet.Description.ToLower().Contains("николай")
+                                 && x.Snippet.Description.ToLower().Contains("костов"));
 
             foreach (var item in items)
             {
-                var videoId = item.ResourceId.VideoId;
-                if (!this.videosRepository.All().Any(x => x.VideoId == videoId))
+                if (!this.videosRepository.All().Any(x => x.VideoId == item.Id.VideoId))
                 {
                     var video = new Video
                     {
-                        VideoId = videoId,
-                        Title = item.Title,
-                        Description = item.Description,
-                        CreatedOn = item.PublishedAt,
+                        VideoId = item.Id.VideoId,
+                        Title = item.Snippet.Title,
+                        Description = item.Snippet.Description,
+                        CreatedOn = item.Snippet.PublishedAt,
                     };
 
                     await this.videosRepository.AddAsync(video);

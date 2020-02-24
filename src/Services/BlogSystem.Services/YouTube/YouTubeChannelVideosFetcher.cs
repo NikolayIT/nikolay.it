@@ -3,14 +3,14 @@
     using System;
     using System.Collections.Generic;
     using System.Linq;
-    using System.Net;
-    using System.Text;
+    using System.Net.Http;
     using System.Text.Json;
+    using System.Threading.Tasks;
 
     public class YouTubeChannelVideosFetcher : IYouTubeChannelVideosFetcher
     {
         private const string UrlFormat =
-            "https://www.googleapis.com/youtube/v3/playlistItems?part=snippet&playlistId={1}&key={0}&maxResults={2}&pageToken={3}";
+            "https://www.googleapis.com/youtube/v3/search?part=snippet&channelId={1}&key={0}&maxResults={2}&pageToken={3}";
 
         private readonly string apiKey;
 
@@ -19,32 +19,22 @@
             this.apiKey = apiKey;
         }
 
-        public IEnumerable<Snippet> GetAllVideosFromChannel(string channelPlaylistId, Func<Item, bool> predicate)
+        public async Task<IEnumerable<Item>> GetAllVideosFromChannel(string channelId, Func<Item, bool> predicate)
         {
-            var items = new List<Snippet>();
+            var items = new List<Item>();
             var nextPage = string.Empty;
-            var client = new WebClient { Encoding = Encoding.UTF8 };
-
+            var client = new HttpClient();
+            var jsonSerializerOptions = new JsonSerializerOptions { PropertyNameCaseInsensitive = true, };
             do
             {
-                var jsonText = client.DownloadString(string.Format(UrlFormat, this.apiKey, channelPlaylistId, 50, nextPage));
-                var obj = JsonSerializer.Deserialize<RootObject>(jsonText);
-                items.AddRange(obj.Items.Where(predicate).Select(x => x.Snippet));
+                var url = string.Format(UrlFormat, this.apiKey, channelId, 50, nextPage);
+                var response = await client.GetAsync(url);
+                var jsonText = await response.Content.ReadAsStringAsync();
+                var obj = JsonSerializer.Deserialize<VideoResults>(jsonText, jsonSerializerOptions);
+                items.AddRange(obj.Items.Where(x => x.Id.Kind == "youtube#video").Where(predicate));
                 nextPage = obj.NextPageToken;
             }
             while (!string.IsNullOrWhiteSpace(nextPage));
-
-            return items;
-        }
-
-        public IEnumerable<Snippet> GetLatestVideosFromChannel(string channelPlaylistId, int maxResults, Func<Item, bool> predicate)
-        {
-            var items = new List<Snippet>();
-            var client = new WebClient { Encoding = Encoding.UTF8 };
-
-            var jsonText = client.DownloadString(string.Format(UrlFormat, this.apiKey, channelPlaylistId, maxResults, string.Empty));
-            var obj = JsonSerializer.Deserialize<RootObject>(jsonText);
-            items.AddRange(obj.Items.Where(predicate).Select(x => x.Snippet));
 
             return items;
         }
