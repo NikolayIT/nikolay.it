@@ -3,7 +3,7 @@
   "defaultProvider": "jsdelivr",
   "libraries": [
     {
-      "library": "jquery@3.4.1",
+      "library": "jquery@3.5.1",
       "destination": "wwwroot/lib/jquery/",
       "files": [
         "dist/jquery.min.js",
@@ -21,7 +21,7 @@
       ]
     },
     {
-      "library": "jquery-validation@1.19.1",
+      "library": "jquery-validation@1.19.2",
       "destination": "wwwroot/lib/jquery-validation/",
       "files": [
         "dist/jquery.validate.js",
@@ -37,7 +37,7 @@
       ]
     },
     {
-      "library": "@fortawesome/fontawesome-free@5.12.0",
+      "library": "@fortawesome/fontawesome-free@5.14.0",
       "destination": "wwwroot/lib/fontawesome/",
       "files": [
         "webfonts/fa-brands-400.eot",
@@ -60,7 +60,7 @@
       ]
     },
     {
-      "library": "tinymce@5.1.5",
+      "library": "tinymce@5.4.1",
       "destination": "wwwroot/lib/tinymce/",
       "files": [
         "tinymce.min.js",
