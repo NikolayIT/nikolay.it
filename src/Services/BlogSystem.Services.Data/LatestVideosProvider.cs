@@ -1,6 +1,6 @@
 ﻿namespace BlogSystem.Services.Data
 {
-    using System.Collections.Generic;
+    using System;
     using System.Linq;
     using System.Threading.Tasks;
 
@@ -20,19 +20,16 @@
             this.videosFetcher = videosFetcher;
         }
 
-        public IEnumerable<Video> GetLatestVideos(int count, string channelId)
+        public async Task FetchLatestVideosAsync(string youtubeChannelId, bool useFilter)
         {
-            this.FetchLatestVideosAsync(channelId).GetAwaiter().GetResult();
-            return this.videosRepository.All().OrderByDescending(x => x.CreatedOn).Take(count).ToList();
-        }
+            Func<Item, bool> filter = x => true;
+            if (useFilter)
+            {
+                filter = x => x.Snippet.Description.ToLower().Contains("николай")
+                              && x.Snippet.Description.ToLower().Contains("костов");
+            }
 
-        public async Task FetchLatestVideosAsync(string youtubeChannelId)
-        {
-            var items = await this.videosFetcher.GetAllVideosFromChannel(
-                            youtubeChannelId,
-                            x => x.Snippet.Description.ToLower().Contains("николай")
-                                 && x.Snippet.Description.ToLower().Contains("костов"));
-
+            var items = await this.videosFetcher.GetAllVideosFromChannel(youtubeChannelId, filter);
             foreach (var item in items)
             {
                 if (!this.videosRepository.All().Any(x => x.VideoId == item.Id.VideoId))

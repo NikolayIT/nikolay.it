@@ -1,4 +1,5 @@
-﻿@model BlogSystem.Web.ViewModels.Videos.VideoListViewModel
+﻿@using BlogSystem.Common
+@model BlogSystem.Web.ViewModels.Videos.VideoListViewModel
 
 @{
     ViewBag.Title = "My Videos";
@@ -13,6 +14,10 @@
                 <h2>@video.Title</h2>
             </a>
             <time><i class="fa fa-calendar"></i> @video.CreatedOn.ToString("yyyy-MM-dd HH:mm")</time>
+            @if (this.User.IsInRole(GlobalConstants.AdministratorRoleName))
+            {
+                <a asp-action="Delete" asp-controller="Videos" asp-area="Administration" asp-route-id="@video.Id"><i class="fa fa-times"></i></a>
+            }
             <p>@video.Description.Replace("\n", ";\n")</p>
         </div>
     }
