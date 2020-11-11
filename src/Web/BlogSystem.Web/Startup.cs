@@ -48,6 +48,7 @@
                         options.MinimumSameSitePolicy = SameSiteMode.None;
                     });
 
+            services.AddDatabaseDeveloperPageExceptionFilter();
             services.AddControllersWithViews();
             services.AddRazorPages();
 
@@ -84,7 +85,7 @@
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
-                app.UseDatabaseErrorPage();
+                app.UseMigrationsEndPoint();
             }
             else
             {
