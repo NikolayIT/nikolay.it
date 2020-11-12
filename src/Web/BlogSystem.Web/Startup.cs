@@ -62,7 +62,6 @@
             // Application services
             services.AddTransient<IBlogUrlGenerator, BlogUrlGenerator>();
             services.AddTransient<IEmailSender, NullMessageSender>();
-            services.AddTransient<ISettingsService, SettingsService>();
             services.AddTransient<ILatestVideosProvider, LatestVideosProvider>();
             services.AddTransient<IYouTubeChannelVideosFetcher>(
                 s => new YouTubeChannelVideosFetcher(this.configuration["YouTube:ApiKey"]));

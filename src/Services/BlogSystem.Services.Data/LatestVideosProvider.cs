@@ -10,11 +10,11 @@
 
     public class LatestVideosProvider : ILatestVideosProvider
     {
-        private readonly IRepository<Video> videosRepository;
+        private readonly IDeletableEntityRepository<Video> videosRepository;
 
         private readonly IYouTubeChannelVideosFetcher videosFetcher;
 
-        public LatestVideosProvider(IRepository<Video> videosRepository, IYouTubeChannelVideosFetcher videosFetcher)
+        public LatestVideosProvider(IDeletableEntityRepository<Video> videosRepository, IYouTubeChannelVideosFetcher videosFetcher)
         {
             this.videosRepository = videosRepository;
             this.videosFetcher = videosFetcher;
@@ -32,7 +32,7 @@
             var items = await this.videosFetcher.GetAllVideosFromChannel(youtubeChannelId, filter);
             foreach (var item in items)
             {
-                if (!this.videosRepository.All().Any(x => x.VideoId == item.Id.VideoId))
+                if (!this.videosRepository.AllWithDeleted().Any(x => x.VideoId == item.Id.VideoId))
                 {
                     var video = new Video
                     {

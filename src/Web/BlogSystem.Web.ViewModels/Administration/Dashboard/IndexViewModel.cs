@@ -4,8 +4,6 @@
 
     public class IndexViewModel
     {
-        public int SettingsCount { get; set; }
-
         public IEnumerable<RemoteMonitorRequestViewModel> RemoteMonitorRequests { get; set; }
     }
 }

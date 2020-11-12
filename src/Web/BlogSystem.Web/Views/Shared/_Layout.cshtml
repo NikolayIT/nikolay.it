@@ -95,7 +95,7 @@
                 @if (IsSectionDefined("breadcrumbs"))
                 {
                     <ul class="pull-right breadcrumb">
-                        @RenderSection("breadcrumbs", false)
+                        @await RenderSectionAsync("breadcrumbs", false)
                     </ul>
                 }
             </div>
@@ -107,11 +107,9 @@
                     @RenderBody()
                 </div>
 
-                <!-- Right Sidebar -->
                 <aside class="col-md-3 magazine-page">
                     <vc:sidebar></vc:sidebar>
                 </aside>
-                <!-- End Right Sidebar -->
             </div>
         </div>
 
@@ -119,7 +117,7 @@
             <div class="container">
                 <div class="row">
                     <div class="col-md-6">
-                        <p>&copy; 2011-@DateTime.Now.Year <strong>@GlobalConstants.SystemName</strong></p>
+                        <p>&copy; 2011-@DateTime.UtcNow.Year <strong>@GlobalConstants.SystemName</strong></p>
                     </div>
                     <div class="col-md-6">
                         <p class="pull-right"><a href="https://github.com/NikolayIT/nikolay.it" target="_blank"><i class="fab fa-github"></i> Open Source System</a></p>
@@ -144,6 +142,6 @@
         <script src="~/js/site.min.js" asp-append-version="true"></script>
     </environment>
 
-    @this.RenderSection("Scripts", required: false)
+    @await this.RenderSectionAsync("Scripts", required: false)
 </body>
 </html>

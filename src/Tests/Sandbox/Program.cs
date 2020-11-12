@@ -11,7 +11,6 @@
     using BlogSystem.Data.Models;
     using BlogSystem.Data.Repositories;
     using BlogSystem.Data.Seeding;
-    using BlogSystem.Services.Data;
     using BlogSystem.Services.Messaging;
 
     using CommandLine;
@@ -52,9 +51,6 @@
         {
             var sw = Stopwatch.StartNew();
 
-            var settingsService = serviceProvider.GetService<ISettingsService>();
-            Console.WriteLine($"Count of settings: {settingsService.GetCount()}");
-
             Console.WriteLine(sw.Elapsed);
             return await Task.FromResult(0);
         }
@@ -81,7 +77,6 @@
 
             // Application services
             services.AddTransient<IEmailSender, NullMessageSender>();
-            services.AddTransient<ISettingsService, SettingsService>();
         }
     }
 }

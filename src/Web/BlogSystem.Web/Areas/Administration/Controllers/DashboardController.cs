@@ -6,7 +6,6 @@
 
     using BlogSystem.Data.Common.Repositories;
     using BlogSystem.Data.Models;
-    using BlogSystem.Services.Data;
     using BlogSystem.Services.Mapping;
     using BlogSystem.Web.ViewModels.Administration.Dashboard;
 
@@ -14,15 +13,11 @@
 
     public class DashboardController : AdministrationController
     {
-        private readonly ISettingsService settingsService;
-
         private readonly IDeletableEntityRepository<RemoteMonitorRequest> remoteMonitorRequestsRepository;
 
         public DashboardController(
-            ISettingsService settingsService,
             IDeletableEntityRepository<RemoteMonitorRequest> remoteMonitorRequestsRepository)
         {
-            this.settingsService = settingsService;
             this.remoteMonitorRequestsRepository = remoteMonitorRequestsRepository;
         }
 
@@ -40,7 +35,6 @@
 
             var viewModel = new IndexViewModel
                                 {
-                                    SettingsCount = this.settingsService.GetCount(),
                                     RemoteMonitorRequests = remoteRequests,
                                 };
             return this.View(viewModel);
