@@ -60,7 +60,7 @@
       ]
     },
     {
-      "library": "tinymce@5.5.1",
+      "library": "tinymce@5.6.1",
       "destination": "wwwroot/lib/tinymce/",
       "files": [
         "tinymce.min.js",
