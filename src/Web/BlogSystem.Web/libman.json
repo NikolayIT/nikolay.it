@@ -74,7 +74,11 @@
         "plugins/table/plugin.min.js",
         "plugins/link/plugin.min.js",
         "plugins/code/plugin.min.js",
-        "plugins/media/plugin.min.js"
+        "plugins/media/plugin.min.js",
+        "plugins/fullscreen/plugin.min.js",
+        "plugins/wordcount/plugin.min.js",
+        "plugins/searchreplace/plugin.min.js",
+        "plugins/lists/plugin.min.js"
       ]
     }
   ]

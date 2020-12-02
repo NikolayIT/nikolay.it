@@ -1,14 +1,12 @@
 ﻿@model Enum
-
 @{
-
     var values = Enum.GetValues(ViewData.ModelMetadata.ModelType).Cast<object>()
-                     .Select(v => new SelectListItem
-                        {
-                            Selected = v.Equals(Model),
-                            Text = v.ToString(),
-                            Value = v.ToString()
-                        });
+        .Select(v => new SelectListItem
+        {
+            Selected = v.Equals(Model),
+            Text = v.ToString(),
+            Value = v.ToString()
+        });
 }
 
-@Html.DropDownList("", values)
+@Html.DropDownList("", values, new { @class = "form-control" })

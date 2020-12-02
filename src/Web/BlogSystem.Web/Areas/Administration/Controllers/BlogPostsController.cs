@@ -5,8 +5,8 @@
 
     using BlogSystem.Data.Common.Repositories;
     using BlogSystem.Data.Models;
-
     using Microsoft.AspNetCore.Mvc;
+    using Microsoft.EntityFrameworkCore;
 
     public class BlogPostsController : AdministrationController
     {
@@ -18,20 +18,20 @@
         }
 
         // GET: Administration/BlogPosts
-        public IActionResult Index()
+        public async Task<IActionResult> Index()
         {
-            return this.View(this.blogPosts.All().OrderByDescending(x => x.CreatedOn).ToList());
+            return this.View(await this.blogPosts.All().OrderByDescending(x => x.CreatedOn).ToListAsync());
         }
 
         // GET: Administration/BlogPosts/Details/5
-        public IActionResult Details(int? id)
+        public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
             {
-                return this.BadRequest();
+                return this.NotFound();
             }
 
-            var blogPost = this.blogPosts.All().FirstOrDefault(x => x.Id == id);
+            var blogPost = await this.blogPosts.All().FirstOrDefaultAsync(m => m.Id == id);
             if (blogPost == null)
             {
                 return this.NotFound();
@@ -55,21 +55,21 @@
             {
                 await this.blogPosts.AddAsync(blogPost);
                 await this.blogPosts.SaveChangesAsync();
-                return this.RedirectToAction("Index");
+                return this.RedirectToAction(nameof(this.Index));
             }
 
             return this.View(blogPost);
         }
 
         // GET: Administration/BlogPosts/Edit/5
-        public IActionResult Edit(int? id)
+        public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
             {
-                return this.BadRequest();
+                return this.NotFound();
             }
 
-            var blogPost = this.blogPosts.All().FirstOrDefault(x => x.Id == id);
+            var blogPost = await this.blogPosts.All().FirstOrDefaultAsync(x => x.Id == id);
             if (blogPost == null)
             {
                 return this.NotFound();
@@ -81,27 +81,47 @@
         // POST: Administration/BlogPosts/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(BlogPost blogPost)
+        public async Task<IActionResult> Edit(int id, BlogPost blogPost)
         {
+            if (id != blogPost.Id)
+            {
+                return this.NotFound();
+            }
+
             if (this.ModelState.IsValid)
             {
-                this.blogPosts.Update(blogPost);
-                await this.blogPosts.SaveChangesAsync();
-                return this.RedirectToAction("Index");
+                try
+                {
+                    this.blogPosts.Update(blogPost);
+                    await this.blogPosts.SaveChangesAsync();
+                }
+                catch (DbUpdateConcurrencyException)
+                {
+                    if (!this.BlogPostExists(blogPost.Id))
+                    {
+                        return this.NotFound();
+                    }
+                    else
+                    {
+                        throw;
+                    }
+                }
+
+                return this.RedirectToAction(nameof(this.Index));
             }
 
             return this.View(blogPost);
         }
 
         // GET: Administration/BlogPosts/Delete/5
-        public IActionResult Delete(int? id)
+        public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
             {
-                return this.BadRequest();
+                return this.NotFound();
             }
 
-            var blogPost = this.blogPosts.All().FirstOrDefault(x => x.Id == id);
+            var blogPost = await this.blogPosts.All().FirstOrDefaultAsync(m => m.Id == id);
             if (blogPost == null)
             {
                 return this.NotFound();
@@ -116,20 +136,15 @@
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var blogPost = this.blogPosts.All().FirstOrDefault(x => x.Id == id);
+            var blogPost = await this.blogPosts.All().FirstOrDefaultAsync(x => x.Id == id);
             this.blogPosts.Delete(blogPost);
             await this.blogPosts.SaveChangesAsync();
-            return this.RedirectToAction("Index");
+            return this.RedirectToAction(nameof(this.Index));
         }
 
-        protected override void Dispose(bool disposing)
+        private bool BlogPostExists(int id)
         {
-            if (disposing)
-            {
-                this.blogPosts.Dispose();
-            }
-
-            base.Dispose(disposing);
+            return this.blogPosts.All().Any(e => e.Id == id);
         }
     }
 }
