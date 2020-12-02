@@ -4,32 +4,3 @@
 }
 
 <h1>@this.ViewData["Title"]</h1>
-
-<h2>Remote Monitor Requests</h2>
-
-<table class="table">
-    <tr>
-        <th>Title</th>
-        <th>Pattern</th>
-        <th>Actual value</th>
-        <th>OK</th>
-    </tr>
-    @foreach (var remoteMonitorRequest in this.Model.RemoteMonitorRequests)
-    {
-        <tr>
-            <td><a href="@remoteMonitorRequest.Url" target="_blank">@remoteMonitorRequest.Title</a></td>
-            <td>@remoteMonitorRequest.RegexPattern</td>
-            <td>@remoteMonitorRequest.ActualValueShort</td>
-            <td>
-                @if (remoteMonitorRequest.Ok)
-                {
-                    <span class="text-success"><i class="fa fa-check"></i></span>
-                }
-                else
-                {
-                    <span class="text-danger"><i class="fa fa-times"></i></span>
-                }
-            </td>
-        </tr>
-    }
-</table>
