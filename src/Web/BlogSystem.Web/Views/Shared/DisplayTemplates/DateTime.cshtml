@@ -1,0 +1,9 @@
+﻿@model DateTime
+
+@if (Model == default(DateTime))
+{
+}
+else
+{
+    <time datetime="@Model.ToString("O")">@Model.ToString("dd/MM/yyyy HH:mm")</time>
+}

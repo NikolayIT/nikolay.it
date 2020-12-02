@@ -80,6 +80,20 @@
         "plugins/searchreplace/plugin.min.js",
         "plugins/lists/plugin.min.js"
       ]
+    },
+    {
+      "library": "moment@2.29.1",
+      "destination": "wwwroot/lib/moment/",
+      "files": [
+        "min/moment-with-locales.min.js"
+      ]
+    },
+    {
+      "library": "favico.js@0.3.10",
+      "destination": "wwwroot/lib/favico.js/",
+      "files": [
+        "favico-0.3.10.min.js"
+      ]
     }
   ]
 }

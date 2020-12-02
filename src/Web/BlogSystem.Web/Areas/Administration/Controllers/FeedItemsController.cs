@@ -18,9 +18,11 @@
             this.dbContext = dbContext;
         }
 
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(int? id)
         {
-            var items = await this.dbContext.FeedItems.Where(x => !x.IsRead).To<FeedItemViewModel>().ToListAsync();
+            var query = this.dbContext.FeedItems.AsQueryable();
+            query = id.HasValue ? query.Where(x => x.FeedId == id.Value) : query.Where(x => !x.IsRead);
+            var items = await query.OrderByDescending(x => x.CreatedOn).To<FeedItemViewModel>().ToListAsync();
             return this.View(items);
         }
 
@@ -30,6 +32,18 @@
             if (item != null)
             {
                 item.IsRead = true;
+                await this.dbContext.SaveChangesAsync();
+            }
+
+            return this.Ok();
+        }
+
+        public async Task<IActionResult> MarkAsUnread(int id)
+        {
+            var item = await this.dbContext.FeedItems.FirstOrDefaultAsync(x => x.Id == id);
+            if (item != null)
+            {
+                item.IsRead = false;
                 await this.dbContext.SaveChangesAsync();
             }
 

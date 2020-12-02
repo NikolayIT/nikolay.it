@@ -1,7 +1,7 @@
 ﻿@model BlogSystem.Data.Models.Feed
 
 @{
-    ViewData["Title"] = "Edit";
+    ViewData["Title"] = "Edit Feed";
 }
 
 <form asp-action="Edit">
@@ -60,6 +60,7 @@
             </label>
         </div>
     </div>
+    <input type="hidden" asp-for="CreatedOn" />
     <input type="hidden" asp-for="Id" />
     <div class="form-group">
         <input type="submit" value="Save" class="btn btn-default" />

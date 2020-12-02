@@ -1,32 +1,52 @@
 ﻿@model IEnumerable<BlogSystem.Web.ViewModels.Administration.FeedItems.FeedItemViewModel>
 
 @{
-    ViewData["Title"] = "Feed Items";
+    ViewData["Title"] = $"Feed Items ({Model.Count()})";
+    ViewData["SkipSidebar"] = true;
 }
 
-<table class="table table-striped table-hover table-bordered table-responsive">
-    <tr>
-        <th>Title</th>
-        <th>Feed</th>
-        <th>Created on</th>
-        <th></th>
-    </tr>
-    
-    @foreach (var item in this.Model)
-    {
+<button class="btn btn-success" onclick="window.location.reload()">Refresh</button>
+
+@if (!this.Model.Any())
+{
+    <p>Everything read. Well done!</p>
+}
+else
+{
+    <table class="table table-striped table-bordered table-condensed table-hover table-responsive">
         <tr>
-            <td><a href="@item.Url" target="_blank">@item.Title</a></td>
-            <td><a href="@item.FeedUrl" target="_blank">@item.FeedName</a></td>
-            <td>@item.CreatedOn</td>
-            <td><button data-id="@item.Id" data-read-button="true" class="btn btn-success">Mark as read</button></td>
+            <th>Title</th>
+            <th>Feed</th>
+            <th>Created on</th>
+            <th></th>
         </tr>
-    }
-</table>
+    
+        @foreach (var item in this.Model)
+        {
+            <tr>
+                <td><a href="@item.Url" target="_blank">@item.Title</a></td>
+                <td><a href="@item.FeedUrl" target="_blank">@item.FeedName</a></td>
+                <td>@Html.DisplayFor(x => item.CreatedOn)</td>
+                <td>
+                    @if (item.IsRead)
+                    {
+                        <button data-id="@item.Id" data-unread-button="true" class="btn btn-default btn-sm">Mark as unread</button>
+                    }
+                    else
+                    {
+                        <button data-id="@item.Id" data-read-button="true" class="btn btn-success btn-sm"><i class="fa fa-check-square"></i></button>
+                        <a data-id="@item.Id" data-read-button="true" class="btn btn-success btn-sm" href="@item.Url" target="_blank"><i class="fa fa-check"></i> <i class="fa fa-window-restore"></i></a>
+                    }
+                </td>
+            </tr>
+        }
+    </table>
+}
 
 @section Scripts
 {
     <script>
-        $("button[data-read-button]").click(function () {
+        $("*[data-read-button]").click(function () {
             var button = $(this);
             var id = button.attr("data-id");
             $.get("/Administration/FeedItems/MarkAsRead?id=" + id,
@@ -34,5 +54,25 @@
                     button.hide();
                 });
         });
+
+        $("*[data-unread-button]").click(function () {
+            var button = $(this);
+            var id = button.attr("data-id");
+            $.get("/Administration/FeedItems/MarkAsUnread?id=" + id,
+                function() {
+                    button.hide();
+                });
+        });
+
+        window.setTimeout(function () {
+            window.location.reload();
+        }, 60 * 1000);
+
+        var favicon = new Favico({
+            bgColor: '#0000FF',
+            type: 'rectangle',
+            fontStyle: 'bolder'
+        });
+        favicon.badge(@Model.Count());
     </script>
 }

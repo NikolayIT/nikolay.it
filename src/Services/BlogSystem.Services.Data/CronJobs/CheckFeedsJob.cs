@@ -77,14 +77,14 @@
                         }
 
                         if (!string.IsNullOrWhiteSpace(feed.NameRegexFilter) &&
-                            !Regex.IsMatch(feedItem.Title, feed.NameRegexFilter))
+                            !Regex.IsMatch(feedItem.Title, feed.NameRegexFilter, RegexOptions.IgnoreCase))
                         {
                             // Filtered by name
                             continue;
                         }
 
                         if (!string.IsNullOrWhiteSpace(feed.UrlRegexFilter) && !string.IsNullOrWhiteSpace(feedItem.Url) &&
-                            !Regex.IsMatch(feedItem.Url, feed.UrlRegexFilter))
+                            !Regex.IsMatch(feedItem.Url, feed.UrlRegexFilter, RegexOptions.IgnoreCase))
                         {
                             // Filtered by URL
                             continue;
@@ -140,7 +140,9 @@
             foreach (var element in elements)
             {
                 var title = Regex.Replace(element.TextContent, @"\s+", " ").Trim();
-                var url = element.QuerySelector("a")?.Attributes["href"]?.Value;
+                var url = element.QuerySelector("a")?.Attributes["href"]?.Value ??
+                          $"{feedUrl}#{element.QuerySelector("a")?.Attributes["id"]?.Value}";
+
                 if (!string.IsNullOrWhiteSpace(url))
                 {
                     url = this.NormalizeUrl(url, feedUrl);

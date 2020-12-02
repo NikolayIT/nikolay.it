@@ -20,25 +20,7 @@
         // GET: Administration/Feeds
         public async Task<IActionResult> Index()
         {
-            return this.View(await this.db.Feeds.ToListAsync());
-        }
-
-        // GET: Administration/Feeds/Details/5
-        public async Task<IActionResult> Details(int? id)
-        {
-            if (id == null)
-            {
-                return this.NotFound();
-            }
-
-            var feed = await this.db.Feeds
-                .FirstOrDefaultAsync(m => m.Id == id);
-            if (feed == null)
-            {
-                return this.NotFound();
-            }
-
-            return this.View(feed);
+            return this.View(await this.db.Feeds.OrderBy(x => x.Name).ToListAsync());
         }
 
         // GET: Administration/Feeds/Create
@@ -122,8 +104,7 @@
                 return this.NotFound();
             }
 
-            var feed = await this.db.Feeds
-                .FirstOrDefaultAsync(m => m.Id == id);
+            var feed = await this.db.Feeds.FirstOrDefaultAsync(m => m.Id == id);
             if (feed == null)
             {
                 return this.NotFound();

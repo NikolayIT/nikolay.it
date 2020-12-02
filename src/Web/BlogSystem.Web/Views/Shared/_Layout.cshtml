@@ -22,6 +22,8 @@
     <meta name="author" content="@GlobalConstants.SiteAuthor" />
     <meta name="generator" content="Nikolay.IT BlogSystem - https://github.com/NikolayIT/nikolay.it" />
     <link rel="alternate" type="application/rss+xml" title="Blog RSS" href="/RSS/Blog" />
+    
+    <link rel="shortcut icon" href="/favicon.ico">
 
     <!-- Global site tag (gtag.js) - Google Analytics -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=UA-25135627-1"></script>
@@ -104,15 +106,22 @@
         </div>
 
         <div class="container content">
-            <div class="row blog-page">
-                <div class="col-md-9">
-                    @RenderBody()
-                </div>
+            @if (this.ViewData.ContainsKey("SkipSidebar"))
+            {
+                @RenderBody()
+            }
+            else
+            {
+                <div class="row">
+                    <div class="col-md-9">
+                        @RenderBody()
+                    </div>
 
-                <aside class="col-md-3 magazine-page">
-                    <vc:sidebar></vc:sidebar>
-                </aside>
-            </div>
+                    <aside class="col-md-3 magazine-page">
+                        <vc:sidebar></vc:sidebar>
+                    </aside>
+                </div>
+            }
         </div>
 
         <footer class="copyright">
@@ -134,6 +143,8 @@
         <script src="~/lib/jquery-validation/dist/jquery.validate.js" asp-append-version="true"></script>
         <script src="~/lib/jquery-validation-unobtrusive/dist/jquery.validate.unobtrusive.js" asp-append-version="true"></script>
         <script src="~/lib/bootstrap/dist/js/bootstrap.js" asp-append-version="true"></script>
+        <script src="~/lib/moment/min/moment-with-locales.min.js" asp-append-version="true"></script>
+        <script src="~/lib/favico.js/favico-0.3.10.min.js" asp-append-version="true"></script>
         <script src="~/js/site.js" asp-append-version="true"></script>
     </environment>
     <environment names="Staging,Production">
@@ -141,6 +152,8 @@
         <script src="~/lib/jquery-validation/dist/jquery.validate.min.js" asp-append-version="true"></script>
         <script src="~/lib/jquery-validation-unobtrusive/dist/jquery.validate.unobtrusive.js" asp-append-version="true"></script>
         <script src="~/lib/bootstrap/dist/js/bootstrap.min.js" asp-append-version="true"></script>
+        <script src="~/lib/moment/min/moment-with-locales.min.js" asp-append-version="true"></script>
+        <script src="~/lib/favico.js/favico-0.3.10.min.js" asp-append-version="true"></script>
         <script src="~/js/site.min.js" asp-append-version="true"></script>
     </environment>
 
