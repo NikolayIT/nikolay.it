@@ -8,10 +8,7 @@
     @Html.ActionLink("Create New", "Create")
 </p>
 <table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.OldId)
-        </th>
+    <tr
         <th>
             @Html.DisplayNameFor(model => model.Title)
         </th>
@@ -32,9 +29,6 @@
 
 @foreach (var item in Model) {
     <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.OldId)
-        </td>
         <td>
             @Html.DisplayFor(modelItem => item.Title)
         </td>

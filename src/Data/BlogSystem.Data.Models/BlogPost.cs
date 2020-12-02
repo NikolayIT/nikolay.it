@@ -22,7 +22,5 @@
         public string ImageOrVideoUrl { get; set; }
 
         public BlogPostType Type { get; set; }
-
-        public int? OldId { get; set; }
     }
 }

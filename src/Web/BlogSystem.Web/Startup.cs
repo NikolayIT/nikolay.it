@@ -107,7 +107,7 @@
                         endpoints.MapControllerRoute(
                             "index.html",
                             "index.html",
-                            new { controller = "Redirects", action = "Index" });
+                            new { controller = "Home", action = "Index" });
                         endpoints.MapControllerRoute(
                             "Blog post",
                             "Blog/{year}/{month}/{title}/{id}",
@@ -116,10 +116,6 @@
                             "Page",
                             "Pages/{permalink}",
                             new { controller = "Pages", action = "Page" });
-                        endpoints.MapControllerRoute(
-                            "Old blog links",
-                            "{year}-{month}/{title}-{id}.html",
-                            new { controller = "Redirects", action = "OldSystemBlogPost" });
                         endpoints.MapControllerRoute(
                             "areaRoute",
                             "{area:exists}/{controller=Home}/{action=Index}/{id?}");
