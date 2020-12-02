@@ -1,7 +1,9 @@
 ﻿namespace BlogSystem.Web
 {
+    using System;
     using System.Reflection;
 
+    using BlogSystem.Common;
     using BlogSystem.Data;
     using BlogSystem.Data.Common;
     using BlogSystem.Data.Common.Repositories;
@@ -10,11 +12,15 @@
     using BlogSystem.Data.Seeding;
     using BlogSystem.Services;
     using BlogSystem.Services.Data;
+    using BlogSystem.Services.Data.CronJobs;
     using BlogSystem.Services.Mapping;
     using BlogSystem.Services.Messaging;
     using BlogSystem.Services.YouTube;
     using BlogSystem.Web.ViewModels;
-
+    using Hangfire;
+    using Hangfire.Console;
+    using Hangfire.Dashboard;
+    using Hangfire.SqlServer;
     using Microsoft.AspNetCore.Builder;
     using Microsoft.AspNetCore.Hosting;
     using Microsoft.AspNetCore.Http;
@@ -35,6 +41,20 @@
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddHangfire(
+                config => config.SetDataCompatibilityLevel(CompatibilityLevel.Version_170)
+                    .UseSimpleAssemblyNameTypeSerializer().UseRecommendedSerializerSettings().UseSqlServerStorage(
+                        this.configuration.GetConnectionString("DefaultConnection"),
+                        new SqlServerStorageOptions
+                        {
+                            CommandBatchMaxTimeout = TimeSpan.FromMinutes(5),
+                            SlidingInvisibilityTimeout = TimeSpan.FromMinutes(5),
+                            QueuePollInterval = TimeSpan.Zero,
+                            UseRecommendedIsolationLevel = true,
+                            UsePageLocksOnDequeue = true,
+                            DisableGlobalLocks = true,
+                        }).UseConsole());
+
             services.AddDbContext<ApplicationDbContext>(
                 options => options.UseSqlServer(this.configuration.GetConnectionString("DefaultConnection")));
 
@@ -61,14 +81,14 @@
 
             // Application services
             services.AddTransient<IBlogUrlGenerator, BlogUrlGenerator>();
-            services.AddTransient<IEmailSender, NullMessageSender>();
+            services.AddTransient<IEmailSender>(_ => new SendGridEmailSender(this.configuration["SendGrid:ApiKey"]));
             services.AddTransient<ILatestVideosProvider, LatestVideosProvider>();
             services.AddTransient<IYouTubeChannelVideosFetcher>(
                 s => new YouTubeChannelVideosFetcher(this.configuration["YouTube:ApiKey"]));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env, IRecurringJobManager recurringJobManager)
         {
             AutoMapperConfig.RegisterMappings(typeof(ErrorViewModel).GetTypeInfo().Assembly);
 
@@ -77,9 +97,10 @@
             {
                 var dbContext = serviceScope.ServiceProvider.GetRequiredService<ApplicationDbContext>();
                 dbContext.Database.Migrate();
-
                 new ApplicationDbContextSeeder().SeedAsync(dbContext, serviceScope.ServiceProvider).GetAwaiter().GetResult();
             }
+
+            this.SeedHangfireJobs(recurringJobManager);
 
             if (env.IsDevelopment())
             {
@@ -100,6 +121,14 @@
 
             app.UseAuthentication();
             app.UseAuthorization();
+
+            if (env.IsProduction())
+            {
+                app.UseHangfireServer(new BackgroundJobServerOptions { WorkerCount = 2 });
+                app.UseHangfireDashboard(
+                    "/hangfire",
+                    new DashboardOptions { Authorization = new[] { new HangfireAuthorizationFilter() } });
+            }
 
             app.UseEndpoints(
                 endpoints =>
@@ -122,6 +151,20 @@
                         endpoints.MapControllerRoute("default", "{controller=Home}/{action=Index}/{id?}");
                         endpoints.MapRazorPages();
                     });
+        }
+
+        private void SeedHangfireJobs(IRecurringJobManager recurringJobManager)
+        {
+            recurringJobManager.AddOrUpdate<CheckFeedsJob>(nameof(CheckFeedsJob), x => x.Work(null), "*/1 * * * *");
+        }
+
+        private class HangfireAuthorizationFilter : IDashboardAuthorizationFilter
+        {
+            public bool Authorize(DashboardContext context)
+            {
+                var httpContext = context.GetHttpContext();
+                return httpContext.User.IsInRole(GlobalConstants.AdministratorRoleName);
+            }
         }
     }
 }

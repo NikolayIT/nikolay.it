@@ -1,0 +1,38 @@
+﻿@model IEnumerable<BlogSystem.Web.ViewModels.Administration.FeedItems.FeedItemViewModel>
+
+@{
+    ViewData["Title"] = "Feed Items";
+}
+
+<table class="table table-striped table-hover table-bordered table-responsive">
+    <tr>
+        <th>Title</th>
+        <th>Feed</th>
+        <th>Created on</th>
+        <th></th>
+    </tr>
+    
+    @foreach (var item in this.Model)
+    {
+        <tr>
+            <td><a href="@item.Url" target="_blank">@item.Title</a></td>
+            <td><a href="@item.FeedUrl" target="_blank">@item.FeedName</a></td>
+            <td>@item.CreatedOn</td>
+            <td><button data-id="@item.Id" data-read-button="true" class="btn btn-success">Mark as read</button></td>
+        </tr>
+    }
+</table>
+
+@section Scripts
+{
+    <script>
+        $("button[data-read-button]").click(function () {
+            var button = $(this);
+            var id = button.attr("data-id");
+            $.get("/Administration/FeedItems/MarkAsRead?id=" + id,
+                function() {
+                    button.hide();
+                });
+        });
+    </script>
+}

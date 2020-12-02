@@ -13,6 +13,10 @@
   </ItemGroup>
 
   <ItemGroup>
+    <PackageReference Include="Hangfire.Console" Version="1.4.2" />
+    <PackageReference Include="Hangfire.Core" Version="1.7.18" />
+    <PackageReference Include="AngleSharp" Version="1.0.0-alpha-844" />
+    <PackageReference Include="CodeHollow.FeedReader" Version="1.2.1" />
     <PackageReference Include="StyleCop.Analyzers" Version="1.2.0-beta.261" PrivateAssets="all">
       <IncludeAssets>runtime; build; native; contentfiles; analyzers</IncludeAssets>
     </PackageReference>
@@ -22,6 +26,7 @@
     <ProjectReference Include="..\..\Data\BlogSystem.Data.Common\BlogSystem.Data.Common.csproj" />
     <ProjectReference Include="..\..\Data\BlogSystem.Data.Models\BlogSystem.Data.Models.csproj" />
     <ProjectReference Include="..\BlogSystem.Services.Mapping\BlogSystem.Services.Mapping.csproj" />
+    <ProjectReference Include="..\BlogSystem.Services.Messaging\BlogSystem.Services.Messaging.csproj" />
     <ProjectReference Include="..\BlogSystem.Services\BlogSystem.Services.csproj" />
   </ItemGroup>
 

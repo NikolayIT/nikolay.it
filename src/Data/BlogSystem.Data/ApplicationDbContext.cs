@@ -32,6 +32,10 @@
 
         public DbSet<Setting> Settings { get; set; }
 
+        public DbSet<Feed> Feeds { get; set; }
+
+        public DbSet<FeedItem> FeedItems { get; set; }
+
         public override int SaveChanges() => this.SaveChanges(true);
 
         public override int SaveChanges(bool acceptAllChangesOnSuccess)
