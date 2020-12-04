@@ -32,11 +32,9 @@
 
         public DateTime? LastUpdate { get; set; }
 
-        [Display(Name = "Interval")]
         [Range(1, 7 * 24 * 60)]
         public int UpdateIntervalInMinutes { get; set; }
 
-        [Display(Name = "Email")]
         public bool NotifyByEmail { get; set; }
 
         public ICollection<FeedItem> Items { get; set; }

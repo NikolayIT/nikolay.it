@@ -1,4 +1,4 @@
-﻿@model IEnumerable<BlogSystem.Data.Models.Feed>
+﻿@model IEnumerable<BlogSystem.Web.ViewModels.Administration.Feeds.FeedViewModel>
 
 @{
     ViewData["Title"] = "Feeds";
@@ -13,6 +13,9 @@
         <tr>
             <th>
                 @Html.DisplayNameFor(model => model.Name)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ItemsCount)
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.Type)
@@ -41,6 +44,9 @@
             <tr>
                 <td>
                     <a href="@item.Url" target="_blank">@Html.DisplayFor(modelItem => item.Name)</a>
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ItemsCount)
                 </td>
                 <td>
                     @Html.DisplayFor(modelItem => item.Type)

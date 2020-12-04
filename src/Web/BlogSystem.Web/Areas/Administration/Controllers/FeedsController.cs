@@ -5,6 +5,8 @@
 
     using BlogSystem.Data;
     using BlogSystem.Data.Models;
+    using BlogSystem.Services.Mapping;
+    using BlogSystem.Web.ViewModels.Administration.Feeds;
     using Microsoft.AspNetCore.Mvc;
     using Microsoft.EntityFrameworkCore;
 
@@ -20,7 +22,7 @@
         // GET: Administration/Feeds
         public async Task<IActionResult> Index()
         {
-            return this.View(await this.db.Feeds.OrderBy(x => x.Name).ToListAsync());
+            return this.View(await this.db.Feeds.OrderBy(x => x.Name).To<FeedViewModel>().ToListAsync());
         }
 
         // GET: Administration/Feeds/Create
