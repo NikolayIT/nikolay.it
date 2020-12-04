@@ -13,6 +13,10 @@
 
         public string Url { get; set; }
 
+        public string FaviconUrl => !string.IsNullOrWhiteSpace(this.Url) && this.Url.StartsWith("http")
+            ? "https://icons.feedercdn.com/" + new Uri(this.Url).Host
+            : "/img/background.jpg";
+
         public bool IsRead { get; set; }
 
         public DateTime CreatedOn { get; set; }

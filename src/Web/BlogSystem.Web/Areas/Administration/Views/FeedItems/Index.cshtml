@@ -24,7 +24,7 @@ else
         @foreach (var item in this.Model)
         {
             <tr>
-                <td><a href="@item.Url" target="_blank">@item.Title</a></td>
+                <td><img src="@item.FaviconUrl" width="24" alt="@item.FeedName" /> <a href="@item.Url" target="_blank">@item.Title</a></td>
                 <td><a href="@item.FeedUrl" target="_blank">@item.FeedName</a></td>
                 <td>@Html.DisplayFor(x => item.CreatedOn)</td>
                 <td>

@@ -4,6 +4,7 @@
     using System.Collections.Generic;
     using System.Linq;
     using System.Net.Http;
+    using System.Text.Json;
     using System.Text.RegularExpressions;
     using System.Threading.Tasks;
 
@@ -11,6 +12,7 @@
     using BlogSystem.Data.Common.Repositories;
     using BlogSystem.Data.Models;
     using BlogSystem.Services.Messaging;
+    using BlushingPenguin.JsonPath;
     using Hangfire;
     using Hangfire.Console;
     using Hangfire.Server;
@@ -55,10 +57,13 @@
                     switch (feed.Type)
                     {
                         case FeedType.Rss:
-                            items = await this.CheckRss(feed.Url);
+                            items = await this.CheckRssAsync(feed.Url);
                             break;
                         case FeedType.Html:
-                            items = await this.CheckHtml(feed.Url, feed.ItemsSelector);
+                            items = await this.CheckHtmlAsync(feed.Url, feed.ItemsSelector);
+                            break;
+                        case FeedType.Json:
+                            items = await this.CheckJsonAsync(feed.Url, feed.ItemsSelector);
                             break;
                     }
 
@@ -118,7 +123,7 @@
             }
         }
 
-        private async Task<IEnumerable<FeedItem>> CheckRss(string feedUrl)
+        private async Task<IEnumerable<FeedItem>> CheckRssAsync(string feedUrl)
         {
             var remoteFeed = await CodeHollow.FeedReader.FeedReader.ReadAsync(feedUrl);
             var items = new List<FeedItem>();
@@ -130,7 +135,7 @@
             return items;
         }
 
-        private async Task<IEnumerable<FeedItem>> CheckHtml(string feedUrl, string itemsSelector)
+        private async Task<IEnumerable<FeedItem>> CheckHtmlAsync(string feedUrl, string itemsSelector)
         {
             var response = await this.httpClient.GetAsync(feedUrl);
             var html = await response.Content.ReadAsStringAsync();
@@ -152,6 +157,15 @@
             }
 
             return items;
+        }
+
+        private async Task<IEnumerable<FeedItem>> CheckJsonAsync(string feedUrl, string itemsSelector)
+        {
+            var response = await this.httpClient.GetAsync(feedUrl);
+            var json = await response.Content.ReadAsStringAsync();
+            var document = JsonDocument.Parse(json);
+            var elements = document.SelectTokens(itemsSelector);
+            return elements.Select(element => new FeedItem { Title = element.GetString(), Url = feedUrl }).ToList();
         }
 
         private string NormalizeUrl(string url, string baseUrl) =>
