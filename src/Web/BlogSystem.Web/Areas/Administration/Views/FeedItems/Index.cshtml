@@ -25,7 +25,7 @@ else
         {
             <tr>
                 <td><img src="@item.FaviconUrl" width="24" alt="@item.FeedName" /> <a href="@item.Url" target="_blank">@item.Title</a></td>
-                <td><a href="@item.FeedUrl" target="_blank">@item.FeedName</a></td>
+                <td><a href="@item.FeedUrl" target="_blank">@item.FeedName</a> [<a asp-area="Administration" asp-controller="FeedItems" asp-action="Index" asp-route-id="@item.FeedId">all</a>]</td>
                 <td>@Html.DisplayFor(x => item.CreatedOn)</td>
                 <td>
                     @if (item.IsRead)

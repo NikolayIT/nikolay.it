@@ -21,7 +21,7 @@
       ]
     },
     {
-      "library": "jquery-validation@1.19.2",
+      "library": "jquery-validation@1.19.3",
       "destination": "wwwroot/lib/jquery-validation/",
       "files": [
         "dist/jquery.validate.js",
@@ -37,7 +37,7 @@
       ]
     },
     {
-      "library": "@fortawesome/fontawesome-free@5.15.1",
+      "library": "@fortawesome/fontawesome-free@5.15.2",
       "destination": "wwwroot/lib/fontawesome/",
       "files": [
         "webfonts/fa-brands-400.eot",

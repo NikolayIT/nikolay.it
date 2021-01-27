@@ -21,6 +21,8 @@
 
         public DateTime CreatedOn { get; set; }
 
+        public int FeedId { get; set; }
+
         public string FeedName { get; set; }
 
         public string FeedUrl { get; set; }

@@ -11,6 +11,7 @@
     using BlogSystem.Data.Models;
     using BlogSystem.Data.Repositories;
     using BlogSystem.Data.Seeding;
+    using BlogSystem.Services.Data.CronJobs;
     using BlogSystem.Services.Messaging;
 
     using CommandLine;
@@ -50,6 +51,9 @@
         private static async Task<int> SandboxCode(SandboxOptions options, IServiceProvider serviceProvider)
         {
             var sw = Stopwatch.StartNew();
+
+            //// (await ActivatorUtilities.CreateInstance<CheckFeedsJob>(serviceProvider).CheckHtmlAsync(
+            ////     "https://rutracker.net/forum/tracker.php?f=1418,1422,1423,1425,1426,1430,1445&nm=ENG", ".t-title")).Dump();
 
             Console.WriteLine(sw.Elapsed);
             return await Task.FromResult(0);
