@@ -60,7 +60,21 @@
                             items = await this.CheckRssAsync(feed.Url);
                             break;
                         case FeedType.Html:
-                            items = await this.CheckHtmlAsync(feed.Url, feed.ItemsSelector);
+                            if (feed.Url.Contains("{page}"))
+                            {
+                                for (var page = 1; page <= 4; page++)
+                                {
+                                    items = items.Concat(
+                                        await this.CheckHtmlAsync(
+                                            feed.Url.Replace("{page}", page.ToString()),
+                                            feed.ItemsSelector));
+                                }
+                            }
+                            else
+                            {
+                                items = await this.CheckHtmlAsync(feed.Url, feed.ItemsSelector);
+                            }
+
                             break;
                         case FeedType.Json:
                             items = await this.CheckJsonAsync(feed.Url, feed.ItemsSelector);
@@ -145,8 +159,8 @@
             foreach (var element in elements)
             {
                 var title = Regex.Replace(element.TextContent, @"\s+", " ").Trim();
-                var url = element.QuerySelector("a")?.Attributes["href"]?.Value ??
-                          $"{feedUrl}#{element.QuerySelector("a")?.Attributes["id"]?.Value}";
+                var url = element.Attributes["href"]?.Value ?? element.QuerySelector("a")?.Attributes["href"]?.Value
+                          ?? $"{feedUrl}#{element.QuerySelector("a")?.Attributes["id"]?.Value}";
 
                 if (!string.IsNullOrWhiteSpace(url))
                 {
