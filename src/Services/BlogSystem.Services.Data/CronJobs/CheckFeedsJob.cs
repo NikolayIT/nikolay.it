@@ -79,6 +79,9 @@
                         case FeedType.Json:
                             items = await this.CheckJsonAsync(feed.Url, feed.ItemsSelector);
                             break;
+                        case FeedType.OkStatusCode:
+                            items = await this.CheckOkStatusCodeAsync(feed.Url);
+                            break;
                     }
 
                     foreach (var feedItem in items)
@@ -180,6 +183,30 @@
             var document = JsonDocument.Parse(json);
             var elements = document.SelectTokens(itemsSelector);
             return elements.Select(element => new FeedItem { Title = element.GetString(), Url = feedUrl }).ToList();
+        }
+
+        private async Task<IEnumerable<FeedItem>> CheckOkStatusCodeAsync(string feedUrl)
+        {
+            try
+            {
+                var response = await this.httpClient.GetAsync(feedUrl);
+                if (!response.IsSuccessStatusCode)
+                {
+                    return new List<FeedItem>
+                               {
+                                   new() { Title = $"[{DateTime.UtcNow}] ({(int)response.StatusCode}) {response.StatusCode}", Url = feedUrl },
+                               };
+                }
+
+                return new List<FeedItem>();
+            }
+            catch (Exception e)
+            {
+                return new List<FeedItem>
+                           {
+                               new() { Title = $"[{DateTime.UtcNow}] Exception: {e.Message}", Url = feedUrl },
+                           };
+            }
         }
 
         private string NormalizeUrl(string url, string baseUrl) =>

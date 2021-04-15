@@ -14,7 +14,7 @@
 
   <ItemGroup>
     <PackageReference Include="Hangfire.Console" Version="1.4.2" />
-    <PackageReference Include="Hangfire.Core" Version="1.7.20" />
+    <PackageReference Include="Hangfire.Core" Version="1.7.22" />
     <PackageReference Include="AngleSharp" Version="1.0.0-alpha-844" />
     <PackageReference Include="CodeHollow.FeedReader" Version="1.2.1" />
     <PackageReference Include="BlushingPenguin.JsonPath" Version="1.0.3" />
