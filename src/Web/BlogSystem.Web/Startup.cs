@@ -32,10 +32,12 @@
     public class Startup
     {
         private readonly IConfiguration configuration;
+        private readonly IWebHostEnvironment env;
 
-        public Startup(IConfiguration configuration)
+        public Startup(IConfiguration configuration, IWebHostEnvironment env)
         {
             this.configuration = configuration;
+            this.env = env;
         }
 
         // This method gets called by the runtime. Use this method to add services to the container.
@@ -54,6 +56,10 @@
                             UsePageLocksOnDequeue = true,
                             DisableGlobalLocks = true,
                         }).UseConsole());
+            if (this.env.IsProduction())
+            {
+                services.AddHangfireServer(options => options.WorkerCount = 2);
+            }
 
             services.AddDbContext<ApplicationDbContext>(
                 options => options.UseSqlServer(this.configuration.GetConnectionString("DefaultConnection")));
@@ -124,7 +130,6 @@
 
             if (env.IsProduction())
             {
-                app.UseHangfireServer(new BackgroundJobServerOptions { WorkerCount = 2 });
                 app.UseHangfireDashboard(
                     "/hangfire",
                     new DashboardOptions { Authorization = new[] { new HangfireAuthorizationFilter() } });

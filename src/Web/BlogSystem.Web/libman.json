@@ -37,7 +37,7 @@
       ]
     },
     {
-      "library": "@fortawesome/fontawesome-free@5.15.3",
+      "library": "@fortawesome/fontawesome-free@5.15.4",
       "destination": "wwwroot/lib/fontawesome/",
       "files": [
         "webfonts/fa-brands-400.eot",
@@ -60,7 +60,7 @@
       ]
     },
     {
-      "library": "tinymce@5.7.1",
+      "library": "tinymce@5.10.2",
       "destination": "wwwroot/lib/tinymce/",
       "files": [
         "tinymce.min.js",

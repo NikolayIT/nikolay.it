@@ -18,6 +18,7 @@
     using Hangfire.Server;
     using Microsoft.EntityFrameworkCore;
 
+    [AutomaticRetry(Attempts = 1)]
     public class CheckFeedsJob
     {
         private readonly IRepository<Feed> feedsRepository;
