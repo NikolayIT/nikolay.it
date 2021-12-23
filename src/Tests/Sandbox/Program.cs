@@ -52,8 +52,15 @@
         {
             var sw = Stopwatch.StartNew();
 
-            //// (await ActivatorUtilities.CreateInstance<CheckFeedsJob>(serviceProvider).CheckHtmlAsync(
-            ////     "https://rutracker.net/forum/tracker.php?f=1418,1422,1423,1425,1426,1430,1445&nm=ENG", ".t-title")).Dump();
+            //// (await ActivatorUtilities.CreateInstance<CheckFeedsJob>(serviceProvider).CheckJsonAsync(
+            ////     //// "https://app.pluralsight.com/learner/user/courses/recent",
+            ////     new Feed
+            ////     {
+            ////         Cookies = "",
+            ////         Url = "https://app.pluralsight.com/learner/user/courses/recent",
+            ////         Type = FeedType.Json,
+            ////         ItemsSelector = "collection.[*].content.title",
+            ////     })).Dump();
 
             Console.WriteLine(sw.Elapsed);
             return await Task.FromResult(0);

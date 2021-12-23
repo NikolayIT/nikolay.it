@@ -33,7 +33,7 @@
                 @Html.DisplayNameFor(model => model.NotifyByEmail)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.CreatedOn)
+                @Html.DisplayNameFor(model => model.LastItemOn)
             </th>
             <th></th>
         </tr>
@@ -64,7 +64,7 @@
                     @Html.DisplayFor(modelItem => item.NotifyByEmail)
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.CreatedOn)
+                    @Html.DisplayFor(modelItem => item.LastItemOn)
                 </td>
                 <td>
                     <a asp-controller="FeedItems" asp-action="Index" asp-route-id="@item.Id">All</a> |

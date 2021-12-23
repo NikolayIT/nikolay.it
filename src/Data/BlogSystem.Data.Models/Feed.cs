@@ -26,6 +26,10 @@
 
         public string ItemsSelector { get; set; }
 
+        public string Cookies { get; set; }
+
+        public string PostData { get; set; }
+
         public string UrlRegexFilter { get; set; }
 
         public string NameRegexFilter { get; set; }

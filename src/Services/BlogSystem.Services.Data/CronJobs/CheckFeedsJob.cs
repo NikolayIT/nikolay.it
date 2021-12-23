@@ -3,10 +3,13 @@
     using System;
     using System.Collections.Generic;
     using System.Linq;
+    using System.Net;
     using System.Net.Http;
+    using System.Text;
     using System.Text.Json;
     using System.Text.RegularExpressions;
     using System.Threading.Tasks;
+    using System.Web;
 
     using AngleSharp.Html.Parser;
     using BlogSystem.Data.Common.Repositories;
@@ -27,8 +30,6 @@
 
         private readonly IEmailSender emailSender;
 
-        private readonly HttpClient httpClient;
-
         private readonly HtmlParser parser;
 
         public CheckFeedsJob(
@@ -39,7 +40,6 @@
             this.feedsRepository = feedsRepository;
             this.feedItemsRepository = feedItemsRepository;
             this.emailSender = emailSender;
-            this.httpClient = new HttpClient();
             this.parser = new HtmlParser();
         }
 
@@ -58,7 +58,7 @@
                     switch (feed.Type)
                     {
                         case FeedType.Rss:
-                            items = await this.CheckRssAsync(feed.Url);
+                            items = await this.CheckRssAsync(feed.Url, feed);
                             break;
                         case FeedType.Html:
                             if (feed.Url.Contains("{page}"))
@@ -66,19 +66,17 @@
                                 for (var page = 1; page <= 4; page++)
                                 {
                                     items = items.Concat(
-                                        await this.CheckHtmlAsync(
-                                            feed.Url.Replace("{page}", page.ToString()),
-                                            feed.ItemsSelector));
+                                        await this.CheckHtmlAsync(feed.Url.Replace("{page}", page.ToString()), feed));
                                 }
                             }
                             else
                             {
-                                items = await this.CheckHtmlAsync(feed.Url, feed.ItemsSelector);
+                                items = await this.CheckHtmlAsync(feed.Url, feed);
                             }
 
                             break;
                         case FeedType.Json:
-                            items = await this.CheckJsonAsync(feed.Url, feed.ItemsSelector);
+                            items = await this.CheckJsonAsync(feed);
                             break;
                         case FeedType.OkStatusCode:
                             items = await this.CheckOkStatusCodeAsync(feed.Url);
@@ -141,9 +139,10 @@
             }
         }
 
-        private async Task<IEnumerable<FeedItem>> CheckRssAsync(string feedUrl)
+        private async Task<IEnumerable<FeedItem>> CheckRssAsync(string feedUrl, Feed feed)
         {
-            var remoteFeed = await CodeHollow.FeedReader.FeedReader.ReadAsync(feedUrl);
+            var xml = await this.GetHttpContentAsync(feedUrl, feed);
+            var remoteFeed = CodeHollow.FeedReader.FeedReader.ReadFromString(xml);
             var items = new List<FeedItem>();
             foreach (var item in remoteFeed.Items)
             {
@@ -153,12 +152,11 @@
             return items;
         }
 
-        private async Task<IEnumerable<FeedItem>> CheckHtmlAsync(string feedUrl, string itemsSelector)
+        private async Task<IEnumerable<FeedItem>> CheckHtmlAsync(string feedUrl, Feed feed)
         {
-            var response = await this.httpClient.GetAsync(feedUrl);
-            var html = await response.Content.ReadAsStringAsync();
+            var html = await this.GetHttpContentAsync(feedUrl, feed);
             var document = await this.parser.ParseDocumentAsync(html);
-            var elements = document.QuerySelectorAll(itemsSelector);
+            var elements = document.QuerySelectorAll(feed.ItemsSelector);
             var items = new List<FeedItem>();
             foreach (var element in elements)
             {
@@ -177,20 +175,60 @@
             return items;
         }
 
-        private async Task<IEnumerable<FeedItem>> CheckJsonAsync(string feedUrl, string itemsSelector)
+        private async Task<IEnumerable<FeedItem>> CheckJsonAsync(Feed feed)
         {
-            var response = await this.httpClient.GetAsync(feedUrl);
-            var json = await response.Content.ReadAsStringAsync();
+            var json = await this.GetHttpContentAsync(feed.Url, feed);
             var document = JsonDocument.Parse(json);
-            var elements = document.SelectTokens(itemsSelector);
-            return elements.Select(element => new FeedItem { Title = element.GetString(), Url = feedUrl }).ToList();
+            var elements = document.SelectTokens(feed.ItemsSelector);
+            return elements.Select(element => new FeedItem { Title = element.GetString(), Url = feed.Url }).ToList();
+        }
+
+        private async Task<string> GetHttpContentAsync(string feedUrl, Feed feed)
+        {
+            var cookieContainer = new CookieContainer();
+            if (!string.IsNullOrWhiteSpace(feed.Cookies))
+            {
+                var cookies = feed.Cookies.Split(';');
+                foreach (var cookie in cookies)
+                {
+                    var cookieParts = cookie.Trim().Split(new char[] { '=' }, 2);
+                    cookieContainer.Add(new Cookie(cookieParts[0], cookieParts[1], "/", new Uri(feedUrl).Host));
+                }
+            }
+
+            var handler = new HttpClientHandler() { CookieContainer = cookieContainer, };
+            var httpClient = new HttpClient(handler);
+            httpClient.DefaultRequestHeaders.Add("User-Agent", "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/96.0.4664.110 Safari/537.36");
+
+            HttpResponseMessage response;
+            if (!string.IsNullOrWhiteSpace(feed.PostData))
+            {
+                string postData = HttpUtility.UrlEncode(feed.PostData);
+                byte[] data = Encoding.UTF8.GetBytes(postData);
+                ByteArrayContent content = new ByteArrayContent(data);
+                content.Headers.Add("Content-Type", "application/x-www-form-urlencoded");
+                response = await httpClient.PostAsync(feedUrl, content);
+            }
+            else
+            {
+                response = await httpClient.GetAsync(feedUrl);
+            }
+
+            if (!response.IsSuccessStatusCode)
+            {
+                throw new Exception($"Status code does not indicate success: {(int)response.StatusCode} {response.ReasonPhrase}");
+            }
+
+            var html = await response.Content.ReadAsStringAsync();
+            return html;
         }
 
         private async Task<IEnumerable<FeedItem>> CheckOkStatusCodeAsync(string feedUrl)
         {
             try
             {
-                var response = await this.httpClient.GetAsync(feedUrl);
+                var httpClient = new HttpClient();
+                var response = await httpClient.GetAsync(feedUrl);
                 if (!response.IsSuccessStatusCode)
                 {
                     return new List<FeedItem>
