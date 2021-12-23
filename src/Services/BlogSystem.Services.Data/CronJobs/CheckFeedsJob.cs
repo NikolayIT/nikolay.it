@@ -5,6 +5,7 @@
     using System.Linq;
     using System.Net;
     using System.Net.Http;
+    using System.Net.Http.Headers;
     using System.Text;
     using System.Text.Json;
     using System.Text.RegularExpressions;
@@ -201,7 +202,13 @@
             httpClient.DefaultRequestHeaders.Add("User-Agent", "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/96.0.4664.110 Safari/537.36");
 
             HttpResponseMessage response;
-            if (!string.IsNullOrWhiteSpace(feed.PostData))
+            if (!string.IsNullOrWhiteSpace(feed.PostData) && feed.PostData.StartsWith("{"))
+            {
+                httpClient.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+                var content = new StringContent(feed.PostData, Encoding.UTF8, "application/json");
+                response = await httpClient.PostAsync(feedUrl, content);
+            }
+            else if (!string.IsNullOrWhiteSpace(feed.PostData))
             {
                 string postData = HttpUtility.UrlEncode(feed.PostData);
                 byte[] data = Encoding.UTF8.GetBytes(postData);
@@ -216,7 +223,7 @@
 
             if (!response.IsSuccessStatusCode)
             {
-                throw new Exception($"Status code does not indicate success: {(int)response.StatusCode} {response.ReasonPhrase}");
+                throw new Exception($"Status code does not indicate success: {(int)response.StatusCode} {response.ReasonPhrase} \"{await response.Content.ReadAsStringAsync()}\"");
             }
 
             var html = await response.Content.ReadAsStringAsync();
