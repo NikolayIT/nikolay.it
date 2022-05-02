@@ -17,6 +17,9 @@
                 @Html.DisplayNameFor(model => model.Type)
             </th>
             <th>
+                @Html.DisplayNameFor(model => model.IsPinned)
+            </th>
+            <th>
                 @Html.DisplayNameFor(model => model.IsDeleted)
             </th>
             <th>
@@ -37,6 +40,9 @@
                 </td>
                 <td>
                     @Html.DisplayFor(modelItem => item.Type)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.IsPinned)
                 </td>
                 <td>
                     @Html.DisplayFor(modelItem => item.IsDeleted)

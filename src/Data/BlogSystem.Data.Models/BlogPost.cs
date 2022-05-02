@@ -22,5 +22,7 @@
         public string ImageOrVideoUrl { get; set; }
 
         public BlogPostType Type { get; set; }
+
+        public bool IsPinned { get; set; }
     }
 }

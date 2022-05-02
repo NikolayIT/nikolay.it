@@ -29,7 +29,8 @@
             var posts = this.blogPostsRepository
                 .All()
                 .Where(x => !x.IsDeleted)
-                .OrderByDescending(x => x.CreatedOn)
+                .OrderByDescending(x => x.IsPinned)
+                .ThenByDescending(x => x.CreatedOn)
                 .To<BlogPostAnnotationViewModel>()
                 .Skip(perPage * (page - 1))
                 .Take(perPage);
