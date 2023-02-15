@@ -3,7 +3,7 @@
   "defaultProvider": "jsdelivr",
   "libraries": [
     {
-      "library": "jquery@3.6.0",
+      "library": "jquery@3.6.3",
       "destination": "wwwroot/lib/jquery/",
       "files": [
         "dist/jquery.min.js",
@@ -21,7 +21,7 @@
       ]
     },
     {
-      "library": "jquery-validation@1.19.3",
+      "library": "jquery-validation@1.19.5",
       "destination": "wwwroot/lib/jquery-validation/",
       "files": [
         "dist/jquery.validate.js",
@@ -29,7 +29,7 @@
       ]
     },
     {
-      "library": "jquery-validation-unobtrusive@3.2.12",
+      "library": "jquery-validation-unobtrusive@4.0.0",
       "destination": "wwwroot/lib/jquery-validation-unobtrusive/",
       "files": [
         "dist/jquery.validate.unobtrusive.js",
@@ -60,7 +60,7 @@
       ]
     },
     {
-      "library": "tinymce@5.10.2",
+      "library": "tinymce@5.10.7",
       "destination": "wwwroot/lib/tinymce/",
       "files": [
         "tinymce.min.js",
@@ -82,7 +82,7 @@
       ]
     },
     {
-      "library": "moment@2.29.1",
+      "library": "moment@2.29.4",
       "destination": "wwwroot/lib/moment/",
       "files": [
         "min/moment-with-locales.min.js"
