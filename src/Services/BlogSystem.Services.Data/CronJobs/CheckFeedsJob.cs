@@ -59,7 +59,7 @@
                     switch (feed.Type)
                     {
                         case FeedType.Rss:
-                            items = await this.CheckRssAsync(feed.Url, feed);
+                            items = await this.CheckRssAsync(feed);
                             break;
                         case FeedType.Html:
                             if (feed.Url.Contains("{page}"))
@@ -140,9 +140,9 @@
             }
         }
 
-        private async Task<IEnumerable<FeedItem>> CheckRssAsync(string feedUrl, Feed feed)
+        private async Task<IEnumerable<FeedItem>> CheckRssAsync(Feed feed)
         {
-            var xml = await this.GetHttpContentAsync(feedUrl, feed);
+            var xml = await this.GetHttpContentAsync(feed.Url, feed);
             var remoteFeed = CodeHollow.FeedReader.FeedReader.ReadFromString(xml);
             var items = new List<FeedItem>();
             foreach (var item in remoteFeed.Items)
@@ -199,7 +199,7 @@
 
             var handler = new HttpClientHandler() { CookieContainer = cookieContainer, };
             var httpClient = new HttpClient(handler);
-            httpClient.DefaultRequestHeaders.Add("User-Agent", "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/96.0.4664.110 Safari/537.36");
+            httpClient.DefaultRequestHeaders.Add("User-Agent", "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/104.0.0.0 Safari/537.36");
 
             HttpResponseMessage response;
             if (!string.IsNullOrWhiteSpace(feed.PostData) && feed.PostData.StartsWith("{"))
