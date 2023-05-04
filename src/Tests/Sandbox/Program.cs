@@ -11,7 +11,6 @@
     using BlogSystem.Data.Models;
     using BlogSystem.Data.Repositories;
     using BlogSystem.Data.Seeding;
-    using BlogSystem.Services.Data.CronJobs;
     using BlogSystem.Services.Messaging;
 
     using CommandLine;
@@ -51,16 +50,6 @@
         private static async Task<int> SandboxCode(SandboxOptions options, IServiceProvider serviceProvider)
         {
             var sw = Stopwatch.StartNew();
-
-            //// (await ActivatorUtilities.CreateInstance<CheckFeedsJob>(serviceProvider).CheckJsonAsync(
-            ////     //// "https://app.pluralsight.com/learner/user/courses/recent",
-            ////     new Feed
-            ////     {
-            ////         Cookies = "",
-            ////         Url = "https://app.pluralsight.com/learner/user/courses/recent",
-            ////         Type = FeedType.Json,
-            ////         ItemsSelector = "collection.[*].content.title",
-            ////     })).Dump();
 
             Console.WriteLine(sw.Elapsed);
             return await Task.FromResult(0);

@@ -12,7 +12,6 @@
     using BlogSystem.Data.Seeding;
     using BlogSystem.Services;
     using BlogSystem.Services.Data;
-    using BlogSystem.Services.Data.CronJobs;
     using BlogSystem.Services.Mapping;
     using BlogSystem.Services.Messaging;
     using BlogSystem.Services.YouTube;
@@ -43,23 +42,23 @@
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddHangfire(
-                config => config.SetDataCompatibilityLevel(CompatibilityLevel.Version_170)
-                    .UseSimpleAssemblyNameTypeSerializer().UseRecommendedSerializerSettings().UseSqlServerStorage(
-                        this.configuration.GetConnectionString("DefaultConnection"),
-                        new SqlServerStorageOptions
-                        {
-                            CommandBatchMaxTimeout = TimeSpan.FromMinutes(5),
-                            SlidingInvisibilityTimeout = TimeSpan.FromMinutes(5),
-                            QueuePollInterval = TimeSpan.Zero,
-                            UseRecommendedIsolationLevel = true,
-                            UsePageLocksOnDequeue = true,
-                            DisableGlobalLocks = true,
-                        }).UseConsole());
-            if (this.env.IsProduction())
-            {
-                services.AddHangfireServer(options => options.WorkerCount = 2);
-            }
+            //// services.AddHangfire(
+            ////     config => config.SetDataCompatibilityLevel(CompatibilityLevel.Version_170)
+            ////         .UseSimpleAssemblyNameTypeSerializer().UseRecommendedSerializerSettings().UseSqlServerStorage(
+            ////             this.configuration.GetConnectionString("DefaultConnection"),
+            ////             new SqlServerStorageOptions
+            ////             {
+            ////                 CommandBatchMaxTimeout = TimeSpan.FromMinutes(5),
+            ////                 SlidingInvisibilityTimeout = TimeSpan.FromMinutes(5),
+            ////                 QueuePollInterval = TimeSpan.Zero,
+            ////                 UseRecommendedIsolationLevel = true,
+            ////                 UsePageLocksOnDequeue = true,
+            ////                 DisableGlobalLocks = true,
+            ////             }).UseConsole());
+            //// if (this.env.IsProduction())
+            //// {
+            ////     services.AddHangfireServer(options => options.WorkerCount = 2);
+            //// }
 
             services.AddDbContext<ApplicationDbContext>(
                 options => options.UseSqlServer(this.configuration.GetConnectionString("DefaultConnection")));
@@ -130,9 +129,9 @@
 
             if (env.IsProduction())
             {
-                app.UseHangfireDashboard(
-                    "/hangfire",
-                    new DashboardOptions { Authorization = new[] { new HangfireAuthorizationFilter() } });
+                //// app.UseHangfireDashboard(
+                ////     "/hangfire",
+                ////     new DashboardOptions { Authorization = new[] { new HangfireAuthorizationFilter() } });
             }
 
             app.UseEndpoints(
@@ -160,7 +159,6 @@
 
         private void SeedHangfireJobs(IRecurringJobManager recurringJobManager)
         {
-            recurringJobManager.AddOrUpdate<CheckFeedsJob>(nameof(CheckFeedsJob), x => x.Work(null), "*/1 * * * *");
         }
 
         private class HangfireAuthorizationFilter : IDashboardAuthorizationFilter
