@@ -3,7 +3,7 @@
   "defaultProvider": "jsdelivr",
   "libraries": [
     {
-      "library": "jquery@3.6.3",
+      "library": "jquery@3.6.4",
       "destination": "wwwroot/lib/jquery/",
       "files": [
         "dist/jquery.min.js",
@@ -86,13 +86,6 @@
       "destination": "wwwroot/lib/moment/",
       "files": [
         "min/moment-with-locales.min.js"
-      ]
-    },
-    {
-      "library": "favico.js@0.3.10",
-      "destination": "wwwroot/lib/favico.js/",
-      "files": [
-        "favico-0.3.10.min.js"
       ]
     }
   ]
