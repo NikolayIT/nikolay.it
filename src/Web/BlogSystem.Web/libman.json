@@ -3,7 +3,7 @@
   "defaultProvider": "jsdelivr",
   "libraries": [
     {
-      "library": "jquery@3.6.4",
+      "library": "jquery@3.7.1",
       "destination": "wwwroot/lib/jquery/",
       "files": [
         "dist/jquery.min.js",
@@ -21,7 +21,7 @@
       ]
     },
     {
-      "library": "jquery-validation@1.19.5",
+      "library": "jquery-validation@1.20.0",
       "destination": "wwwroot/lib/jquery-validation/",
       "files": [
         "dist/jquery.validate.js",
@@ -60,7 +60,7 @@
       ]
     },
     {
-      "library": "tinymce@5.10.7",
+      "library": "tinymce@5.10.9",
       "destination": "wwwroot/lib/tinymce/",
       "files": [
         "tinymce.min.js",
