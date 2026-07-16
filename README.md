@@ -15,7 +15,6 @@ An open source blog platform built with **ASP.NET Core MVC on .NET 10**, **Entit
 - 🗑️ **Soft delete** by default for all deletable entities, with global query filters
 - 🎨 **Bootstrap 5** and **Font Awesome 6** front end; client-side libraries restored via LibMan at build time
 - 📦 Runtime CSS/JS **bundling and minification** via [LigerShark.WebOptimizer](https://github.com/ligershark/WebOptimizer)
-- ✉️ Email sending through **SendGrid**
 - 🚀 Migrations and seeders run **automatically on startup** — no manual database setup
 
 ## Technology stack
@@ -26,7 +25,6 @@ An open source blog platform built with **ASP.NET Core MVC on .NET 10**, **Entit
 | Data access | Entity Framework Core 10, SQL Server, repository pattern |
 | Mapping | [Mapster](https://github.com/MapsterMapper/Mapster) (convention-based, registered by reflection) |
 | Front end | Bootstrap 5, Font Awesome 6, LibMan, WebOptimizer |
-| Email | SendGrid |
 | Testing | xUnit v3, Moq, EF Core InMemory |
 | Code quality | StyleCop.Analyzers with shared ruleset |
 
@@ -44,8 +42,7 @@ src/
 ├── Services/
 │   ├── BlogSystem.Services            # YouTube video fetcher, blog URL generator
 │   ├── BlogSystem.Services.Data       # Database-backed services
-│   ├── BlogSystem.Services.Mapping    # Mapster conventions and .To<T>() projection
-│   └── BlogSystem.Services.Messaging  # SendGrid email sender
+│   └── BlogSystem.Services.Mapping    # Mapster conventions and .To<T>() projection
 ├── Web/
 │   ├── BlogSystem.Web.ViewModels      # All view models (mapping is registered from this assembly)
 │   ├── BlogSystem.Web.Infrastructure  # Web-layer helpers
@@ -112,9 +109,6 @@ Secrets are kept out of source control. Create `src/Web/BlogSystem.Web/appsettin
   },
   "YouTube": {
     "ApiKey": "<YouTube Data API key>"
-  },
-  "SendGrid": {
-    "ApiKey": "<SendGrid API key>"
   }
 }
 ```

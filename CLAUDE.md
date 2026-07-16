@@ -38,7 +38,7 @@ Layered solution; dependencies flow Web → Services → Data → Common:
 - `Data/BlogSystem.Data.Models` — entities: `BlogPost`, `Page`, `Video`, `Setting`, plus Identity's `ApplicationUser`/`ApplicationRole`. Entities inherit `BaseModel<TKey>` / `BaseDeletableModel<TKey>`.
 - `Data/BlogSystem.Data.Common` — base model and repository abstractions.
 - `Data/BlogSystem.Data` — `ApplicationDbContext` (an `IdentityDbContext`), EF repository implementations, migrations, seeders (`RolesSeeder`, `SettingsSeeder`).
-- `Services/*` — `Services` (YouTube video fetcher, `BlogUrlGenerator`), `Services.Data` (DB-backed services), `Services.Messaging` (SendGrid email), `Services.Mapping` (Mapster conventions).
+- `Services/*` — `Services` (YouTube video fetcher, `BlogUrlGenerator`), `Services.Data` (DB-backed services), `Services.Mapping` (Mapster conventions).
 - `Web/BlogSystem.Web.ViewModels` — all view models; `Web/BlogSystem.Web` — MVC app with default Identity UI.
 
 ### Data access conventions
@@ -63,7 +63,7 @@ Layered solution; dependencies flow Web → Services → Data → Common:
 
 ### Configuration and disabled features
 
-- Secrets (YouTube/SendGrid API keys, production connection string) belong in `appsettings.Production.json`, which is intentionally not tracked in git.
+- Secrets (YouTube API key, production connection string) belong in `appsettings.Production.json`, which is intentionally not tracked in git.
 - Hangfire is intentionally disabled — the packages are still referenced and its setup is commented out in `Startup` (recent commits removed feed processing to another system). Do not re-enable or "clean up" the commented Hangfire code without being asked.
 
 ## Code style

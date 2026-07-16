@@ -22,7 +22,6 @@
     <ProjectReference Include="..\..\Data\BlogSystem.Data.Common\BlogSystem.Data.Common.csproj" />
     <ProjectReference Include="..\..\Data\BlogSystem.Data.Models\BlogSystem.Data.Models.csproj" />
     <ProjectReference Include="..\BlogSystem.Services.Mapping\BlogSystem.Services.Mapping.csproj" />
-    <ProjectReference Include="..\BlogSystem.Services.Messaging\BlogSystem.Services.Messaging.csproj" />
     <ProjectReference Include="..\BlogSystem.Services\BlogSystem.Services.csproj" />
   </ItemGroup>
 

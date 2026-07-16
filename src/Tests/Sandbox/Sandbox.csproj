@@ -39,7 +39,6 @@
     <ProjectReference Include="..\..\Data\BlogSystem.Data\BlogSystem.Data.csproj" />
     <ProjectReference Include="..\..\Services\BlogSystem.Services.Data\BlogSystem.Services.Data.csproj" />
     <ProjectReference Include="..\..\Services\BlogSystem.Services.Mapping\BlogSystem.Services.Mapping.csproj" />
-    <ProjectReference Include="..\..\Services\BlogSystem.Services.Messaging\BlogSystem.Services.Messaging.csproj" />
     <ProjectReference Include="..\..\Services\BlogSystem.Services\BlogSystem.Services.csproj" />
   </ItemGroup>
 

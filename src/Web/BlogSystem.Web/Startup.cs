@@ -13,7 +13,6 @@
     using BlogSystem.Services;
     using BlogSystem.Services.Data;
     using BlogSystem.Services.Mapping;
-    using BlogSystem.Services.Messaging;
     using BlogSystem.Services.YouTube;
     using BlogSystem.Web.ViewModels;
     using Hangfire;
@@ -106,7 +105,6 @@
 
             // Application services
             services.AddTransient<IBlogUrlGenerator, BlogUrlGenerator>();
-            services.AddTransient<IEmailSender>(_ => new SendGridEmailSender(this.configuration["SendGrid:ApiKey"]));
             services.AddTransient<ILatestVideosProvider, LatestVideosProvider>();
             services.AddTransient<IYouTubeChannelVideosFetcher>(
                 s => new YouTubeChannelVideosFetcher(this.configuration["YouTube:ApiKey"]));
