@@ -23,6 +23,7 @@
     using Microsoft.AspNetCore.Builder;
     using Microsoft.AspNetCore.Hosting;
     using Microsoft.AspNetCore.Http;
+    using Microsoft.AspNetCore.Mvc;
     using Microsoft.EntityFrameworkCore;
     using Microsoft.EntityFrameworkCore.Diagnostics;
     using Microsoft.Extensions.Configuration;
@@ -76,6 +77,11 @@
                     });
 
             services.AddDatabaseDeveloperPageExceptionFilter();
+
+            // TempData carries the administration status messages across redirects,
+            // so its cookie has to work even before the user accepts the cookie policy.
+            services.Configure<CookieTempDataProviderOptions>(options => options.Cookie.IsEssential = true);
+
             services.AddControllersWithViews();
             services.AddRazorPages();
 
@@ -93,6 +99,7 @@
                             "css/bootstrap.themes.unify.app.css",
                             "css/bootstrap.themes.unify.red.css",
                             "css/site.css");
+                        pipeline.AddCssBundle("/css/admin.min.css", "css/admin.css");
                         pipeline.AddJavaScriptBundle("/js/site.min.js", "js/site.js");
                     },
                 options => options.EnableTagHelperBundling = true);
@@ -170,7 +177,7 @@
                             new { controller = "Pages", action = "Page" });
                         endpoints.MapControllerRoute(
                             "areaRoute",
-                            "{area:exists}/{controller=Home}/{action=Index}/{id?}");
+                            "{area:exists}/{controller=Dashboard}/{action=Index}/{id?}");
                         endpoints.MapControllerRoute("default", "{controller=Home}/{action=Index}/{id?}");
                         endpoints.MapRazorPages();
                     });

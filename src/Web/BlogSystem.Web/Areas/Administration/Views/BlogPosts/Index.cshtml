@@ -1,65 +1,109 @@
-﻿@model IEnumerable<BlogSystem.Data.Models.BlogPost>
+@using BlogSystem.Services
+@model BlogSystem.Web.ViewModels.Administration.PaginatedListViewModel<BlogSystem.Web.ViewModels.Administration.BlogPosts.BlogPostRowViewModel>
+@inject IBlogUrlGenerator UrlGenerator
 
 @{
     ViewData["Title"] = "Blog Posts";
 }
 
-<p>
-    <a asp-action="Create">Create New</a>
-</p>
-<table class="table">
-    <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.Title)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Type)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.IsPinned)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.IsDeleted)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.CreatedOn)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.ModifiedOn)
-            </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var item in Model)
-        {
-            <tr>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Title)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Type)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.IsPinned)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.IsDeleted)
-                    @Html.DisplayFor(modelItem => item.DeletedOn)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.CreatedOn)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.ModifiedOn)
-                </td>
-                <td>
-                    <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
-                    <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
-                    <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
-                </td>
-            </tr>
-        }
-    </tbody>
-</table>
+<div class="admin-page-header clearfix">
+    <h1><i class="fas fa-file-alt"></i> Blog posts <small>(@Model.TotalCount)</small></h1>
+    <div class="admin-page-actions">
+        <a asp-action="Create" class="btn btn-primary"><i class="fas fa-plus"></i> New blog post</a>
+    </div>
+</div>
+
+<form method="get" class="form-inline" style="margin-bottom: 15px;">
+    <div class="input-group" style="width: 300px;">
+        <input type="text" name="searchTerm" value="@Model.SearchTerm" class="form-control" placeholder="Search by title..." />
+        <span class="input-group-btn">
+            <button type="submit" class="btn btn-default"><i class="fas fa-search"></i></button>
+        </span>
+    </div>
+    @if (!string.IsNullOrWhiteSpace(Model.SearchTerm))
+    {
+        <a asp-action="Index" class="btn btn-link">Clear</a>
+    }
+</form>
+
+@if (Model.Items.Any())
+{
+    <div class="panel panel-default">
+        <table class="table table-hover">
+            <thead>
+                <tr>
+                    <th>Title</th>
+                    <th>Type</th>
+                    <th>Status</th>
+                    <th>Created</th>
+                    <th>Modified</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var post in Model.Items)
+                {
+                    <tr class="@(post.IsDeleted ? "danger" : string.Empty)">
+                        <td>
+                            <a asp-action="Edit" asp-route-id="@post.Id">@post.Title</a>
+                            @if (post.IsPinned)
+                            {
+                                <i class="fas fa-thumbtack text-muted" title="Pinned"></i>
+                            }
+                        </td>
+                        <td><span class="label label-default">@post.Type</span></td>
+                        <td>
+                            @if (post.IsDeleted)
+                            {
+                                <span class="label label-danger">Deleted</span>
+                            }
+                            else
+                            {
+                                <span class="label label-success">Published</span>
+                            }
+                        </td>
+                        <td>@post.CreatedOn.ToString("yyyy-MM-dd HH:mm")</td>
+                        <td>@(post.ModifiedOn?.ToString("yyyy-MM-dd HH:mm"))</td>
+                        <td class="admin-row-actions">
+                            @if (!post.IsDeleted)
+                            {
+                                <a href="@UrlGenerator.GenerateUrl(post.Id, post.Title, post.CreatedOn)" target="_blank" class="btn btn-default btn-xs" title="View on site"><i class="fas fa-external-link-alt"></i></a>
+                                <a asp-action="Edit" asp-route-id="@post.Id" class="btn btn-default btn-xs"><i class="fas fa-pencil-alt"></i> Edit</a>
+                                <form asp-action="Delete" asp-route-id="@post.Id" asp-route-searchTerm="@Model.SearchTerm" asp-route-page="@Model.PageNumber" method="post">
+                                    <button type="submit" class="btn btn-danger btn-xs" onclick="return confirm('Delete this blog post? It can be restored later.');"><i class="fas fa-trash-alt"></i> Delete</button>
+                                </form>
+                            }
+                            else
+                            {
+                                <a asp-action="Edit" asp-route-id="@post.Id" class="btn btn-default btn-xs"><i class="fas fa-pencil-alt"></i> Edit</a>
+                                <form asp-action="Restore" asp-route-id="@post.Id" asp-route-searchTerm="@Model.SearchTerm" asp-route-page="@Model.PageNumber" method="post">
+                                    <button type="submit" class="btn btn-success btn-xs"><i class="fas fa-undo"></i> Restore</button>
+                                </form>
+                                <form asp-action="HardDelete" asp-route-id="@post.Id" asp-route-searchTerm="@Model.SearchTerm" asp-route-page="@Model.PageNumber" method="post">
+                                    <button type="submit" class="btn btn-danger btn-xs" onclick="return confirm('Permanently delete this blog post? This CANNOT be undone.');"><i class="fas fa-times"></i> Delete forever</button>
+                                </form>
+                            }
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+
+    <partial name="_Pager" model="@((BlogSystem.Web.ViewModels.Administration.PaginationViewModel)Model)" />
+}
+else
+{
+    <div class="panel panel-default">
+        <div class="panel-body text-muted">
+            @if (string.IsNullOrWhiteSpace(Model.SearchTerm))
+            {
+                <text>There are no blog posts yet. <a asp-action="Create">Create the first one</a>.</text>
+            }
+            else
+            {
+                <text>No blog posts match "<strong>@Model.SearchTerm</strong>". <a asp-action="Index">Show all</a>.</text>
+            }
+        </div>
+    </div>
+}

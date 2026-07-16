@@ -1,62 +1,46 @@
-﻿@model BlogSystem.Data.Models.BlogPost
+@using BlogSystem.Services
+@model BlogSystem.Web.ViewModels.Administration.BlogPosts.BlogPostEditViewModel
+@inject IBlogUrlGenerator UrlGenerator
 
 @{
     ViewData["Title"] = "Edit Blog Post";
 }
 
-<form asp-action="Edit">
+<div class="admin-page-header clearfix">
+    <h1><i class="fas fa-file-alt"></i> Edit blog post</h1>
+    <div class="admin-page-actions">
+        @if (!Model.IsDeleted && !string.IsNullOrWhiteSpace(Model.Title))
+        {
+            <a href="@UrlGenerator.GenerateUrl(Model.Id, Model.Title, Model.CreatedOn)" target="_blank" class="btn btn-default"><i class="fas fa-external-link-alt"></i> View on site</a>
+        }
+        <a asp-action="Index" class="btn btn-default"><i class="fas fa-arrow-left"></i> Back to list</a>
+    </div>
+</div>
+
+@if (Model.IsDeleted)
+{
+    <div class="alert alert-warning">
+        <i class="fas fa-exclamation-triangle"></i> This blog post is deleted and is not visible on the site. You can restore it from the blog posts list.
+    </div>
+}
+
+<form asp-action="Edit" asp-route-id="@Model.Id" method="post">
     <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-    <div class="form-group">
-        <label asp-for="Title" class="control-label"></label>
-        <input asp-for="Title" class="form-control" />
-        <span asp-validation-for="Title" class="text-danger"></span>
-    </div>
-    <div class="form-group">
-        <label asp-for="Type" class="control-label"></label>
-        @Html.EditorFor(x => x.Type)
-        <span asp-validation-for="Type" class="text-danger"></span>
-    </div>
-    <div class="form-group">
-        <label asp-for="ImageOrVideoUrl" class="control-label"></label>
-        <input asp-for="ImageOrVideoUrl" class="form-control" />
-        <span asp-validation-for="ImageOrVideoUrl" class="text-danger"></span>
-    </div>
-    <div class="form-group">
-        <label asp-for="ShortContent" class="control-label"></label>
-        @Html.EditorFor(x => x.ShortContent)
-        <span asp-validation-for="ShortContent" class="text-danger"></span>
-    </div>
-    <div class="form-group">
-        <label asp-for="Content" class="control-label"></label>
-        @Html.EditorFor(x => x.Content)
-        <span asp-validation-for="Content" class="text-danger"></span>
-    </div>
-    <div class="form-group">
-        <label asp-for="MetaDescription" class="control-label"></label>
-        <textarea asp-for="MetaDescription" class="form-control"></textarea>
-        <span asp-validation-for="MetaDescription" class="text-danger"></span>
-    </div>
-    <div class="form-group">
-        <label asp-for="MetaKeywords" class="control-label"></label>
-        <input asp-for="MetaKeywords" class="form-control" />
-        <span asp-validation-for="MetaKeywords" class="text-danger"></span>
-    </div>
-    <div class="form-group">
-        <label asp-for="IsPinned" class="control-label"></label>
-        <input asp-for="IsPinned" class="form-control" />
-        <span asp-validation-for="IsPinned" class="text-danger"></span>
-    </div>
-    <div class="form-group">
-        <label asp-for="CreatedOn" class="control-label"></label>
-        <input asp-for="CreatedOn" class="form-control" />
-        <span asp-validation-for="CreatedOn" class="text-danger"></span>
-    </div>
     <input type="hidden" asp-for="Id" />
-    <div class="form-group">
-        <input type="submit" value="Save" class="btn btn-default" />
+    <partial name="_BlogPostFormFields" model="Model" />
+    <div class="admin-form-footer clearfix">
+        <button type="submit" class="btn btn-primary"><i class="fas fa-save"></i> Save changes</button>
+        <a asp-action="Index" class="btn btn-default">Cancel</a>
+        <div class="pull-right text-right admin-meta-list">
+            <div>Created on @Model.CreatedOn.ToString("yyyy-MM-dd HH:mm")</div>
+            @if (Model.ModifiedOn != null)
+            {
+                <div>Last modified on @Model.ModifiedOn.Value.ToString("yyyy-MM-dd HH:mm")</div>
+            }
+        </div>
     </div>
 </form>
 
-<div>
-    <a asp-action="Index">Back to List</a>
-</div>
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

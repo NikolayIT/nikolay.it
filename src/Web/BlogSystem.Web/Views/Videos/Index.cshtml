@@ -16,7 +16,9 @@
             <time><i class="fa fa-calendar"></i> @video.CreatedOn.ToString("yyyy-MM-dd HH:mm")</time>
             @if (this.User.IsInRole(GlobalConstants.AdministratorRoleName))
             {
-                <a asp-action="Delete" asp-controller="Videos" asp-area="Administration" asp-route-id="@video.Id"><i class="fa fa-times"></i></a>
+                <form asp-action="Delete" asp-controller="Videos" asp-area="Administration" asp-route-id="@video.Id" asp-route-returnUrl="@(this.Context.Request.Path + this.Context.Request.QueryString)" method="post" style="display: inline;">
+                    <button type="submit" class="btn btn-link" style="padding: 0;" title="Delete video" onclick="return confirm('Hide this video from the site? It can be restored from the administration.');"><i class="fa fa-times"></i></button>
+                </form>
             }
             <p>@video.Description.Replace("\n", ";\n")</p>
         </div>

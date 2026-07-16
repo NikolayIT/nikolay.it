@@ -5,151 +5,151 @@
 
     using BlogSystem.Data.Common.Repositories;
     using BlogSystem.Data.Models;
+    using BlogSystem.Services.Mapping;
+    using BlogSystem.Web.ViewModels.Administration.Settings;
 
     using Microsoft.AspNetCore.Mvc;
     using Microsoft.EntityFrameworkCore;
 
     public class SettingsController : AdministrationController
     {
-        private readonly IDeletableEntityRepository<Setting> repository;
+        private readonly IDeletableEntityRepository<Setting> settings;
 
-        public SettingsController(IDeletableEntityRepository<Setting> repository)
+        public SettingsController(IDeletableEntityRepository<Setting> settings)
         {
-            this.repository = repository;
+            this.settings = settings;
         }
 
-        // GET: Administration/Settings
         public async Task<IActionResult> Index()
         {
-            return this.View(await this.repository.AllWithDeleted().ToListAsync());
+            var viewModel = await this.settings.AllWithDeleted()
+                .OrderBy(x => x.Name)
+                .To<SettingRowViewModel>()
+                .ToListAsync();
+            return this.View(viewModel);
         }
 
-        // GET: Administration/Settings/Details/5
-        public async Task<IActionResult> Details(int? id)
-        {
-            if (id == null)
-            {
-                return this.NotFound();
-            }
-
-            var setting = await this.repository.AllWithDeleted()
-                .FirstOrDefaultAsync(m => m.Id == id);
-            if (setting == null)
-            {
-                return this.NotFound();
-            }
-
-            return this.View(setting);
-        }
-
-        // GET: Administration/Settings/Create
         public IActionResult Create()
         {
-            return this.View();
+            return this.View(new SettingInputModel());
         }
 
-        // POST: Administration/Settings/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Name,Value,Id")] Setting setting)
+        public async Task<IActionResult> Create(SettingInputModel input)
         {
-            if (this.ModelState.IsValid)
+            if (!this.ModelState.IsValid)
             {
-                await this.repository.AddAsync(setting);
-                await this.repository.SaveChangesAsync();
-                return this.RedirectToAction(nameof(this.Index));
+                return this.View(input);
             }
 
-            return this.View(setting);
-        }
+            var setting = new Setting { Name = input.Name, Value = input.Value };
+            await this.settings.AddAsync(setting);
+            await this.settings.SaveChangesAsync();
 
-        // GET: Administration/Settings/Edit/5
-        public IActionResult Edit(int? id)
-        {
-            if (id == null)
-            {
-                return this.NotFound();
-            }
-
-            var setting = this.repository.All().FirstOrDefault(x => x.Id == id);
-            if (setting == null)
-            {
-                return this.NotFound();
-            }
-
-            return this.View(setting);
-        }
-
-        // POST: Administration/Settings/Edit/5
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Name,Value")] Setting setting)
-        {
-            if (id != setting.Id)
-            {
-                return this.NotFound();
-            }
-
-            if (this.ModelState.IsValid)
-            {
-                try
-                {
-                    var dbSetting = this.repository.AllWithDeleted().FirstOrDefault(x => x.Id == id);
-                    dbSetting.Name = setting.Name;
-                    dbSetting.Value = setting.Value;
-                    await this.repository.SaveChangesAsync();
-                }
-                catch (DbUpdateConcurrencyException)
-                {
-                    if (!this.SettingExists(setting.Id))
-                    {
-                        return this.NotFound();
-                    }
-                    else
-                    {
-                        throw;
-                    }
-                }
-
-                return this.RedirectToAction(nameof(this.Index));
-            }
-
-            return this.View(setting);
-        }
-
-        // GET: Administration/Settings/Delete/5
-        public async Task<IActionResult> Delete(int? id)
-        {
-            if (id == null)
-            {
-                return this.NotFound();
-            }
-
-            var setting = await this.repository.AllWithDeleted()
-                .FirstOrDefaultAsync(m => m.Id == id);
-            if (setting == null)
-            {
-                return this.NotFound();
-            }
-
-            return this.View(setting);
-        }
-
-        // POST: Administration/Settings/Delete/5
-        [HttpPost]
-        [ActionName("Delete")]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> DeleteConfirmed(int id)
-        {
-            var setting = this.repository.All().FirstOrDefault(x => x.Id == id);
-            this.repository.Delete(setting);
-            await this.repository.SaveChangesAsync();
+            this.TempData["StatusMessage"] = $"Setting \"{setting.Name}\" was created.";
             return this.RedirectToAction(nameof(this.Index));
         }
 
-        private bool SettingExists(int id)
+        public async Task<IActionResult> Edit(int id)
         {
-            return this.repository.All().Any(e => e.Id == id);
+            var viewModel = await this.settings.AllWithDeleted()
+                .Where(x => x.Id == id)
+                .To<SettingEditViewModel>()
+                .FirstOrDefaultAsync();
+            if (viewModel == null)
+            {
+                return this.NotFound();
+            }
+
+            return this.View(viewModel);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Edit(int id, SettingEditViewModel input)
+        {
+            if (id != input.Id)
+            {
+                return this.NotFound();
+            }
+
+            var setting = await this.settings.AllWithDeleted().FirstOrDefaultAsync(x => x.Id == id);
+            if (setting == null)
+            {
+                return this.NotFound();
+            }
+
+            if (!this.ModelState.IsValid)
+            {
+                input.CreatedOn = setting.CreatedOn;
+                input.ModifiedOn = setting.ModifiedOn;
+                return this.View(input);
+            }
+
+            setting.Name = input.Name;
+            setting.Value = input.Value;
+            await this.settings.SaveChangesAsync();
+
+            this.TempData["StatusMessage"] = $"Setting \"{setting.Name}\" was saved.";
+            return this.RedirectToAction(nameof(this.Index));
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Delete(int id)
+        {
+            var setting = await this.settings.All().FirstOrDefaultAsync(x => x.Id == id);
+            if (setting == null)
+            {
+                return this.NotFound();
+            }
+
+            this.settings.Delete(setting);
+            await this.settings.SaveChangesAsync();
+
+            this.TempData["StatusMessage"] = $"Setting \"{setting.Name}\" was deleted. You can restore it at any time.";
+            return this.RedirectToAction(nameof(this.Index));
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Restore(int id)
+        {
+            var setting = await this.settings.AllWithDeleted().FirstOrDefaultAsync(x => x.Id == id);
+            if (setting == null)
+            {
+                return this.NotFound();
+            }
+
+            this.settings.Undelete(setting);
+            await this.settings.SaveChangesAsync();
+
+            this.TempData["StatusMessage"] = $"Setting \"{setting.Name}\" was restored.";
+            return this.RedirectToAction(nameof(this.Index));
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> HardDelete(int id)
+        {
+            var setting = await this.settings.AllWithDeleted().FirstOrDefaultAsync(x => x.Id == id);
+            if (setting == null)
+            {
+                return this.NotFound();
+            }
+
+            if (!setting.IsDeleted)
+            {
+                this.TempData["ErrorMessage"] = "Only deleted settings can be deleted permanently.";
+                return this.RedirectToAction(nameof(this.Index));
+            }
+
+            this.settings.HardDelete(setting);
+            await this.settings.SaveChangesAsync();
+
+            this.TempData["StatusMessage"] = $"Setting \"{setting.Name}\" was permanently deleted.";
+            return this.RedirectToAction(nameof(this.Index));
         }
     }
 }

@@ -1,0 +1,98 @@
+@using BlogSystem.Common
+<!DOCTYPE html>
+<html>
+<head>
+    <title>@ViewBag.Title - Administration - @GlobalConstants.SystemName</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="robots" content="noindex, nofollow" />
+    <link rel="shortcut icon" href="/favicon.ico">
+
+    <environment names="Development">
+        <link href="~/lib/fontawesome/css/all.css" rel="stylesheet" asp-append-version="true" />
+        <link href="~/lib/bootstrap/dist/css/bootstrap.css" rel="stylesheet" asp-append-version="true" />
+    </environment>
+    <environment names="Staging,Production">
+        <link href="~/lib/fontawesome/css/all.min.css" rel="stylesheet" asp-append-version="true" />
+        <link href="~/lib/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet" asp-append-version="true" />
+    </environment>
+    <link href="~/css/admin.min.css" rel="stylesheet" asp-append-version="true" />
+</head>
+
+<body class="admin">
+    <nav class="navbar navbar-inverse navbar-fixed-top">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#admin-navbar" aria-expanded="false">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" asp-area="Administration" asp-controller="Dashboard" asp-action="Index">
+                    <i class="fas fa-tools"></i> @GlobalConstants.SystemName &mdash; Administration
+                </a>
+            </div>
+            <div id="admin-navbar" class="collapse navbar-collapse">
+                <ul class="nav navbar-nav visible-xs">
+                    <li><a asp-area="Administration" asp-controller="Dashboard" asp-action="Index"><i class="fas fa-tachometer-alt fa-fw"></i> Dashboard</a></li>
+                    <li><a asp-area="Administration" asp-controller="BlogPosts" asp-action="Index"><i class="fas fa-file-alt fa-fw"></i> Blog posts</a></li>
+                    <li><a asp-area="Administration" asp-controller="Pages" asp-action="Index"><i class="fas fa-copy fa-fw"></i> Pages</a></li>
+                    <li><a asp-area="Administration" asp-controller="Videos" asp-action="Index"><i class="fas fa-video fa-fw"></i> Videos</a></li>
+                    <li><a asp-area="Administration" asp-controller="Settings" asp-action="Index"><i class="fas fa-sliders-h fa-fw"></i> Settings</a></li>
+                </ul>
+                <ul class="nav navbar-nav navbar-right">
+                    <li><a href="/" target="_blank"><i class="fas fa-external-link-alt"></i> View site</a></li>
+                    <li>
+                        <a href="javascript:document.getElementById('adminLogoutForm').submit()"><i class="fas fa-sign-out-alt"></i> Logout (@this.User.Identity.Name)</a>
+                        <form id="adminLogoutForm" method="post" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@(this.Url.Content("~/"))"></form>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-sm-3 col-md-2 admin-sidebar hidden-xs">
+                <ul class="nav nav-sidebar">
+                    <li class="@this.ActiveClass("Dashboard")"><a asp-area="Administration" asp-controller="Dashboard" asp-action="Index"><i class="fas fa-tachometer-alt fa-fw"></i> Dashboard</a></li>
+                </ul>
+                <div class="admin-sidebar-heading">Content</div>
+                <ul class="nav nav-sidebar">
+                    <li class="@this.ActiveClass("BlogPosts")"><a asp-area="Administration" asp-controller="BlogPosts" asp-action="Index"><i class="fas fa-file-alt fa-fw"></i> Blog posts</a></li>
+                    <li class="@this.ActiveClass("Pages")"><a asp-area="Administration" asp-controller="Pages" asp-action="Index"><i class="fas fa-copy fa-fw"></i> Pages</a></li>
+                    <li class="@this.ActiveClass("Videos")"><a asp-area="Administration" asp-controller="Videos" asp-action="Index"><i class="fas fa-video fa-fw"></i> Videos</a></li>
+                </ul>
+                <div class="admin-sidebar-heading">System</div>
+                <ul class="nav nav-sidebar">
+                    <li class="@this.ActiveClass("Settings")"><a asp-area="Administration" asp-controller="Settings" asp-action="Index"><i class="fas fa-sliders-h fa-fw"></i> Settings</a></li>
+                </ul>
+            </div>
+            <div class="col-xs-12 col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 admin-main">
+                <partial name="_StatusMessages" />
+                @RenderBody()
+            </div>
+        </div>
+    </div>
+
+    <environment names="Development">
+        <script src="~/lib/jquery/dist/jquery.js" asp-append-version="true"></script>
+        <script src="~/lib/bootstrap/dist/js/bootstrap.js" asp-append-version="true"></script>
+    </environment>
+    <environment names="Staging,Production">
+        <script src="~/lib/jquery/dist/jquery.min.js" asp-append-version="true"></script>
+        <script src="~/lib/bootstrap/dist/js/bootstrap.min.js" asp-append-version="true"></script>
+    </environment>
+
+    @await this.RenderSectionAsync("Scripts", required: false)
+</body>
+</html>
+
+@functions {
+    private string ActiveClass(string controllerName)
+    {
+        var currentController = (string)this.ViewContext.RouteData.Values["controller"];
+        return string.Equals(currentController, controllerName, StringComparison.OrdinalIgnoreCase) ? "active" : string.Empty;
+    }
+}

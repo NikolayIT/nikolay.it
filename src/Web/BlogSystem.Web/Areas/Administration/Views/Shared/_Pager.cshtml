@@ -1,0 +1,40 @@
+@model BlogSystem.Web.ViewModels.Administration.PaginationViewModel
+
+@if (Model.TotalPages > 1)
+{
+    var windowStart = Math.Max(1, Model.PageNumber - 2);
+    var windowEnd = Math.Min(Model.TotalPages, Model.PageNumber + 2);
+
+    <nav aria-label="Page navigation">
+        <ul class="pagination">
+            <li class="@(Model.HasPreviousPage ? string.Empty : "disabled")">
+                <a href="@(Model.HasPreviousPage ? this.Url.Action("Index", new { page = Model.PageNumber - 1, searchTerm = Model.SearchTerm }) : "#")" aria-label="Previous">&laquo;</a>
+            </li>
+            @if (windowStart > 1)
+            {
+                <li><a href="@this.Url.Action("Index", new { page = 1, searchTerm = Model.SearchTerm })">1</a></li>
+                if (windowStart > 2)
+                {
+                    <li class="disabled"><a href="#">&hellip;</a></li>
+                }
+            }
+            @for (var i = windowStart; i <= windowEnd; i++)
+            {
+                <li class="@(i == Model.PageNumber ? "active" : string.Empty)">
+                    <a href="@this.Url.Action("Index", new { page = i, searchTerm = Model.SearchTerm })">@i</a>
+                </li>
+            }
+            @if (windowEnd < Model.TotalPages)
+            {
+                if (windowEnd < Model.TotalPages - 1)
+                {
+                    <li class="disabled"><a href="#">&hellip;</a></li>
+                }
+                <li><a href="@this.Url.Action("Index", new { page = Model.TotalPages, searchTerm = Model.SearchTerm })">@Model.TotalPages</a></li>
+            }
+            <li class="@(Model.HasNextPage ? string.Empty : "disabled")">
+                <a href="@(Model.HasNextPage ? this.Url.Action("Index", new { page = Model.PageNumber + 1, searchTerm = Model.SearchTerm }) : "#")" aria-label="Next">&raquo;</a>
+            </li>
+        </ul>
+    </nav>
+}

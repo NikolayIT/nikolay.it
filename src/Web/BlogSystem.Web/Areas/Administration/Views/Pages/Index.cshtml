@@ -1,68 +1,77 @@
-﻿@model IEnumerable<BlogSystem.Data.Models.Page>
+﻿@model System.Collections.Generic.IEnumerable<BlogSystem.Web.ViewModels.Administration.Pages.PageRowViewModel>
 
 @{
-    ViewBag.Title = "Index";
+    ViewData["Title"] = "Pages";
 }
 
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.Permalink)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Title)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.MetaDescription)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.MetaKeywords)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.IsDeleted)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.CreatedOn)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.ModifiedOn)
-        </th>
-        <th></th>
-    </tr>
+<div class="admin-page-header clearfix">
+    <h1><i class="fas fa-copy"></i> Pages <small>(@Model.Count())</small></h1>
+    <div class="admin-page-actions">
+        <a asp-action="Create" class="btn btn-primary"><i class="fas fa-plus"></i> New page</a>
+    </div>
+</div>
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.Permalink)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Title)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.MetaDescription)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.MetaKeywords)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.IsDeleted)
-            @Html.DisplayFor(modelItem => item.DeletedOn)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.CreatedOn)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.ModifiedOn)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.Id }) |
-            @Html.ActionLink("Details", "Details", new { id=item.Id }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.Id })
-        </td>
-    </tr>
+@if (Model.Any())
+{
+    <div class="panel panel-default">
+        <table class="table table-hover">
+            <thead>
+                <tr>
+                    <th>Title</th>
+                    <th>Permalink</th>
+                    <th>Status</th>
+                    <th>Created</th>
+                    <th>Modified</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr class="@(item.IsDeleted ? "danger" : string.Empty)">
+                        <td><a asp-action="Edit" asp-route-id="@item.Id">@item.Title</a></td>
+                        <td><code>/Pages/@item.Permalink</code></td>
+                        <td>
+                            @if (item.IsDeleted)
+                            {
+                                <span class="label label-danger">Deleted</span>
+                            }
+                            else
+                            {
+                                <span class="label label-success">Published</span>
+                            }
+                        </td>
+                        <td>@item.CreatedOn.ToString("yyyy-MM-dd HH:mm")</td>
+                        <td>@(item.ModifiedOn?.ToString("yyyy-MM-dd HH:mm"))</td>
+                        <td class="admin-row-actions">
+                            @if (!item.IsDeleted)
+                            {
+                                <a href="/Pages/@item.Permalink" target="_blank" class="btn btn-default btn-xs" title="View on site"><i class="fas fa-external-link-alt"></i></a>
+                                <a asp-action="Edit" asp-route-id="@item.Id" class="btn btn-default btn-xs"><i class="fas fa-pencil-alt"></i> Edit</a>
+                                <form asp-action="Delete" asp-route-id="@item.Id" method="post">
+                                    <button type="submit" class="btn btn-danger btn-xs" onclick="return confirm('Delete this page? It can be restored later.');"><i class="fas fa-trash-alt"></i> Delete</button>
+                                </form>
+                            }
+                            else
+                            {
+                                <a asp-action="Edit" asp-route-id="@item.Id" class="btn btn-default btn-xs"><i class="fas fa-pencil-alt"></i> Edit</a>
+                                <form asp-action="Restore" asp-route-id="@item.Id" method="post">
+                                    <button type="submit" class="btn btn-success btn-xs"><i class="fas fa-undo"></i> Restore</button>
+                                </form>
+                                <form asp-action="HardDelete" asp-route-id="@item.Id" method="post">
+                                    <button type="submit" class="btn btn-danger btn-xs" onclick="return confirm('Permanently delete this page? This CANNOT be undone.');"><i class="fas fa-times"></i> Delete forever</button>
+                                </form>
+                            }
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
 }
-
-</table>
+else
+{
+    <div class="panel panel-default">
+        <div class="panel-body text-muted">There are no pages yet. <a asp-action="Create">Create the first one</a>.</div>
+    </div>
+}

@@ -1,33 +1,38 @@
-﻿@model BlogSystem.Data.Models.Setting
+@model BlogSystem.Web.ViewModels.Administration.Settings.SettingInputModel
 
 @{
-    ViewData["Title"] = "Create";
+    ViewData["Title"] = "New Setting";
 }
 
-<h4>Setting</h4>
-<hr />
+<div class="admin-page-header clearfix">
+    <h1><i class="fas fa-sliders-h"></i> New setting</h1>
+    <div class="admin-page-actions">
+        <a asp-action="Index" class="btn btn-default"><i class="fas fa-arrow-left"></i> Back to list</a>
+    </div>
+</div>
+
 <div class="row">
-    <div class="col-md-4">
-        <form asp-action="Create">
+    <div class="col-md-6">
+        <form asp-action="Create" method="post">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
-                <label asp-for="Name" class="control-label"></label>
-                <input asp-for="Name" class="form-control" />
+                <label asp-for="Name"></label>
+                <input asp-for="Name" class="form-control" placeholder="Setting name" />
                 <span asp-validation-for="Name" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="Value" class="control-label"></label>
-                <input asp-for="Value" class="form-control" />
+                <label asp-for="Value"></label>
+                <textarea asp-for="Value" class="form-control" rows="4"></textarea>
                 <span asp-validation-for="Value" class="text-danger"></span>
             </div>
-            <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-default" />
+            <div class="admin-form-footer">
+                <button type="submit" class="btn btn-primary"><i class="fas fa-save"></i> Create setting</button>
+                <a asp-action="Index" class="btn btn-default">Cancel</a>
             </div>
         </form>
     </div>
 </div>
 
-<div>
-    <a asp-action="Index">Back to List</a>
-</div>
-
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

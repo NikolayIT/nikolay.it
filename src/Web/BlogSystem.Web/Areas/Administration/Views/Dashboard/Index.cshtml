@@ -1,0 +1,89 @@
+@model BlogSystem.Web.ViewModels.Administration.Dashboard.DashboardViewModel
+
+@{
+    ViewData["Title"] = "Dashboard";
+}
+
+<div class="admin-page-header clearfix">
+    <h1><i class="fas fa-tachometer-alt"></i> Dashboard</h1>
+    <div class="admin-page-actions">
+        <a asp-controller="BlogPosts" asp-action="Create" class="btn btn-primary"><i class="fas fa-plus"></i> New blog post</a>
+        <a asp-controller="Pages" asp-action="Create" class="btn btn-default"><i class="fas fa-plus"></i> New page</a>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-sm-6 col-md-3">
+        <a asp-controller="BlogPosts" asp-action="Index" class="admin-stat">
+            <span class="admin-stat-icon"><i class="fas fa-file-alt"></i></span>
+            <div class="admin-stat-value">@Model.BlogPostsCount</div>
+            <div class="admin-stat-label">Blog posts</div>
+        </a>
+    </div>
+    <div class="col-sm-6 col-md-3">
+        <a asp-controller="Pages" asp-action="Index" class="admin-stat">
+            <span class="admin-stat-icon"><i class="fas fa-copy"></i></span>
+            <div class="admin-stat-value">@Model.PagesCount</div>
+            <div class="admin-stat-label">Pages</div>
+        </a>
+    </div>
+    <div class="col-sm-6 col-md-3">
+        <a asp-controller="Videos" asp-action="Index" class="admin-stat">
+            <span class="admin-stat-icon"><i class="fas fa-video"></i></span>
+            <div class="admin-stat-value">@Model.VideosCount</div>
+            <div class="admin-stat-label">Videos</div>
+        </a>
+    </div>
+    <div class="col-sm-6 col-md-3">
+        <a asp-controller="Settings" asp-action="Index" class="admin-stat">
+            <span class="admin-stat-icon"><i class="fas fa-sliders-h"></i></span>
+            <div class="admin-stat-value">@Model.SettingsCount</div>
+            <div class="admin-stat-label">Settings</div>
+        </a>
+    </div>
+</div>
+
+<div class="panel panel-default">
+    <div class="panel-heading"><strong>Recent blog posts</strong></div>
+    @if (Model.RecentBlogPosts.Any())
+    {
+        <table class="table table-hover">
+            <thead>
+                <tr>
+                    <th>Title</th>
+                    <th>Type</th>
+                    <th>Status</th>
+                    <th>Created</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var post in Model.RecentBlogPosts)
+                {
+                    <tr class="@(post.IsDeleted ? "danger" : string.Empty)">
+                        <td><a asp-controller="BlogPosts" asp-action="Edit" asp-route-id="@post.Id">@post.Title</a></td>
+                        <td><span class="label label-default">@post.Type</span></td>
+                        <td>
+                            @if (post.IsDeleted)
+                            {
+                                <span class="label label-danger">Deleted</span>
+                            }
+                            else
+                            {
+                                <span class="label label-success">Published</span>
+                            }
+                        </td>
+                        <td>@post.CreatedOn.ToString("yyyy-MM-dd HH:mm")</td>
+                        <td class="admin-row-actions">
+                            <a asp-controller="BlogPosts" asp-action="Edit" asp-route-id="@post.Id" class="btn btn-default btn-xs"><i class="fas fa-pencil-alt"></i> Edit</a>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    }
+    else
+    {
+        <div class="panel-body text-muted">There are no blog posts yet.</div>
+    }
+</div>

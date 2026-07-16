@@ -1,0 +1,46 @@
+@model BlogSystem.Web.ViewModels.Administration.Pages.PageInputModel
+
+<div class="row">
+    <div class="col-md-8">
+        <div class="form-group">
+            <label asp-for="Title"></label>
+            <input asp-for="Title" class="form-control" placeholder="Page title" />
+            <span asp-validation-for="Title" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="Content"></label>
+            @Html.EditorFor(x => x.Content)
+            <span asp-validation-for="Content" class="text-danger"></span>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="panel panel-default">
+            <div class="panel-heading"><strong>Publishing</strong></div>
+            <div class="panel-body">
+                <div class="form-group" style="margin-bottom: 0;">
+                    <label asp-for="Permalink"></label>
+                    <div class="input-group">
+                        <span class="input-group-addon">/Pages/</span>
+                        <input asp-for="Permalink" class="form-control" placeholder="my-page" />
+                    </div>
+                    <span asp-validation-for="Permalink" class="text-danger"></span>
+                </div>
+            </div>
+        </div>
+        <div class="panel panel-default">
+            <div class="panel-heading"><strong>SEO</strong></div>
+            <div class="panel-body">
+                <div class="form-group">
+                    <label asp-for="MetaDescription"></label>
+                    <textarea asp-for="MetaDescription" class="form-control" rows="3"></textarea>
+                    <span asp-validation-for="MetaDescription" class="text-danger"></span>
+                </div>
+                <div class="form-group" style="margin-bottom: 0;">
+                    <label asp-for="MetaKeywords"></label>
+                    <input asp-for="MetaKeywords" class="form-control" placeholder="keyword1, keyword2" />
+                    <span asp-validation-for="MetaKeywords" class="text-danger"></span>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

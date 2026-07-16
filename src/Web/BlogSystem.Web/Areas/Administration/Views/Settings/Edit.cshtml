@@ -1,33 +1,46 @@
-﻿@model BlogSystem.Data.Models.Setting
+@model BlogSystem.Web.ViewModels.Administration.Settings.SettingEditViewModel
 
 @{
-    ViewData["Title"] = "Edit";
+    ViewData["Title"] = "Edit Setting";
 }
 
-<h4>Setting</h4>
-<hr />
+<div class="admin-page-header clearfix">
+    <h1><i class="fas fa-sliders-h"></i> Edit setting</h1>
+    <div class="admin-page-actions">
+        <a asp-action="Index" class="btn btn-default"><i class="fas fa-arrow-left"></i> Back to list</a>
+    </div>
+</div>
+
 <div class="row">
-    <div class="col-md-4">
-        <form asp-action="Edit">
+    <div class="col-md-6">
+        <form asp-action="Edit" asp-route-id="@Model.Id" method="post">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="Id" />
             <div class="form-group">
-                <label asp-for="Name" class="control-label"></label>
+                <label asp-for="Name"></label>
                 <input asp-for="Name" class="form-control" />
                 <span asp-validation-for="Name" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="Value" class="control-label"></label>
-                <input asp-for="Value" class="form-control" />
+                <label asp-for="Value"></label>
+                <textarea asp-for="Value" class="form-control" rows="4"></textarea>
                 <span asp-validation-for="Value" class="text-danger"></span>
             </div>
-            <div class="form-group">
-                <input type="submit" value="Save" class="btn btn-default" />
+            <div class="admin-form-footer clearfix">
+                <button type="submit" class="btn btn-primary"><i class="fas fa-save"></i> Save changes</button>
+                <a asp-action="Index" class="btn btn-default">Cancel</a>
+                <div class="pull-right text-right admin-meta-list">
+                    <div>Created on @Model.CreatedOn.ToString("yyyy-MM-dd HH:mm")</div>
+                    @if (Model.ModifiedOn != null)
+                    {
+                        <div>Last modified on @Model.ModifiedOn.Value.ToString("yyyy-MM-dd HH:mm")</div>
+                    }
+                </div>
             </div>
         </form>
     </div>
 </div>
 
-<div>
-    <a asp-action="Index">Back to List</a>
-</div>
-
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

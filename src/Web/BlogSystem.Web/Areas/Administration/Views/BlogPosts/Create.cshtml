@@ -1,56 +1,25 @@
-﻿@model BlogSystem.Data.Models.BlogPost
+@model BlogSystem.Web.ViewModels.Administration.BlogPosts.BlogPostInputModel
 
 @{
-    ViewData["Title"] = "Create Blog Post";
+    ViewData["Title"] = "New Blog Post";
 }
 
-<form asp-action="Create">
+<div class="admin-page-header clearfix">
+    <h1><i class="fas fa-file-alt"></i> New blog post</h1>
+    <div class="admin-page-actions">
+        <a asp-action="Index" class="btn btn-default"><i class="fas fa-arrow-left"></i> Back to list</a>
+    </div>
+</div>
+
+<form asp-action="Create" method="post">
     <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-    <div class="form-group">
-        <label asp-for="Title" class="control-label"></label>
-        <input asp-for="Title" class="form-control" />
-        <span asp-validation-for="Title" class="text-danger"></span>
-    </div>
-    <div class="form-group">
-        <label asp-for="Type" class="control-label"></label>
-        @Html.EditorFor(x => x.Type)
-        <span asp-validation-for="Type" class="text-danger"></span>
-    </div>
-    <div class="form-group">
-        <label asp-for="ImageOrVideoUrl" class="control-label"></label>
-        <input asp-for="ImageOrVideoUrl" class="form-control" />
-        <span asp-validation-for="ImageOrVideoUrl" class="text-danger"></span>
-    </div>
-    <div class="form-group">
-        <label asp-for="ShortContent" class="control-label"></label>
-        @Html.EditorFor(x => x.ShortContent)
-        <span asp-validation-for="ShortContent" class="text-danger"></span>
-    </div>
-    <div class="form-group">
-        <label asp-for="Content" class="control-label"></label>
-        @Html.EditorFor(x => x.Content)
-        <span asp-validation-for="Content" class="text-danger"></span>
-    </div>
-    <div class="form-group">
-        <label asp-for="MetaDescription" class="control-label"></label>
-        <textarea asp-for="MetaDescription" class="form-control"></textarea>
-        <span asp-validation-for="MetaDescription" class="text-danger"></span>
-    </div>
-    <div class="form-group">
-        <label asp-for="MetaKeywords" class="control-label"></label>
-        <input asp-for="MetaKeywords" class="form-control" />
-        <span asp-validation-for="MetaKeywords" class="text-danger"></span>
-    </div>
-    <div class="form-group">
-        <label asp-for="IsPinned" class="control-label"></label>
-        <input asp-for="IsPinned" class="form-control" />
-        <span asp-validation-for="IsPinned" class="text-danger"></span>
-    </div>
-    <div class="form-group">
-        <input type="submit" value="Create" class="btn btn-default" />
+    <partial name="_BlogPostFormFields" model="Model" />
+    <div class="admin-form-footer">
+        <button type="submit" class="btn btn-primary"><i class="fas fa-save"></i> Create post</button>
+        <a asp-action="Index" class="btn btn-default">Cancel</a>
     </div>
 </form>
 
-<div>
-    <a asp-action="Index">Back to List</a>
-</div>
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}
