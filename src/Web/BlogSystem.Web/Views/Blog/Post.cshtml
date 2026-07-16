@@ -1,4 +1,4 @@
-﻿@using System.Net
+@using System.Net
 @using BlogSystem.Common
 @using Microsoft.AspNetCore.Http.Extensions
 @model BlogSystem.Web.ViewModels.Blog.BlogPostViewModel
@@ -7,38 +7,21 @@
     ViewBag.Title = Model.Title;
 }
 
-@*@section breadcrumbs {
-        <li><a href="/">Home</a></li>
-        <li><a href="/Blog">Blog</a></li>
-        <li><a href="/Blog/@(Model.CreatedOn.Year.ToString("0000"))">@Model.CreatedOn.Year.ToString("0000")</a></li>
-        <li><a href="/Blog/@(Model.CreatedOn.Year.ToString("0000"))/@(Model.CreatedOn.Month.ToString("00"))">@(Model.CreatedOn.Month.ToString("00"))</a></li>
-        <li class="active">Post</li>
-    }*@
-
-<div class="blog margin-bottom-40">
-    <div class="blog-post-tags">
-        <ul class="list-unstyled list-inline blog-info">
-            <li><i class="fa fa-calendar"></i> @Model.CreatedOn.ToString("MMMM dd, yyyy")</li>
-            <li><i class="fa fa-pencil-alt"></i> @GlobalConstants.SiteAuthor</li>
-            @if (this.User.IsInRole(GlobalConstants.AdministratorRoleName))
-            {
-                <li><i class="fa fa-pencil-alt"></i> <a href="/Administration/BlogPosts/Edit/@Model.Id">Edit</a></li>
-            }
-        </ul>
-        @*<ul class="list-unstyled list-inline blog-tags">
-                <li>
-                    <i class="fa fa-tags"></i>
-                    <a href="#">Technology</a>
-                    <a href="#">Education</a>
-                    <a href="#">Internet</a>
-                    <a href="#">Media</a>
-                </li>
-            </ul>*@
+<article class="blog-post">
+    <div class="blog-post-meta">
+        <span class="me-3"><i class="fa fa-calendar"></i> @Model.CreatedOn.ToString("MMMM dd, yyyy")</span>
+        <span class="me-3"><i class="fa fa-pencil-alt"></i> @GlobalConstants.SiteAuthor</span>
+        @if (this.User.IsInRole(GlobalConstants.AdministratorRoleName))
+        {
+            <span><i class="fa fa-pencil-alt"></i> <a href="/Administration/BlogPosts/Edit/@Model.Id">Edit</a></span>
+        }
     </div>
-    @Html.Raw(Model.Content)
-    <br />
-    <div id="social-button-sharer">
-            <a class="twitter-share-button" href="https://twitter.com/intent/tweet">Tweet</a>
+    <div class="blog-post-content">
+        @Html.Raw(Model.Content)
+    </div>
+
+    <div id="social-button-sharer" class="mt-4">
+        <a class="twitter-share-button" href="https://twitter.com/intent/tweet">Tweet</a>
         <script>
             window.twttr = (function (d, s, id) {
                 var js, fjs = d.getElementsByTagName(s)[0],
@@ -62,4 +45,4 @@
             <a target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=@WebUtility.UrlEncode(this.Context.Request.GetDisplayUrl())&amp;src=sdkpreparse" class="fb-xfbml-parse-ignore">Share</a>
         </div>
     </div>
-</div>
+</article>

@@ -1,217 +1,334 @@
-﻿body {
-    background-image: url('../img/background.jpg') !important;
-    background-repeat: no-repeat !important;
-    background-color: #000 !important;
-    background-position: center top !important;
-    background-attachment: fixed !important;
+/* Brand ---------------------------------------------------------------------
+   Clean Bootstrap 5 look with the site's red accent. */
+
+:root {
+    --brand-accent: #c9253c;
+    --brand-accent-dark: #a51e31;
+    --brand-dark: #212529;
+    --bs-link-color: #c9253c;
+    --bs-link-color-rgb: 201, 37, 60;
+    --bs-link-hover-color: #a51e31;
+    --bs-link-hover-color-rgb: 165, 30, 49;
 }
+
+body {
+    background-color: #eef1f4;
+}
+
+/* Links: no underline by default, underline only on hover for text links. */
+a {
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+/* Header ---------------------------------------------------------------------- */
+
+.site-header .navbar {
+    padding-top: 0.75rem;
+    padding-bottom: 0.75rem;
+}
+
+.site-header .navbar-brand img {
+    height: 44px;
+    width: auto;
+}
+
+.site-header .nav-link {
+    font-weight: 500;
+}
+
+.page-band {
+    background: linear-gradient(135deg, #23272b 0%, #343a40 100%);
+    border-bottom: 3px solid var(--brand-accent);
+    padding: 1.75rem 0;
+    margin-bottom: 1.5rem;
+}
+
+.page-band h1 {
+    color: #ffffff;
+    font-size: 1.6rem;
+    font-weight: 600;
+    margin: 0;
+}
+
+/* Content card ------------------------------------------------------------------ */
+
+.content-card {
+    background-color: #ffffff;
+    border: 1px solid #e3e6ea;
+    border-radius: 8px;
+    box-shadow: 0 1px 3px rgba(33, 37, 41, 0.06);
+    padding: 2rem;
+}
+
+@media (max-width: 575.98px) {
+    .content-card {
+        padding: 1.25rem;
+    }
+}
+
+.btn-accent {
+    --bs-btn-color: #fff;
+    --bs-btn-bg: var(--brand-accent);
+    --bs-btn-border-color: var(--brand-accent);
+    --bs-btn-hover-color: #fff;
+    --bs-btn-hover-bg: var(--brand-accent-dark);
+    --bs-btn-hover-border-color: var(--brand-accent-dark);
+    --bs-btn-active-color: #fff;
+    --bs-btn-active-bg: var(--brand-accent-dark);
+    --bs-btn-active-border-color: var(--brand-accent-dark);
+}
+
+.pagination {
+    --bs-pagination-color: var(--brand-accent);
+    --bs-pagination-active-bg: var(--brand-accent);
+    --bs-pagination-active-border-color: var(--brand-accent);
+    --bs-pagination-hover-color: var(--brand-accent-dark);
+    flex-wrap: wrap;
+}
+
+.pagination a:hover {
+    text-decoration: none;
+}
+
+/* Blog posts ---------------------------------------------------------------- */
+
+.blog-post + .blog-post {
+    margin-top: 2.5rem;
+    padding-top: 2.5rem;
+    border-top: 1px solid #e9ecef;
+}
+
+.blog-post .blog-post-title {
+    font-size: 1.6rem;
+    font-weight: 700;
+    margin-bottom: 0.5rem;
+}
+
+.blog-post .blog-post-title a {
+    color: #212529;
+    text-decoration: none;
+}
+
+.blog-post .blog-post-title a:hover {
+    color: var(--brand-accent);
+}
+
+.blog-post-meta {
+    color: #6c757d;
+    font-size: 0.85rem;
+    margin-bottom: 1rem;
+}
+
+.blog-post-meta i {
+    color: var(--brand-accent);
+    margin-right: 0.25rem;
+}
+
+.blog-post-meta a {
+    color: #6c757d;
+}
+
+.blog-post-content {
+    line-height: 1.7;
+}
+
+.blog-post-content img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 4px;
+}
+
+.blog-post-content pre {
+    background-color: #f6f8fa;
+    border: 1px solid #e9ecef;
+    border-radius: 6px;
+    padding: 1rem;
+    overflow-x: auto;
+}
+
+.blog-post-content table {
+    max-width: 100%;
+}
+
+.blog-img {
+    margin-bottom: 1.25rem;
+}
+
+.blog-img img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 6px;
+}
+
+/* Sidebar -------------------------------------------------------------------- */
+
+.sidebar-card {
+    border: 1px solid #e3e6ea;
+    border-radius: 8px;
+    box-shadow: 0 1px 3px rgba(33, 37, 41, 0.06);
+    margin-bottom: 1.5rem;
+}
+
+.sidebar-card .card-header {
+    background-color: #ffffff;
+    border-bottom: 1px solid #e9ecef;
+    border-radius: 8px 8px 0 0;
+    font-size: 0.8rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    color: #495057;
+    padding: 0.75rem 1.25rem;
+}
+
+.social-grid {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 0.5rem;
+}
+
+.social-grid a {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 44px;
+    border: 1px solid #e3e6ea;
+    border-radius: 6px;
+    color: #495057;
+    font-size: 1.25rem;
+    transition: all 0.15s ease-in-out;
+}
+
+.social-grid a:hover {
+    background-color: var(--brand-accent);
+    border-color: var(--brand-accent);
+    color: #ffffff;
+    text-decoration: none;
+}
+
+.recent-post {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 0.75rem 1.25rem;
+}
+
+.recent-post i {
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 38px;
+    height: 38px;
+    border-radius: 6px;
+    background-color: #f1f3f5;
+    color: var(--brand-accent);
+    font-size: 1.1rem;
+}
+
+.recent-post a {
+    font-size: 0.9rem;
+    font-weight: 500;
+    color: #343a40;
+    text-decoration: none;
+}
+
+.recent-post a:hover {
+    color: var(--brand-accent);
+    text-decoration: none;
+}
+
+/* Videos --------------------------------------------------------------------- */
+
+.video-list-item .card {
+    border: 1px solid #e3e6ea;
+}
+
+.video-list-item .card-title {
+    font-size: 0.95rem;
+    font-weight: 600;
+}
+
+.video-list-item .card-text {
+    font-size: 0.8rem;
+    color: #6c757d;
+    max-height: 60px;
+    overflow: hidden;
+}
+
+/* Footer ----------------------------------------------------------------------- */
+
+.site-footer {
+    background-color: var(--brand-dark);
+    border-top: 3px solid var(--brand-accent);
+    color: #adb5bd;
+    font-size: 0.9rem;
+}
+
+.footer-heading {
+    color: #ffffff;
+    font-size: 0.8rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin-bottom: 0.75rem;
+}
+
+.site-footer a {
+    color: #ced4da;
+    text-decoration: none;
+}
+
+.site-footer a:hover {
+    color: #ffffff;
+}
+
+.site-footer ul li {
+    margin-bottom: 0.25rem;
+}
+
+.footer-social {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+}
+
+.footer-social a {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 36px;
+    height: 36px;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 6px;
+    color: #ced4da;
+    font-size: 1rem;
+}
+
+.footer-social a:hover {
+    background-color: var(--brand-accent);
+    border-color: var(--brand-accent);
+    color: #ffffff;
+    text-decoration: none;
+}
+
+.footer-bottom {
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    font-size: 0.8rem;
+}
+
+/* Misc ------------------------------------------------------------------------ */
 
 .edit-with-tinymce {
     width: 100%;
     height: 500px;
 }
 
-.header {
-    background-color: black;
-}
-
-.copyright {
-    background-color: black;
-}
-
-.header .navbar-default .navbar-nav > li > a {
-    color: #DDDDDD;
-}
-
-.topbar ul.loginbar > li > a, .topbar ul.loginbar > li > a:hover {
-    color: #AAAAAA !important;
-}
-
-.navbar-collapse {
-    margin-bottom: 5px;
-    text-align: right;
-}
-
-.topbar {
-    margin-right: 10px;
-    margin-top: 0;
-}
-
-.navbar-header {
-    height: 80px;
-    margin: 0;
-}
-
-.navbar-brand {
-    margin: 0;
-}
-
-.blog-photos li i {
-    opacity: 0.6;
-    width: 58px;
-    height: 54px;
-    font-size: 52px;
-    margin: 0 2px 8px;
-    color: black;
-    text-align: center;
-}
-
-.blog-photos li i:hover {
-    opacity: 1;
-    box-shadow: 0 0 0 2px #72c02c;
-}
-
-.posts .dl-horizontal dt i {
-    width: 60px;
-    height: 60px;
-    padding-top: 4px;
-    border: solid 1px #ddd;
-    font-size: 52px;
-    text-align: center;
-}
-
-.hidden {
-    display: none;
-}
-
-
-.copyright p {
-    font-size: 13px;
-}
-
-.video-list-item {
-    height: 260px;
-    overflow: hidden;
-    margin-bottom: 20px;
-}
-
-.video-list-item h2 {
-    margin-bottom: 5px;
-    font-size: 16px;
-    line-height: 22px;
-    font-weight: bold;
-}
-
-/*Blog Large
-------------------------------------*/
-/*Blog Page*/
-.blog h2 {
-    color: #555;
-    font-size: 21px;
-    line-height: 32px;
-    margin-bottom: 10px;
-}
-
-.blog h2 a {
-    color: #585f69;
-    line-height: 32px;
-}
-
-.blog h2 a:hover {
-    color: #72c02c;
-    text-decoration: none;
-}
-
-.blog .blog-img {
-    margin: 20px 0;
-}
-
-.headline-md {
-    margin-top: 9px;
-}
-
-/*Blog Content Tags*/
-.blog-post-tags {
-    padding: 5px 0 8px;
-    margin-bottom: 10px;
-    border-top: solid 1px #eee;
-    border-bottom: solid 1px #eee;
-}
-
-.blog-post-tags ul {
-    margin-bottom: 0;
-}
-
-.blog-post-tags li {
-    font-size: 12px;
-}
-
-.blog-post-tags li i {
-    color: #777;
-}
-
-.blog-post-tags ul.blog-info {
-    color: #eee;
-    margin-bottom: 3px;
-}
-
-.blog-post-tags ul.blog-tags a {
-    color: #555;
-    font-size: 11px;
-    display: inline;
-    padding: 3px 7px;
-    margin-right: 2px;
-    background: #f4f4f4;
-}
-
-.blog-post-tags ul.blog-tags a:hover {
-    background: #72c02c;
-}
-
-/*Blog Item Page
-------------------------------------*/
-.blog-item .media img {
-    top: 3px;
-    width: 54px;
-    height: 54px;
-    position: relative;
-}
-
-.post-comment h3,
-.blog-item .media h3 {
-    color: #72c02c;
-    font-size: 21px;
-    margin-bottom: 25px;
-}
-
-.blog-item .media h4.media-heading {
-    color: #555;
-    font-size: 17px;
-    position: relative;
-}
-
-.blog-item .media h4.media-heading span {
-    top: 3px;
-    right: 0;
-    color: #777;
-    font-size: 12px;
-    position: absolute;
-}
-
-.blog-item .media h4.media-heading span a {
-    color: #72c02c;
-}
-
-/*Blog Medium
-------------------------------------*/
-.blog-medium .blog-info li,
-.blog-medium .blog-info li a {
-    color: #777;
-}
-
-/* Medium devices (desktops, 992px and up) */
-@media (max-width: 992px) {
-    .blog-medium img {
-        margin-bottom: 20px;
-    }
-}
-
-/*Blog Full Wisth
-------------------------------------*/
-.blog-full-width .blog-post-tags {
-    padding: 5px 0;
-}
-
-.blog-full-width ul.blog-info {
-    margin-bottom: 0;
+/* The default Identity UI pages still use Bootstrap 4 markup. */
+.form-group {
+    margin-bottom: 1rem;
 }

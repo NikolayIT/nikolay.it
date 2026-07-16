@@ -1,4 +1,4 @@
-﻿@using BlogSystem.Common
+@using BlogSystem.Common
 @using BlogSystem.Data.Models
 @using Microsoft.AspNetCore.Identity
 @inject SignInManager<ApplicationUser> SignInManager
@@ -6,14 +6,13 @@
 
 @if (this.SignInManager.IsSignedIn(this.User))
 {
-    <ul class="loginbar pull-right">
-        <li>
-            <a class="nav-link text-dark" asp-area="Identity" asp-page="/Account/Manage/Index" title="Manage">Hello @(this.User.Identity.Name)!</a>
+    <ul class="navbar-nav ms-auto">
+        <li class="nav-item">
+            <a class="nav-link" asp-area="Identity" asp-page="/Account/Manage/Index" title="Manage">Hello @(this.User.Identity.Name)!</a>
         </li>
-        <li class="topbar-devider"></li>
-        <li>
-            <a href="javascript:document.getElementById('logoutForm').submit()">Logout</a>
-            <form id="logoutForm" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@(this.Url.Action("Index", "Home", new { area = string.Empty }))">
+        <li class="nav-item">
+            <form method="post" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@(this.Url.Action("Index", "Home", new { area = string.Empty }))">
+                <button type="submit" class="nav-link btn btn-link">Logout</button>
             </form>
         </li>
     </ul>

@@ -1,17 +1,17 @@
-﻿@model BlogSystem.Web.ViewModels.Home.BlogPostAnnotationViewModel
+@model BlogSystem.Web.ViewModels.Home.BlogPostAnnotationViewModel
 
 @if (Model.ImageOrVideoUrl != null)
 {
     <div class="blog-img">
         @if (Model.ImageOrVideoUrl.Contains("youtube.com"))
         {
-            <div class="responsive-video">
-                <iframe src="@Model.ImageOrVideoUrl" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
+            <div class="ratio ratio-16x9">
+                <iframe src="@Model.ImageOrVideoUrl" title="@Model.Title" allowfullscreen></iframe>
             </div>
         }
         else
         {
-            <img src="@Model.ImageOrVideoUrl" class="img-responsive" alt="@Model.Title" />
+            <img src="@Model.ImageOrVideoUrl" class="img-fluid" alt="@Model.Title" />
         }
     </div>
 }

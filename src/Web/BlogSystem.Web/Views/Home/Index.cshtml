@@ -1,66 +1,61 @@
-﻿@using BlogSystem.Common
+@using BlogSystem.Common
 @model BlogSystem.Web.ViewModels.Home.IndexViewModel
 @{
     ViewBag.Title = GlobalConstants.SystemName;
 }
 
-@*@section breadcrumbs {
-    <li><a href="/">Home</a></li>
-}*@
-
-<div class="blog margin-bottom-40">
-
 @if (Model.Posts.Any())
 {
     foreach (var post in Model.Posts)
     {
-        <h2><a href="@post.Url">@post.Title</a></h2>
-        <div class="blog-post-tags">
-            <ul class="list-unstyled list-inline blog-info">
-                <li><i class="fa fa-calendar"></i> @post.CreatedOn.ToString("MMMM dd, yyyy")</li>
-                <li><i class="fa fa-pencil-alt"></i> @GlobalConstants.SiteAuthor</li>
-            </ul>
-            @*<ul class="list-unstyled list-inline blog-tags">
-                <li>
-                    <i class="fa fa-tags"></i>
-                    <a href="#">Technology</a>
-                    <a href="#">Education</a>
-                    <a href="#">Internet</a>
-                    <a href="#">Media</a>
-                </li>
-            </ul>*@
-        </div>
-        <partial name="_ImageOrVideo" model="post" />
-
-        @Html.Raw(post.Content)
-
-        <p><a class="btn btn-u btn-u-small" href="@post.Url"><i class="fa fa-plus"></i> Read More</a></p>
-        <br />
+        <article class="blog-post">
+            <h2 class="blog-post-title"><a href="@post.Url">@post.Title</a></h2>
+            <div class="blog-post-meta">
+                <span class="me-3"><i class="fa fa-calendar"></i> @post.CreatedOn.ToString("MMMM dd, yyyy")</span>
+                <span><i class="fa fa-pencil-alt"></i> @GlobalConstants.SiteAuthor</span>
+            </div>
+            <partial name="_ImageOrVideo" model="post" />
+            <div class="blog-post-content">
+                @Html.Raw(post.Content)
+            </div>
+            <p class="mt-3"><a class="btn btn-accent btn-sm" href="@post.Url"><i class="fa fa-plus"></i> Read More</a></p>
+        </article>
     }
 }
 else
 {
     <h2>Sorry, nothing here.</h2>
 }
-</div>
 
-@if (Model.PagesCount > 0)
+@if (Model.PagesCount > 1)
 {
-    <div class="text-center">
-        <ul class="pagination">
-            <li><a href="/?page=@Model.PreviousPage"><i class="fa fa-backward"></i></a></li>
-            @for (int i = 1; i <= Model.PagesCount; i++)
+    var windowStart = Math.Max(1, Model.CurrentPage - 2);
+    var windowEnd = Math.Min(Model.PagesCount, Model.CurrentPage + 2);
+
+    <nav aria-label="Blog pages" class="mt-4">
+        <ul class="pagination justify-content-center mb-0">
+            <li class="page-item"><a class="page-link" href="/?page=@Model.PreviousPage" aria-label="Previous"><i class="fa fa-backward"></i></a></li>
+            @if (windowStart > 1)
             {
-                if (i == Model.CurrentPage)
+                <li class="page-item"><a class="page-link" href="/?page=1">1</a></li>
+                if (windowStart > 2)
                 {
-                    <li class="active"><a href="/?page=@i">@i</a></li>
-                }
-                else
-                {
-                    <li><a href="/?page=@i">@i</a></li>
+                    <li class="page-item disabled"><a class="page-link" href="#">&hellip;</a></li>
                 }
             }
-            <li><a href="/?page=@Model.NextPage"><i class="fa fa-forward"></i></a></li>
+            @for (int i = windowStart; i <= windowEnd; i++)
+            {
+                <li class="page-item @(i == Model.CurrentPage ? "active" : string.Empty)"><a class="page-link" href="/?page=@i">@i</a></li>
+            }
+            @if (windowEnd < Model.PagesCount)
+            {
+                if (windowEnd < Model.PagesCount - 1)
+                {
+                    <li class="page-item disabled"><a class="page-link" href="#">&hellip;</a></li>
+                }
+                <li class="page-item"><a class="page-link" href="/?page=@Model.PagesCount">@Model.PagesCount</a></li>
+            }
+            <li class="page-item"><a class="page-link" href="/?page=@Model.NextPage" aria-label="Next"><i class="fa fa-forward"></i></a></li>
         </ul>
-    </div>
+    </nav>
 }

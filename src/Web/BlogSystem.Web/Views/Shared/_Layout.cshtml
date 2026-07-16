@@ -1,6 +1,6 @@
-﻿@using BlogSystem.Common
+@using BlogSystem.Common
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
     @if (ViewBag.Title == GlobalConstants.SystemName)
     {
@@ -18,11 +18,10 @@
         <meta name="description" content="@ViewBag.Description" />
     }
     <meta name="robots" content="index, follow" />
-    <meta name="revisit-after" content="1 days" />
     <meta name="author" content="@GlobalConstants.SiteAuthor" />
     <meta name="generator" content="Nikolay.IT BlogSystem - https://github.com/NikolayIT/nikolay.it" />
     <link rel="alternate" type="application/rss+xml" title="Blog RSS" href="/RSS/Blog" />
-    
+
     <link rel="shortcut icon" href="/favicon.ico">
 
     <!-- Global site tag (gtag.js) - Google Analytics -->
@@ -46,103 +45,107 @@
     <link href="~/css/site.min.css" rel="stylesheet" asp-append-version="true" />
 </head>
 
-<body class="boxed-layout container">
-    <div class="wrapper">
-        <header class="header">
-            <div class="row">
-                <div class="col-md-6">
-                    <div class="navbar-header">
-                        <a class="navbar-brand" href="/">
-                            <img id="logo-header" src="/img/header-logo.png" width="300" height="80" alt="Logo">
-                        </a>
-                    </div>
-                </div>
-
-                <div class="navbar navbar-default col-md-6" role="navigation">
-                    <div class="topbar">
-                        <partial name="_LoginPartial" />
-                    </div>
-                    <div class="clearfix"></div>
-                    <nav class="collapse navbar-collapse navbar-responsive-collapse">
-                        <ul class="nav navbar-nav">
-                            <li><a href="/">Home</a></li>
-                            <vc:menu></vc:menu>
-                            <li><a href="/Videos">My Videos</a></li>
-                            @if (User.IsInRole(GlobalConstants.AdministratorRoleName))
-                            {
-                                <li class="dropdown open">
-                                    <a class="dropdown-toggle" data-toggle="dropdown" href="#" id="admin-menu">Admin<span class="caret"></span></a>
-                                    <ul class="dropdown-menu" aria-labelledby="admin-menu">
-                                        <li class="text-center"><a href="/Administration">Dashboard</a></li>
-                                        <li class="text-center"><a href="/Administration/BlogPosts">Blog posts</a></li>
-                                        <li class="text-center"><a href="/Administration/Pages">Pages</a></li>
-                                        <li class="text-center"><a href="/Administration/Videos">Videos</a></li>
-                                        <li class="text-center"><a href="/Administration/Settings">Settings</a></li>
-                                    </ul>
-                                </li>
-                            }
-                        </ul>
-                    </nav>
-                </div>
-            </div>
-        </header>
-
-        <div class="breadcrumbs">
+<body class="d-flex flex-column min-vh-100">
+    <header class="site-header">
+        <nav class="navbar navbar-expand-lg bg-dark" data-bs-theme="dark">
             <div class="container">
-                <h1 class="pull-left">@ViewBag.Title</h1>
-                @if (IsSectionDefined("breadcrumbs"))
-                {
-                    <ul class="pull-right breadcrumb">
-                        @await RenderSectionAsync("breadcrumbs", false)
+                <a class="navbar-brand" href="/">
+                    <img src="/img/header-logo.png" alt="@GlobalConstants.SystemName" />
+                </a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#main-navbar" aria-controls="main-navbar" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="main-navbar">
+                    <ul class="navbar-nav me-auto">
+                        <li class="nav-item"><a class="nav-link" href="/">Home</a></li>
+                        <vc:menu></vc:menu>
+                        <li class="nav-item"><a class="nav-link" href="/Videos">My Videos</a></li>
+                        @if (User.IsInRole(GlobalConstants.AdministratorRoleName))
+                        {
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle" href="#" id="admin-menu" role="button" data-bs-toggle="dropdown" aria-expanded="false">Admin</a>
+                                <ul class="dropdown-menu" aria-labelledby="admin-menu">
+                                    <li><a class="dropdown-item" href="/Administration">Dashboard</a></li>
+                                    <li><a class="dropdown-item" href="/Administration/BlogPosts">Blog posts</a></li>
+                                    <li><a class="dropdown-item" href="/Administration/Pages">Pages</a></li>
+                                    <li><a class="dropdown-item" href="/Administration/Videos">Videos</a></li>
+                                    <li><a class="dropdown-item" href="/Administration/Settings">Settings</a></li>
+                                </ul>
+                            </li>
+                        }
                     </ul>
-                }
-            </div>
-        </div>
-
-        <div class="container content">
-            @if (this.ViewData.ContainsKey("SkipSidebar"))
-            {
-                @RenderBody()
-            }
-            else
-            {
-                <div class="row">
-                    <div class="col-md-9">
-                        @RenderBody()
-                    </div>
-
-                    <aside class="col-md-3 magazine-page">
-                        <vc:sidebar></vc:sidebar>
-                    </aside>
+                    <partial name="_LoginPartial" />
                 </div>
-            }
-        </div>
-
-        <footer class="copyright">
+            </div>
+        </nav>
+        <div class="page-band">
             <div class="container">
-                <div class="row">
-                    <div class="col-md-6">
-                        <p>&copy; 2011-@DateTime.UtcNow.Year <strong>@GlobalConstants.SystemName</strong></p>
-                    </div>
-                    <div class="col-md-6">
-                        <p class="pull-right"><a href="https://github.com/NikolayIT/nikolay.it" target="_blank"><i class="fab fa-github"></i> Open Source System</a></p>
+                <h1>@ViewBag.Title</h1>
+            </div>
+        </div>
+    </header>
+
+    <main class="container pb-4 flex-grow-1">
+        <partial name="_CookieConsentPartial" />
+        <div class="row g-4">
+            <div class="col-lg-8">
+                <div class="content-card">
+                    @RenderBody()
+                </div>
+            </div>
+
+            <aside class="col-lg-4">
+                <vc:sidebar></vc:sidebar>
+            </aside>
+        </div>
+    </main>
+
+    <footer class="site-footer mt-auto">
+        <div class="container py-4">
+            <div class="row g-4">
+                <div class="col-md-5">
+                    <h2 class="footer-heading">@GlobalConstants.SystemName</h2>
+                    <p class="mb-0">Personal blog and videos about software development and technology by @GlobalConstants.SiteAuthor.</p>
+                </div>
+                <div class="col-md-3">
+                    <h2 class="footer-heading">Links</h2>
+                    <ul class="list-unstyled mb-0">
+                        <li><a href="/">Home</a></li>
+                        <li><a href="/Videos">My Videos</a></li>
+                        <li><a href="/RSS/Blog">RSS Feed</a></li>
+                        <li><a asp-controller="Home" asp-action="Privacy" asp-area="">Privacy</a></li>
+                    </ul>
+                </div>
+                <div class="col-md-4">
+                    <h2 class="footer-heading">Follow me</h2>
+                    <div class="footer-social">
+                        <a href="https://github.com/NikolayIT" target="_blank" title="GitHub"><i class="fab fa-github"></i></a>
+                        <a href="https://stackoverflow.com/users/1862812/nikolay-kostov" target="_blank" title="Stack Overflow"><i class="fab fa-stack-overflow"></i></a>
+                        <a href="https://www.linkedin.com/in/nikolaykostov/" target="_blank" title="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="https://www.youtube.com/channel/UCH9CezHU-ICXwIiL9Q--l4w" target="_blank" title="YouTube"><i class="fab fa-youtube"></i></a>
+                        <a href="https://www.facebook.com/Nikolay.IT" target="_blank" title="Facebook"><i class="fab fa-facebook-f"></i></a>
+                        <a href="https://www.instagram.com/nikolaykostov1990" target="_blank" title="Instagram"><i class="fab fa-instagram"></i></a>
+                        <a href="mailto:blog@nikolay.it" rel="nofollow" title="Email"><i class="fa fa-envelope"></i></a>
+                        <a href="/RSS/Blog" target="_blank" title="RSS"><i class="fa fa-rss"></i></a>
                     </div>
                 </div>
             </div>
-        </footer>
-    </div>
+        </div>
+        <div class="footer-bottom py-3">
+            <div class="container d-flex flex-column flex-md-row justify-content-between">
+                <div>&copy; 2011-@DateTime.UtcNow.Year <strong>@GlobalConstants.SystemName</strong></div>
+                <div><a href="https://github.com/NikolayIT/nikolay.it" target="_blank"><i class="fab fa-github"></i> Open Source System</a></div>
+            </div>
+        </div>
+    </footer>
 
     <environment names="Development">
         <script src="~/lib/jquery/dist/jquery.js" asp-append-version="true"></script>
-        <script src="~/lib/jquery-validation/dist/jquery.validate.js" asp-append-version="true"></script>
-        <script src="~/lib/jquery-validation-unobtrusive/dist/jquery.validate.unobtrusive.js" asp-append-version="true"></script>
-        <script src="~/lib/bootstrap/dist/js/bootstrap.js" asp-append-version="true"></script>
+        <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.js" asp-append-version="true"></script>
     </environment>
     <environment names="Staging,Production">
         <script src="~/lib/jquery/dist/jquery.min.js" asp-append-version="true"></script>
-        <script src="~/lib/jquery-validation/dist/jquery.validate.min.js" asp-append-version="true"></script>
-        <script src="~/lib/jquery-validation-unobtrusive/dist/jquery.validate.unobtrusive.js" asp-append-version="true"></script>
-        <script src="~/lib/bootstrap/dist/js/bootstrap.min.js" asp-append-version="true"></script>
+        <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js" asp-append-version="true"></script>
     </environment>
     <script src="~/js/site.min.js" asp-append-version="true"></script>
 

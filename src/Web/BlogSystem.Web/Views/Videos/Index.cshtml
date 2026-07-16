@@ -1,47 +1,65 @@
-﻿@using BlogSystem.Common
+@using BlogSystem.Common
 @model BlogSystem.Web.ViewModels.Videos.VideoListViewModel
 
 @{
     ViewBag.Title = "My Videos";
 }
 
-<div class="row">
+<div class="row row-cols-1 row-cols-md-2 g-4 mb-4">
     @foreach (var video in Model.Videos)
     {
-        <div class="col-md-3 video-list-item">
-            <a href="@video.VideoUrl" target="_blank" title="@video.Title">
-                <img src="@video.ThumbnailUrl" class="img-responsive" alt="@video.Title"/>
-                <h2>@video.Title</h2>
-            </a>
-            <time><i class="fa fa-calendar"></i> @video.CreatedOn.ToString("yyyy-MM-dd HH:mm")</time>
-            @if (this.User.IsInRole(GlobalConstants.AdministratorRoleName))
-            {
-                <form asp-action="Delete" asp-controller="Videos" asp-area="Administration" asp-route-id="@video.Id" asp-route-returnUrl="@(this.Context.Request.Path + this.Context.Request.QueryString)" method="post" style="display: inline;">
-                    <button type="submit" class="btn btn-link" style="padding: 0;" title="Delete video" onclick="return confirm('Hide this video from the site? It can be restored from the administration.');"><i class="fa fa-times"></i></button>
-                </form>
-            }
-            <p>@video.Description.Replace("\n", ";\n")</p>
+        <div class="col video-list-item">
+            <div class="card h-100">
+                <a href="@video.VideoUrl" target="_blank" title="@video.Title">
+                    <img src="@video.ThumbnailUrl" class="card-img-top" alt="@video.Title" />
+                </a>
+                <div class="card-body">
+                    <h2 class="card-title"><a class="text-decoration-none text-body" href="@video.VideoUrl" target="_blank">@video.Title</a></h2>
+                    <p class="card-text">@video.Description.Replace("\n", ";\n")</p>
+                </div>
+                <div class="card-footer d-flex justify-content-between align-items-center">
+                    <time class="text-body-secondary small"><i class="fa fa-calendar"></i> @video.CreatedOn.ToString("yyyy-MM-dd HH:mm")</time>
+                    @if (this.User.IsInRole(GlobalConstants.AdministratorRoleName))
+                    {
+                        <form asp-action="Delete" asp-controller="Videos" asp-area="Administration" asp-route-id="@video.Id" asp-route-returnUrl="@(this.Context.Request.Path + this.Context.Request.QueryString)" method="post">
+                            <button type="submit" class="btn btn-link btn-sm p-0 text-danger" title="Delete video" onclick="return confirm('Hide this video from the site? It can be restored from the administration.');"><i class="fa fa-times"></i></button>
+                        </form>
+                    }
+                </div>
+            </div>
         </div>
     }
 </div>
 
-@if (Model.Pages > 0)
+@if (Model.Pages > 1)
 {
-    <div class="text-center">
-        <ul class="pagination">
-            <li><a href="/Videos/?page=@Model.PreviousPage"><i class="fa fa-backward"></i></a></li>
-            @for (int i = 1; i <= Model.Pages; i++)
+    var windowStart = Math.Max(1, Model.Page - 2);
+    var windowEnd = Math.Min(Model.Pages, Model.Page + 2);
+
+    <nav aria-label="Video pages">
+        <ul class="pagination justify-content-center mb-0">
+            <li class="page-item"><a class="page-link" href="/Videos/?page=@Model.PreviousPage" aria-label="Previous"><i class="fa fa-backward"></i></a></li>
+            @if (windowStart > 1)
             {
-                if (i == Model.Page)
+                <li class="page-item"><a class="page-link" href="/Videos/?page=1">1</a></li>
+                if (windowStart > 2)
                 {
-                    <li class="active"><a href="/Videos/?page=@i">@i</a></li>
-                }
-                else
-                {
-                    <li><a href="/Videos/?page=@i">@i</a></li>
+                    <li class="page-item disabled"><a class="page-link" href="#">&hellip;</a></li>
                 }
             }
-            <li><a href="/Videos/?page=@Model.NextPage"><i class="fa fa-forward"></i></a></li>
+            @for (int i = windowStart; i <= windowEnd; i++)
+            {
+                <li class="page-item @(i == Model.Page ? "active" : string.Empty)"><a class="page-link" href="/Videos/?page=@i">@i</a></li>
+            }
+            @if (windowEnd < Model.Pages)
+            {
+                if (windowEnd < Model.Pages - 1)
+                {
+                    <li class="page-item disabled"><a class="page-link" href="#">&hellip;</a></li>
+                }
+                <li class="page-item"><a class="page-link" href="/Videos/?page=@Model.Pages">@Model.Pages</a></li>
+            }
+            <li class="page-item"><a class="page-link" href="/Videos/?page=@Model.NextPage" aria-label="Next"><i class="fa fa-forward"></i></a></li>
         </ul>
-    </div>
+    </nav>
 }

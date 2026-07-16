@@ -1,61 +1,46 @@
-﻿@model SidebarViewModel
-@*<!-- Search Bar -->
-    <div class="headline headline-md"><h2>Search</h2></div>
-    <div class="input-group margin-bottom-40">
-        <input type="text" class="form-control" placeholder="Search">
-        <span class="input-group-btn">
-            <button class="btn-u" type="button">Go</button>
-        </span>
-    </div>
-    <!-- End Search Bar -->*@
+@model SidebarViewModel
 
-<!-- Social Bar -->
-<div class="headline headline-md">
-    <h2>Social</h2>
-</div>
-<ul class="list-unstyled blog-photos margin-bottom-10">
-    <li><a href="https://github.com/NikolayIT" target="_blank"><i class="fab fa-github hover-effect"></i></a></li>
-    <li><a href="https://stackoverflow.com/users/1862812/nikolay-kostov" target="_blank"><i class="fab fa-stack-overflow hover-effect"></i></a></li>
-    <li><a href="https://www.linkedin.com/in/nikolaykostov/" target="_blank"><i class="fab fa-linkedin hover-effect"></i></a></li>
-    <li><a href="https://www.youtube.com/channel/UCH9CezHU-ICXwIiL9Q--l4w" target="_blank"><i class="fab fa-youtube-square hover-effect"></i></a></li>
-</ul>
-<ul class="list-unstyled blog-photos margin-bottom-30">
-    <li><a href="https://www.facebook.com/Nikolay.IT" target="_blank"><i class="fab fa-facebook hover-effect"></i></a></li>
-    <li><a href="https://www.instagram.com/nikolaykostov1990" target="_blank"><i class="fab fa-instagram-square hover-effect"></i></a></li>
-    <li><a href="mailto:blog@nikolay.it" target="_blank" rel="nofollow"><i class="fa fa-envelope hover-effect"></i></a></li>
-    <li><a href="/RSS/Blog" target="_blank"><i class="fa fa-rss-square hover-effect"></i></a></li>
-</ul>
-<!-- End Social -->
-<!-- GitHub Badge -->
-<div class="headline headline-md">
-    <h2>Me @@ GitHub</h2>
-</div>
-@*<iframe src="https://githubbadge.appspot.com/NikolayIT?s=1" style="border: 0;height: 142px;width: 200px;overflow: hidden;" frameBorder="0"></iframe>*@
-<a href="https://github.com/NikolayIT" target="_blank"><img src="https://img.shields.io/github/followers/NikolayIT?style=social"/></a><br /><br />
-<a href="https://github.com/NikolayIT" target="_blank"><img src="https://img.shields.io/github/stars/NikolayIT?style=social"/></a><br /><br />
-<iframe src="https://github.com/sponsors/NikolayIT/button" title="Sponsor NikolayIT" height="35" width="116" style="border: 0;"></iframe>
-<!-- End GitHub Badge -->
-<!-- StackOverflow Badge -->
-<div class="headline headline-md">
-    <h2>Me @@ StackOverflow</h2>
-</div>
-<a href="https://stackoverflow.com/users/1862812/nikolay-kostov"><img src="https://stackoverflow.com/users/flair/1862812.png?theme=clean" width="208" height="58" alt="profile for Nikolay Kostov at Stack Overflow, Q&amp;A for professional and enthusiast programmers" title="profile for Nikolay Kostov at Stack Overflow, Q&amp;A for professional and enthusiast programmers"></a>
-<!-- End StackOverflow Badge -->
-<!-- Posts -->
-<div class="posts margin-bottom-40">
-    <div class="headline headline-md">
-        <h2>Recent Posts</h2>
+<div class="card sidebar-card">
+    <div class="card-header">Follow me</div>
+    <div class="card-body">
+        <div class="social-grid">
+            <a href="https://github.com/NikolayIT" target="_blank" title="GitHub"><i class="fab fa-github"></i></a>
+            <a href="https://stackoverflow.com/users/1862812/nikolay-kostov" target="_blank" title="Stack Overflow"><i class="fab fa-stack-overflow"></i></a>
+            <a href="https://www.linkedin.com/in/nikolaykostov/" target="_blank" title="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+            <a href="https://www.youtube.com/channel/UCH9CezHU-ICXwIiL9Q--l4w" target="_blank" title="YouTube"><i class="fab fa-youtube"></i></a>
+            <a href="https://www.facebook.com/Nikolay.IT" target="_blank" title="Facebook"><i class="fab fa-facebook-f"></i></a>
+            <a href="https://www.instagram.com/nikolaykostov1990" target="_blank" title="Instagram"><i class="fab fa-instagram"></i></a>
+            <a href="mailto:blog@nikolay.it" rel="nofollow" title="Email"><i class="fa fa-envelope"></i></a>
+            <a href="/RSS/Blog" target="_blank" title="RSS"><i class="fa fa-rss"></i></a>
+        </div>
     </div>
-    @foreach (var post in Model.RecentPosts)
-    {
-        <dl class="dl-horizontal">
-            <dt><a href="@post.Url"><i class="@post.IconClass"></i></a></dt>
-            <dd>
-                <p>
-                    <a href="@post.Url">@post.Title</a>
-                </p>
-            </dd>
-        </dl>
-    }
 </div>
-<!-- End posts -->
+
+<div class="card sidebar-card">
+    <div class="card-header">Me @@ GitHub</div>
+    <div class="card-body text-center">
+        <p class="mb-2"><a href="https://github.com/NikolayIT" target="_blank"><img src="https://img.shields.io/github/followers/NikolayIT?style=social" alt="GitHub followers" /></a></p>
+        <p class="mb-2"><a href="https://github.com/NikolayIT" target="_blank"><img src="https://img.shields.io/github/stars/NikolayIT?style=social" alt="GitHub stars" /></a></p>
+        <iframe src="https://github.com/sponsors/NikolayIT/button" title="Sponsor NikolayIT" height="35" width="116" style="border: 0;"></iframe>
+    </div>
+</div>
+
+<div class="card sidebar-card">
+    <div class="card-header">Me @@ Stack Overflow</div>
+    <div class="card-body text-center">
+        <a href="https://stackoverflow.com/users/1862812/nikolay-kostov"><img src="https://stackoverflow.com/users/flair/1862812.png?theme=clean" width="208" height="58" class="img-fluid" alt="profile for Nikolay Kostov at Stack Overflow, Q&amp;A for professional and enthusiast programmers" title="profile for Nikolay Kostov at Stack Overflow, Q&amp;A for professional and enthusiast programmers"></a>
+    </div>
+</div>
+
+<div class="card sidebar-card">
+    <div class="card-header">Recent posts</div>
+    <ul class="list-group list-group-flush">
+        @foreach (var post in Model.RecentPosts)
+        {
+            <li class="list-group-item recent-post">
+                <i class="@post.IconClass"></i>
+                <a href="@post.Url">@post.Title</a>
+            </li>
+        }
+    </ul>
+</div>

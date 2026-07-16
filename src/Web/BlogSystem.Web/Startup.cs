@@ -93,12 +93,7 @@
             services.AddWebOptimizer(
                 pipeline =>
                     {
-                        pipeline.AddCssBundle(
-                            "/css/site.min.css",
-                            "css/bootstrap.themes.unify.css",
-                            "css/bootstrap.themes.unify.app.css",
-                            "css/bootstrap.themes.unify.red.css",
-                            "css/site.css");
+                        pipeline.AddCssBundle("/css/site.min.css", "css/site.css");
                         pipeline.AddCssBundle("/css/admin.min.css", "css/admin.css");
                         pipeline.AddJavaScriptBundle("/js/site.min.js", "js/site.js");
                     },
