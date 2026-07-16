@@ -79,6 +79,22 @@
 
             services.AddSingleton(this.configuration);
 
+            // WebOptimizer (bundling and minification).
+            // Cache busting is handled by WebOptimizer's tag helpers, which require
+            // @addTagHelper *, WebOptimizer.Core in _ViewImports.cshtml to activate.
+            services.AddWebOptimizer(
+                pipeline =>
+                    {
+                        pipeline.AddCssBundle(
+                            "/css/site.min.css",
+                            "css/bootstrap.themes.unify.css",
+                            "css/bootstrap.themes.unify.app.css",
+                            "css/bootstrap.themes.unify.red.css",
+                            "css/site.css");
+                        pipeline.AddJavaScriptBundle("/js/site.min.js", "js/site.js");
+                    },
+                options => options.EnableTagHelperBundling = true);
+
             // Data repositories
             services.AddScoped(typeof(IDeletableEntityRepository<>), typeof(EfDeletableEntityRepository<>));
             services.AddScoped(typeof(IRepository<>), typeof(EfRepository<>));
@@ -119,6 +135,7 @@
             }
 
             app.UseHttpsRedirection();
+            app.UseWebOptimizer();
             app.UseStaticFiles();
             app.UseCookiePolicy();
 

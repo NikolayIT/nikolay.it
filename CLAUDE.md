@@ -58,7 +58,7 @@ Layered solution; dependencies flow Web → Services → Data → Common:
 
 - Public controllers extend `BaseController`. Admin CRUD controllers live in the `Administration` area and extend `AdministrationController`, which applies `[Authorize(Roles = Administrator)]` and `[Area("Administration")]`.
 - Custom routes are defined in `Startup.Configure`: blog posts use `Blog/{year}/{month}/{title}/{id}`, static pages use `Pages/{permalink}`.
-- Client-side assets: `wwwroot/` with BuildBundlerMinifier (`bundleconfig.json`) and LibMan (`libman.json`) running as part of the build.
+- Client-side assets: `wwwroot/` with LibMan (`libman.json`) restoring libraries at build time. CSS/JS bundling and minification happen at runtime via LigerShark.WebOptimizer: `Startup.ConfigureServices` defines the `/css/site.min.css` and `/js/site.min.js` bundles (there are no physical min files), `app.UseWebOptimizer()` runs before `UseStaticFiles()`, and `@addTagHelper *, WebOptimizer.Core` in `_ViewImports.cshtml` provides cache busting.
 
 ### Configuration and disabled features
 
