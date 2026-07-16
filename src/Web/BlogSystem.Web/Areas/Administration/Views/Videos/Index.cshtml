@@ -5,10 +5,10 @@
 }
 
 <div class="admin-page-header clearfix">
-    <h1><i class="fas fa-video"></i> Videos <small>(@Model.TotalCount)</small></h1>
+    <h1><i class="fas fa-video"></i> Videos <small class="text-body-secondary">(@Model.TotalCount)</small></h1>
     <div class="admin-page-actions">
-        <a href="/Videos" target="_blank" class="btn btn-default"><i class="fas fa-external-link-alt"></i> View on site</a>
-        <form asp-action="FetchLatest" method="post" style="display: inline;">
+        <a href="/Videos" target="_blank" class="btn btn-outline-secondary"><i class="fas fa-external-link-alt"></i> View on site</a>
+        <form asp-action="FetchLatest" method="post" class="d-inline">
             <button type="submit" class="btn btn-primary"><i class="fab fa-youtube"></i> Fetch latest from YouTube</button>
         </form>
     </div>
@@ -16,8 +16,8 @@
 
 @if (Model.Items.Any())
 {
-    <div class="panel panel-default">
-        <table class="table table-hover">
+    <div class="card mb-3">
+        <table class="table table-hover align-middle">
             <thead>
                 <tr>
                     <th></th>
@@ -31,18 +31,18 @@
             <tbody>
                 @foreach (var video in Model.Items)
                 {
-                    <tr class="@(video.IsDeleted ? "danger" : string.Empty)">
+                    <tr class="@(video.IsDeleted ? "table-danger" : string.Empty)">
                         <td><img src="https://i.ytimg.com/vi/@(video.VideoId)/default.jpg" alt="Thumbnail" class="admin-video-thumbnail" /></td>
                         <td>@video.Title</td>
                         <td><a href="https://www.youtube.com/watch?v=@video.VideoId" target="_blank">@video.VideoId <i class="fas fa-external-link-alt"></i></a></td>
                         <td>
                             @if (video.IsDeleted)
                             {
-                                <span class="label label-danger">Hidden</span>
+                                <span class="badge text-bg-danger">Hidden</span>
                             }
                             else
                             {
-                                <span class="label label-success">Visible</span>
+                                <span class="badge text-bg-success">Visible</span>
                             }
                         </td>
                         <td>@video.CreatedOn.ToString("yyyy-MM-dd HH:mm")</td>
@@ -50,13 +50,13 @@
                             @if (!video.IsDeleted)
                             {
                                 <form asp-action="Delete" asp-route-id="@video.Id" asp-route-page="@Model.PageNumber" method="post">
-                                    <button type="submit" class="btn btn-danger btn-xs" onclick="return confirm('Hide this video from the site? It can be restored later.');"><i class="fas fa-trash-alt"></i> Delete</button>
+                                    <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('Hide this video from the site? It can be restored later.');"><i class="fas fa-trash-alt"></i> Delete</button>
                                 </form>
                             }
                             else
                             {
                                 <form asp-action="Restore" asp-route-id="@video.Id" asp-route-page="@Model.PageNumber" method="post">
-                                    <button type="submit" class="btn btn-success btn-xs"><i class="fas fa-undo"></i> Restore</button>
+                                    <button type="submit" class="btn btn-success btn-sm"><i class="fas fa-undo"></i> Restore</button>
                                 </form>
                             }
                         </td>
@@ -70,7 +70,7 @@
 }
 else
 {
-    <div class="panel panel-default">
-        <div class="panel-body text-muted">There are no videos yet. Use the "Fetch latest from YouTube" button to import them.</div>
+    <div class="card">
+        <div class="card-body text-body-secondary">There are no videos yet. Use the "Fetch latest from YouTube" button to import them.</div>
     </div>
 }

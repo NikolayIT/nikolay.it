@@ -11,9 +11,9 @@
     <div class="admin-page-actions">
         @if (!Model.IsDeleted && !string.IsNullOrWhiteSpace(Model.Title))
         {
-            <a href="@UrlGenerator.GenerateUrl(Model.Id, Model.Title, Model.CreatedOn)" target="_blank" class="btn btn-default"><i class="fas fa-external-link-alt"></i> View on site</a>
+            <a href="@UrlGenerator.GenerateUrl(Model.Id, Model.Title, Model.CreatedOn)" target="_blank" class="btn btn-outline-secondary"><i class="fas fa-external-link-alt"></i> View on site</a>
         }
-        <a asp-action="Index" class="btn btn-default"><i class="fas fa-arrow-left"></i> Back to list</a>
+        <a asp-action="Index" class="btn btn-outline-secondary"><i class="fas fa-arrow-left"></i> Back to list</a>
     </div>
 </div>
 
@@ -30,8 +30,8 @@
     <partial name="_BlogPostFormFields" model="Model" />
     <div class="admin-form-footer clearfix">
         <button type="submit" class="btn btn-primary"><i class="fas fa-save"></i> Save changes</button>
-        <a asp-action="Index" class="btn btn-default">Cancel</a>
-        <div class="pull-right text-right admin-meta-list">
+        <a asp-action="Index" class="btn btn-outline-secondary">Cancel</a>
+        <div class="float-end text-end admin-meta-list">
             <div>Created on @Model.CreatedOn.ToString("yyyy-MM-dd HH:mm")</div>
             @if (Model.ModifiedOn != null)
             {

@@ -1,11 +1,11 @@
-﻿@model System.Collections.Generic.IEnumerable<BlogSystem.Web.ViewModels.Administration.Pages.PageRowViewModel>
+@model System.Collections.Generic.IEnumerable<BlogSystem.Web.ViewModels.Administration.Pages.PageRowViewModel>
 
 @{
     ViewData["Title"] = "Pages";
 }
 
 <div class="admin-page-header clearfix">
-    <h1><i class="fas fa-copy"></i> Pages <small>(@Model.Count())</small></h1>
+    <h1><i class="fas fa-copy"></i> Pages <small class="text-body-secondary">(@Model.Count())</small></h1>
     <div class="admin-page-actions">
         <a asp-action="Create" class="btn btn-primary"><i class="fas fa-plus"></i> New page</a>
     </div>
@@ -13,7 +13,7 @@
 
 @if (Model.Any())
 {
-    <div class="panel panel-default">
+    <div class="card">
         <table class="table table-hover">
             <thead>
                 <tr>
@@ -28,17 +28,17 @@
             <tbody>
                 @foreach (var item in Model)
                 {
-                    <tr class="@(item.IsDeleted ? "danger" : string.Empty)">
+                    <tr class="@(item.IsDeleted ? "table-danger" : string.Empty)">
                         <td><a asp-action="Edit" asp-route-id="@item.Id">@item.Title</a></td>
                         <td><code>/Pages/@item.Permalink</code></td>
                         <td>
                             @if (item.IsDeleted)
                             {
-                                <span class="label label-danger">Deleted</span>
+                                <span class="badge text-bg-danger">Deleted</span>
                             }
                             else
                             {
-                                <span class="label label-success">Published</span>
+                                <span class="badge text-bg-success">Published</span>
                             }
                         </td>
                         <td>@item.CreatedOn.ToString("yyyy-MM-dd HH:mm")</td>
@@ -46,20 +46,20 @@
                         <td class="admin-row-actions">
                             @if (!item.IsDeleted)
                             {
-                                <a href="/Pages/@item.Permalink" target="_blank" class="btn btn-default btn-xs" title="View on site"><i class="fas fa-external-link-alt"></i></a>
-                                <a asp-action="Edit" asp-route-id="@item.Id" class="btn btn-default btn-xs"><i class="fas fa-pencil-alt"></i> Edit</a>
+                                <a href="/Pages/@item.Permalink" target="_blank" class="btn btn-outline-secondary btn-sm" title="View on site"><i class="fas fa-external-link-alt"></i></a>
+                                <a asp-action="Edit" asp-route-id="@item.Id" class="btn btn-outline-secondary btn-sm"><i class="fas fa-pencil-alt"></i> Edit</a>
                                 <form asp-action="Delete" asp-route-id="@item.Id" method="post">
-                                    <button type="submit" class="btn btn-danger btn-xs" onclick="return confirm('Delete this page? It can be restored later.');"><i class="fas fa-trash-alt"></i> Delete</button>
+                                    <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('Delete this page? It can be restored later.');"><i class="fas fa-trash-alt"></i> Delete</button>
                                 </form>
                             }
                             else
                             {
-                                <a asp-action="Edit" asp-route-id="@item.Id" class="btn btn-default btn-xs"><i class="fas fa-pencil-alt"></i> Edit</a>
+                                <a asp-action="Edit" asp-route-id="@item.Id" class="btn btn-outline-secondary btn-sm"><i class="fas fa-pencil-alt"></i> Edit</a>
                                 <form asp-action="Restore" asp-route-id="@item.Id" method="post">
-                                    <button type="submit" class="btn btn-success btn-xs"><i class="fas fa-undo"></i> Restore</button>
+                                    <button type="submit" class="btn btn-success btn-sm"><i class="fas fa-undo"></i> Restore</button>
                                 </form>
                                 <form asp-action="HardDelete" asp-route-id="@item.Id" method="post">
-                                    <button type="submit" class="btn btn-danger btn-xs" onclick="return confirm('Permanently delete this page? This CANNOT be undone.');"><i class="fas fa-times"></i> Delete forever</button>
+                                    <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('Permanently delete this page? This CANNOT be undone.');"><i class="fas fa-times"></i> Delete forever</button>
                                 </form>
                             }
                         </td>
@@ -71,7 +71,7 @@
 }
 else
 {
-    <div class="panel panel-default">
-        <div class="panel-body text-muted">There are no pages yet. <a asp-action="Create">Create the first one</a>.</div>
+    <div class="card">
+        <div class="card-body text-body-secondary">There are no pages yet. <a asp-action="Create">Create the first one</a>.</div>
     </div>
 }

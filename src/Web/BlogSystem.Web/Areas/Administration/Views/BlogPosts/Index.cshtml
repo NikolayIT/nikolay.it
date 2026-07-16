@@ -7,18 +7,16 @@
 }
 
 <div class="admin-page-header clearfix">
-    <h1><i class="fas fa-file-alt"></i> Blog posts <small>(@Model.TotalCount)</small></h1>
+    <h1><i class="fas fa-file-alt"></i> Blog posts <small class="text-body-secondary">(@Model.TotalCount)</small></h1>
     <div class="admin-page-actions">
         <a asp-action="Create" class="btn btn-primary"><i class="fas fa-plus"></i> New blog post</a>
     </div>
 </div>
 
-<form method="get" class="form-inline" style="margin-bottom: 15px;">
-    <div class="input-group" style="width: 300px;">
+<form method="get" class="d-flex align-items-center mb-3">
+    <div class="input-group" style="max-width: 320px;">
         <input type="text" name="searchTerm" value="@Model.SearchTerm" class="form-control" placeholder="Search by title..." />
-        <span class="input-group-btn">
-            <button type="submit" class="btn btn-default"><i class="fas fa-search"></i></button>
-        </span>
+        <button type="submit" class="btn btn-outline-secondary"><i class="fas fa-search"></i></button>
     </div>
     @if (!string.IsNullOrWhiteSpace(Model.SearchTerm))
     {
@@ -28,7 +26,7 @@
 
 @if (Model.Items.Any())
 {
-    <div class="panel panel-default">
+    <div class="card mb-3">
         <table class="table table-hover">
             <thead>
                 <tr>
@@ -43,23 +41,23 @@
             <tbody>
                 @foreach (var post in Model.Items)
                 {
-                    <tr class="@(post.IsDeleted ? "danger" : string.Empty)">
+                    <tr class="@(post.IsDeleted ? "table-danger" : string.Empty)">
                         <td>
                             <a asp-action="Edit" asp-route-id="@post.Id">@post.Title</a>
                             @if (post.IsPinned)
                             {
-                                <i class="fas fa-thumbtack text-muted" title="Pinned"></i>
+                                <i class="fas fa-thumbtack text-body-secondary" title="Pinned"></i>
                             }
                         </td>
-                        <td><span class="label label-default">@post.Type</span></td>
+                        <td><span class="badge text-bg-secondary">@post.Type</span></td>
                         <td>
                             @if (post.IsDeleted)
                             {
-                                <span class="label label-danger">Deleted</span>
+                                <span class="badge text-bg-danger">Deleted</span>
                             }
                             else
                             {
-                                <span class="label label-success">Published</span>
+                                <span class="badge text-bg-success">Published</span>
                             }
                         </td>
                         <td>@post.CreatedOn.ToString("yyyy-MM-dd HH:mm")</td>
@@ -67,20 +65,20 @@
                         <td class="admin-row-actions">
                             @if (!post.IsDeleted)
                             {
-                                <a href="@UrlGenerator.GenerateUrl(post.Id, post.Title, post.CreatedOn)" target="_blank" class="btn btn-default btn-xs" title="View on site"><i class="fas fa-external-link-alt"></i></a>
-                                <a asp-action="Edit" asp-route-id="@post.Id" class="btn btn-default btn-xs"><i class="fas fa-pencil-alt"></i> Edit</a>
+                                <a href="@UrlGenerator.GenerateUrl(post.Id, post.Title, post.CreatedOn)" target="_blank" class="btn btn-outline-secondary btn-sm" title="View on site"><i class="fas fa-external-link-alt"></i></a>
+                                <a asp-action="Edit" asp-route-id="@post.Id" class="btn btn-outline-secondary btn-sm"><i class="fas fa-pencil-alt"></i> Edit</a>
                                 <form asp-action="Delete" asp-route-id="@post.Id" asp-route-searchTerm="@Model.SearchTerm" asp-route-page="@Model.PageNumber" method="post">
-                                    <button type="submit" class="btn btn-danger btn-xs" onclick="return confirm('Delete this blog post? It can be restored later.');"><i class="fas fa-trash-alt"></i> Delete</button>
+                                    <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('Delete this blog post? It can be restored later.');"><i class="fas fa-trash-alt"></i> Delete</button>
                                 </form>
                             }
                             else
                             {
-                                <a asp-action="Edit" asp-route-id="@post.Id" class="btn btn-default btn-xs"><i class="fas fa-pencil-alt"></i> Edit</a>
+                                <a asp-action="Edit" asp-route-id="@post.Id" class="btn btn-outline-secondary btn-sm"><i class="fas fa-pencil-alt"></i> Edit</a>
                                 <form asp-action="Restore" asp-route-id="@post.Id" asp-route-searchTerm="@Model.SearchTerm" asp-route-page="@Model.PageNumber" method="post">
-                                    <button type="submit" class="btn btn-success btn-xs"><i class="fas fa-undo"></i> Restore</button>
+                                    <button type="submit" class="btn btn-success btn-sm"><i class="fas fa-undo"></i> Restore</button>
                                 </form>
                                 <form asp-action="HardDelete" asp-route-id="@post.Id" asp-route-searchTerm="@Model.SearchTerm" asp-route-page="@Model.PageNumber" method="post">
-                                    <button type="submit" class="btn btn-danger btn-xs" onclick="return confirm('Permanently delete this blog post? This CANNOT be undone.');"><i class="fas fa-times"></i> Delete forever</button>
+                                    <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('Permanently delete this blog post? This CANNOT be undone.');"><i class="fas fa-times"></i> Delete forever</button>
                                 </form>
                             }
                         </td>
@@ -94,8 +92,8 @@
 }
 else
 {
-    <div class="panel panel-default">
-        <div class="panel-body text-muted">
+    <div class="card">
+        <div class="card-body text-body-secondary">
             @if (string.IsNullOrWhiteSpace(Model.SearchTerm))
             {
                 <text>There are no blog posts yet. <a asp-action="Create">Create the first one</a>.</text>

@@ -1,8 +1,8 @@
 /* Layout ------------------------------------------------------------------ */
 
 body.admin {
-    padding-top: 50px;
-    background-color: #f9f9f9;
+    padding-top: 56px;
+    background-color: #f8f9fa;
 }
 
 .admin-main {
@@ -21,16 +21,15 @@ body.admin {
 @media (min-width: 768px) {
     .admin-sidebar {
         position: fixed;
-        top: 50px;
+        top: 56px;
         bottom: 0;
         left: 0;
         z-index: 1000;
-        display: block;
         padding: 20px 0;
         overflow-x: hidden;
         overflow-y: auto;
         background-color: #ffffff;
-        border-right: 1px solid #e7e7e7;
+        border-right: 1px solid #e9ecef;
     }
 }
 
@@ -40,22 +39,22 @@ body.admin {
     font-weight: bold;
     text-transform: uppercase;
     letter-spacing: 1px;
-    color: #999999;
+    color: #adb5bd;
 }
 
-.nav-sidebar > li > a {
+.nav-sidebar .nav-link {
     padding: 8px 20px;
-    color: #444444;
+    color: #495057;
+    border-radius: 0;
 }
 
-.nav-sidebar > li > a:hover,
-.nav-sidebar > li > a:focus {
-    background-color: #f5f5f5;
+.nav-sidebar .nav-link:hover,
+.nav-sidebar .nav-link:focus {
+    background-color: #f1f3f5;
+    color: #212529;
 }
 
-.nav-sidebar > .active > a,
-.nav-sidebar > .active > a:hover,
-.nav-sidebar > .active > a:focus {
+.nav-sidebar .nav-link.active {
     color: #ffffff;
     background-color: #c9253c;
 }
@@ -65,13 +64,13 @@ body.admin {
 .admin-page-header {
     margin: 0 0 20px;
     padding-bottom: 10px;
-    border-bottom: 1px solid #e7e7e7;
+    border-bottom: 1px solid #e9ecef;
 }
 
 .admin-page-header h1 {
     margin: 0;
     font-size: 24px;
-    line-height: 34px;
+    line-height: 38px;
     display: inline-block;
 }
 
@@ -86,22 +85,23 @@ body.admin {
     margin-bottom: 20px;
     padding: 20px;
     background-color: #ffffff;
-    border: 1px solid #e7e7e7;
-    border-radius: 4px;
-    color: #444444;
+    border: 1px solid #e9ecef;
+    border-radius: 6px;
+    color: #495057;
+    text-decoration: none;
 }
 
 .admin-stat:hover,
 .admin-stat:focus {
     text-decoration: none;
     border-color: #c9253c;
-    color: #444444;
+    color: #495057;
 }
 
 .admin-stat .admin-stat-icon {
     float: right;
     font-size: 36px;
-    color: #dddddd;
+    color: #dee2e6;
 }
 
 .admin-stat .admin-stat-value {
@@ -111,25 +111,25 @@ body.admin {
 }
 
 .admin-stat .admin-stat-label {
-    color: #999999;
+    color: #adb5bd;
     text-transform: uppercase;
     font-size: 11px;
     letter-spacing: 1px;
 }
 
-/* Panels and tables ---------------------------------------------------------- */
+/* Cards and tables ----------------------------------------------------------- */
 
-.admin .panel {
-    border-color: #e7e7e7;
+.admin .card {
+    border-color: #e9ecef;
 }
 
-.admin .table > tbody > tr.danger > td {
-    background-color: #fdf3f4;
+.admin .card > .table {
+    margin-bottom: 0;
 }
 
 .admin .table .admin-row-actions {
     white-space: nowrap;
-    text-align: right;
+    text-align: end;
 }
 
 .admin .table .admin-row-actions form {
@@ -148,11 +148,11 @@ body.admin {
 .admin-form-footer {
     margin-top: 20px;
     padding-top: 15px;
-    border-top: 1px solid #e7e7e7;
+    border-top: 1px solid #e9ecef;
 }
 
 .admin-meta-list {
     margin-bottom: 0;
-    color: #777777;
+    color: #6c757d;
     font-size: 12px;
 }

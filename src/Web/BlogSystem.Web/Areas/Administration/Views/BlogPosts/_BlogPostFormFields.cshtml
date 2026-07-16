@@ -1,55 +1,54 @@
 @model BlogSystem.Web.ViewModels.Administration.BlogPosts.BlogPostInputModel
 
 <div class="row">
-    <div class="col-md-8">
-        <div class="form-group">
-            <label asp-for="Title"></label>
+    <div class="col-lg-8">
+        <div class="mb-3">
+            <label asp-for="Title" class="form-label"></label>
             <input asp-for="Title" class="form-control" placeholder="Post title" />
             <span asp-validation-for="Title" class="text-danger"></span>
         </div>
-        <div class="form-group">
-            <label asp-for="ShortContent"></label>
-            <p class="help-block" style="margin: 0 0 5px;">Shown in the post list on the home page.</p>
+        <div class="mb-3">
+            <label asp-for="ShortContent" class="form-label"></label>
+            <div class="form-text mt-0 mb-1">Shown in the post list on the home page.</div>
             @Html.EditorFor(x => x.ShortContent)
             <span asp-validation-for="ShortContent" class="text-danger"></span>
         </div>
-        <div class="form-group">
-            <label asp-for="Content"></label>
+        <div class="mb-3">
+            <label asp-for="Content" class="form-label"></label>
             @Html.EditorFor(x => x.Content)
             <span asp-validation-for="Content" class="text-danger"></span>
         </div>
     </div>
-    <div class="col-md-4">
-        <div class="panel panel-default">
-            <div class="panel-heading"><strong>Publishing</strong></div>
-            <div class="panel-body">
-                <div class="form-group">
-                    <label asp-for="Type"></label>
-                    <select asp-for="Type" asp-items="Html.GetEnumSelectList<BlogSystem.Data.Models.BlogPostType>()" class="form-control"></select>
+    <div class="col-lg-4">
+        <div class="card mb-3">
+            <div class="card-header"><strong>Publishing</strong></div>
+            <div class="card-body">
+                <div class="mb-3">
+                    <label asp-for="Type" class="form-label"></label>
+                    <select asp-for="Type" asp-items="Html.GetEnumSelectList<BlogSystem.Data.Models.BlogPostType>()" class="form-select"></select>
                     <span asp-validation-for="Type" class="text-danger"></span>
                 </div>
-                <div class="checkbox" style="margin-bottom: 0;">
-                    <label>
-                        <input asp-for="IsPinned" /> @Html.DisplayNameFor(x => x.IsPinned)
-                    </label>
+                <div class="form-check">
+                    <input asp-for="IsPinned" class="form-check-input" />
+                    <label asp-for="IsPinned" class="form-check-label"></label>
                 </div>
             </div>
         </div>
-        <div class="panel panel-default">
-            <div class="panel-heading"><strong>Media &amp; SEO</strong></div>
-            <div class="panel-body">
-                <div class="form-group">
-                    <label asp-for="ImageOrVideoUrl"></label>
+        <div class="card">
+            <div class="card-header"><strong>Media &amp; SEO</strong></div>
+            <div class="card-body">
+                <div class="mb-3">
+                    <label asp-for="ImageOrVideoUrl" class="form-label"></label>
                     <input asp-for="ImageOrVideoUrl" class="form-control" placeholder="https://..." />
                     <span asp-validation-for="ImageOrVideoUrl" class="text-danger"></span>
                 </div>
-                <div class="form-group">
-                    <label asp-for="MetaDescription"></label>
+                <div class="mb-3">
+                    <label asp-for="MetaDescription" class="form-label"></label>
                     <textarea asp-for="MetaDescription" class="form-control" rows="3"></textarea>
                     <span asp-validation-for="MetaDescription" class="text-danger"></span>
                 </div>
-                <div class="form-group" style="margin-bottom: 0;">
-                    <label asp-for="MetaKeywords"></label>
+                <div>
+                    <label asp-for="MetaKeywords" class="form-label"></label>
                     <input asp-for="MetaKeywords" class="form-control" placeholder="keyword1, keyword2" />
                     <span asp-validation-for="MetaKeywords" class="text-danger"></span>
                 </div>
