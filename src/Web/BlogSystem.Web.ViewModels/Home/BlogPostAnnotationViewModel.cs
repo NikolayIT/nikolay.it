@@ -2,13 +2,13 @@
 {
     using System;
 
-    using AutoMapper;
-
     using BlogSystem.Data.Models;
     using BlogSystem.Services;
     using BlogSystem.Services.Mapping;
 
-    public class BlogPostAnnotationViewModel : IMapFrom<BlogPost>, IHaveCustomMappings
+    using Mapster;
+
+    public class BlogPostAnnotationViewModel : BlogSystem.Services.Mapping.IMapFrom<BlogPost>, IHaveCustomMappings
     {
         private readonly IBlogUrlGenerator urlGenerator;
 
@@ -34,11 +34,10 @@
 
         public string Url => this.urlGenerator.GenerateUrl(this.Id, this.Title, this.CreatedOn);
 
-        public void CreateMappings(IProfileExpression configuration)
+        public void CreateMappings(TypeAdapterConfig configuration)
         {
-            configuration.CreateMap<BlogPost, BlogPostAnnotationViewModel>().ForMember(
-                m => m.Content,
-                opt => opt.MapFrom(u => u.ShortContent));
+            configuration.NewConfig<BlogPost, BlogPostAnnotationViewModel>()
+                .Map(dest => dest.Content, src => src.ShortContent);
         }
     }
 }

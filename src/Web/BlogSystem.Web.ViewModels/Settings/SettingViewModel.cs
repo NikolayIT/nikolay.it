@@ -1,11 +1,11 @@
 ﻿namespace BlogSystem.Web.ViewModels.Settings
 {
-    using AutoMapper;
-
     using BlogSystem.Data.Models;
     using BlogSystem.Services.Mapping;
 
-    public class SettingViewModel : IMapFrom<Setting>, IHaveCustomMappings
+    using Mapster;
+
+    public class SettingViewModel : BlogSystem.Services.Mapping.IMapFrom<Setting>, IHaveCustomMappings
     {
         public int Id { get; set; }
 
@@ -15,11 +15,10 @@
 
         public string NameAndValue { get; set; }
 
-        public void CreateMappings(IProfileExpression configuration)
+        public void CreateMappings(TypeAdapterConfig configuration)
         {
-            configuration.CreateMap<Setting, SettingViewModel>().ForMember(
-                m => m.NameAndValue,
-                opt => opt.MapFrom(x => x.Name + " = " + x.Value));
+            configuration.NewConfig<Setting, SettingViewModel>()
+                .Map(dest => dest.NameAndValue, src => src.Name + " = " + src.Value);
         }
     }
 }
