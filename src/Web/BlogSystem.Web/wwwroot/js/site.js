@@ -1,13 +1,29 @@
 ﻿$(function () {
-    moment.locale("bg");
+    const dateTimeFormat = new Intl.DateTimeFormat("bg", {
+        weekday: "short",
+        day: "numeric",
+        month: "short",
+        year: "numeric",
+        hour: "numeric",
+        minute: "2-digit",
+    });
+
     $("time").each(function (i, e) {
         const dateTimeValue = $(e).attr("datetime");
         if (!dateTimeValue) {
             return;
         }
 
-        const time = moment.utc(dateTimeValue).local();
-        $(e).html(time.format("llll"));
-        $(e).attr("title", $(e).attr("datetime"));
+        // Values rendered by the server are UTC but have no timezone designator
+        const utcDateTimeValue = /(?:[Zz]|[+-]\d{2}:?\d{2})$/.test(dateTimeValue)
+            ? dateTimeValue
+            : dateTimeValue + "Z";
+        const time = new Date(utcDateTimeValue);
+        if (isNaN(time)) {
+            return;
+        }
+
+        $(e).html(dateTimeFormat.format(time));
+        $(e).attr("title", dateTimeValue);
     });
 });

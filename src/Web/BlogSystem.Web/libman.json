@@ -80,13 +80,6 @@
         "plugins/searchreplace/plugin.min.js",
         "plugins/lists/plugin.min.js"
       ]
-    },
-    {
-      "library": "moment@2.29.4",
-      "destination": "wwwroot/lib/moment/",
-      "files": [
-        "min/moment-with-locales.min.js"
-      ]
     }
   ]
 }
