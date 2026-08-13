@@ -44,12 +44,16 @@
                 this.parser.ToAbsoluteImageUrl("https://www.youtube.com/embed/m-dlCFYRS28", "https://nikolay.it"));
         }
 
-        [Fact]
-        public void ToAbsoluteImageUrlShouldMakeRootRelativeImagesAbsolute()
+        [Theory]
+        [InlineData("/img/2011-08/book-cover.png")]
+        [InlineData("img/2011-08/book-cover.png")]
+        public void ToAbsoluteImageUrlShouldMakeRelativeImagesAbsolute(string imageUrl)
         {
+            // A rooted path parses as an absolute file: URI on Linux but not on Windows, so this
+            // has to be decided on the scheme rather than on Uri.TryCreate.
             Assert.Equal(
                 "https://nikolay.it/img/2011-08/book-cover.png",
-                this.parser.ToAbsoluteImageUrl("/img/2011-08/book-cover.png", "https://nikolay.it"));
+                this.parser.ToAbsoluteImageUrl(imageUrl, "https://nikolay.it"));
         }
 
         [Fact]

@@ -61,6 +61,7 @@
         <link href="~/lib/fontawesome/css/all.min.css" rel="stylesheet" asp-append-version="true" />
         <link href="~/lib/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet" asp-append-version="true" />
     </environment>
+    <link href="~/lib/highlightjs/styles/github.min.css" rel="stylesheet" asp-append-version="true" />
     <link href="~/css/site.min.css" rel="stylesheet" asp-append-version="true" />
 </head>
 
@@ -107,13 +108,13 @@
     <main class="container pb-4 flex-grow-1">
         <partial name="_CookieConsentPartial" />
         <div class="row g-4">
-            <div class="col-lg-8">
+            <div class="col-lg-9">
                 <div class="content-card">
                     @RenderBody()
                 </div>
             </div>
 
-            <aside class="col-lg-4">
+            <aside class="col-lg-3">
                 <vc:sidebar></vc:sidebar>
             </aside>
         </div>
@@ -166,6 +167,7 @@
         <script src="~/lib/jquery/dist/jquery.min.js" asp-append-version="true"></script>
         <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js" asp-append-version="true"></script>
     </environment>
+    <script src="~/lib/highlightjs/highlight.min.js" asp-append-version="true"></script>
     <script src="~/js/site.min.js" asp-append-version="true"></script>
 
     @await this.RenderSectionAsync("Scripts", required: false)

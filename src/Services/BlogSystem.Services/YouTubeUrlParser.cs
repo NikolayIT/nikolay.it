@@ -39,9 +39,15 @@
                 return thumbnail;
             }
 
-            return Uri.TryCreate(imageOrVideoUrl, UriKind.Absolute, out _)
-                       ? imageOrVideoUrl
-                       : baseUrl?.TrimEnd('/') + "/" + imageOrVideoUrl.TrimStart('/');
+            // Uri.TryCreate(.., UriKind.Absolute) is not usable here: on Linux it parses "/img/x.png"
+            // as an absolute file: URI, so the path would be returned unchanged on the server.
+            if (imageOrVideoUrl.StartsWith("http://", StringComparison.OrdinalIgnoreCase)
+                || imageOrVideoUrl.StartsWith("https://", StringComparison.OrdinalIgnoreCase))
+            {
+                return imageOrVideoUrl;
+            }
+
+            return baseUrl?.TrimEnd('/') + "/" + imageOrVideoUrl.TrimStart('/');
         }
     }
 }

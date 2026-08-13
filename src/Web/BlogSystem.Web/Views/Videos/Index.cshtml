@@ -1,3 +1,4 @@
+@using System.Globalization
 @using BlogSystem.Common
 @model BlogSystem.Web.ViewModels.Videos.VideoListViewModel
 
@@ -18,7 +19,7 @@
                     <p class="card-text">@video.Description.Replace("\n", ";\n")</p>
                 </div>
                 <div class="card-footer d-flex justify-content-between align-items-center">
-                    <time class="text-body-secondary small"><i class="fa fa-calendar"></i> @video.CreatedOn.ToString("yyyy-MM-dd HH:mm")</time>
+                    <time class="text-body-secondary small" datetime="@video.CreatedOn.ToString("yyyy-MM-dd", CultureInfo.InvariantCulture)"><i class="fa fa-calendar"></i> @video.CreatedOn.ToString("MMMM dd, yyyy", CultureInfo.InvariantCulture)</time>
                     @if (this.User.IsInRole(GlobalConstants.AdministratorRoleName))
                     {
                         <form asp-action="Delete" asp-controller="Videos" asp-area="Administration" asp-route-id="@video.Id" asp-route-returnUrl="@(this.Context.Request.Path + this.Context.Request.QueryString)" method="post">

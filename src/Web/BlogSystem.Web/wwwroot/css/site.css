@@ -332,3 +332,9 @@ a:hover {
 .form-group {
     margin-bottom: 1rem;
 }
+
+/* highlight.js paints its own background; the .blog-post-content pre rule above already does. */
+.blog-post-content pre code.hljs {
+    background: transparent;
+    padding: 0;
+}

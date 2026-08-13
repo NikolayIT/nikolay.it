@@ -53,6 +53,15 @@
       ]
     },
     {
+      "provider": "cdnjs",
+      "library": "highlight.js@11.11.1",
+      "destination": "wwwroot/lib/highlightjs/",
+      "files": [
+        "highlight.min.js",
+        "styles/github.min.css"
+      ]
+    },
+    {
       "library": "tinymce@6.8.6",
       "destination": "wwwroot/lib/tinymce/",
       "files": [
