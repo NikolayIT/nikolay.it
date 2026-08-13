@@ -2,6 +2,7 @@
 {
     using System.Linq;
 
+    using BlogSystem.Common;
     using BlogSystem.Data.Common.Repositories;
     using BlogSystem.Data.Models;
     using BlogSystem.Services.Mapping;
@@ -30,6 +31,10 @@
             {
                 return this.NotFound("Page not found!");
             }
+
+            this.ViewBag.Keywords = viewModel.MetaKeywords;
+            this.ViewBag.Description = viewModel.MetaDescription;
+            this.ViewBag.Canonical = $"{GlobalConstants.SystemBaseUrl}/Pages/{permalink.Trim()}";
 
             return this.View(viewModel);
         }

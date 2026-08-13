@@ -21,6 +21,25 @@
     <meta name="author" content="@GlobalConstants.SiteAuthor" />
     <meta name="generator" content="Nikolay.IT BlogSystem - https://github.com/NikolayIT/nikolay.it" />
     <link rel="alternate" type="application/rss+xml" title="Blog RSS" href="/RSS/Blog" />
+    @{
+        var canonicalUrl = (string)ViewBag.Canonical ?? GlobalConstants.SystemBaseUrl + this.Context.Request.Path;
+        var socialTitle = ViewBag.Title == null || ViewBag.Title == GlobalConstants.SystemName
+            ? GlobalConstants.SystemName
+            : $"{ViewBag.Title} - {GlobalConstants.SystemName}";
+        var socialDescription = (string)ViewBag.Description ?? GlobalConstants.SiteDescription;
+        var socialImage = (string)ViewBag.OgImage ?? GlobalConstants.SystemBaseUrl + "/img/header-logo.png";
+    }
+    <link rel="canonical" href="@canonicalUrl" />
+    <meta property="og:type" content="@(ViewBag.OgType ?? "website")" />
+    <meta property="og:site_name" content="@GlobalConstants.SystemName" />
+    <meta property="og:title" content="@socialTitle" />
+    <meta property="og:description" content="@socialDescription" />
+    <meta property="og:url" content="@canonicalUrl" />
+    <meta property="og:image" content="@socialImage" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="@socialTitle" />
+    <meta name="twitter:description" content="@socialDescription" />
+    <meta name="twitter:image" content="@socialImage" />
 
     <link rel="shortcut icon" href="/favicon.ico">
 

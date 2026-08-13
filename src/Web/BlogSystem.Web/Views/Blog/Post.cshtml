@@ -1,3 +1,4 @@
+@using System.Globalization
 @using System.Net
 @using BlogSystem.Common
 @using Microsoft.AspNetCore.Http.Extensions
@@ -5,11 +6,34 @@
 
 @{
     ViewBag.Title = Model.Title;
+
+    var articleJsonLd = new
+    {
+        context = "https://schema.org",
+        type = "BlogPosting",
+        headline = Model.Title,
+        description = Model.MetaDescription,
+        keywords = Model.MetaKeywords,
+        datePublished = Model.CreatedOn.ToString("yyyy-MM-ddTHH:mm:ssZ", CultureInfo.InvariantCulture),
+        dateModified = (Model.ModifiedOn ?? Model.CreatedOn).ToString("yyyy-MM-ddTHH:mm:ssZ", CultureInfo.InvariantCulture),
+        image = (string)ViewBag.OgImage,
+        mainEntityOfPage = (string)ViewBag.Canonical,
+        url = (string)ViewBag.Canonical,
+        author = new { type = "Person", name = GlobalConstants.SiteAuthor, url = GlobalConstants.SystemBaseUrl },
+        publisher = new { type = "Person", name = GlobalConstants.SiteAuthor, url = GlobalConstants.SystemBaseUrl },
+        inLanguage = "en",
+    };
+    // schema.org needs "@context"/"@type"; anonymous-type members cannot start with '@'.
+    var articleJson = System.Text.Json.JsonSerializer.Serialize(articleJsonLd)
+        .Replace("\"context\":", "\"@context\":")
+        .Replace("\"type\":", "\"@type\":");
 }
+
+@Html.Raw("<script type=\"application/ld+json\">" + articleJson + "</script>")
 
 <article class="blog-post">
     <div class="blog-post-meta">
-        <span class="me-3"><i class="fa fa-calendar"></i> @Model.CreatedOn.ToString("MMMM dd, yyyy")</span>
+        <span class="me-3"><i class="fa fa-calendar"></i> <time datetime="@Model.CreatedOn.ToString("yyyy-MM-dd", CultureInfo.InvariantCulture)">@Model.CreatedOn.ToString("MMMM dd, yyyy", CultureInfo.InvariantCulture)</time></span>
         <span class="me-3"><i class="fa fa-pencil-alt"></i> @GlobalConstants.SiteAuthor</span>
         @if (this.User.IsInRole(GlobalConstants.AdministratorRoleName))
         {

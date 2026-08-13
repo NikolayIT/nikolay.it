@@ -4,6 +4,7 @@
     using System.Diagnostics;
     using System.Linq;
 
+    using BlogSystem.Common;
     using BlogSystem.Data.Common.Repositories;
     using BlogSystem.Data.Models;
     using BlogSystem.Services.Mapping;
@@ -42,6 +43,11 @@
                                 PagesCount = pagesCount,
                             };
 
+            this.ViewBag.Description = GlobalConstants.SiteDescription;
+            this.ViewBag.Canonical = page > 1
+                ? $"{GlobalConstants.SystemBaseUrl}/?page={page}"
+                : GlobalConstants.SystemBaseUrl + "/";
+
             return this.View(model);
         }
 
@@ -60,6 +66,9 @@
         [HttpGet("robots.txt")]
         [ResponseCache(Duration = 86400, Location = ResponseCacheLocation.Any)]
         public IActionResult RobotsTxt() =>
-            this.Content("User-agent: *" + Environment.NewLine + "Disallow:");
+            this.Content(
+                "User-agent: *" + Environment.NewLine +
+                "Disallow:" + Environment.NewLine +
+                $"Sitemap: {GlobalConstants.SystemBaseUrl}/sitemap.xml");
     }
 }

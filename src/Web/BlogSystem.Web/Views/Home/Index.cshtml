@@ -1,3 +1,4 @@
+@using System.Globalization
 @using BlogSystem.Common
 @model BlogSystem.Web.ViewModels.Home.IndexViewModel
 @{
@@ -11,7 +12,7 @@
         <article class="blog-post">
             <h2 class="blog-post-title"><a href="@post.Url">@post.Title</a></h2>
             <div class="blog-post-meta">
-                <span class="me-3"><i class="fa fa-calendar"></i> @post.CreatedOn.ToString("MMMM dd, yyyy")</span>
+                <span class="me-3"><i class="fa fa-calendar"></i> <time datetime="@post.CreatedOn.ToString("yyyy-MM-dd", CultureInfo.InvariantCulture)">@post.CreatedOn.ToString("MMMM dd, yyyy", CultureInfo.InvariantCulture)</time></span>
                 <span><i class="fa fa-pencil-alt"></i> @GlobalConstants.SiteAuthor</span>
             </div>
             <partial name="_ImageOrVideo" model="post" />
