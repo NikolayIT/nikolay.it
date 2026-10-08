@@ -150,8 +150,59 @@ a:hover {
     overflow-x: auto;
 }
 
+/* Tables come from TinyMCE as plain <table> markup without Bootstrap classes. */
 .blog-post-content table {
+    width: 100%;
     max-width: 100%;
+    margin: 1rem 0 1.75rem;
+    border-collapse: collapse;
+    font-size: 0.9rem;
+    line-height: 1.45;
+    font-variant-numeric: tabular-nums;
+}
+
+.blog-post-content th,
+.blog-post-content td {
+    padding: 0.5rem 0.75rem;
+    border: 1px solid #dee2e6;
+    text-align: left;
+    vertical-align: top;
+}
+
+.blog-post-content thead th {
+    background-color: #f1f3f5;
+    color: #212529;
+    font-weight: 600;
+    vertical-align: bottom;
+    border-bottom: 2px solid var(--brand-accent);
+}
+
+.blog-post-content tbody tr:nth-child(even) {
+    background-color: #f8f9fa;
+}
+
+.blog-post-content tbody tr:hover {
+    background-color: #fdf2f4;
+}
+
+.blog-post-content td code,
+.blog-post-content th code {
+    font-size: 0.85em;
+    white-space: nowrap;
+}
+
+/* Wide tables scroll sideways on phones instead of squeezing every column. */
+@media (max-width: 767.98px) {
+    .blog-post-content table {
+        display: block;
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+    }
+
+    .blog-post-content th,
+    .blog-post-content td {
+        min-width: 6rem;
+    }
 }
 
 .blog-img {
